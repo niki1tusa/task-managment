@@ -1,13 +1,15 @@
-import { Header } from "./header/Header";
 import { Menu } from "./Menu";
-import { Projects } from "./projects/Projects";
+import {  menus } from "./menu.data";
+import { projects } from "./projects.data";
 
 export const Sidebar = () => {
   return (
-    <aside>
-      <Header />
-      <Menu title='Menu'/>
-      <Projects/>
+    <aside className="w-1/6 h-screen bg-white flex flex-col items-center pt-4">
+      <Menu title="Account"/>
+      <span className="h-[1px] w-[80%] block bg-gray/50 my-5" />
+      <Menu title="Menu" menus={menus}/>
+      <span className="h-[1px] w-[80%] block bg-gray/50 my-5" />
+      <Menu title="Projects" menus={projects}/>
     </aside>
   );
 };
