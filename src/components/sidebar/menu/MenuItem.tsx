@@ -1,5 +1,5 @@
 import type { IMenuItem } from "@/types/menu.item.interface";
-
+// import cn from 'clsx'
 export const MenuItem = ({ title, Icon, color }: IMenuItem) => {
   return (
     <div

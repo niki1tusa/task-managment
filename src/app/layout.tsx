@@ -10,8 +10,8 @@ const openSans = Open_Sans({
 
 export const metadata: Metadata = {
   icons: {
-    icon: "/images/favicon.svg",
-    shortcut: "/images/favicon.svg",
+    icon: "/favicon/favicon.svg",
+    shortcut: "/favicon/favicon.svg",
   },
   title: {
     absolute: SITE_NAME,
@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${openSans.variable} antialiased bg-white-const`}>{children}</body>
+      <body className={`${openSans.variable} antialiased `}>{children}</body>
     </html>
   );
 }
