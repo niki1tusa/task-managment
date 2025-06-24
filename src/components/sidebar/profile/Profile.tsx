@@ -20,7 +20,7 @@ export const Profile = ({
 				<div className='flex gap-3 items-center'>
 					<div className='rounded-full bg-blueviolet w-8 h-8 ' />
 					<div className='flex flex-col text-[0.8rem]'>
-						<div className='text-[1rem] text-dark'>{data.name}</div>
+						<div className='text-[1rem] text-dark dark:text-white'>{data.name}</div>
 						<div>{data.email}</div>
 					</div>
 					<ChevronDown />

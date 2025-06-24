@@ -1,4 +1,7 @@
+'use client'
 import { Bell, Search } from "lucide-react";
+import dynamic from "next/dynamic";
+const DynamicToggleTheme = dynamic(() => import('../toggle-theme/ToggleTheme').then((mod) => mod.ToggleTheme), { ssr: false })
 
 export const Header = () => {
   return (
@@ -16,6 +19,7 @@ export const Header = () => {
         <span className="text-center rounded-full bg-white">
           <Bell className="text-dark mx-2 my-2" />
         </span>
+        <DynamicToggleTheme/>
       </div>
     </div>
   );

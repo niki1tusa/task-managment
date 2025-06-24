@@ -1,8 +1,10 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
 	--color-blueviolet: #725cee;
-	--color-white-const: rgb(246, 244, 255);
+	--color-white-const: #f6f4ff;
 	--color-gray: #a0a0a0;
 	--color-dark: #030307;
 	--color-pink: #fd8eee;
@@ -15,7 +17,8 @@ html {
 }
 html,
 body {
+	@apply bg-gradient-to-br from-[#f6f4ff] to-[#f4effe] 
+	dark:from-[#131313] dark:to-[#1a1a1a];
 	font-family: var(--font-open-sans);
 	min-width: 320px;
-	background-color: var(--color-white-const);
 }
