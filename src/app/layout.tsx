@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Open_Sans } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 
 import { SITE_NAME } from '@/constants/seo.constants';
 
@@ -7,9 +7,10 @@ import { Provider } from './Providers';
 
 import './globals.css';
 
-const openSans = Open_Sans({
-	variable: '--font-open-sans',
+const poppins = Poppins({
+	variable: '--font-poppins-sans',
 	subsets: ['latin'],
+	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
 });
 
 export const metadata: Metadata = {
@@ -31,7 +32,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en' suppressHydrationWarning>
-			<body className={`${openSans.variable} antialiased `}>
+			<body className={`${poppins.variable} antialiased `}>
 				<Provider>{children}</Provider>
 			</body>
 		</html>

@@ -19,6 +19,6 @@ html,
 body {
 	@apply bg-gradient-to-br from-[#f6f4ff] to-[#f4effe] 
 	dark:from-[#131313] dark:to-[#1a1a1a];
-	font-family: var(--font-open-sans);
+	font-family: var(--font-poppins-sans);
 	min-width: 320px;
 }

@@ -1,14 +1,19 @@
-import { Header } from "@/components/header/Header";
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
+
+import { Card } from '@/components/statistic/card/Card';
+import { cards } from '@/components/statistic/card/card.data';
+import { Header } from '@/components/header/Header';
+import { Statistic } from '@/components/statistic/Statistic';
 
 export const metadata: Metadata = {
-  title: "Dashboard",
+	title: 'Dashboard',
 };
 
 export default function DashboardPage() {
-  return (
-    <>
-    <Header/>
-    </>
-  );
+	return (
+		<>
+			<Header />
+<Statistic/>
+		</>
+	);
 }
