@@ -13,7 +13,7 @@ export const MenuItem = ({ title, Icon, color }: IMenuItem) => {
 
 			{title === 'Message' ? (
 				<div className='flex gap-4'>
-				<div>{title}</div>	 <div className='rounded-full text-center w-5 h-5 bg-blue-400 text-white'>4</div>
+				<div>{title}</div>	 <div className='rounded-full text-[12px] flex items-center justify-center w-5 h-5 bg-blue-400 text-white'>4</div>
 				</div>
 			) : (
 				<div>{title}</div>

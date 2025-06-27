@@ -1,10 +1,11 @@
 import { Card } from './card/Card';
 import { cards } from './card/card.data';
+import { Chart } from './chart/Line.chart';
 
 export const Statistic = () => {
 	return (
-		<div className='mt-10'>
-			<div className='w-1/3 flex flex-col gap-3'>
+		<div className='mt-10 grid grid-cols-[30%_70%] gap-5'>
+			<div className=' flex flex-col gap-3'>
 				{cards.map(card => (
 					<Card
 						key={card.id}
@@ -15,6 +16,7 @@ export const Statistic = () => {
 					/>
 				))}
 			</div>
+			<Chart/>
 		</div>
 	);
 };
