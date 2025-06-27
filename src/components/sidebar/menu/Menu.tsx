@@ -1,3 +1,4 @@
+
 import { Heading } from './Heading';
 import { MenuItem } from './MenuItem';
 import type { IMenuItem } from '@/types/menu.item.interface';
@@ -10,6 +11,7 @@ interface Props {
 }
 
 export const Menu = ({ heading, menus, isBorderTop = false }: Props) => {
+	
 	return (
 		<nav className='flex flex-col gap-4'>
 			{isBorderTop && <span className='h-[1px] w-[80%] block bg-gray/50 mt-8' />}

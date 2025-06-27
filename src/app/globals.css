@@ -4,7 +4,7 @@
 
 @theme {
 	--color-blueviolet: #725cee;
-	--color-white-const: #f6f4ff;
+	--color-primary: #f6f4ff;
 	--color-gray: #a0a0a0;
 	--color-dark: #030307;
 	--color-pink: #fd8eee;
@@ -21,4 +21,9 @@ body {
 	dark:from-[#131313] dark:to-[#1a1a1a];
 	font-family: var(--font-poppins-sans);
 	min-width: 320px;
+}
+button,
+input,
+select {
+	cursor: pointer;
 }
