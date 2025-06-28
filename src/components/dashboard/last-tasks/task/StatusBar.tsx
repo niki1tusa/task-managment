@@ -1,6 +1,9 @@
+import cn from 'clsx';
 import { CircleCheck } from 'lucide-react';
-import cn from 'clsx'
+
 import type { ITask } from '@/shared/types/task.types';
+
+import '@/shared/styles/shimmer.animation.css';
 
 type Props = Pick<ITask, 'status'>;
 export const StatusBar = ({ status }: Props) => {
@@ -13,7 +16,9 @@ export const StatusBar = ({ status }: Props) => {
 	return (
 		<div className=' bg-gray rounded-full h-10 mx-5 relative'>
 			<div
-				className={cn(`${getProgressColor(status)} h-full rounded-full transition-all duration-500`)}
+				className={cn(
+					`${getProgressColor(status)} h-full rounded-full transition-all duration-500`
+				)}
 				style={{ width: `${status}%` }}
 			/>
 			<span className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  text-white font-medium'>

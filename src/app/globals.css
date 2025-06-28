@@ -13,8 +13,10 @@
 	--orange: #f4bf29;
 	--blue: #72bdf3;
 	--side: #fff;
-	--chat:#725cee;
+	--chat: #725cee;
+
 }
+
 .dark {
 	--primary: #030307;
 	--background: #030307;
@@ -29,7 +31,6 @@
 	--chat: rgb(15, 15, 25);
 }
 
-
 @theme inline {
 	--color-primary: var(--primary);
 	--color-background: var(--background);
@@ -41,7 +42,7 @@
 	--color-green: var(--green);
 	--color-blue: var(--blue);
 	--color-side: var(--side);
-	--color-chat: var(--chat)
+	--color-chat: var(--chat);
 }
 html {
 	font-size: 16px;
@@ -61,24 +62,4 @@ button,
 input,
 select {
 	cursor: pointer;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.bg-shimmer {
-  background: linear-gradient(
-    110deg,
-    #a855f7 0%,
-    #6366f1 50%,
-    #a855f7 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 2s linear infinite;
 }
