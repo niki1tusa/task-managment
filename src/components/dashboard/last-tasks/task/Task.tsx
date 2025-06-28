@@ -1,6 +1,6 @@
 import { Image, Link, MessageSquareText, Pencil } from 'lucide-react';
 
-import type { ITask } from '../../../types/task.types';
+import type { ITask } from '../../../../types/task.types';
 
 import { Header } from './Header';
 import { StatusBar } from './StatusBar';

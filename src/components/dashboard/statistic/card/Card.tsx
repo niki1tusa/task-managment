@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import type { ICard } from '../../../types/card.types';
+import type { ICard } from '../../../../types/card.types';
 
 export const Card = ({ img, count, title, color }: ICard) => {
 	return (

@@ -3,7 +3,7 @@ import { Poppins } from 'next/font/google';
 
 import { SITE_NAME } from '@/constants/seo.constants';
 
-import { Provider } from './Providers';
+import { Provider } from '../providers/Providers';
 
 import './globals.css';
 

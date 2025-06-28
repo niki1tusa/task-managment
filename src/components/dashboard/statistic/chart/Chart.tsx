@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { monthlyData, yearlyData } from '../../../data/chart.data';
+import { monthlyData, yearlyData } from '../../../../data/chart.data';
 
 import { LineChart } from './Line.chart';
 
@@ -24,7 +24,7 @@ export const Chart = () => {
 					onChange={handleFilterChange}
 				>
 					<option value='Year'>Yearly</option>
-					<option  value='Month'>Monthly</option>
+					<option value='Month'>Monthly</option>
 				</select>
 			</div>
 			<LineChart data={currentData} />
