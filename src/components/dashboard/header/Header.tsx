@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 import { SearchField } from './SearchField';
 
 const DynamicToggleTheme = dynamic(
-	() => import('../../toggle-theme/ToggleTheme').then(mod => mod.ToggleTheme),
+	() => import('../../ui/toggle-theme/ToggleTheme').then(mod => mod.ToggleTheme),
 	{ ssr: false }
 );
 
@@ -16,7 +16,7 @@ export const Header = () => {
 			<div className='font-bold text-3xl '>Dashboard</div>
 			<div className='flex gap-2 items-center '>
 				<SearchField />
-				<span className='text-center rounded-full bg-white dark:bg-dark shadow shadow-neutral-400'>
+				<span className='text-center rounded-full bg-background dark:bg-dark shadow shadow-neutral-400'>
 					<Bell className='mx-2 my-2 ' />
 				</span>
 				<DynamicToggleTheme />

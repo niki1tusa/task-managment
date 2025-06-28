@@ -2,23 +2,58 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@theme {
-	--color-blueviolet: #725cee;
-	--color-primary: #f6f4ff;
-	--color-gray: #a0a0a0;
-	--color-dark: #030307;
-	--color-pink: #fd8eee;
-	--color-yellow: #fce247;
-	--color-orange: #f4bf29;
-	--color-green: #04d0ad;
+:root {
+	--primary: #725cee;
+	--background: #f6f4ff;
+	--gray: #a0a0a0;
+	--foreground: #030307;
+	--green: #04d0ad;
+	--pink: #fd8eee;
+	--yellow: #fce247;
+	--orange: #f4bf29;
+	--blue: #72bdf3;
+	--side: #fff;
+	--chat:#725cee;
+}
+.dark {
+	--primary: #030307;
+	--background: #030307;
+	--gray: #a0a0a0;
+	--foreground: #f6f4ff;
+	--green: #030307;
+	--pink: #030307;
+	--yellow: #030307;
+	--orange: #030307;
+	--blue: #030307;
+	--side: rgb(15, 15, 25);
+	--chat: rgb(15, 15, 25);
+}
+
+
+@theme inline {
+	--color-primary: var(--primary);
+	--color-background: var(--background);
+	--color-gray: var(--gray);
+	--color-foreground: var(--foreground);
+	--color-pink: var(--pink);
+	--color-yellow: var(--yellow);
+	--color-orange: var(--orange);
+	--color-green: var(--green);
+	--color-blue: var(--blue);
+	--color-side: var(--side);
+	--color-chat: var(--chat)
 }
 html {
 	font-size: 16px;
 }
+
+@layer base {
+	body {
+		@apply bg-background text-foreground;
+	}
+}
 html,
 body {
-	@apply bg-gradient-to-br from-[#f6f4ff] to-[#f4effe] 
-	dark:from-[#131313] dark:to-[#1a1a1a];
 	font-family: var(--font-poppins-sans);
 	min-width: 320px;
 }

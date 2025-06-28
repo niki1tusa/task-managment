@@ -6,7 +6,7 @@ export const LIST_CARD: ICard[] = [
 		img: '/dashboard/active-projects.svg',
 		count: '92',
 		title: 'Active Project',
-		color: 'bg-blueviolet',
+		color: 'bg-primary',
 	},
 	{
 		id: '2',

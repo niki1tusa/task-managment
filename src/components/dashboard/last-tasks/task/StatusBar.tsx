@@ -11,7 +11,7 @@ export const StatusBar = ({ status }: Props) => {
 		return 'bg-green';
 	};
 	return (
-		<div className=' bg-gray-200 rounded-full h-10 dark:bg-gray-700 mx-5 relative'>
+		<div className=' bg-gray rounded-full h-10 mx-5 relative shadow shadow-neutral-400'>
 			<div
 				className={`${getProgressColor(status)} h-full  rounded-full`}
 				style={{ width: `${status}%` }}

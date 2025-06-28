@@ -4,7 +4,7 @@ import type { IProjectsMenu } from '@/types/projects.menu.types';
 export const PROJECTS_MENU: IProjectsMenu[] = [
 	{
 		title: 'Landing Page',
-		color: 'bg-blueviolet',
+		color: 'bg-primary',
 	},
 	{
 		title: 'Mobile App',

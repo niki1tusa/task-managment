@@ -14,7 +14,7 @@ export const Profile = ({ data }: { data: IProfile }) => {
     font-semibold px-1.5 py-1 mt-2 bg-gray/10 text-gray shadow shadow-neutral-400'
 			>
 				<div className='flex gap-3 items-center'>
-					<div className='rounded-full bg-blueviolet w-8 h-8 ' />
+					<div className='rounded-full bg-primary w-8 h-8 shadow shadow-neutral-400' />
 					<div className='flex flex-col text-[0.8rem]'>
 						<div className='text-[1rem] text-dark dark:text-white'>{data.name}</div>
 						<div>{data.email}</div>
