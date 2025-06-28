@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 
+import { monthlyData, yearlyData } from '../../../data/chart.data';
+
 import { LineChart } from './Line.chart';
-import { monthlyData, yearlyData } from './chart.data';
 
 export const Chart = () => {
 	const [filter, setFilter] = useState<'Month' | 'Year'>('Month');

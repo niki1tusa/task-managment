@@ -1,7 +1,6 @@
 import { cards } from '../../data/card.data';
 
 import { Card } from './card/Card';
-import { cards } from './card/card.data';
 import { Chart } from './chart/Chart';
 
 export const Statistic = () => {

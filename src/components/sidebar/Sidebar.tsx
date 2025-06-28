@@ -1,4 +1,4 @@
-import { account } from "../../data/account.data";
+import { account } from "../../data/profile.data";
 import { Menu } from "./menu/Menu";
 import {  menus } from "../../data/menu.data";
 import { projects } from "../../data/projects.data";

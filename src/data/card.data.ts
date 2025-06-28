@@ -1,26 +1,23 @@
-import active from '../../../../public/dashboard/active-projects.svg';
-import going from '../../../../public/dashboard/ongoing-projects.svg';
-import working from '../../../../public/dashboard/working-hours.svg';
-import type { ICard } from '../components/statistic/card/card.types';
+import type { ICard } from '../types/card.types';
 
 export const cards: ICard[] = [
 	{
 		id: '1',
-		img: active,
+		img: '/dashboard/active-projects.svg',
 		count: '92',
 		title: 'Active Project',
 		color: 'bg-blueviolet',
 	},
 	{
 		id: '2',
-		img: going,
+		img: '/dashboard/ongoing-projects.svg',
 		count: '35',
 		title: 'On Going Project',
 		color: 'bg-yellow',
 	},
 	{
 		id: '3',
-		img: working,
+		img: '/dashboard/working-hours.svg',
 		count: '19h 09m',
 		title: 'Working hours',
 		color: 'bg-pink',

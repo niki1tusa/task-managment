@@ -1,5 +1,6 @@
-import { Plane } from "lucide-react";
-import type { ITask } from "./task.types";
+import { Plane } from 'lucide-react';
+
+import type { ITask } from '../types/task.types';
 
 export const tasks: ITask[] = [
 	{
