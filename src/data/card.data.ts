@@ -1,8 +1,7 @@
 import active from '../../../../public/dashboard/active-projects.svg';
 import going from '../../../../public/dashboard/ongoing-projects.svg';
 import working from '../../../../public/dashboard/working-hours.svg';
-
-import type { ICard } from './card.types';
+import type { ICard } from '../components/statistic/card/card.types';
 
 export const cards: ICard[] = [
 	{

@@ -1,7 +1,7 @@
-import { account } from "./menu/data/account.data";
+import { account } from "../../data/account.data";
 import { Menu } from "./menu/Menu";
-import {  menus } from "./menu/data/menu.data";
-import { projects } from "./menu/data/projects.data";
+import {  menus } from "../../data/menu.data";
+import { projects } from "../../data/projects.data";
 import { Profile } from "./profile/Profile";
 
 export const Sidebar = () => {

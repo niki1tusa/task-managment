@@ -1,5 +1,6 @@
+import { cards } from '../../data/card.data';
+
 import { Card } from './card/Card';
-import { cards } from './card/card.data';
 import { Chart } from './chart/Line.chart';
 
 export const Statistic = () => {
@@ -16,7 +17,7 @@ export const Statistic = () => {
 					/>
 				))}
 			</div>
-			<Chart/>
+			<Chart />
 		</div>
 	);
 };
