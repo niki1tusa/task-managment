@@ -15,7 +15,7 @@ export const Profile = ({
 			<Heading heading='Account' />
 			<div
 				className='flex items-center border rounded-4xl 
-    font-semibold px-1.5 py-1 mt-2 bg-gray/10 text-gray '
+    font-semibold px-1.5 py-1 mt-2 bg-gray/10 text-gray shadow shadow-neutral-400'
 			>
 				<div className='flex gap-3 items-center'>
 					<div className='rounded-full bg-blueviolet w-8 h-8 ' />
