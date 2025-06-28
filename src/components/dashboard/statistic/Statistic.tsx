@@ -1,6 +1,6 @@
 
 
-import { LIST_CARD } from '@/data/list.card.data';
+import { LIST_CARD } from '@/shared/data/list.card.data';
 import { Card } from './card/Card';
 import { Chart } from './chart/Chart';
 

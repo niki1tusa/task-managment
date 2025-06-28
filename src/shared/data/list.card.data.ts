@@ -1,4 +1,4 @@
-import type { ICard } from '../types/card.types';
+import type { ICard } from '@/shared/types/card.types';
 
 export const LIST_CARD: ICard[] = [
 	{

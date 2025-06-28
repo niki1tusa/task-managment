@@ -8,8 +8,9 @@ import {
 	UsersRound,
 } from 'lucide-react';
 
-import PAGE from '@/config/page.config';
-import type { IMenuItem } from '@/types/menu.item.types';
+import {PAGE }from '@/config/page.config';
+
+import type { IMenuItem } from '@/shared/types/menu.item.types';
 
 export const MENU: IMenuItem[] = [
 	{

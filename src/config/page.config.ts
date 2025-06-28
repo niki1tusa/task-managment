@@ -1,4 +1,4 @@
-class Page {
+class PagesConfig {
 	 HOME = '/';
 	 DASHBOARD = '/dashboard';
 	 MESSAGES = '/messages';
@@ -7,11 +7,7 @@ class Page {
 	 SCHEDULE = '/schedule';
 	 REPORT = '/report';
 	 SETTINGS = '/settings';
-	 LANDING = '/landing';
-	 MOBILE = '/mobile'
-	 FLYER = '/flyer';
-	 BRENDING = '/brending'
 	};
 
-const PAGE = new Page();
-export default PAGE;
+export const PAGE = new PagesConfig();
+

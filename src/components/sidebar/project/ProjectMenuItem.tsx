@@ -1,7 +1,6 @@
 'use client';
 
-import type { IMenuItem } from '@/types/menu.item.types';
-import type { IProjectsMenu } from '@/types/projects.menu.types';
+import type { IProjectsMenu } from '@/shared/types/projects.menu.types';
 
 export const ProjectMenuItem = ({ item }: { item: IProjectsMenu }) => {
 	return (

@@ -3,7 +3,7 @@
 import { Heading } from '../../ui/Heading';
 
 import { MenuItem } from './MenuItem';
-import type { IMenuItem } from '@/types/menu.item.types';
+import type { IMenuItem } from '@/shared/types/menu.item.types';
 
 interface Props {
 	heading: string;

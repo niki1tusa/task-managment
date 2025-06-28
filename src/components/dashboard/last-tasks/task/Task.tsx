@@ -1,9 +1,9 @@
 import { Image, Link, MessageSquareText, Pencil } from 'lucide-react';
 
-import type { ITask } from '../../../../types/task.types';
 
 import { Header } from './Header';
 import { StatusBar } from './StatusBar';
+import type { ITask } from '@/shared/types/task.types';
 
 export const Task = ({ task }: { task: ITask }) => {
 	return (
@@ -29,7 +29,9 @@ export const Task = ({ task }: { task: ITask }) => {
 					</div>
 				</div>
 				<div className='flex gap-2 mb-2 mr-2'>
-					<button className='bg-primary text-2xl text-white rounded-full w-9 h-9 shadow shadow-neutral-400'>+</button>
+					<button className='bg-primary text-2xl text-white rounded-full w-9 h-9 shadow shadow-neutral-400'>
+						+
+					</button>
 					<button className='bg-primary  text-white rounded-full w-9 h-9 flex justify-center items-center shadow shadow-neutral-400'>
 						<Pencil size={21} />
 					</button>

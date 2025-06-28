@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import type { IMenuItem } from '@/types/menu.item.types';
+import type { IMenuItem } from '@/shared/types/menu.item.types';
 
 export const MenuItem = ({ item }: { item: IMenuItem }) => {
 	const pathname = usePathname();

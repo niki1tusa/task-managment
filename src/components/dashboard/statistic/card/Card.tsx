@@ -1,6 +1,6 @@
+import type { ICard } from '@/shared/types/card.types';
 import Image from 'next/image';
 
-import type { ICard } from '../../../../types/card.types';
 
 export const Card = ({ img, count, title, color }: ICard) => {
 	return (

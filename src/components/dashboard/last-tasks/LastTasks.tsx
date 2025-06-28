@@ -1,5 +1,5 @@
 
-import { TASKS } from '@/data/task.data';
+import { TASKS } from '@/shared/data/task.data';
 import { Task } from './task/Task';
 
 export const LastTasks = () => {

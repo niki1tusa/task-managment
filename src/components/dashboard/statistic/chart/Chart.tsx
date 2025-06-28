@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 
-import { monthlyData, yearlyData } from '../../../../data/chart.data';
 
 import { LineChart } from './Line.chart';
+import { monthlyData, yearlyData } from '@/shared/data/chart.data';
 
 export const Chart = () => {
 	const [filter, setFilter] = useState<'Month' | 'Year'>('Month');
@@ -13,7 +13,7 @@ export const Chart = () => {
 		const value = e.target.value as 'Month' | 'Year';
 		setFilter(value);
 	};
-	const currentData = filter === 'Month' ? monthlyData : yearlyData;
+	const currentData = filter === 'Month' ? monthlyData : yearlyData
 	return (
 		<div className='bg-blue rounded-2xl shadow shadow-neutral-500 p-6'>
 			<div className='flex justify-between items-center mb-4'>

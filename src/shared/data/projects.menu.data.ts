@@ -1,5 +1,4 @@
-import PAGE from '@/config/page.config';
-import type { IProjectsMenu } from '@/types/projects.menu.types';
+import type { IProjectsMenu } from '@/shared/types/projects.menu.types';
 
 export const PROJECTS_MENU: IProjectsMenu[] = [
 	{
