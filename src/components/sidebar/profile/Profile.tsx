@@ -1,15 +1,11 @@
 import { ChevronDown } from 'lucide-react';
 
-import { Heading } from '../menu/Heading';
+import { Heading } from '../../ui/Heading';
+
+import type { IProfile } from '@/types/profile.types';
 
 // import cn from 'clsx'
-export const Profile = ({
-	title,
-	data,
-}: {
-	title: string;
-	data: { name: string; email: string };
-}) => {
+export const Profile = ({ data }: { data: IProfile }) => {
 	return (
 		<div>
 			<Heading heading='Account' />

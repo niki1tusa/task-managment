@@ -5,7 +5,7 @@ import type { ICard } from '../../../types/card.types';
 export const Card = ({ img, count, title, color }: ICard) => {
 	return (
 		<div
-			className={`rounded-3xl shadow shadow-neutral-400 flex justify-around text-dark px-2 py-7 ${color}`}
+			className={`rounded-3xl shadow shadow-neutral-400 flex justify-around text-dark dark:text-white dark:bg-dark px-2 py-7 ${color}`}
 		>
 			<div className=''>
 				<div className='text-3xl font-semibold'>{count}</div>

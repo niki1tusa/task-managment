@@ -7,7 +7,7 @@ import { StatusBar } from './StatusBar';
 
 export const Task = ({ task }: { task: ITask }) => {
 	return (
-		<div className=' text-sm rounded-3xl bg-white flex flex-col gap-5 shadow shadow-neutral-400'>
+		<div className=' text-sm rounded-3xl bg-white dark:bg-dark flex flex-col gap-5 shadow shadow-neutral-400'>
 			{/* 1 section */}
 			<Header task={task} />
 			{/* 2 section */}

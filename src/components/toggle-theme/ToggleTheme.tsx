@@ -12,7 +12,7 @@ export const ToggleTheme = () => {
 			className='text-center rounded-full bg-white px-1 py-1 transition-colors shadow shadow-neutral-400'
 			onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
 		>
-			{theme === 'dark' ? <Moon className='text-sky-800' size={30} /> : <SunDim className='text-yellow' size={30} />}
+			{theme === 'dark' ? <Moon className='text-neutral-800' size={30} /> : <SunDim className='text-yellow' size={30} />}
 		</button>
 	);
 };

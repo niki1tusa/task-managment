@@ -1,6 +1,6 @@
 import type { ICard } from '../types/card.types';
 
-export const cards: ICard[] = [
+export const LIST_CARD: ICard[] = [
 	{
 		id: '1',
 		img: '/dashboard/active-projects.svg',

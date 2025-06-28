@@ -2,7 +2,7 @@ import { Plane } from 'lucide-react';
 
 import type { ITask } from '../types/task.types';
 
-export const tasks: ITask[] = [
+export const TASKS: ITask[] = [
 	{
 		id: 1,
 		iconTheme: Plane,
