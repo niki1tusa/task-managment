@@ -1,19 +1,29 @@
 @keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+	0% {
+		background-position: -200% 0;
+	}
+	100% {
+		background-position: 200% 0;
+	}
 }
 
-.bg-shimmer {
-  background: linear-gradient(
-    110deg,
-    #a855f7 0%,
-    #6366f1 50%,
-    #a855f7 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 2s linear infinite;
+.bg-shimmer-done {
+	background: linear-gradient(110deg, #a855f7 0%, #6366f1 50%, #a855f7 100%);
+	background-size: 200% 100%;
+	animation: shimmer 2s linear infinite;
+}
+.bg-shimmer-green {
+	background: linear-gradient(110deg, #22c55e 0%, #198f44 50%, #22c55e 100%);
+	background-size: 200% 100%;
+	animation: shimmer 2s linear infinite;
+}
+.bg-shimmer-yellow {
+	background: linear-gradient(110deg, #eab308 0%, #a8770e 50%, #eab308 100%);
+	background-size: 200% 100%;
+	animation: shimmer 2s linear infinite;
+}
+.bg-shimmer-red {
+	background: linear-gradient(110deg, #ef4444 0%, #dc2626 50%, #ef4444 100%);
+	background-size: 200% 100%;
+	animation: shimmer 2s linear infinite;
 }

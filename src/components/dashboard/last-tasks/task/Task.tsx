@@ -9,13 +9,13 @@ export const Task = ({ task }: { task: ITask }) => {
 		(task.subTask.filter(item => item.isCompleted === true).length / task.subTask.length) * 100
 	);
 	return (
-		<div className=' text-sm rounded-3xl bg-background  flex flex-col gap-5 shadow shadow-neutral-400'>
+		<div className='border border-white dark:border-none text-sm rounded-3xl bg-background  flex flex-col gap-5 shadow shadow-neutral-400'>
 			{/* 1 section */}
 			<Header task={task} />
 			{/* 2 section */}
 			<StatusBar status={status} />
 			{/* 3 section */}
-			<div className='flex justify-between items-center mx-5'>
+			<div className='flex justify-between items-center mx-5 pb-2'>
 				<div className='flex gap-2 justify-between'>
 					<div className='flex '>
 						<MessageSquareText size={19} />

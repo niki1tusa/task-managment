@@ -10,10 +10,10 @@ export const metadata: Metadata = {
 
 export default function DashboardPage() {
 	return (
-		<>
+		<div className='mx-7 mt-2'>
 			<Header />
 			<Statistic />
 			<LastTasks />
-		</>
+		</div>
 	);
 }

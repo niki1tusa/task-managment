@@ -1,0 +1,46 @@
+'use client';
+
+import { ChevronDown } from 'lucide-react';
+import React, { useState } from 'react';
+
+import { timeRange } from '../../../../shared/data/project-chart.data';
+
+import type { ITimeRange } from './project-chart.types';
+
+interface Props {
+	selectedRange: ITimeRange;
+	onChangeRange: (range: ITimeRange) => void;
+}
+export function ProjectChartHeader({ selectedRange, onChangeRange }: Props) {
+	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+	const hnadleRangeChange = (range: ITimeRange) => {
+		onChangeRange(range);
+		setIsDropdownOpen(false);
+	};
+	return (
+		<div className=' mx-5 rounded-2xl border p-6 text-white shadow shadow-neutral-500 dark:border-none'>
+			<h2 className='text-xl font-semibold'>Project Statistic</h2>{' '}
+			<div className='relative'>
+				<button
+					onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+					className='flex items-center gap-2 rounded-2xl border border-neutral-200 px-3 py-1.5 text-sm'
+				>
+					{selectedRange.label}
+					{<ChevronDown size={16} />}
+				</button>
+				{isDropdownOpen && (
+					<div className='absolute right-0 z-10 mt-2 w-32 rounded-2xl border border-neutral-200 py-1'>
+						{timeRange.map(range => (
+							<button
+								key={range.value}
+								className='hover:text-primary w-full px-3 py-2 text-left text-sm transition-colors'
+							>
+								{range.label}
+							</button>
+						))}
+					</div>
+				)}
+			</div>
+		</div>
+	);
+}
