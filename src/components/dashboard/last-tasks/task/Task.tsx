@@ -1,17 +1,19 @@
 import { Image, Link, MessageSquareText, Pencil } from 'lucide-react';
 
-
 import { Header } from './Header';
 import { StatusBar } from './StatusBar';
 import type { ITask } from '@/shared/types/task.types';
 
 export const Task = ({ task }: { task: ITask }) => {
+	const status = Math.floor(
+		(task.subTask.filter(item => item.isCompleted === true).length / task.subTask.length) * 100
+	);
 	return (
 		<div className=' text-sm rounded-3xl bg-background  flex flex-col gap-5 shadow shadow-neutral-400'>
 			{/* 1 section */}
 			<Header task={task} />
 			{/* 2 section */}
-			<StatusBar status={task.status} />
+			<StatusBar status={status} />
 			{/* 3 section */}
 			<div className='flex justify-between items-center mx-5'>
 				<div className='flex gap-2 justify-between'>
@@ -21,7 +23,7 @@ export const Task = ({ task }: { task: ITask }) => {
 					</div>
 					<div className='flex'>
 						<Image size={19} />
-						{task.saveCount}
+						{task.img}
 					</div>
 					<div className='flex '>
 						<Link size={19} />

@@ -15,7 +15,7 @@ export const Chart = () => {
 	};
 	const currentData = filter === 'Month' ? monthlyData : yearlyData
 	return (
-		<div className='bg-blue rounded-2xl shadow shadow-neutral-500 p-6'>
+		<div className='bg-blue text-white rounded-2xl shadow shadow-neutral-500 p-6'>
 			<div className='flex justify-between items-center mb-4'>
 				<h2 className='text-xl font-semibold'>Project Statistic</h2>
 				<select

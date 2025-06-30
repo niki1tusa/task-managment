@@ -1,5 +1,12 @@
-import type { LucideIcon } from "lucide-react";
-import type { IProfile } from "./profile.types";
+import type { LucideIcon } from 'lucide-react';
+
+import type { IProfile } from './profile.types';
+
+export interface ISubTask {
+	id: number;
+	title: string;
+	isCompleted: boolean;
+}
 
 export interface ITask {
 	id: number;
@@ -7,8 +14,8 @@ export interface ITask {
 	title: string;
 	users: IProfile[];
 	deadline: string;
-	status: number;
+	subTask: ISubTask[];
 	comment: number;
-	saveCount: number;
+	img: number;
 	link: number;
 }

@@ -42,7 +42,7 @@ const options = {
 	scales: {
 		x: {
 			ticks: {
-				color: '#030307',
+				color: '#fff',
 				font: {
 					size: 14,
 					weight: 500,
@@ -57,7 +57,7 @@ const options = {
 		},
 		y: {
 			ticks: {
-				color: '#030307',
+				color: '#fff',
 				font: {
 					size: 14,
 					weight: 500,
