@@ -32,7 +32,7 @@ export const ProjectChart = ({ data }: Props) => {
 	}, [data]);
 	return (
 		<ResponsiveContainer width='100%' height={300}>
-			<AreaChart data={data} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
+			<AreaChart data={data} margin={{ top: 10, right: 20, left: 10, bottom: 0 }}>
 				<defs>
 					<linearGradient id='colorGradient' x1='0' y1='0' x2='0' y2='1'>
 						<stop offset='5%' stopColor='#725BF2' stopOpacity={0.3} />
@@ -41,7 +41,7 @@ export const ProjectChart = ({ data }: Props) => {
 				</defs>
 				<CartesianGrid strokeDasharray='0' vertical={false} stroke='#F3F4F6' />
 				<XAxis
-					dataKey='value'
+					dataKey='period'
 					axisLine={false}
 					tickLine={false}
 					tick={{ fontSize: 12, fill: '#9CA3AF' }}

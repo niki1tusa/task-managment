@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
-import { MonthlyData, yearlyData } from '../../../../shared/data/project-chart.data';
+import { monthlyData, yearlyData } from '../../../../shared/data/project-chart.data';
 import type { ITimeRange } from '../../../../shared/types/project-chart.types';
 
 import { ProjectChart } from './ProjectChart';
@@ -13,7 +13,9 @@ export function ProjectStatisticsChart() {
 		label: 'Yearly',
 		value: 'yearly',
 	});
-	const currentData = selectedRange.value === 'yearly' ? yearlyData : MonthlyData;
+	const currentData = useMemo(() => {
+	return	selectedRange.value === 'yearly' ? yearlyData : monthlyData;
+	}, [selectedRange]);
 	return (
 		<div className='text-foreground rounded-2xl border border-white shadow shadow-neutral-500 dark:border-none'>
 			<ProjectChartHeader onChangeRange={setSelectedRange} selectedRange={selectedRange} />

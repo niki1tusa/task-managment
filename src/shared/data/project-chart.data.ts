@@ -9,7 +9,7 @@ export const yearlyData: IChartDataPoint[] = [
 	{ period: 'Jun', value: 23 },
 ];
 
-export const MonthlyData: IChartDataPoint[] = [
+export const monthlyData: IChartDataPoint[] = [
 	{ period: '1 week', value: 23 },
 	{ period: '2 week', value: 12 },
 	{ period: '3 week', value: 30 },

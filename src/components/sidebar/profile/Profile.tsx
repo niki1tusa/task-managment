@@ -15,11 +15,7 @@ export const Profile = ({ data }: { data: IProfile }) => {
 		<div>
 			<div className='flex items-center justify-between'>
 				<Heading heading='Account' />
-				{isShowMenu ? (
-					<PanelLeftOpen className='mr-5' color='gray' />
-				) : (
-					<PanelLeftClose className='mr-5' color='gray' />
-				)}
+				{/* {isShowMenu ? <PanelLeftOpen color='gray' /> : <PanelLeftClose color='gray' />} */}
 			</div>
 			<div className='bg-gray/10 text-gray mt-2 flex items-center rounded-4xl border px-1.5 py-1 font-semibold shadow shadow-neutral-400'>
 				<div className='flex items-center gap-3'>
