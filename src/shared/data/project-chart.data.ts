@@ -1,7 +1,4 @@
-import type {
-	IChartDataPoint,
-	ITimeRange,
-} from '../../components/dashboard/statistic/chart/project-chart.types';
+import type { IChartDataPoint, ITimeRange } from '../types/project-chart.types';
 
 export const yearlyData: IChartDataPoint[] = [
 	{ period: 'Jan', value: 23 },

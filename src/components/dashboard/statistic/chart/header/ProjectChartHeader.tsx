@@ -3,9 +3,8 @@
 import { ChevronDown } from 'lucide-react';
 import React, { useState } from 'react';
 
-import { timeRange } from '../../../../shared/data/project-chart.data';
-
-import type { ITimeRange } from './project-chart.types';
+import { timeRange } from '../../../../../shared/data/project-chart.data';
+import type { ITimeRange } from '../../../../../shared/types/project-chart.types';
 
 interface Props {
 	selectedRange: ITimeRange;
@@ -13,12 +12,12 @@ interface Props {
 }
 export function ProjectChartHeader({ selectedRange, onChangeRange }: Props) {
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-	const hnadleRangeChange = (range: ITimeRange) => {
+	const handleRangeChange = (range: ITimeRange) => {
 		onChangeRange(range);
 		setIsDropdownOpen(false);
 	};
 	return (
-		<div className=' mx-5 rounded-2xl border p-6 text-white shadow shadow-neutral-500 dark:border-none'>
+		<div className='flex items-center justify-between px-5 pt-2'>
 			<h2 className='text-xl font-semibold'>Project Statistic</h2>{' '}
 			<div className='relative'>
 				<button

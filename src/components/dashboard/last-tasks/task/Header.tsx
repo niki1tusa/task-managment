@@ -11,7 +11,7 @@ export const Header = ({ task }: { task: ITask }) => {
 			</div>
 			<div className='flex flex-col'>
 				<span className='font-medium'>{task.title}</span>
-				<span className='text-gray'>{task.deadline}</span>
+				<span className='text-gray'>{task.due} days</span>
 			</div>
 			<div className='flex -space-x-2'>
 				{task.users.map(user => (

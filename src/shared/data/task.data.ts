@@ -1,16 +1,17 @@
 import { Bug, LaptopMinimalCheck, Plane } from 'lucide-react';
 
-import { PROFILES } from './profile.data';
 import type { ITask } from '@/shared/types/task.types';
+
+import { PROFILES } from './profile.data';
 
 export const TASKS: ITask[] = [
 	{
 		id: 1,
 		iconTheme: Plane,
 		title: 'Travel App User Flow',
-		deadline: '5 days',
+		due: 5,
 		users: PROFILES,
-
+		isCompleted: false,
 		subTask: [
 			{ id: 1, title: 'fix component', isCompleted: false },
 			{ id: 2, title: 'fix component', isCompleted: false },
@@ -24,9 +25,9 @@ export const TASKS: ITask[] = [
 		id: 2,
 		iconTheme: LaptopMinimalCheck,
 		title: 'Create next app',
-		deadline: '0 days',
+		due: 0,
 		users: PROFILES,
-
+		isCompleted: true,
 		subTask: [
 			{ id: 1, title: 'fix component', isCompleted: true },
 			{ id: 2, title: 'fix component', isCompleted: true },
@@ -40,9 +41,9 @@ export const TASKS: ITask[] = [
 		id: 3,
 		iconTheme: Bug,
 		title: 'Debuging AI system searh.',
-		deadline: '5 days',
+		due: 5,
 		users: PROFILES,
-
+		isCompleted: false,
 		subTask: [
 			{ id: 1, title: 'fix component', isCompleted: false },
 			{ id: 2, title: 'fix component', isCompleted: true },

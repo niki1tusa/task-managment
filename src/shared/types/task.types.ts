@@ -12,8 +12,9 @@ export interface ITask {
 	id: number;
 	iconTheme: LucideIcon;
 	title: string;
+	isCompleted: boolean;
 	users: IProfile[];
-	deadline: string;
+	due: number;
 	subTask: ISubTask[];
 	comment: number;
 	img: number;

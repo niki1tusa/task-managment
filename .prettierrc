@@ -14,6 +14,7 @@
 		"^@/app/(.*)$",
 		"^@/components/(.*)$",
 		"^@/ui/(.*)$",
+		"^@/shared/(.*)$",
 		"^@/providers/(.*)$",
 		"^@/constants/(.*)$",
 		"^@/config/(.*)$",

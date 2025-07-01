@@ -10,8 +10,9 @@ import {
 	YAxis,
 } from 'recharts';
 
-import { ProjectChartToolTip } from './ProjectChartToolTip';
-import type { IChartDataPoint } from './project-chart.types';
+import type { IChartDataPoint } from '../../../../shared/types/project-chart.types';
+
+import { ProjectChartToolTip } from './tool-tip/ProjectChartToolTip';
 
 interface Props {
 	data: IChartDataPoint[];
@@ -31,7 +32,7 @@ export const ProjectChart = ({ data }: Props) => {
 	}, [data]);
 	return (
 		<ResponsiveContainer width='100%' height={300}>
-			<AreaChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+			<AreaChart data={data} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
 				<defs>
 					<linearGradient id='colorGradient' x1='0' y1='0' x2='0' y2='1'>
 						<stop offset='5%' stopColor='#725BF2' stopOpacity={0.3} />
