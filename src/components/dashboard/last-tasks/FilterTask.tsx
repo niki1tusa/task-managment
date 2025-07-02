@@ -2,10 +2,11 @@ const BUTTONS_OPTIONS = ['All', 'Completed', 'in-progress', 'not-started'];
 const SELECT_OPTIONS = ['Asc', 'Desc'];
 interface Props {
 	select: string | null;
+    sortOrder: string | null
 	setSelect: (arg: any) => void;
 	setSortOrder: (arg: any) => void;
 }
-export default function FilterTask({ select, setSelect, setSortOrder }: Props) {
+export default function FilterTask({ select, setSelect, sortOrder, setSortOrder }: Props) {
 	return (
 		<div>
 			<div className='mb-4 flex gap-2 rounded-[4px] border border-white py-1 pl-2 shadow shadow-neutral-400'>
@@ -25,12 +26,12 @@ export default function FilterTask({ select, setSelect, setSortOrder }: Props) {
 				))}
 			</div>
 
-			<select
+			<select value={sortOrder || ''}
 				onChange={e => setSortOrder(e.target.value)}
 				className='mb-4 gap-2 rounded-[4px] border border-white px-4 py-1.5 text-sm text-gray-500 shadow shadow-neutral-400'
 			>
 				{SELECT_OPTIONS.map(option => (
-					<option key={option} value={option}>
+					<option key={option} >
 						{option}
 					</option>
 				))}

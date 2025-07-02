@@ -11,7 +11,7 @@ export const LastTasks = () => {
 	const [select, setSelect] = useState(null);
 	const [sortOrder, setSortOrder] = useState(null);
 	const filtered = useMemo(() => {
-		const filteredTasks = !select
+		let filteredTasks = !select
 			? TASKS
 			: TASKS.filter(item => {
 					switch (select) {
@@ -26,14 +26,12 @@ export const LastTasks = () => {
 					}
 				});
 
-		const secondFilterTasks = filteredTasks.sort((a, b) => {
-			if (sortOrder === 'Desc') {
-				return a.due - b.due;
-			} else {
-				return b.due - a.due;
-			}
-		});
-		return secondFilterTasks;
+		if (sortOrder === 'Desc') {
+			filteredTasks = [...filteredTasks].sort((a, b) => b.due - a.due);
+		} else if (sortOrder === 'Asc') {
+			filteredTasks = [...filteredTasks].sort((a, b) => a.due - b.due);
+		}
+		return filteredTasks;
 	}, [select, sortOrder]);
 
 	const count = filtered.length;
@@ -43,7 +41,12 @@ export const LastTasks = () => {
 				<h1 className='mb-3 text-[22px] font-medium'>
 					Last Tasks <span className='opacity-50'>({count})</span>
 				</h1>
-				<FilterTask select={select} setSelect={setSelect} setSortOrder={setSortOrder} />
+				<FilterTask
+					select={select}
+					setSelect={setSelect}
+					sortOrder={sortOrder}
+					setSortOrder={setSortOrder}
+				/>
 			</div>
 
 			<div className='grid grid-cols-3 gap-2'>
