@@ -2,7 +2,6 @@ import cn from 'clsx';
 import { CircleCheck } from 'lucide-react';
 import { useMemo } from 'react';
 
-import type { ITask } from '@/shared/types/task.types';
 
 import '@/shared/styles/shimmer.animation.css';
 

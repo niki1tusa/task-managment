@@ -1,0 +1,40 @@
+const BUTTONS_OPTIONS = ['All', 'Completed', 'in-progress', 'not-started'];
+const SELECT_OPTIONS = ['Asc', 'Desc'];
+interface Props {
+	select: string | null;
+	setSelect: (arg: any) => void;
+	setSortOrder: (arg: any) => void;
+}
+export default function FilterTask({ select, setSelect, setSortOrder }: Props) {
+	return (
+		<div>
+			<div className='mb-4 flex gap-2 rounded-[4px] border border-white py-1 pl-2 shadow shadow-neutral-400'>
+				{BUTTONS_OPTIONS.map(button => (
+					<button
+						onClick={() => setSelect(button)}
+						key={button}
+						value={button}
+						className={`rounded-sm px-4 py-1.5 text-sm font-medium transition-all duration-300 ${
+							select === button
+								? 'text-primary bg-white shadow'
+								: 'hover:text-primary text-gray-500'
+						}`}
+					>
+						{button}
+					</button>
+				))}
+			</div>
+
+			<select
+				onChange={e => setSortOrder(e.target.value)}
+				className='mb-4 gap-2 rounded-[4px] border border-white px-4 py-1.5 text-sm text-gray-500 shadow shadow-neutral-400'
+			>
+				{SELECT_OPTIONS.map(option => (
+					<option key={option} value={option}>
+						{option}
+					</option>
+				))}
+			</select>
+		</div>
+	);
+}
