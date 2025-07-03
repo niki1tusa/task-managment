@@ -3,13 +3,13 @@ import type { LucideIcon } from 'lucide-react';
 import type { IProfile } from './profile.types';
 
 export interface ISubTask {
-	id: number;
+	id: string;
 	title: string;
 	isCompleted: boolean;
 }
 
 export interface ITask {
-	id: number;
+	id: string;
 	iconTheme: LucideIcon;
 	title: string;
 	isCompleted: boolean;

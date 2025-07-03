@@ -1,13 +1,16 @@
-import { Image, Link, MessageSquareText, Pencil } from 'lucide-react';
+import { Image, Link as LucideLink, MessageSquareText, Pencil } from 'lucide-react';
 
 import { Header } from './Header';
 import { StatusBar } from './StatusBar';
 import type { ITask } from '@/shared/types/task.types';
+import { PAGE } from '@/config/page.config';
+import Link from 'next/link';
 
 export const Task = ({ task }: { task: ITask }) => {
 	const status = Math.floor(
 		(task.subTask.filter(item => item.isCompleted === true).length / task.subTask.length) * 100
 	);
+
 	return (
 		<div className='border border-white dark:border-none text-sm rounded-3xl bg-background  flex flex-col gap-5 shadow shadow-neutral-400'>
 			{/* 1 section */}
@@ -26,7 +29,7 @@ export const Task = ({ task }: { task: ITask }) => {
 						{task.img}
 					</div>
 					<div className='flex '>
-						<Link size={19} />
+						<LucideLink size={19} />
 						{task.link}
 					</div>
 				</div>
@@ -34,9 +37,9 @@ export const Task = ({ task }: { task: ITask }) => {
 					<button className='bg-primary text-2xl text-white rounded-full w-9 h-9 shadow shadow-neutral-400'>
 						+
 					</button>
-					<button className='bg-primary  text-white rounded-full w-9 h-9 flex justify-center items-center shadow shadow-neutral-400'>
+					<Link href={PAGE.TASK_EDIT(task.id)} className='bg-primary  text-white rounded-full w-9 h-9 flex justify-center items-center shadow shadow-neutral-400'>
 						<Pencil size={21} />
-					</button>
+					</Link>
 				</div>
 			</div>
 		</div>
