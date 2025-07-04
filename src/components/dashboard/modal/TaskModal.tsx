@@ -4,10 +4,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { BookAlert, Bug, FileX2Icon, Plane } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { type SubmitHandler, useForm } from 'react-hook-form';
+import DatePicker from 'react-datepicker';
+import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 
 import { TASKS } from '@/shared/data/task.data';
-import type { ITask, TFormData } from '@/shared/types/task.types';
+import type { TFormData } from '@/shared/types/task.types';
 
 import { ZTaskScheme } from './task.zod';
 
@@ -38,7 +39,7 @@ export default function TaskModal({ children, id }: Props) {
 		resolver: zodResolver(ZTaskScheme),
 		defaultValues: {
 			title: findTask?.title || '',
-			due: findTask ? new Date(findTask.due).toISOString().split('T')[0] : '',
+			due:  new Date(findTask.due),
 		},
 	});
 	const onSubmit: SubmitHandler<TFormData> = data => console.log(data);
@@ -71,10 +72,19 @@ export default function TaskModal({ children, id }: Props) {
 
 					<div>
 						<label className='mb-1 block font-medium'>Due date:</label>
-						<input
-							{...register('due')}
-							className='hover:bg-background focus:bg-background w-full rounded border p-2'
-							type='date'
+						<Controller
+							control={control}
+							name='due'
+							render={({ field }) => (
+								<DatePicker
+									selected={field.value}
+									onChange={field.onChange}
+									dateFormat='yyyy-MM-dd'
+									className='hover:bg-background focus:bg-background w-full rounded border p-2'
+									minDate={new Date()}
+									placeholderText='Select due date'
+								/>
+							)}
 						/>
 						{errors.due && <p className='text-sm text-red-500'>{errors.due.message}</p>}
 					</div>
