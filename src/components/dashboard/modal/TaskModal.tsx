@@ -1,13 +1,21 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import { BookAlert, Bug, FileX2Icon, Plane } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { type SubmitHandler, useForm } from 'react-hook-form';
+
+import { TASKS } from '@/shared/data/task.data';
+import type { ITask, TFormData } from '@/shared/types/task.types';
+
+import { ZTaskScheme } from './task.zod';
 
 interface Props {
 	children: React.ReactNode;
+	id: string;
 }
-export default function TaskModal({ children }: Props) {
+export default function TaskModal({ children, id }: Props) {
 	const router = useRouter();
 	const closeModal = () => router.back();
 	useEffect(() => {
@@ -19,34 +27,71 @@ export default function TaskModal({ children }: Props) {
 		document.addEventListener('keydown', handleEscape);
 		return () => document.removeEventListener('keydown', handleEscape);
 	}, []);
+	const findTask = TASKS.find(task => task.id === id);
+	// react-hook-form
+	const {
+		register,
+		control,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<TFormData>({
+		resolver: zodResolver(ZTaskScheme),
+		defaultValues: {
+			title: findTask?.title || '',
+			due: findTask ? new Date(findTask.due).toISOString().split('T')[0] : '',
+		},
+	});
+	const onSubmit: SubmitHandler<TFormData> = data => console.log(data);
 	return (
-		<div
-			onClick={closeModal}
-			className='absolute top-[30%] left-[50%] z-50 min-w-md -translate-x-[50%] transform items-center justify-center bg-white text-black'
-		>
-			<div onClick={e => e.stopPropagation()} className='mx-2 max-h-[90vh] rounded-lg'>
-				<div className='bg-background mt-3 flex items-center justify-between p-2'>
+		<>
+			{/* Оверлей */}
+			<div onClick={closeModal} className='bg-opacity-50 bg-background/90 fixed inset-0 z-40' />
+			{/* Модалка */}
+			<div
+				onClick={e => e.stopPropagation()}
+				className='fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white p-4 text-black shadow-lg'
+			>
+				<div className='mb-4 flex items-center justify-between'>
 					{children}
-					<button onClick={closeModal}>x</button>
+					<button onClick={closeModal} className='text-2xl font-bold hover:text-red-600'>
+						x
+					</button>
 				</div>
-				<div className='flex flex-col my-5 mx-2'>
-					<span>
-						<label >Title</label>
-						<input className='border' type='text' placeholder='' />
-					</span>
-					<span>
-						<label>Due date</label>
-						<input className='border' type='date' placeholder='' />
-					</span>
-					<span className='flex'>
-						<Plane/>
-						<Bug/>
-						<BookAlert/>
-						<FileX2Icon/>
-					</span>
-					<button className='bg-primary rounded-2xl text-white w-[30%]'>Save</button>
-				</div>
+
+				<form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>
+					<div>
+						<label className='mb-1 block font-medium'>Title:</label>
+						<input
+							{...register('title')}
+							className='hover:bg-background focus:bg-background w-full rounded border p-2'
+							type='text'
+						/>
+						{errors.title && <p className='text-sm text-red-500'>{errors.title.message}</p>}
+					</div>
+
+					<div>
+						<label className='mb-1 block font-medium'>Due date:</label>
+						<input
+							{...register('due')}
+							className='hover:bg-background focus:bg-background w-full rounded border p-2'
+							type='date'
+						/>
+						{errors.due && <p className='text-sm text-red-500'>{errors.due.message}</p>}
+					</div>
+
+					<div className='flex items-center gap-2'>
+						<label className='font-medium'>Icon:</label>
+						<Plane />
+						<Bug />
+						<BookAlert />
+						<FileX2Icon />
+					</div>
+
+					<button type='submit' className='bg-primary w-[30%] rounded-2xl py-2 text-white'>
+						Save
+					</button>
+				</form>
 			</div>
-		</div>
+		</>
 	);
 }

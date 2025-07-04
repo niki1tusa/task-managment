@@ -9,7 +9,7 @@ export const TASKS: ITask[] = [
 		id: '1',
 		iconTheme: Plane,
 		title: 'Travel App User Flow',
-		due: 5,
+		due: new Date('Junuary 1, 2025'),
 		users: PROFILES,
 		isCompleted: false,
 		subTask: [
@@ -25,7 +25,7 @@ export const TASKS: ITask[] = [
 		id: '2',
 		iconTheme: LaptopMinimalCheck,
 		title: 'Create next app',
-		due: 0,
+		due: new Date('Junuary 1, 2025'),
 		users: PROFILES,
 		isCompleted: true,
 		subTask: [
@@ -41,7 +41,7 @@ export const TASKS: ITask[] = [
 		id: '3',
 		iconTheme: Bug,
 		title: 'Debuging AI system searh.',
-		due: 5,
+		due:new Date('July 10, 2025'),
 		users: PROFILES,
 		isCompleted: false,
 		subTask: [
@@ -58,7 +58,7 @@ export const TASKS: ITask[] = [
 		id: '4',
 		iconTheme: LaptopMinimalCheck,
 		title: 'Mobile App Redesign',
-		due: 3,
+		due: new Date('Junuary 15, 2025'),
 		users: PROFILES.slice(0, 2),
 		isCompleted: false,
 		subTask: [
@@ -75,7 +75,7 @@ export const TASKS: ITask[] = [
 		id: '5',
 		iconTheme: Bug,
 		title: 'Fix Authentication Issues',
-		due: 1,
+		due:new Date('July 9, 2025'),
 		users: PROFILES.slice(1, 3),
 		isCompleted: true,
 		subTask: [
@@ -91,7 +91,7 @@ export const TASKS: ITask[] = [
 		id: '6',
 		iconTheme: Plane,
 		title: 'API Integration for Booking System',
-		due: 7,
+		due: new Date('July 11, 2025'),
 		users: PROFILES,
 		isCompleted: false,
 		subTask: [
@@ -109,7 +109,7 @@ export const TASKS: ITask[] = [
 		id: '7',
 		iconTheme: LaptopMinimalCheck,
 		title: 'Database Migration Script',
-		due: 2,
+		due:new Date('July 12, 2025'),
 		users: PROFILES.slice(0, 1),
 		isCompleted: true,
 		subTask: [
@@ -126,7 +126,7 @@ export const TASKS: ITask[] = [
 		id: '8',
 		iconTheme: Bug,
 		title: 'Performance Optimization',
-		due: 4,
+		due: new Date('July 10, 2025'),
 		users: PROFILES.slice(1, 2),
 		isCompleted: false,
 		subTask: [

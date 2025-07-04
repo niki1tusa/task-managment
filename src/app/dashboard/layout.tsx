@@ -6,7 +6,6 @@ interface Props {
 	modals: React.ReactNode;
 }
 export default function DashboardLayout({ children, modals }: Props) {
-	console.log('modals:', modals)
 	return (
 		<div className='grid grid-cols-[15%_60%_25%] justify-between '>
 			<Sidebar />

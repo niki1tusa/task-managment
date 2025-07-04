@@ -14,9 +14,10 @@ export interface ITask {
 	title: string;
 	isCompleted: boolean;
 	users: IProfile[];
-	due: number;
+	due: Date;
 	subTask: ISubTask[];
 	comment: number;
 	img: number;
 	link: number;
 }
+export type TFormData = Pick<ITask, 'title' | 'iconTheme' | 'due'>
