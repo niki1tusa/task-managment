@@ -62,5 +62,6 @@ input,
 select,
 option {
 	cursor: pointer;
+	outline: none;
 	font-family: var(--font-poppins-sans);
 }

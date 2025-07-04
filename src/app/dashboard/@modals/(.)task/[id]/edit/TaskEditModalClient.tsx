@@ -6,7 +6,7 @@ interface Props {
 export default function TaskEditModalClient({ id }: Props) {
 	return (
 		<TaskModal>
-			<div>Task id: {id}</div>
+			<h2 className='flex items-center justify-center font-semibold'>Edit Task "{id}"</h2>
 		</TaskModal>
 	);
 }
