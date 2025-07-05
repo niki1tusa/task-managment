@@ -1,7 +1,8 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { BookAlert, Bug, FileX2Icon, Plane } from 'lucide-react';
+import cn from 'clsx';
+import { Plane, SquareX } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
@@ -10,6 +11,7 @@ import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { TASKS } from '@/shared/data/task.data';
 import type { TFormData } from '@/shared/types/task.types';
 
+import { ICON_NAMES, MODAL_ICON } from './icon.data';
 import { ZTaskScheme } from './task.zod';
 
 interface Props {
@@ -32,6 +34,9 @@ export default function TaskModal({ children, id }: Props) {
 	// react-hook-form
 	const {
 		register,
+		reset,
+		setValue,
+		watch,
 		control,
 		handleSubmit,
 		formState: { errors },
@@ -39,10 +44,24 @@ export default function TaskModal({ children, id }: Props) {
 		resolver: zodResolver(ZTaskScheme),
 		defaultValues: {
 			title: findTask?.title || '',
-			due:  new Date(findTask.due),
+			due: findTask?.due ? new Date(findTask.due) : new Date(),
+			iconTheme: findTask?.iconTheme || 'Plane',
 		},
 	});
-	const onSubmit: SubmitHandler<TFormData> = data => console.log(data);
+	const onSubmit: SubmitHandler<TFormData> = data => {
+		console.log(data)
+		closeModal();
+	};
+
+	useEffect(() => {
+		if (findTask) {
+			reset({
+				title: findTask?.title,
+				due: new Date(findTask.due),
+				iconTheme: findTask?.iconTheme || 'Plane',
+			});
+		}
+	}, [id, reset]);
 	return (
 		<>
 			{/* Оверлей */}
@@ -54,17 +73,20 @@ export default function TaskModal({ children, id }: Props) {
 			>
 				<div className='mb-4 flex items-center justify-between'>
 					{children}
-					<button onClick={closeModal} className='text-2xl font-bold hover:text-red-600'>
-						x
+					<button
+						onClick={closeModal}
+						className='text-2xl font-bold transition-colors hover:text-red-600'
+					>
+						<SquareX />
 					</button>
 				</div>
 
-				<form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>
+				<form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
 					<div>
 						<label className='mb-1 block font-medium'>Title:</label>
 						<input
 							{...register('title')}
-							className='hover:bg-background focus:bg-background w-full rounded border p-2'
+							className='text-gray w-full rounded border p-2 shadow shadow-neutral-400 hover:bg-[#f6f4ff] focus:bg-[#f6f4ff]'
 							type='text'
 						/>
 						{errors.title && <p className='text-sm text-red-500'>{errors.title.message}</p>}
@@ -80,7 +102,7 @@ export default function TaskModal({ children, id }: Props) {
 									selected={field.value}
 									onChange={field.onChange}
 									dateFormat='yyyy-MM-dd'
-									className='hover:bg-background focus:bg-background w-full rounded border p-2'
+									className='text-gray w-full rounded border p-2 shadow shadow-neutral-400 hover:bg-[#f6f4ff] focus:bg-[#f6f4ff]'
 									minDate={new Date()}
 									placeholderText='Select due date'
 								/>
@@ -91,13 +113,33 @@ export default function TaskModal({ children, id }: Props) {
 
 					<div className='flex items-center gap-2'>
 						<label className='font-medium'>Icon:</label>
-						<Plane />
-						<Bug />
-						<BookAlert />
-						<FileX2Icon />
+						<div className='flex gap-3'>
+							{ICON_NAMES.map(name => {
+								const Icon = MODAL_ICON[name];
+								return (
+									<button
+										onClick={() => setValue('iconTheme', name)}
+										type='button'
+										key={name}
+										className={cn(
+											'bg-primary hover:bg-primary/50 rounded-sm p-2 text-white transition-colors',
+											{
+												'border-2 border-indigo-800 shadow shadow-neutral-400':
+													watch('iconTheme') === name,
+											}
+										)}
+									>
+										<Icon size={20} />
+									</button>
+								);
+							})}
+						</div>
 					</div>
 
-					<button type='submit' className='bg-primary w-[30%] rounded-2xl py-2 text-white'>
+					<button
+						type='submit'
+						className='bg-primary hover:bg-primary/50 w-[30%] rounded-2xl py-2 text-white transition-colors'
+					>
 						Save
 					</button>
 				</form>

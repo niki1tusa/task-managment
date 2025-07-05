@@ -1,6 +1,7 @@
 import type { LucideIcon } from 'lucide-react';
 
 import type { IProfile } from './profile.types';
+import type { IconName } from '@/components/dashboard/modal/icon.data';
 
 export interface ISubTask {
 	id: string;
@@ -10,7 +11,7 @@ export interface ISubTask {
 
 export interface ITask {
 	id: string;
-	iconTheme: LucideIcon;
+	iconTheme: IconName;
 	title: string;
 	isCompleted: boolean;
 	users: IProfile[];
