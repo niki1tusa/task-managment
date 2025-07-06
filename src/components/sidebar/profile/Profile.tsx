@@ -10,9 +10,9 @@ import { Heading } from '../../ui/Heading';
 
 // import cn from 'clsx'
 export const Profile = ({ data }: { data: IProfile }) => {
-	const [isShowMenu, setIsShowMenu] = useState(false);
+	// const [isShowMenu, setIsShowMenu] = useState(false);
 	return (
-		<div>
+		<div className='pt-4'>
 			<div className='flex items-center justify-between'>
 				<Heading heading='Account' />
 				{/* {isShowMenu ? <PanelLeftOpen color='gray' /> : <PanelLeftClose color='gray' />} */}

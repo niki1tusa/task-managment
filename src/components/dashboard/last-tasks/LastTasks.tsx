@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 
 import { TASKS } from '@/shared/data/task.data';
+import type { ITask } from '@/shared/types/task.types';
 
 import FilterTask from './FilterTask';
 import { Task } from './task/Task';
@@ -25,22 +26,37 @@ export const LastTasks = () => {
 							return true;
 					}
 				});
-
+		const sortFnc = (data: ITask[], sort?: string) => {
+			if (sort === 'asc') {
+				return [...data].sort(
+					(a, b) =>
+						Math.ceil((a.due.getTime() - Date.now()) / (1000 * 60 * 60 * 24)) -
+						Math.ceil((b.due.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
+				);
+			} else {
+				return [...data].sort(
+					(a, b) =>
+						Math.ceil((b.due.getTime() - Date.now()) / (1000 * 60 * 60 * 24)) -
+						Math.ceil((a.due.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
+				);
+			}
+		};
 		if (sortOrder === 'Desc') {
-			filteredTasks = [...filteredTasks].sort((a, b) => b.due - a.due);
+			filteredTasks = sortFnc(filteredTasks);
 		} else if (sortOrder === 'Asc') {
-			filteredTasks = [...filteredTasks].sort((a, b) => a.due - b.due);
+			filteredTasks = sortFnc(filteredTasks, 'asc');
 		}
 		return filteredTasks;
 	}, [select, sortOrder]);
 
 	const count = filtered.length;
 	return (
-		<div className='mt-5'>
-			<div className='mt-10 flex justify-between'>
-				<h1 className='mb-3 text-[22px] font-medium'>
-					Last Tasks <span className='opacity-50'>({count})</span>
-				</h1>
+		<div className='mt-8'>
+			<h1 className='text-[22px] font-medium'>
+				Last Tasks <span className='opacity-50'>({count})</span>
+			</h1>
+			<div className=' flex justify-between'>
+				<div></div>
 				<FilterTask
 					select={select}
 					setSelect={setSelect}

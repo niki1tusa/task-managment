@@ -1,4 +1,3 @@
-import type { LucideIcon } from 'lucide-react';
 
 import type { IProfile } from './profile.types';
 import type { IconName } from '@/components/dashboard/modal/icon.data';

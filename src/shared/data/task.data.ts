@@ -1,4 +1,4 @@
-import { Bug, LaptopMinimalCheck, Plane } from 'lucide-react';
+import { Bug, LaptopMinimalCheck, Plane, TabletSmartphone } from 'lucide-react';
 
 import type { ITask } from '@/shared/types/task.types';
 
@@ -7,7 +7,7 @@ import { PROFILES } from './profile.data';
 export const TASKS: ITask[] = [
 	{
 		id: '1',
-		iconTheme: Plane,
+		iconTheme: 'Plane',
 		title: 'Travel App User Flow',
 		due: new Date('Junuary 1, 2025'),
 		users: PROFILES,
@@ -23,7 +23,7 @@ export const TASKS: ITask[] = [
 	},
 	{
 		id: '2',
-		iconTheme: LaptopMinimalCheck,
+		iconTheme: "TabletSmartphone",
 		title: 'Create next app',
 		due: new Date('Junuary 1, 2025'),
 		users: PROFILES,
@@ -39,7 +39,7 @@ export const TASKS: ITask[] = [
 	},
 	{
 		id: '3',
-		iconTheme: Bug,
+		iconTheme: 'Bug',
 		title: 'Debuging AI system searh.',
 		due:new Date('July 10, 2025'),
 		users: PROFILES,
@@ -56,7 +56,7 @@ export const TASKS: ITask[] = [
 	},
 	{
 		id: '4',
-		iconTheme: LaptopMinimalCheck,
+		iconTheme: 'Hammer',
 		title: 'Mobile App Redesign',
 		due: new Date('Junuary 15, 2025'),
 		users: PROFILES.slice(0, 2),
@@ -73,7 +73,7 @@ export const TASKS: ITask[] = [
 	},
 	{
 		id: '5',
-		iconTheme: Bug,
+		iconTheme: 'Bug',
 		title: 'Fix Authentication Issues',
 		due:new Date('July 9, 2025'),
 		users: PROFILES.slice(1, 3),
@@ -89,7 +89,7 @@ export const TASKS: ITask[] = [
 	},
 	{
 		id: '6',
-		iconTheme: Plane,
+		iconTheme: 'Plane',
 		title: 'API Integration for Booking System',
 		due: new Date('July 11, 2025'),
 		users: PROFILES,
@@ -107,7 +107,7 @@ export const TASKS: ITask[] = [
 	},
 	{
 		id: '7',
-		iconTheme: LaptopMinimalCheck,
+		iconTheme: 'Bot',
 		title: 'Database Migration Script',
 		due:new Date('July 12, 2025'),
 		users: PROFILES.slice(0, 1),
@@ -124,7 +124,7 @@ export const TASKS: ITask[] = [
 	},
 	{
 		id: '8',
-		iconTheme: Bug,
+		iconTheme: 'Bug',
 		title: 'Performance Optimization',
 		due: new Date('July 10, 2025'),
 		users: PROFILES.slice(1, 2),

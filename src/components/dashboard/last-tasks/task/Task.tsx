@@ -13,7 +13,7 @@ export const Task = ({ task }: { task: ITask }) => {
 	);
 
 	return (
-		<div className='bg-background flex flex-col gap-5 rounded-3xl border border-white text-sm shadow shadow-neutral-400 dark:border-none'>
+		<div className='bg-background grid grid-cols-1 grid-rows-3 gap-3 rounded-3xl border border-white text-sm shadow shadow-neutral-400 dark:border-none'>
 			{/* 1 section */}
 			<Header task={task} />
 			{/* 2 section */}
