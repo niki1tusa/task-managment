@@ -3,16 +3,15 @@ import { SquareX } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
 interface Props {
-    title?: string
-	children: React.ReactNode;
+	title?: string;
+
 	closeModal?: () => void;
 }
-export default function Header({ children, closeModal, title }: Props) {
+export default function Header({ closeModal, title }: Props) {
 	return (
 		<div className='mb-4 flex items-center justify-between'>
-			<h1>{title}</h1>
+			<h1 className='font-medium text-2xl'>{title}</h1>
 			<div className='mb-4 flex items-center justify-between'>
-				{children}
 				<Button
 					onClick={closeModal}
 					className='text-2xl font-bold transition-colors hover:text-red-600'

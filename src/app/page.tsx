@@ -27,9 +27,9 @@ export const metadata: Metadata = {
 
 export default function Home() {
 	return (
-		<div className='flex items-center justify-center'>
-			<Link href={PAGE.DASHBOARD}>
-				<b>CLICK ME </b>(for go Dashboard page)
+		<div className='flex items-center w-full h-full justify-center'>
+			<Link href={PAGE.DASHBOARD} className='border-b-2'>
+				<b>CLICK ME </b>(for go to the Dashboard page)
 			</Link>
 			
 		</div>

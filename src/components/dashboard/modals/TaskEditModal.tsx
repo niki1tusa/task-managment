@@ -19,13 +19,12 @@ import { ICON_NAMES, MODAL_ICON } from './icon.data';
 import { ZTaskScheme } from './scheme.zod';
 
 interface Props {
-	children: React.ReactNode;
 	id: string;
 }
-export default function TaskModal({ children, id }: Props) {
+export default function TaskModal({ id }: Props) {
 	const tasks = useTaskStore(state => state.tasks);
 	const updateTask = useTaskStore(state => state.updateTask);
-	const notify = () => toast('Task edit is success!');
+	const notify = () => toast.success('Task edit is success!');
 
 	const router = useRouter();
 	const closeModal = () => router.back();
@@ -83,7 +82,9 @@ export default function TaskModal({ children, id }: Props) {
 				onClick={e => e.stopPropagation()}
 				className='fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white p-4 text-black shadow-lg'
 			>
-				<Header closeModal={closeModal}>{children}</Header>
+				<Header title={`Edit task "${id}"`} closeModal={closeModal}/>
+				
+				
 
 				<form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
 					<div>

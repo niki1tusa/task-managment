@@ -3,6 +3,7 @@ import { Image, Link as LucideLink, MessageSquareText, Pencil, Plus } from 'luci
 import type { ITask } from '@/shared/types/task.types';
 
 import { TaskBtnAction } from './TaskBtnAction';
+import { PAGE } from '@/config/page.config';
 interface Props { 
     task: ITask
 }
@@ -24,10 +25,10 @@ export const Footer = ({task}: Props) => {
 				</div>
 			</div>
 			<div className='mr-2 mb-2 flex gap-2'>
-				<TaskBtnAction href={task.id}>
+				<TaskBtnAction href={PAGE.ADD_SUBTASK(task.id)}>
 					<Plus />
 				</TaskBtnAction>
-				<TaskBtnAction href={task.id}>
+				<TaskBtnAction href={PAGE.TASK_EDIT(task.id)}>
 					<Pencil size={21} />
 				</TaskBtnAction>
 			</div>

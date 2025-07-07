@@ -20,7 +20,7 @@ interface Props {
 type TForm = { title: string };
 export default function SubTaskModal({ id }: Props) {
 	const addSubTask = useTaskStore(state => state.addSubTask);
-	const notify = () => toast('Create subtask is success!');
+	const notify = () => toast.success('Create subtask is success!');
 	const router = useRouter();
 	const closeModal = () => router.back();
 
@@ -61,7 +61,7 @@ export default function SubTaskModal({ id }: Props) {
 				onClick={e => e.stopPropagation()}
 				className='fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white p-4 text-black shadow-lg'
 			>
-				<Header title={`Add Subtask ${id}`} closeModal={closeModal}>''</Header>
+				<Header title={`Add Subtask "${id}"`} closeModal={closeModal}/>
 	
 
 				<form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
