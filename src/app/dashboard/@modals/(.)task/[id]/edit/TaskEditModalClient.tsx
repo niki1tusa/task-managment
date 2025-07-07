@@ -1,4 +1,4 @@
-import TaskModal from '@/components/dashboard/modal/TaskModal';
+import TaskModal from '@/components/dashboard/modals/TaskEditModal';
 
 interface Props {
 	id: string;

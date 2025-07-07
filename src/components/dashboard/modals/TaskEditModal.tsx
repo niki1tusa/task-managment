@@ -2,23 +2,31 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import cn from 'clsx';
-import { Plane, SquareX } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
+import { ToastContainer, toast } from 'react-toastify';
 
-import { TASKS } from '@/shared/data/task.data';
+import { Button } from '@/components/ui/Button';
+
 import type { TFormData } from '@/shared/types/task.types';
 
+import { useTaskStore } from '@/store/store';
+
+import Header from './header/Header';
 import { ICON_NAMES, MODAL_ICON } from './icon.data';
-import { ZTaskScheme } from './task.zod';
+import { ZTaskScheme } from './scheme.zod';
 
 interface Props {
 	children: React.ReactNode;
 	id: string;
 }
 export default function TaskModal({ children, id }: Props) {
+	const tasks = useTaskStore(state => state.tasks);
+	const updateTask = useTaskStore(state => state.updateTask);
+	const notify = () => toast('Task edit is success!');
+
 	const router = useRouter();
 	const closeModal = () => router.back();
 	useEffect(() => {
@@ -30,7 +38,7 @@ export default function TaskModal({ children, id }: Props) {
 		document.addEventListener('keydown', handleEscape);
 		return () => document.removeEventListener('keydown', handleEscape);
 	}, []);
-	const findTask = TASKS.find(task => task.id === id);
+	const findTask = tasks.find(task => task.id === id);
 	// react-hook-form
 	const {
 		register,
@@ -49,8 +57,11 @@ export default function TaskModal({ children, id }: Props) {
 		},
 	});
 	const onSubmit: SubmitHandler<TFormData> = data => {
-		console.log(data)
-		closeModal();
+		updateTask(id, data);
+		notify();
+		setTimeout(() => {
+			closeModal();
+		}, 2000);
 	};
 
 	useEffect(() => {
@@ -66,20 +77,13 @@ export default function TaskModal({ children, id }: Props) {
 		<>
 			{/* Оверлей */}
 			<div onClick={closeModal} className='bg-opacity-50 bg-background/90 fixed inset-0 z-40' />
+			<ToastContainer />
 			{/* Модалка */}
 			<div
 				onClick={e => e.stopPropagation()}
 				className='fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white p-4 text-black shadow-lg'
 			>
-				<div className='mb-4 flex items-center justify-between'>
-					{children}
-					<button
-						onClick={closeModal}
-						className='text-2xl font-bold transition-colors hover:text-red-600'
-					>
-						<SquareX />
-					</button>
-				</div>
+				<Header closeModal={closeModal}>{children}</Header>
 
 				<form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
 					<div>
@@ -135,13 +139,7 @@ export default function TaskModal({ children, id }: Props) {
 							})}
 						</div>
 					</div>
-
-					<button
-						type='submit'
-						className='bg-primary hover:bg-primary/50 w-[30%] rounded-2xl py-2 text-white transition-colors'
-					>
-						Save
-					</button>
+					<Button type='submit'>Save</Button>
 				</form>
 			</div>
 		</>

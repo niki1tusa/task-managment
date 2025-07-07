@@ -3,7 +3,7 @@ import { Poppins } from 'next/font/google';
 
 import { SITE_NAME } from '@/constants/seo.constants';
 
-import { Provider } from '../providers/Providers';
+import { ProviderWrapper } from '../providers/Providers';
 
 import './globals.css';
 
@@ -33,7 +33,7 @@ export default function RootLayout({
 	return (
 		<html lang='en' suppressHydrationWarning>
 			<body className={`${poppins.variable} antialiased `}>
-				<Provider>{children}</Provider>
+				<ProviderWrapper>{children}</ProviderWrapper>
 			</body>
 		</html>
 	);

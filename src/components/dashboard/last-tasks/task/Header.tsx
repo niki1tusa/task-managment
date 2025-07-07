@@ -4,11 +4,10 @@ import React from 'react';
 
 import type { ITask } from '@/shared/types/task.types';
 
-import { MODAL_ICON, type IconName } from '../../modal/icon.data';
+import { type IconName, MODAL_ICON } from '../../modals/icon.data';
 
 export const Header = ({ task }: { task: ITask }) => {
-
-  const TaskIcon = MODAL_ICON[task.iconTheme.trim() as IconName];
+	const TaskIcon = MODAL_ICON[task.iconTheme.trim() as IconName];
 	const date = Math.ceil((task.due.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
 	const result = date <= 0 ? (task.isCompleted ? 'Done' : 'Overdue') : ` ${date} days`;
 	return (
@@ -17,7 +16,7 @@ export const Header = ({ task }: { task: ITask }) => {
 				<TaskIcon color='#725cee' />
 			</div>
 			<div className='flex min-w-0 flex-1 flex-col'>
-				<span className='mb-1 line-clamp-2 text-sm leading-tight font-medium break-words'>
+				<span className='mb-1 line-clamp-2 text-sm leading-none font-medium break-words'>
 					{task.title}
 				</span>
 				<span className='text-gray'>{result}</span>

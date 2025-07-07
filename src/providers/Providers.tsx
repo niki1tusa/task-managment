@@ -1,10 +1,12 @@
 import { ThemeProvider } from 'next-themes';
 import type { ReactNode } from 'react';
-
-export const Provider = ({ children }: { children: ReactNode }) => {
+// import { Provider } from 'react-redux';
+export const ProviderWrapper = ({ children }: { children: ReactNode }) => {
 	return (
-		<ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-			{children}
-		</ThemeProvider>
+		// <Provider store={store}>
+			<ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+				{children}
+			</ThemeProvider>
+		// </Provider>
 	);
 };

@@ -2,8 +2,9 @@
 
 import { useMemo, useState } from 'react';
 
-import { TASKS } from '@/shared/data/task.data';
 import type { ITask } from '@/shared/types/task.types';
+
+import { useTaskStore } from '@/store/store';
 
 import FilterTask from './FilterTask';
 import { Task } from './task/Task';
@@ -11,10 +12,13 @@ import { Task } from './task/Task';
 export const LastTasks = () => {
 	const [select, setSelect] = useState(null);
 	const [sortOrder, setSortOrder] = useState(null);
+
+	const tasks = useTaskStore(state => state.tasks);
+
 	const filtered = useMemo(() => {
 		let filteredTasks = !select
-			? TASKS
-			: TASKS.filter(item => {
+			? tasks
+			: tasks.filter(item => {
 					switch (select) {
 						case 'Completed':
 							return item.isCompleted;
@@ -47,7 +51,7 @@ export const LastTasks = () => {
 			filteredTasks = sortFnc(filteredTasks, 'asc');
 		}
 		return filteredTasks;
-	}, [select, sortOrder]);
+	}, [select, sortOrder, tasks]);
 
 	const count = filtered.length;
 	return (
@@ -55,7 +59,7 @@ export const LastTasks = () => {
 			<h1 className='text-[22px] font-medium'>
 				Last Tasks <span className='opacity-50'>({count})</span>
 			</h1>
-			<div className=' flex justify-between'>
+			<div className='flex justify-between'>
 				<div></div>
 				<FilterTask
 					select={select}

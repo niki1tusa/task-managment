@@ -1,0 +1,11 @@
+import SubTaskModal from "@/components/dashboard/modals/SubTaskAddModal";
+import { useTaskStore } from "@/store/store";
+
+interface Props {
+    params: Promise<{ id: string }>;
+}
+export default async function SubTaskAddModal({ params }: Props) {
+    const { id } = await params;
+    
+    return <SubTaskModal id={id}/>
+}
