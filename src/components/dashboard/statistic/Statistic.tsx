@@ -4,7 +4,7 @@ import { LIST_CARD } from '@/shared/data/list.card.data';
 
 export const Statistic = () => {
 	return (
-		<div className='mt-10 grid grid-cols-[30%_70%] gap-5'>
+		<div className=' grid grid-cols-1 lg:grid-cols-[30%_70%] gap-5'>
 			<div className='flex flex-col gap-3'>
 				{LIST_CARD.map(card => (
 					<Card

@@ -3,10 +3,13 @@ import { persist } from 'zustand/middleware';
 
 import { TASKS } from '@/shared/data/task.data';
 import type { ISubTask, ITask, TFormData } from '@/shared/types/task.types';
+import type { IProfile } from '@/shared/types/profile.types';
+import { PROFILES } from '@/shared/data/profile.data';
 
 interface ITaskStore {
 	statusCount: (data: ITask) => number;
 	tasks: ITask[];
+	profiles: IProfile[]
 	updateTask: (id: string, data: TFormData) => void;
 	addSubTask: (id: string, data: Pick<ISubTask, 'title'>) => void;
 }
@@ -15,6 +18,7 @@ export const useTaskStore = create<ITaskStore>()(
 	persist(
 		set => ({
 			tasks: TASKS,
+			profiles: PROFILES,
 			statusCount: data => {
 				return Math.floor(
 					(data.subTask.filter(item => item.isCompleted === true).length / data.subTask.length) *

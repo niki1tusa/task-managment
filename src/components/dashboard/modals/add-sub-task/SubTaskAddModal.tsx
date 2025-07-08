@@ -11,8 +11,8 @@ import { Button } from '@/components/ui/Button';
 
 import { useTaskStore } from '@/store/store';
 
-import { ZSubTaskScheme } from './scheme.zod';
-import Header from './header/Header';
+import Header from '../header/Header';
+import { ZSubTaskScheme } from '../scheme.zod';
 
 interface Props {
 	id: string;
@@ -61,8 +61,7 @@ export default function SubTaskModal({ id }: Props) {
 				onClick={e => e.stopPropagation()}
 				className='fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white p-4 text-black shadow-lg'
 			>
-				<Header title={`Add Subtask "${id}"`} closeModal={closeModal}/>
-	
+				<Header title={`Add Subtask "${id}"`} closeModal={closeModal} />
 
 				<form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
 					<div>

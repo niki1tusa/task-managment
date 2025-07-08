@@ -14,9 +14,9 @@ import type { TFormData } from '@/shared/types/task.types';
 
 import { useTaskStore } from '@/store/store';
 
-import Header from './header/Header';
-import { ICON_NAMES, MODAL_ICON } from './icon.data';
-import { ZTaskScheme } from './scheme.zod';
+import Header from '../header/Header';
+import { ICON_NAMES, MODAL_ICON } from '../icon.data';
+import { ZTaskScheme } from '../scheme.zod';
 
 interface Props {
 	id: string;
@@ -82,9 +82,7 @@ export default function TaskModal({ id }: Props) {
 				onClick={e => e.stopPropagation()}
 				className='fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white p-4 text-black shadow-lg'
 			>
-				<Header title={`Edit task "${id}"`} closeModal={closeModal}/>
-				
-				
+				<Header title={`Edit task "${id}"`} closeModal={closeModal} />
 
 				<form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
 					<div>

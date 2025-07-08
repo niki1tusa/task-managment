@@ -4,7 +4,8 @@ import React from 'react';
 
 import type { ITask } from '@/shared/types/task.types';
 
-import { type IconName, MODAL_ICON } from '../../modals/icon.data';
+import { type IconName, MODAL_ICON } from '../../../modals/icon.data';
+import { Avatar } from './Avatar';
 
 export const Header = ({ task }: { task: ITask }) => {
 	const TaskIcon = MODAL_ICON[task.iconTheme.trim() as IconName];
@@ -23,14 +24,10 @@ export const Header = ({ task }: { task: ITask }) => {
 			</div>
 			<div className='flex -space-x-2'>
 				{task.users.map(user => (
-					<div
-						key={user.id}
-						className='bg-primary flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border shadow shadow-neutral-400'
-					>
-						<Image src={user.img} alt='user' width={36} height={36} />
-					</div>
+					<Avatar key={user.id} id={user.id} img={user.img} />
 				))}
 			</div>
 		</div>
 	);
 };
+

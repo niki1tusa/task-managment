@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from 'react';
 
+import { Title } from '@/components/ui/Title';
+
 import type { ITask } from '@/shared/types/task.types';
 
 import { useTaskStore } from '@/store/store';
@@ -55,10 +57,8 @@ export const LastTasks = () => {
 
 	const count = filtered.length;
 	return (
-		<div className='mt-8'>
-			<h1 className='text-[22px] font-medium'>
-				Last Tasks <span className='opacity-50'>({count})</span>
-			</h1>
+		<div>
+			<Title count={count}>Last Tasks </Title>
 			<div className='flex justify-between'>
 				<div></div>
 				<FilterTask
@@ -69,7 +69,7 @@ export const LastTasks = () => {
 				/>
 			</div>
 
-			<div className='grid grid-cols-3 gap-2'>
+			<div className='grid grid-cols-1 lg:grid-cols-3 gap-2'>
 				{count ? (
 					filtered.map(task => <Task key={task.id} task={task} />)
 				) : (

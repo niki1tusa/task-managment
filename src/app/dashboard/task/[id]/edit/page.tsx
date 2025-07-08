@@ -1,4 +1,5 @@
-import ClientPage from './ClientPage';
+import ClientPage from '@/components/dashboard/modals/edit-task/ClientPage';
+
 
 interface Props {
 	params: Promise<{ id: string }>;

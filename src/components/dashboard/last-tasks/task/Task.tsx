@@ -2,9 +2,9 @@ import type { ITask } from '@/shared/types/task.types';
 
 import { useTaskStore } from '@/store/store';
 
-import { Header } from './Header';
-import { StatusBar } from './StatusBar';
 import { Footer } from './Footer';
+import { StatusBar } from './StatusBar';
+import { Header } from './header/Header';
 
 export const Task = ({ task }: { task: ITask }) => {
 	const statusCount = useTaskStore(state => state.statusCount);
