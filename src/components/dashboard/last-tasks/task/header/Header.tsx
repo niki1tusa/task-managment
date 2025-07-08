@@ -9,7 +9,7 @@ import { Avatar } from './Avatar';
 
 export const Header = ({ task }: { task: ITask }) => {
 	const TaskIcon = MODAL_ICON[task.iconTheme.trim() as IconName];
-	const date = Math.ceil((task.due.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
+	const date = Math.ceil((task.due.date.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
 	const result = date <= 0 ? (task.isCompleted ? 'Done' : 'Overdue') : ` ${date} days`;
 	return (
 		<div className='mx-5 mt-3 flex gap-3 pt-2'>

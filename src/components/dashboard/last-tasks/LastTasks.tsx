@@ -36,14 +36,14 @@ export const LastTasks = () => {
 			if (sort === 'asc') {
 				return [...data].sort(
 					(a, b) =>
-						Math.ceil((a.due.getTime() - Date.now()) / (1000 * 60 * 60 * 24)) -
-						Math.ceil((b.due.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
+						Math.ceil((a.due.date.getTime() - Date.now()) / (1000 * 60 * 60 * 24)) -
+						Math.ceil((b.due.date.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
 				);
 			} else {
 				return [...data].sort(
 					(a, b) =>
-						Math.ceil((b.due.getTime() - Date.now()) / (1000 * 60 * 60 * 24)) -
-						Math.ceil((a.due.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
+						Math.ceil((b.due.date.getTime() - Date.now()) / (1000 * 60 * 60 * 24)) -
+						Math.ceil((a.due.date.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
 				);
 			}
 		};
@@ -57,10 +57,16 @@ export const LastTasks = () => {
 
 	const count = filtered.length;
 	return (
-		<div>
-			<Title count={count}>Last Tasks </Title>
-			<div className='flex justify-between'>
-				<div></div>
+		<div className='flex flex-col gap-5'>
+			<Title count={count}> Last Tasks </Title>
+			<div className='flex justify-between '>
+				<button
+					className={
+						'border border-white py-2 shadow shadow-neutral-400 hover:text-primary rounded-sm max-h-12 px-4 text-sm font-medium text-gray-500 transition-all duration-300'
+					}
+				>
+				+	Add Task
+				</button>
 				<FilterTask
 					select={select}
 					setSelect={setSelect}
@@ -69,7 +75,7 @@ export const LastTasks = () => {
 				/>
 			</div>
 
-			<div className='grid grid-cols-1 lg:grid-cols-3 gap-2'>
+			<div className='grid grid-cols-1 gap-2 lg:grid-cols-3'>
 				{count ? (
 					filtered.map(task => <Task key={task.id} task={task} />)
 				) : (

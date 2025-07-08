@@ -1,15 +1,21 @@
+
 import { Bug, LaptopMinimalCheck, Plane, TabletSmartphone } from 'lucide-react';
 
 import type { ITask } from '@/shared/types/task.types';
 
 import { PROFILES } from './profile.data';
+import { setHours, setMinutes } from 'date-fns';
 
 export const TASKS: ITask[] = [
 	{
 		id: '1',
 		iconTheme: 'Plane',
 		title: 'Travel App User Flow',
-		due: new Date('Junuary 1, 2025'),
+		due: {
+			date: new Date('January 9, 2025'),
+			startTime: setMinutes(setHours(new Date(), 9), 0),
+			endTime: setMinutes(setHours(new Date(), 17), 0),
+		},
 		users: PROFILES,
 		isCompleted: false,
 		subTask: [
@@ -17,15 +23,19 @@ export const TASKS: ITask[] = [
 			{ id: '2', title: 'fix component', isCompleted: false },
 			{ id: '3', title: 'fix component', isCompleted: true },
 		],
-		comment: 1, 	 	
+		comment: 1,
 		img: 2,
 		link: 2,
 	},
 	{
 		id: '2',
-		iconTheme: "TabletSmartphone",
+		iconTheme: 'TabletSmartphone',
 		title: 'Create next app',
-		due: new Date('Junuary 1, 2025'),
+		due: {
+			date: new Date('July 10, 2025'),
+			startTime: setMinutes(setHours(new Date(), 10), 30),
+			endTime: setMinutes(setHours(new Date(), 16), 0),
+		},
 		users: PROFILES,
 		isCompleted: true,
 		subTask: [
@@ -41,7 +51,11 @@ export const TASKS: ITask[] = [
 		id: '3',
 		iconTheme: 'Bug',
 		title: 'Debuging AI system searh.',
-		due:new Date('July 10, 2025'),
+		due: {
+			date: new Date('July 11, 2025'),
+			startTime: setMinutes(setHours(new Date(), 13), 15),
+			endTime: setMinutes(setHours(new Date(), 18), 0),
+		},
 		users: PROFILES,
 		isCompleted: false,
 		subTask: [
@@ -58,7 +72,11 @@ export const TASKS: ITask[] = [
 		id: '4',
 		iconTheme: 'Hammer',
 		title: 'Mobile App Redesign',
-		due: new Date('Junuary 15, 2025'),
+		due: {
+			date: new Date('January 15, 2025'),
+			startTime: setMinutes(setHours(new Date(), 8), 45),
+			endTime: setMinutes(setHours(new Date(), 15), 30),
+		},
 		users: PROFILES.slice(0, 2),
 		isCompleted: false,
 		subTask: [
@@ -75,7 +93,11 @@ export const TASKS: ITask[] = [
 		id: '5',
 		iconTheme: 'Bug',
 		title: 'Fix Authentication Issues',
-		due:new Date('July 9, 2025'),
+		due: {
+			date: new Date('July 9, 2025'),
+			startTime: setMinutes(setHours(new Date(), 14), 0),
+			endTime: setMinutes(setHours(new Date(), 18), 30),
+		},
 		users: PROFILES.slice(1, 3),
 		isCompleted: true,
 		subTask: [
@@ -91,7 +113,11 @@ export const TASKS: ITask[] = [
 		id: '6',
 		iconTheme: 'Plane',
 		title: 'API Integration for Booking System',
-		due: new Date('July 11, 2025'),
+		due: {
+			date: new Date('July 11, 2025'),
+			startTime: setMinutes(setHours(new Date(), 11), 0),
+			endTime: setMinutes(setHours(new Date(), 17), 30),
+		},
 		users: PROFILES,
 		isCompleted: false,
 		subTask: [
@@ -109,7 +135,11 @@ export const TASKS: ITask[] = [
 		id: '7',
 		iconTheme: 'Bot',
 		title: 'Database Migration Script',
-		due:new Date('July 12, 2025'),
+		due: {
+			date: new Date('July 12, 2025'),
+			startTime: setMinutes(setHours(new Date(), 7), 30),
+			endTime: setMinutes(setHours(new Date(), 12), 0),
+		},
 		users: PROFILES.slice(0, 1),
 		isCompleted: true,
 		subTask: [
@@ -126,7 +156,11 @@ export const TASKS: ITask[] = [
 		id: '8',
 		iconTheme: 'Bug',
 		title: 'Performance Optimization',
-		due: new Date('July 10, 2025'),
+		due: {
+			date: new Date('July 16, 2025'),
+			startTime: setMinutes(setHours(new Date(), 10), 0),
+			endTime: setMinutes(setHours(new Date(), 16), 30),
+		},
 		users: PROFILES.slice(1, 2),
 		isCompleted: false,
 		subTask: [
@@ -141,3 +175,5 @@ export const TASKS: ITask[] = [
 		link: 5,
 	},
 ];
+
+

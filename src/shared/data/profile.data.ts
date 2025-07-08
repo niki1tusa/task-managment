@@ -29,5 +29,32 @@ export const PROFILES: IProfile[] =[
 	email: 'test@email.com',
 	img: 'https://avatars.githubusercontent.com/u/3'
 
+},
+{
+	id: '545454',
+	name: 'name',
+	email: 'test@email.com',
+	img: 'https://avatars.githubusercontent.com/u/4'
+
+},
+{
+	id: '54',
+	name: 'name',
+	email: 'test@email.com',
+	img: 'https://avatars.githubusercontent.com/u/5'
+
+},{
+	id: '54545454546y',
+	name: 'name',
+	email: 'test@email.com',
+	img: 'https://avatars.githubusercontent.com/u/6'
+
+},
+{
+	id: '54545fecd',
+	name: 'name',
+	email: 'test@email.com',
+	img: 'https://avatars.githubusercontent.com/u/7'
+
 }
 ]

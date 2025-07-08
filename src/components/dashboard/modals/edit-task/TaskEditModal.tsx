@@ -51,7 +51,9 @@ export default function TaskModal({ id }: Props) {
 		resolver: zodResolver(ZTaskScheme),
 		defaultValues: {
 			title: findTask?.title || '',
-			due: findTask?.due ? new Date(findTask.due) : new Date(),
+			due: {
+				date: findTask?.due ? new Date(findTask.due.date) : new Date(),
+			},
 			iconTheme: findTask?.iconTheme || 'Plane',
 		},
 	});
@@ -67,7 +69,9 @@ export default function TaskModal({ id }: Props) {
 		if (findTask) {
 			reset({
 				title: findTask?.title,
-				due: new Date(findTask.due),
+				due: {
+					date: findTask?.due ? new Date(findTask.due.date) : new Date(),
+				},
 				iconTheme: findTask?.iconTheme || 'Plane',
 			});
 		}
@@ -99,7 +103,7 @@ export default function TaskModal({ id }: Props) {
 						<label className='mb-1 block font-medium'>Due date:</label>
 						<Controller
 							control={control}
-							name='due'
+							name='due.date'
 							render={({ field }) => (
 								<DatePicker
 									selected={field.value}

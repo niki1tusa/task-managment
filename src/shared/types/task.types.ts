@@ -7,14 +7,18 @@ export interface ISubTask {
 	title: string;
 	isCompleted: boolean;
 }
-
+export interface IDue { 
+	date: Date
+	startTime?: Date
+	endTime?: Date
+}
 export interface ITask {
 	id: string;
 	iconTheme: IconName;
 	title: string;
 	isCompleted: boolean;
 	users: IProfile[];
-	due: Date;
+	due: IDue
 	subTask: ISubTask[];
 	comment: number;
 	img: number;
