@@ -1,49 +1,47 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
+import { type SubmitHandler, useForm } from 'react-hook-form';
+import { ToastContainer, toast } from 'react-toastify';
 
+import { Button } from '@/components/ui/Button';
+
+import type { ILoginForm } from '@/shared/types/task.types';
 
 import { PAGE } from '@/config/page.config';
 
-
-import { zodResolver } from '@hookform/resolvers/zod';
-import { toast, ToastContainer } from 'react-toastify';
-import Header from '../../header/Header';
-import { useForm, type SubmitHandler } from 'react-hook-form';
-import type { ILoginForm } from '@/shared/types/task.types';
+import Header from '../../header-modals/Header';
 import { ZLoginScheme } from '../../scheme.zod';
-import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/Button';
-
 
 export default function ClientPage() {
 	const router = useRouter();
-    const notify = () => toast.success('Authorized is success!');
-        // react-hook-form
-        const {
-            register,
-            handleSubmit,
-            formState: { errors },
-        } = useForm<ILoginForm>({
-            resolver: zodResolver(ZLoginScheme),
-        });
-        const onSubmit: SubmitHandler<ILoginForm> = data => {
-            console.log(data);
-            notify();
-            setTimeout(() => {
-                router.push(PAGE.DASHBOARD)
-            }, 1000);
-        };
+	const notify = () => toast.success('Authorized is success!');
+	// react-hook-form
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<ILoginForm>({
+		resolver: zodResolver(ZLoginScheme),
+	});
+	const onSubmit: SubmitHandler<ILoginForm> = data => {
+		console.log(data);
+		notify();
+		setTimeout(() => {
+			router.push(PAGE.DASHBOARD);
+		}, 1000);
+	};
 
 	return (
 		<div className='px-5 py-3'>
-
 			<ToastContainer />
 			{/* Модалка */}
 			<div
 				onClick={e => e.stopPropagation()}
 				className='fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white p-4 text-black shadow-lg'
 			>
-				<Header title={`Login`}  />
+				<Header title={`Login`} />
 
 				<form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
 					<div>
@@ -68,7 +66,6 @@ export default function ClientPage() {
 					<Button type='submit'>Send</Button>
 				</form>
 			</div>
-	
 		</div>
 	);
 }

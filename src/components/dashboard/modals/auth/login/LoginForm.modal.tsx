@@ -8,10 +8,10 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import { Button } from '@/components/ui/Button';
 
-import Header from '../../header/Header';
-import { ZLoginScheme, ZSubTaskScheme } from '../../scheme.zod';
 import type { ILoginForm } from '@/shared/types/task.types';
 
+import Header from '../../header-modals/Header';
+import { ZLoginScheme, ZSubTaskScheme } from '../../scheme.zod';
 
 export default function LoginFormModal() {
 	const notify = () => toast.success('Authorized is success!');

@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/Button';
 
 import { useTaskStore } from '@/store/store';
 
-import Header from '../header/Header';
+import Header from '../header-modals/Header';
 import { ZSubTaskScheme } from '../scheme.zod';
 
 interface Props {

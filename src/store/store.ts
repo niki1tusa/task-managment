@@ -7,7 +7,7 @@ import { TASKS } from '@/shared/data/task.data';
 import type { IProfile } from '@/shared/types/profile.types';
 import type { ISubTask, ITask, TFormData } from '@/shared/types/task.types';
 
-interface ITaskStore {
+export interface ITaskStore {
 	statusCount: (data: ITask) => number;
 	getTodayTasks: () => void;
 	tasks: ITask[];
