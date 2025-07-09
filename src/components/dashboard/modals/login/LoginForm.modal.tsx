@@ -1,18 +1,16 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { type SubmitHandler, useForm } from 'react-hook-form';
-import { ToastContainer, toast } from 'react-toastify';
+
 
 import { Button } from '@/components/ui/Button';
 import Form from '@/components/ui/Form';
 
-import type { ILoginForm } from '@/shared/types/task.types';
 
-import Header from '../../header-modals/Header';
-import { ZLoginScheme, ZSubTaskScheme } from '../../scheme.zod';
+import { WrapperModal } from '../Wrapper.modal';
+import Header from '../header-modals/Header';
+import { ZLoginScheme } from '../scheme.zod';
 
 export default function LoginFormModal() {
 	const router = useRouter();
@@ -29,11 +27,7 @@ export default function LoginFormModal() {
 	}, []);
 
 	return (
-		<>
-			{/* Оверлей */}
-			<div onClick={closeModal} className='bg-opacity-50 bg-background/90 fixed inset-0 z-40' />
-			<ToastContainer />
-			{/* Модалка */}
+		<WrapperModal closeModal={closeModal} isLogin={true}>
 			<div
 				onClick={e => e.stopPropagation()}
 				className='fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white p-4 text-black shadow-lg'
@@ -48,6 +42,6 @@ export default function LoginFormModal() {
 					successMessage='Authorized is success!'
 				/>
 			</div>
-		</>
+		</WrapperModal>
 	);
 }

@@ -13,7 +13,7 @@ class PagesConfig {
 	SCHEDULE = '/schedule';
 	REPORT = '/report';
 	SETTINGS = '/settings';
-	LOGIN = `${this.DASHBOARD}/auth/login`
+	LOGIN = '/auth/login';
 }
 
 export const PAGE = new PagesConfig();

@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 
 import Form from '@/components/ui/Form';
 
+import { WrapperModal } from '../Wrapper.modal';
 import Header from '../header-modals/Header';
 import { ZTaskScheme } from '../scheme.zod';
 
@@ -26,9 +27,7 @@ export default function TaskModal({ id }: Props) {
 	}, []);
 
 	return (
-		<>
-			<div onClick={closeModal} className='bg-opacity-50 bg-background/90 fixed inset-0 z-40' />
-			<ToastContainer />
+		<WrapperModal closeModal={closeModal}>
 			<div
 				onClick={e => e.stopPropagation()}
 				className='fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white p-4 text-black shadow-lg'
@@ -46,6 +45,6 @@ export default function TaskModal({ id }: Props) {
 					isDataField={true}
 				/>
 			</div>
-		</>
+		</WrapperModal>
 	);
 }

@@ -26,14 +26,16 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
+	modals,
 	children,
 }: Readonly<{
 	children: React.ReactNode;
+	modals: React.ReactNode;
 }>) {
 	return (
 		<html lang='en' suppressHydrationWarning>
 			<body className={`${poppins.variable} antialiased `}>
-				<ProviderWrapper>{children}</ProviderWrapper>
+				<ProviderWrapper>{modals}{children}</ProviderWrapper>
 			</body>
 		</html>
 	);

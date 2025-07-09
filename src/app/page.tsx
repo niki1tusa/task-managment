@@ -27,11 +27,15 @@ export const metadata: Metadata = {
 
 export default function Home() {
 	return (
-		<div className='flex items-center w-full h-full justify-center'>
-			<Link href={PAGE.DASHBOARD} className='border-b-2'>
-				<b>CLICK ME </b>(for go to the Dashboard page)
-			</Link>
-			
+		<div className='mt-10 flex h-full w-full flex-col items-center gap-10 text-3xl'>
+			<nav className='flex flex-col gap-5 w-[30%] justify-center items-center h-full'>
+				<Link href={PAGE.DASHBOARD} className='border-b-2'>
+					<b>CLICK ME </b>(for go to the Dashboard page)
+				</Link>{' '}
+				<Link className='border-b-2' href={PAGE.LOGIN}>
+					Login
+				</Link>
+			</nav>
 		</div>
 	);
 }

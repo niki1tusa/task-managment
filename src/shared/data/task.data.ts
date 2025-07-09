@@ -1,10 +1,6 @@
-
-import { Bug, LaptopMinimalCheck, Plane, TabletSmartphone } from 'lucide-react';
-
-import type { ITask } from '@/shared/types/task.types';
-
-import { PROFILES } from './profile.data';
 import { setHours, setMinutes } from 'date-fns';
+import type { ITask } from '@/shared/types/task.types';
+import { PROFILES } from './profile.data';
 
 export const TASKS: ITask[] = [
 	{
@@ -12,7 +8,7 @@ export const TASKS: ITask[] = [
 		iconTheme: 'Plane',
 		title: 'Travel App User Flow',
 		due: {
-			date: new Date('January 9, 2025'),
+			date: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
 			startTime: setMinutes(setHours(new Date(), 9), 0),
 			endTime: setMinutes(setHours(new Date(), 17), 0),
 		},
@@ -32,7 +28,7 @@ export const TASKS: ITask[] = [
 		iconTheme: 'TabletSmartphone',
 		title: 'Create next app',
 		due: {
-			date: new Date('July 10, 2025'),
+			date: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
 			startTime: setMinutes(setHours(new Date(), 10), 30),
 			endTime: setMinutes(setHours(new Date(), 16), 0),
 		},
@@ -50,9 +46,9 @@ export const TASKS: ITask[] = [
 	{
 		id: '3',
 		iconTheme: 'Bug',
-		title: 'Debuging AI system searh.',
+		title: 'Debugging AI system search.',
 		due: {
-			date: new Date('July 11, 2025'),
+			date: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
 			startTime: setMinutes(setHours(new Date(), 13), 15),
 			endTime: setMinutes(setHours(new Date(), 18), 0),
 		},
@@ -73,7 +69,7 @@ export const TASKS: ITask[] = [
 		iconTheme: 'Hammer',
 		title: 'Mobile App Redesign',
 		due: {
-			date: new Date('January 15, 2025'),
+			date: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
 			startTime: setMinutes(setHours(new Date(), 8), 45),
 			endTime: setMinutes(setHours(new Date(), 15), 30),
 		},
@@ -94,7 +90,7 @@ export const TASKS: ITask[] = [
 		iconTheme: 'Bug',
 		title: 'Fix Authentication Issues',
 		due: {
-			date: new Date('July 9, 2025'),
+			date: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
 			startTime: setMinutes(setHours(new Date(), 14), 0),
 			endTime: setMinutes(setHours(new Date(), 18), 30),
 		},
@@ -114,7 +110,7 @@ export const TASKS: ITask[] = [
 		iconTheme: 'Plane',
 		title: 'API Integration for Booking System',
 		due: {
-			date: new Date('July 11, 2025'),
+			date: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
 			startTime: setMinutes(setHours(new Date(), 11), 0),
 			endTime: setMinutes(setHours(new Date(), 17), 30),
 		},
@@ -136,7 +132,7 @@ export const TASKS: ITask[] = [
 		iconTheme: 'Bot',
 		title: 'Database Migration Script',
 		due: {
-			date: new Date('July 12, 2025'),
+			date: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000),
 			startTime: setMinutes(setHours(new Date(), 7), 30),
 			endTime: setMinutes(setHours(new Date(), 12), 0),
 		},
@@ -157,7 +153,7 @@ export const TASKS: ITask[] = [
 		iconTheme: 'Bug',
 		title: 'Performance Optimization',
 		due: {
-			date: new Date('July 16, 2025'),
+			date: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
 			startTime: setMinutes(setHours(new Date(), 10), 0),
 			endTime: setMinutes(setHours(new Date(), 16), 30),
 		},
@@ -175,5 +171,3 @@ export const TASKS: ITask[] = [
 		link: 5,
 	},
 ];
-
-

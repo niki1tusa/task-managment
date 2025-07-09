@@ -2,18 +2,19 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import cn from 'clsx';
+import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { Controller, type FieldValues, type SubmitHandler, useForm } from 'react-hook-form';
-import { ToastContainer, toast } from 'react-toastify';
-import type { ZodAny, ZodSchema, z } from 'zod';
+import { toast } from 'react-toastify';
+import type { ZodSchema } from 'zod';
 
 import { ICON_NAMES, MODAL_ICON } from '@/components/dashboard/modals/icon.data';
 import { Button } from '@/components/ui/Button';
 
-import type { TFormData } from '@/shared/types/task.types';
 
 import { useTaskStore } from '@/store/store';
+import type { TFormData } from '../dashboard/modals/scheme.zod';
 
 interface Props<T extends FieldValues = TFormData> {
 	id?: string;
@@ -22,12 +23,13 @@ interface Props<T extends FieldValues = TFormData> {
 	isTitleField?: boolean;
 	isEmail?: boolean;
 	isPassword?: boolean;
-	isDataField?: boolean
+	isDataField?: boolean;
 	zodScheme?: ZodSchema<T>;
 	closeModal?: () => void;
 	isUpdateTask?: boolean;
 	isAddSubTask?: boolean;
-	successMessage?: string
+	successMessage?: string;
+	router?: AppRouterInstance;
 }
 export default function Form<T extends FieldValues = TFormData>({
 	id,
@@ -41,7 +43,8 @@ export default function Form<T extends FieldValues = TFormData>({
 	isEmail = false,
 	isPassword = false,
 	isDataField = false,
-	successMessage = 'Task edit is success!'
+	successMessage = 'Task edit is success!',
+	router,
 }: Props<T>) {
 	// store
 	const tasks = useTaskStore(state => state.tasks);
@@ -67,16 +70,20 @@ export default function Form<T extends FieldValues = TFormData>({
 		resolver: zodResolver(zodScheme),
 	});
 	const onSubmit: SubmitHandler<T> = data => {
-		if (isUpdateTask) {
+		if (id && isUpdateTask) {
 			updateTask(id, data);
 		}
-		if (isAddSubTask) {
+		if (id && isAddSubTask) {
 			addSubTask(id, data);
 		}
 
 		notify();
 		setTimeout(() => {
-			closeModal?.();
+			if (closeModal) {
+				closeModal();
+			} else if (router) {
+				router.back();
+			}
 		}, 1000);
 	};
 
@@ -92,15 +99,17 @@ export default function Form<T extends FieldValues = TFormData>({
 	}, [id, reset]);
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
-{	isTitleField &&		<div>
-				<label className='mb-1 block font-medium'>Title:</label>
-				<input
-					{...register('title')}
-					className='text-gray w-full rounded border p-2 shadow shadow-neutral-400 hover:bg-[#f6f4ff] focus:bg-[#f6f4ff]'
-					type='text'
-				/>
-				{errors.title && <p className='text-sm text-red-500'>{errors.title.message as string}</p>}
-			</div>}
+			{isTitleField && (
+				<div>
+					<label className='mb-1 block font-medium'>Title:</label>
+					<input
+						{...register('title')}
+						className='text-gray w-full rounded border p-2 shadow shadow-neutral-400 hover:bg-[#f6f4ff] focus:bg-[#f6f4ff]'
+						type='text'
+					/>
+					{errors.title && <p className='text-sm text-red-500'>{errors.title.message as string}</p>}
+				</div>
+			)}
 
 			{isDataField && (
 				<div>
@@ -170,7 +179,9 @@ export default function Form<T extends FieldValues = TFormData>({
 						className='text-gray w-full rounded border p-2 shadow shadow-neutral-400 hover:bg-[#f6f4ff] focus:bg-[#f6f4ff]'
 						type='text'
 					/>
-					{errors.password && <p className='text-sm text-red-500'>{errors.password.message as string}</p>}
+					{errors.password && (
+						<p className='text-sm text-red-500'>{errors.password.message as string}</p>
+					)}
 				</div>
 			)}
 			<Button type='submit'>{btnText}</Button>

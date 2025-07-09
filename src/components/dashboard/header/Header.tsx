@@ -27,7 +27,7 @@ export const Header = () => {
 					<Bell className='mx-2 my-2' />
 				</span>
 				<DynamicToggleTheme />
-				<Link href={PAGE.LOGIN}>Login</Link>
+			
 			</div>
 		</div>
 	);

@@ -5,7 +5,8 @@ import { persist } from 'zustand/middleware';
 import { PROFILES } from '@/shared/data/profile.data';
 import { TASKS } from '@/shared/data/task.data';
 import type { IProfile } from '@/shared/types/profile.types';
-import type { ISubTask, ITask, TFormData } from '@/shared/types/task.types';
+import type { ISubTask, ITask, } from '@/shared/types/task.types';
+import type { TFormData } from '@/components/dashboard/modals/scheme.zod';
 
 export interface ITaskStore {
 	statusCount: (data: ITask) => number;
@@ -21,11 +22,8 @@ export const useTaskStore = create<ITaskStore>()(
 		set => ({
 			tasks: TASKS,
 			profiles: PROFILES,
-			getTodayTasks: () => {
-				return TASKS.filter(task => {
-					const taskDate = new Date(task.due.date);
-					return isToday(taskDate);
-				});
+			getTodayTasks: (): ITask[] => {
+				return useTaskStore.getState().tasks.filter(task => isToday(new Date(task.due.date)));
 			},
 			statusCount: data => {
 				return Math.floor(

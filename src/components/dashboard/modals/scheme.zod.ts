@@ -23,3 +23,6 @@ export const ZLoginScheme = z.object({
 	email: z.string().min(1, 'Email is required.').email(),
 	password: z.string().min(1, 'Password is reuired.')
 });
+export type TFormData = z.infer<typeof ZTaskScheme>;
+export type TSubTaskForm = z.infer<typeof ZSubTaskScheme>;
+export type TLoginForm = z.infer<typeof ZLoginScheme>;
