@@ -20,11 +20,14 @@ interface Props<T extends FieldValues = TFormData> {
 	btnText?: string;
 	isIcon?: boolean;
 	isTitleField?: boolean;
+	isEmail?: boolean;
+	isPassword?: boolean;
+	isDataField?: boolean
 	zodScheme?: ZodSchema<T>;
 	closeModal?: () => void;
-	isUpdateTask: boolean;
+	isUpdateTask?: boolean;
 	isAddSubTask?: boolean;
-	isOverlay?: boolean;
+	successMessage?: string
 }
 export default function Form<T extends FieldValues = TFormData>({
 	id,
@@ -35,7 +38,10 @@ export default function Form<T extends FieldValues = TFormData>({
 	closeModal,
 	isUpdateTask = false,
 	isAddSubTask = false,
-	isOverlay = false,
+	isEmail = false,
+	isPassword = false,
+	isDataField = false,
+	successMessage = 'Task edit is success!'
 }: Props<T>) {
 	// store
 	const tasks = useTaskStore(state => state.tasks);
@@ -43,9 +49,9 @@ export default function Form<T extends FieldValues = TFormData>({
 	const addSubTask = useTaskStore(state => state.addSubTask);
 
 	// notification
-	const notify = () => toast.success('Task edit is success!');
-    
-    // find task
+	const notify = () => toast.success(successMessage);
+
+	// find task
 	const findTask = tasks.find(task => task.id === id);
 
 	// react-hook-form
@@ -85,68 +91,89 @@ export default function Form<T extends FieldValues = TFormData>({
 			});
 	}, [id, reset]);
 	return (
-		
-			
-			<form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
+		<form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
+{	isTitleField &&		<div>
+				<label className='mb-1 block font-medium'>Title:</label>
+				<input
+					{...register('title')}
+					className='text-gray w-full rounded border p-2 shadow shadow-neutral-400 hover:bg-[#f6f4ff] focus:bg-[#f6f4ff]'
+					type='text'
+				/>
+				{errors.title && <p className='text-sm text-red-500'>{errors.title.message as string}</p>}
+			</div>}
+
+			{isDataField && (
 				<div>
-					<label className='mb-1 block font-medium'>Title:</label>
+					<label className='mb-1 block font-medium'>Due date:</label>
+					<Controller
+						control={control}
+						name='due.date'
+						render={({ field }) => (
+							<DatePicker
+								selected={field.value}
+								onChange={field.onChange}
+								dateFormat='yyyy-MM-dd'
+								className='text-gray w-full rounded border p-2 shadow shadow-neutral-400 hover:bg-[#f6f4ff] focus:bg-[#f6f4ff]'
+								minDate={new Date()}
+								placeholderText='Select due date'
+							/>
+						)}
+					/>
+					{errors.due && <p className='text-sm text-red-500'>{errors.due.message as string}</p>}
+				</div>
+			)}
+
+			{isIcon && (
+				<div className='flex items-center gap-2'>
+					<label className='font-medium'>Icon:</label>
+					<div className='flex gap-3'>
+						{ICON_NAMES.map(name => {
+							const Icon = MODAL_ICON[name];
+							return (
+								<button
+									onClick={() => setValue('iconTheme', name)}
+									type='button'
+									key={name}
+									className={cn(
+										'bg-primary hover:bg-primary/50 rounded-sm p-2 text-white transition-colors',
+										{
+											'border-2 border-indigo-800 shadow shadow-neutral-400':
+												watch('iconTheme') === name,
+										}
+									)}
+								>
+									<Icon size={20} />
+								</button>
+							);
+						})}
+					</div>
+				</div>
+			)}
+			{isEmail && (
+				<div>
+					<label className='mb-1 block font-medium'>Email:</label>
 					<input
-						{...register('title')}
+						{...register('email')}
+						placeholder='example@email.com'
 						className='text-gray w-full rounded border p-2 shadow shadow-neutral-400 hover:bg-[#f6f4ff] focus:bg-[#f6f4ff]'
 						type='text'
 					/>
-					{errors.title && <p className='text-sm text-red-500'>{errors.title.message as string}</p>}
+					{errors.email && <p className='text-sm text-red-500'>{errors.email.message as string}</p>}
 				</div>
-
-				{isTitleField && (
-					<div>
-						<label className='mb-1 block font-medium'>Due date:</label>
-						<Controller
-							control={control}
-							name='due.date'
-							render={({ field }) => (
-								<DatePicker
-									selected={field.value}
-									onChange={field.onChange}
-									dateFormat='yyyy-MM-dd'
-									className='text-gray w-full rounded border p-2 shadow shadow-neutral-400 hover:bg-[#f6f4ff] focus:bg-[#f6f4ff]'
-									minDate={new Date()}
-									placeholderText='Select due date'
-								/>
-							)}
-						/>
-						{errors.due && <p className='text-sm text-red-500'>{errors.due.message as string}</p>}
-					</div>
-				)}
-
-				{isIcon && (
-					<div className='flex items-center gap-2'>
-						<label className='font-medium'>Icon:</label>
-						<div className='flex gap-3'>
-							{ICON_NAMES.map(name => {
-								const Icon = MODAL_ICON[name];
-								return (
-									<button
-										onClick={() => setValue('iconTheme', name)}
-										type='button'
-										key={name}
-										className={cn(
-											'bg-primary hover:bg-primary/50 rounded-sm p-2 text-white transition-colors',
-											{
-												'border-2 border-indigo-800 shadow shadow-neutral-400':
-													watch('iconTheme') === name,
-											}
-										)}
-									>
-										<Icon size={20} />
-									</button>
-								);
-							})}
-						</div>
-					</div>
-				)}
-				<Button type='submit'>{btnText}</Button>
-			</form>
-		
+			)}
+			{isPassword && (
+				<div>
+					<label className='mb-1 block font-medium'>Password:</label>
+					<input
+						{...register('password')}
+						placeholder='Enter passowrd'
+						className='text-gray w-full rounded border p-2 shadow shadow-neutral-400 hover:bg-[#f6f4ff] focus:bg-[#f6f4ff]'
+						type='text'
+					/>
+					{errors.password && <p className='text-sm text-red-500'>{errors.password.message as string}</p>}
+				</div>
+			)}
+			<Button type='submit'>{btnText}</Button>
+		</form>
 	);
 }

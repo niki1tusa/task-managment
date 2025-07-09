@@ -43,7 +43,7 @@ export default function TaskModal({ id }: Props) {
 					zodScheme={ZTaskScheme}
 					closeModal={closeModal}
 					isUpdateTask={true}
-					isOverlay={true}
+					isDataField={true}
 				/>
 			</div>
 		</>

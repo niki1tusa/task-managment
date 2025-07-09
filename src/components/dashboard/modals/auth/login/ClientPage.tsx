@@ -13,6 +13,7 @@ import { PAGE } from '@/config/page.config';
 
 import Header from '../../header-modals/Header';
 import { ZLoginScheme } from '../../scheme.zod';
+import Form from '@/components/ui/Form';
 
 export default function ClientPage() {
 	const router = useRouter();
@@ -41,8 +42,7 @@ export default function ClientPage() {
 				onClick={e => e.stopPropagation()}
 				className='fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white p-4 text-black shadow-lg'
 			>
-				<Header title={`Login`} />
-
+				<h1>Login</h1>
 				<form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
 					<div>
 						<label className='mb-1 block font-medium'>Email:</label>

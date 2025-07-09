@@ -59,13 +59,13 @@ export const LastTasks = () => {
 	return (
 		<div className='flex flex-col gap-5'>
 			<Title count={count}> Last Tasks </Title>
-			<div className='flex justify-between '>
+			<div className='flex justify-between'>
 				<button
 					className={
-						'border border-white py-2 shadow shadow-neutral-400 hover:text-primary rounded-sm max-h-12 px-4 text-sm font-medium text-gray-500 transition-all duration-300'
+						'hover:text-primary max-h-[41px] rounded-sm border border-white px-2 py-1 text-sm font-medium text-gray-500 shadow shadow-neutral-400 transition-all duration-300'
 					}
 				>
-				+	Add Task
+					+ Add Task
 				</button>
 				<FilterTask
 					select={select}
