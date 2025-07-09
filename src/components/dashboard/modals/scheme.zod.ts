@@ -17,3 +17,9 @@ export const ZTaskScheme = z.object({
 export const ZSubTaskScheme = z.object({
 	title: z.string().min(1, 'Title is required (minimal one symbol)!'),
 });
+
+
+export const ZLoginScheme = z.object({
+	email: z.string().min(1, 'Email is required.').email(),
+	password: z.string().min(1, 'Password is reuired.')
+});

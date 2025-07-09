@@ -3,8 +3,14 @@
 import { Bell } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
-import { SearchField } from './SearchField';
+import { Button } from '@/components/ui/Button';
 import { Title } from '@/components/ui/Title';
+
+import { PAGE } from '@/config/page.config';
+
+
+import { SearchField } from './SearchField';
+import Link from 'next/link';
 
 const DynamicToggleTheme = dynamic(
 	() => import('../../ui/toggle-theme/ToggleTheme').then(mod => mod.ToggleTheme),
@@ -13,14 +19,15 @@ const DynamicToggleTheme = dynamic(
 
 export const Header = () => {
 	return (
-		<div className='bg-transparent flex flex-col lg:flex-row justify-between items-center pt-4 '>
-		<Title heading='page'>Dashboard</Title>	
-			<div className='flex flex-col lg:flex-row gap-2 items-center '>
+		<div className='flex flex-col items-center justify-between bg-transparent pt-4 lg:flex-row'>
+			<Title heading='page'>Dashboard</Title>
+			<div className='flex flex-col items-center gap-2 lg:flex-row'>
 				<SearchField />
-				<span className='text-center rounded-full bg-background dark:bg-dark shadow shadow-neutral-400'>
-					<Bell className='mx-2 my-2 ' />
+				<span className='bg-background dark:bg-dark rounded-full text-center shadow shadow-neutral-400'>
+					<Bell className='mx-2 my-2' />
 				</span>
 				<DynamicToggleTheme />
+				<Link href={PAGE.LOGIN}>Login</Link>
 			</div>
 		</div>
 	);

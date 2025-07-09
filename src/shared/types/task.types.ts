@@ -24,4 +24,8 @@ export interface ITask {
 	img: number;
 	link: number;
 }
+export interface ILoginForm {
+	email: string;
+	password: string;
+}
 export type TFormData = Pick<ITask, 'title' | 'iconTheme' | 'due'>;

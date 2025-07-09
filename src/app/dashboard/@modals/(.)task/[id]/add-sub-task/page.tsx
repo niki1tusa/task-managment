@@ -1,6 +1,5 @@
-import SubTaskModal from '@/components/dashboard/modals/add-sub-task/SubTaskAddModal';
+import SubTaskModal from '@/components/dashboard/modals/add-sub-task/SubTaskAdd.modal';
 
-import { useTaskStore } from '@/store/store';
 
 interface Props {
 	params: Promise<{ id: string }>;

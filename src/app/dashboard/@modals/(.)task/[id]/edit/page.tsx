@@ -1,4 +1,4 @@
-import TaskModal from '@/components/dashboard/modals/edit-task/TaskEditModal';
+import TaskModal from '@/components/dashboard/modals/edit-task/TaskEdit.modal';
 
 interface Props {
 	params: Promise<{ id: string }>;
