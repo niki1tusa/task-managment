@@ -14,7 +14,6 @@ interface Props {
 }
 export const Footer = ({ task }: Props) => {
 	const pathname = usePathname();
-	console.log(pathname)
 	return (
 		<div className='mx-5 flex items-center justify-between pb-2'>
 			<div className='flex justify-between gap-2'>

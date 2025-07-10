@@ -9,18 +9,19 @@ import { useTaskStore } from '@/store/store';
 import { Avatar } from '../last-tasks/task/header/Avatar';
 
 import TimelineChart from './TimeLineChart';
+import { useMemo } from 'react';
 
 const HOURS = Array.from({ length: 9 }, (_, i) => i + 1);
 export function TodayTasks() {
-	const profiles = useTaskStore(state => state.profiles);
-	const todayTasks = useTaskStore(state => state.getTodayTasks);
-const users = [...new Set(todayTasks().map((task: ITask) => task.users).flat())];
+	const getTodayTasks = useTaskStore(state => state.getTodayTasks);
+	const todayTasks = useMemo(() => getTodayTasks(), [getTodayTasks]);
+const users = [...new Set(todayTasks.map((task: ITask) => task.users).flat())];
 	return (
 		<div className='text-foreground rounded-2xl border border-white px-5 pt-5 shadow shadow-neutral-500 dark:border-none'>
 			<div className='flex justify-between pb-5'>
 				<Title>Today Tasks</Title>
 				<div className='flex -space-x-2'>
-					{profiles.map(profile => (
+					{users.map(profile => (
 						<Avatar key={profile.id} id={profile.id} img={profile.img} />
 					))}
 				</div>
