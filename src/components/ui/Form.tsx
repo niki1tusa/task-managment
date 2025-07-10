@@ -3,7 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import cn from 'clsx';
 import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { Controller, type FieldValues, type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/Button';
 
 import { useTaskStore } from '@/store/store';
 import type { TFormData } from '../dashboard/modals/scheme.zod';
+import { Eye, EyeOff } from 'lucide-react';
 
 interface Props<T extends FieldValues = TFormData> {
 	id?: string;
@@ -56,7 +57,8 @@ export default function Form<T extends FieldValues = TFormData>({
 
 	// find task
 	const findTask = tasks.find(task => task.id === id);
-
+	//
+	const [isShowEye, setIsShowEye] = useState(false)
 	// react-hook-form
 	const {
 		register,
@@ -173,12 +175,16 @@ export default function Form<T extends FieldValues = TFormData>({
 			{isPassword && (
 				<div>
 					<label className='mb-1 block font-medium'>Password:</label>
+				<span  className='relative'>
 					<input
 						{...register('password')}
 						placeholder='Enter passowrd'
 						className='text-gray w-full rounded border p-2 shadow shadow-neutral-400 hover:bg-[#f6f4ff] focus:bg-[#f6f4ff]'
 						type='text'
 					/>
+					<button onClick={()=>setIsShowEye(!isShowEye)} className='absolute right-2 top-[1px] text-gray'>{isShowEye?<Eye/>:<EyeOff/>}</button>
+					
+					</span>	
 					{errors.password && (
 						<p className='text-sm text-red-500'>{errors.password.message as string}</p>
 					)}
