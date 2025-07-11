@@ -15,15 +15,15 @@ import { PAGE } from '@/config/page.config';
 export default function HomeClient() {
 	return (
 		<>
-			<div className='flex h-full w-full flex-col items-center justify-center gap-10 text-3xl'>
+			<div className='flex h-full w-full flex-col items-center justify-center gap-10 2xl:text-3xl'>
 				<BubbleBackground className='absolute inset-0 z-0 flex items-center justify-center' />
 				{/* <GradientBackground className='absolute inset-0 z-0 flex items-center justify-center' /> */}
-				<div className='z-20 grid h-[60%] w-[50%] grid-cols-2 overflow-hidden rounded-4xl bg-purple-950/80 text-white/90'>
-					<div className='p-10'>
+				<div className='z-20 grid h-[70%] w-[50%] grid-cols-2 overflow-hidden rounded-4xl bg-purple-950/80 text-white/90'>
+					<div className='p-10 '>
 						<Title>
-							<b className='font-playfair text-6xl'>Wellcom on task managment</b>
+							<b className='font-playfair text-3xl 2xl:text-6xl'>Wellcom on task managment</b>
 						</Title>
-						<br /><span className='text-[18px]'>we save your time and improve the organization of projects.
+						<br /><span className='leading-0.5 text-[0.7rem] 2xl:text-[18px]'>we save your time and improve the organization of projects.
 							</span> 
 						<div>
 							<Form

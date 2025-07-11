@@ -18,13 +18,13 @@ export function Field({ labelText, registerName, type = 'text', placeholderText 
 		formState: { errors },
 	} = useForm();
 	return (
-		<div>
-			<label className='mb-1 block font-medium'>{labelText}:</label>
+		<div className=''>
+			<label className='mb-1 block font-medium xl:text-sm'>{labelText}:</label>
 			<span className='relative '>
 				{type === 'email' && <Mail className='absolute text-gray top-2 left-2'/>}
 				<input
 					{...register(registerName)}
-					className='pl-10 text-gray w-full rounded border p-2 shadow shadow-neutral-400 transition-all duration-200 hover:mb-0.5 hover:bg-[#f6f4ff] focus:bg-[#f6f4ff]'
+					className='text-sm p-5  text-gray w-[80%] h-[30%] 2xl:w-full rounded border  shadow shadow-neutral-400 transition-all duration-200 hover:mb-0.5 hover:bg-[#f6f4ff] focus:bg-[#f6f4ff]'
 					type={type === 'password' ? (isShowEye ? 'text' : 'password') : 'text'}
 					placeholder={placeholderText}
 				/>

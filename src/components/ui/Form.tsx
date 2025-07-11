@@ -93,7 +93,7 @@ export default function Form<T extends FieldValues = TFormData>({
 			});
 	}, [id, reset]);
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
+		<form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-0.5 2xl:gap-6'>
 			{isTitleField && (
 				<Field labelText='Title' registerName='title' placeholderText='Enter title' type='text' />
 			)}

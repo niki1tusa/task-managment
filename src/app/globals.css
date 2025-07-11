@@ -3,6 +3,18 @@
 @import 'tw-animate-css';
 @custom-variant dark (&:where(.dark, .dark *));
 
+@theme {
+--breakpoint-*: initial;
+}
+
+@custom-variant 2xl (@media (min-width: 1650px));
+@custom-variant xl (@media (min-width: 1399px));
+@custom-variant lg (@media (min-width: 1200px));
+@custom-variant md (@media (min-width: 992px));
+@custom-variant sm (@media (min-width: 768px));
+@custom-variant xs (@media (min-width: 480px));
+@custom-variant xxs (@media (min-width: 360px));
+
 :root {
 	--primary: #725cee;
 	--background: #f6f4ff;
@@ -168,6 +180,6 @@ option {
 		@apply border-border outline-ring/50;
 	}
 	body {
-		@apply bg-background text-foreground;
+		@apply bg-background text-foreground 2xl:text-2xl xl:text-xl;
 	}
 }
