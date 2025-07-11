@@ -78,8 +78,14 @@ export const useTaskStore = create<ITaskStore>()(
 							...task,
 							due: {
 								date: new Date(task.due.date),
-								startTime: task.due.startTime ? new Date(task.due.startTime) : undefined,
-								endTime: task.due.endTime ? new Date(task.due.endTime) : undefined,
+								startTime:
+									task.due && typeof task.due.startTime === 'string'
+										? new Date(task.due.startTime)
+										: undefined,
+								endTime:
+									task.due && typeof task.due.endTime === 'string'
+										? new Date(task.due.endTime)
+										: undefined,
 							},
 						}));
 					}

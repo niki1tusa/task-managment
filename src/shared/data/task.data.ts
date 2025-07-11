@@ -8,11 +8,11 @@ export const TASKS: ITask[] = [
 		iconTheme: 'Plane',
 		title: 'Travel App User Flow',
 		due: {
-			date: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-			startTime: setMinutes(setHours(new Date(), 9), 0),
-			endTime: setMinutes(setHours(new Date(), 17), 0),
+			date: new Date(),
+			startTime: setMinutes(setHours(new Date(), 14), 0),
+			endTime: setMinutes(setHours(new Date(), 16), 0),
 		},
-		users: PROFILES,
+			users: PROFILES.filter(item=> +item.id > 4),
 		isCompleted: false,
 		subTask: [
 			{ id: '1', title: 'fix component', isCompleted: false },
@@ -28,11 +28,11 @@ export const TASKS: ITask[] = [
 		iconTheme: 'TabletSmartphone',
 		title: 'Create next app',
 		due: {
-			date: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
-			startTime: setMinutes(setHours(new Date(), 10), 30),
-			endTime: setMinutes(setHours(new Date(), 16), 0),
+			date: new Date(),
+			startTime: setMinutes(setHours(new Date(), 10), 0),
+			endTime: setMinutes(setHours(new Date(), 12), 0),
 		},
-		users: PROFILES,
+			users: PROFILES.filter(item=> +item.id % 3 === 0),
 		isCompleted: true,
 		subTask: [
 			{ id: '1', title: 'fix component', isCompleted: true },
@@ -52,7 +52,7 @@ export const TASKS: ITask[] = [
 			startTime: setMinutes(setHours(new Date(), 13), 15),
 			endTime: setMinutes(setHours(new Date(), 18), 0),
 		},
-		users: PROFILES,
+		users: PROFILES.filter(item=> +item.id % 2 === 0),
 		isCompleted: false,
 		subTask: [
 			{ id: '1', title: 'fix component', isCompleted: false },
@@ -114,7 +114,7 @@ export const TASKS: ITask[] = [
 			startTime: setMinutes(setHours(new Date(), 11), 0),
 			endTime: setMinutes(setHours(new Date(), 17), 30),
 		},
-		users: PROFILES,
+			users: PROFILES.filter(item=> +item.id <3 ),
 		isCompleted: false,
 		subTask: [
 			{ id: '1', title: 'analyze API documentation', isCompleted: true },

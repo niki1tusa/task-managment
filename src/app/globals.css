@@ -15,7 +15,7 @@
 	--blue: #72bdf3;
 	--side: #fff;
 	--chat: #725cee;
-
+	--timeline-task: #725cee63;
 	--radius: 0.625rem;
 
 	--card: oklch(1 0 0);
@@ -60,6 +60,7 @@
 	--blue: #030307;
 	--side: rgb(15, 15, 25);
 	--chat: rgb(15, 15, 25);
+	--timeline-task: #030307;
 
 	--card: oklch(0.205 0 0);
 	--card-foreground: oklch(0.985 0 0);
@@ -92,6 +93,7 @@
 }
 
 @theme inline {
+	--font-playfair: var(--font-playfair) ;
 	--color-primary: var(--primary);
 	--color-background: var(--background);
 	--color-gray: var(--gray);
@@ -103,6 +105,7 @@
 	--color-blue: var(--blue);
 	--color-side: var(--side);
 	--color-chat: var(--chat);
+	--color-timeline-task: var(--timeline-task);
 	--color-sidebar-ring: var(--sidebar-ring);
 	--color-sidebar-border: var(--sidebar-border);
 	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);

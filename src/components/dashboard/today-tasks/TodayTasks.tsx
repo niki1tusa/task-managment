@@ -9,19 +9,21 @@ import type { ITask } from '@/shared/types/task.types';
 
 import { useTaskStore } from '@/store/store';
 
-import { Avatar } from '../last-tasks/task/header/Avatar';
-import { ICON_NAMES } from '../modals/icon.data';
-
-import TimelineChart from './TimeLineChart';
 import { Task } from '../last-tasks/task/Task';
+import { Avatar } from '../last-tasks/task/header/Avatar';
+import clsx from 'clsx';
 
-const HOURS = Array.from({ length: 9 }, (_, i) => i + 1);
-export function TodayTasks() {
+const HOURS = Array.from({ length: 9 }, (_, i) => i + 9);
+export default function TodayTasks() {
 	const getTodayTasks = useTaskStore(state => state.getTodayTasks);
 	const todayTasks = useMemo(() => getTodayTasks(), [getTodayTasks]);
 	const users = [...new Set(todayTasks.map((task: ITask) => task.users).flat())];
+
+	// Фильтруем задачи, у которых есть startTime и endTime
+	const tasksWithTime = todayTasks.filter(task => task.due.startTime && task.due.endTime);
+
 	return (
-		<div className='text-foreground rounded-2xl border border-white px-5 pt-5 shadow shadow-neutral-500 dark:border-none'>
+		<div className='text-foreground my-10 h-[600px] rounded-2xl border border-white px-5 pt-5 shadow shadow-neutral-500 dark:border-none'>
 			<div className='flex justify-between pb-5'>
 				<Title>Today Tasks</Title>
 				<div className='flex -space-x-2'>
@@ -30,33 +32,50 @@ export function TodayTasks() {
 					))}
 				</div>
 			</div>
-			<div className='overflow-x-autop-3 w-full'>
-				<div className='grid grid-cols-9'>
+			{/* // часовые метки */}
+			<div className='w-full overflow-x-auto p-3'>
+				<div className='grid grid-cols-9 grid-rows-2'>
 					{HOURS.map(hour => (
-						<div key={hour} className='text-center text-sm'>
+						<div key={hour} className={clsx('text-center text-sm',{ 'text-primary':Date.now() === hour})}>
 							{hour > 12 ? ` ${hour} pm` : `${hour} am`}
 						</div>
 					))}
 				</div>
-				<div className='relative h-36'>
-					{todayTasks.map(task => {
-						const start = getHours(task.due.startTime);
-						const end = getHours(task.due.endTime);
-						const startMinutes = getMinutes(task.due.startTime);
-						const endMinutes = getMinutes(task.due.endTime);
-						const startProcent = ((start - 9) * 60 + (startMinutes / (17 - 9)) * 60) * 100;
-						const endProcent = ((start - 9) * 60 + (endMinutes / (17 - 9)) * 60) * 100;
+				<div className='relative h-72'>
+					{/* // вертикальные линии */}
+					{HOURS.map((_, i) => (
+						<div
+							key={i}
+							className='absolute top-0 h-full border-l border-gray-300'
+							style={{ left: `${(i / HOURS.length) * 100}%` }}
+						></div>
+					))}
+					{/* // сегодняшние задачи */}
+					{tasksWithTime.map(task => {
+						const start = getHours(task.due.startTime!);
+						const end = getHours(task.due.endTime!);
+						const startMinutes = getMinutes(task.due.startTime!);
+						const endMinutes = getMinutes(task.due.endTime!);
+						const startProcent = (((start - 9) * 60 + startMinutes) / ((17 - 9) * 60)) * 100;
+						const endProcent = (((end - 9) * 60 + endMinutes) / ((17 - 9) * 60)) * 100;
 						const widthProcent = endProcent - startProcent;
-						const Icon = ICON_NAMES[task.iconTheme];
-
-						return <div key={task.id} className='absolute top-3 ' style={{
-							left: `${startProcent}%`,
-							width: `${widthProcent}`
-						}}><Task task={task}/></div>;
+						console.log('startprocent:', startProcent);
+						console.log('width', widthProcent);
+						return (
+							<div
+								key={task.id}
+								className='absolute top-8'
+								style={{
+									left: `${startProcent}%`,
+									width: `${widthProcent}%`,
+								}}
+							>
+								<Task task={task} className='bg-timeline-task' isMinimal={true} />
+							</div>
+						);
 					})}
 				</div>
 			</div>
-			<TimelineChart />
 		</div>
 	);
 }

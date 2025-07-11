@@ -25,7 +25,7 @@ interface Props<T extends FieldValues = TFormData> {
 	isEmailField?: boolean;
 	isPassowrdField?: boolean;
 	isDataField?: boolean;
-	zodScheme?: ZodSchema<T>;
+	zodScheme: ZodSchema<T>;
 	closeModal?: () => void;
 	isEditTask?: boolean;
 	isAddSubTask?: boolean;

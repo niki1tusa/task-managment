@@ -1,6 +1,6 @@
 'use client';
 
-import {  Eye, EyeOff } from 'lucide-react';
+import {  Eye, EyeOff, Mail } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -20,10 +20,11 @@ export function Field({ labelText, registerName, type = 'text', placeholderText 
 	return (
 		<div>
 			<label className='mb-1 block font-medium'>{labelText}:</label>
-			<span className='relative'>
+			<span className='relative '>
+				{type === 'email' && <Mail className='absolute text-gray top-2 left-2'/>}
 				<input
 					{...register(registerName)}
-					className='text-gray w-full rounded border p-2 shadow shadow-neutral-400 transition-all duration-200 hover:mb-0.5 hover:bg-[#f6f4ff] focus:bg-[#f6f4ff]'
+					className='pl-10 text-gray w-full rounded border p-2 shadow shadow-neutral-400 transition-all duration-200 hover:mb-0.5 hover:bg-[#f6f4ff] focus:bg-[#f6f4ff]'
 					type={type === 'password' ? (isShowEye ? 'text' : 'password') : 'text'}
 					placeholder={placeholderText}
 				/>
