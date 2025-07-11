@@ -1,10 +1,13 @@
 'use client';
 
+import Link from 'next/link';
 import { useMemo, useState } from 'react';
 
 import { Title } from '@/components/ui/Title';
 
 import type { ITask } from '@/shared/types/task.types';
+
+import { PAGE } from '@/config/page.config';
 
 import { useTaskStore } from '@/store/store';
 
@@ -60,13 +63,12 @@ export const LastTasks = () => {
 		<div className='flex flex-col gap-5'>
 			<Title count={count}> Last Tasks </Title>
 			<div className='flex justify-between'>
-				<button
-					className={
-						'hover:text-primary max-h-[41px] rounded-sm border border-white px-2 py-1 text-sm font-medium text-gray-500 shadow shadow-neutral-400 transition-all duration-300'
-					}
+				<Link
+					href={PAGE.ADD_TASK}
+					className='hover:text-primary max-h-[41px] rounded-sm border border-white px-2 pt-2 text-sm font-medium text-gray-500 shadow shadow-neutral-400 transition-all duration-300 '
 				>
 					+ Add Task
-				</button>
+				</Link>
 				<FilterTask
 					select={select}
 					setSelect={setSelect}

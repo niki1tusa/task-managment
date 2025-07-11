@@ -6,10 +6,7 @@ import { type IconName, MODAL_ICON } from '../../../modals/icon.data';
 
 import { Avatar } from './Avatar';
 
-
 export const Header = ({ task }: { task: ITask }) => {
-	
-
 	const TaskIcon = MODAL_ICON[task.iconTheme.trim() as IconName];
 	const date = Math.ceil((task.due.date.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
 	const displayDue = date <= 0 ? (task.isCompleted ? 'Done' : 'Overdue') : ` ${date} days`;
@@ -25,9 +22,12 @@ export const Header = ({ task }: { task: ITask }) => {
 				<span className='text-gray'>{displayDue}</span>
 			</div>
 			<div className='flex -space-x-2'>
-				{task.users.map(user => (
-					<Avatar key={user.id} id={user.id} img={user.img} />
-				))}
+				{task.users.map((user, i) => {
+					if (i < 3) {
+						return <Avatar key={user.id} id={user.id} img={user.img} />;
+					}
+					return;
+				})}
 			</div>
 		</div>
 	);

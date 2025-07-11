@@ -4,6 +4,8 @@ class PagesConfig {
 	TASK_EDIT(id: string) {
 		return `${this.DASHBOARD}/task/${id}/edit`;
 	}
+	ADD_TASK = `${this.DASHBOARD}/task/add-task`;
+
 	ADD_SUBTASK(id: string) {
 		return `${this.DASHBOARD}/task/${id}/add-sub-task`;
 	}

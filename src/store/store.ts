@@ -14,8 +14,9 @@ export interface ITaskStore {
 	getTodayTasks: () => ITask[];
 	tasks: ITask[];
 	profiles: IProfile[];
-	updateTask: (id: string, data: TFormData) => void;
+	EditTask: (id: string, data: TFormData) => void;
 	addSubTask: (id: string, data: Pick<ISubTask, 'title'>) => void;
+	deleteTask: (id: string) => void;
 }
 
 export const useTaskStore = create<ITaskStore>()(
@@ -32,9 +33,17 @@ export const useTaskStore = create<ITaskStore>()(
 						100
 				);
 			},
-			updateTask: (id, data) =>
+			addTask: (data: ITask) =>
+				set(state => ({
+					tasks: [...state.tasks, data],
+				})),
+			EditTask: (id, data) =>
 				set(state => ({
 					tasks: state.tasks.map(task => (task.id === id ? { ...task, ...data } : task)),
+				})),
+			deleteTask: id =>
+				set(state => ({
+					tasks: state.tasks.filter(task => task.id !== id),
 				})),
 			addSubTask: (id, subTask) =>
 				set(state => ({

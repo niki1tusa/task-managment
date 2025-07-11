@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
+import { Title } from '@/components/ui/Title';
+
 import { OG_IMAGE, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/constants/seo.constants';
 
 import { PAGE } from '@/config/page.config';
+import LoginFormModal from '@/components/dashboard/modals/login/LoginForm.modal';
 
 export const metadata: Metadata = {
 	title: `${SITE_NAME} | Home`,
@@ -27,15 +30,25 @@ export const metadata: Metadata = {
 
 export default function Home() {
 	return (
-		<div className='mt-10 flex h-full w-full flex-col items-center gap-10 text-3xl'>
-			<nav className='flex flex-col gap-5 w-[30%] justify-center items-center h-full'>
-				<Link href={PAGE.DASHBOARD} className='border-b-2'>
-					<b>CLICK ME </b>(for go to the Dashboard page)
-				</Link>{' '}
-				<Link className='border-b-2' href={PAGE.LOGIN}>
-					Login
-				</Link>
-			</nav>
+		<div className='flex h-full w-full flex-col items-center justify-center gap-10 text-3xl'>
+			<div className='grid grid-cols-2 h-[50%] w-[50%] border border-black p-4 '>
+				<div>
+					<Title>
+					
+							<b className='text-4xl'>Wellcom on task managment</b> <br /> we save your time and
+							improve the organization of projects.
+					
+					</Title>
+				</div>
+				<div>
+					<Link href={PAGE.DASHBOARD} className='border-b-2'>
+						<b>CLICK ME </b>(for go to the Dashboard page)
+					</Link>
+					<Link className='border-b-2' href={PAGE.LOGIN}>
+						Login
+					</Link>
+				</div>
+			</div>
 		</div>
 	);
 }

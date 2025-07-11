@@ -22,8 +22,8 @@ export default function ClientPage() {
 				<Form
 					router={router}
 					zodScheme={ZLoginScheme}
-					isEmail={true}
-					isPassword={true}
+					isEmailField={true}
+					isPassowrdField={true}
 					btnText='Send'
 				/>
 			</div>

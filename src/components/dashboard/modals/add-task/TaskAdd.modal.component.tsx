@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { ToastContainer } from 'react-toastify';
 
 import Form from '@/components/ui/Form';
 
@@ -10,10 +9,7 @@ import { WrapperModal } from '../Wrapper.modal';
 import Header from '../header-modals/Header';
 import { ZTaskScheme } from '../scheme.zod';
 
-interface Props {
-	id: string;
-}
-export default function TaskModal({ id }: Props) {
+export default function TaskAddModalComponent() {
 	const router = useRouter();
 	const closeModal = () => router.back();
 	useEffect(() => {
@@ -32,10 +28,8 @@ export default function TaskModal({ id }: Props) {
 				onClick={e => e.stopPropagation()}
 				className='fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white p-4 text-black shadow-lg'
 			>
-				<Header title={`Edit task "${id}"`} closeModal={closeModal} />
-
+				<Header title={`Add task `} closeModal={closeModal} />
 				<Form
-					id={id}
 					btnText='Save'
 					isIconField={true}
 					isTitleField={true}
@@ -43,7 +37,7 @@ export default function TaskModal({ id }: Props) {
 					closeModal={closeModal}
 					isEditTask={true}
 					isDataField={true}
-				/>
+				/>{' '}
 			</div>
 		</WrapperModal>
 	);

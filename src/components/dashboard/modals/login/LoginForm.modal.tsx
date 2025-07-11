@@ -3,10 +3,8 @@
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-
 import { Button } from '@/components/ui/Button';
 import Form from '@/components/ui/Form';
-
 
 import { WrapperModal } from '../Wrapper.modal';
 import Header from '../header-modals/Header';
@@ -35,8 +33,8 @@ export default function LoginFormModal() {
 				<Header title={`Login`} closeModal={closeModal} />
 				<Form
 					closeModal={closeModal}
-					isEmail={true}
-					isPassword={true}
+					isEmailField={true}
+					isPassowrdField={true}
 					btnText='Send'
 					zodScheme={ZLoginScheme}
 					successMessage='Authorized is success!'
