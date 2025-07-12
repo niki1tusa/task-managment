@@ -20,7 +20,7 @@ export const Task = ({ task, className, isMinimal }: Props) => {
 	return (
 		<div
 			className={clsx(
-				'grid grid-cols-1 gap-3 rounded-3xl border border-white text-md shadow shadow-neutral-400 dark:border-none',
+				'grid grid-cols-1 gap-3 rounded-3xl border border-white text-sm 2xl:text-md shadow shadow-neutral-400 dark:border-none',
 				className ? `${className} text-white grid-rows-2` : 'bg-background grid-rows-3'
 			)}
 		>

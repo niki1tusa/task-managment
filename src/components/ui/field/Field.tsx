@@ -1,13 +1,14 @@
 'use client';
 
-import {  Eye, EyeOff, Mail } from 'lucide-react';
+import clsx from 'clsx';
+import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 interface Props {
 	labelText: string;
-	registerName: 'title' | 'email' | 'password';
-	type?: 'text' | 'password' | 'email' | 'date';
+	registerName: 'title' | 'email' | 'password' | 'name';
+	type?: 'text' | 'password' | 'email';
 	placeholderText?: string;
 }
 export function Field({ labelText, registerName, type = 'text', placeholderText }: Props) {
@@ -20,11 +21,15 @@ export function Field({ labelText, registerName, type = 'text', placeholderText 
 	return (
 		<div className=''>
 			<label className='mb-1 block font-medium xl:text-sm'>{labelText}:</label>
-			<span className='relative '>
-				{type === 'email' && <Mail className='absolute text-gray top-2 left-2'/>}
+			<span className='relative'>
+				{type === 'password' && <Lock size={20} className='text-gray absolute top-[25%] left-[2%]' />}
+				{type === 'email' && <Mail size={20} className='text-gray absolute top-[25%] left-[2%]' />}
 				<input
 					{...register(registerName)}
-					className='text-sm p-5  text-gray w-[80%] h-[30%] 2xl:w-full rounded border  shadow shadow-neutral-400 transition-all duration-200 hover:mb-0.5 hover:bg-[#f6f4ff] focus:bg-[#f6f4ff]'
+					className={clsx(
+						'text-gray h-[30%] w-[80%] rounded border py-5 text-sm shadow shadow-neutral-400 transition-all duration-200 hover:mb-0.5 hover:bg-[#f6f4ff] focus:bg-[#f6f4ff] 2xl:w-full',
+						 type==='password' || type === 'email'? 'pl-8': 'pl-4'
+					)}
 					type={type === 'password' ? (isShowEye ? 'text' : 'password') : 'text'}
 					placeholder={placeholderText}
 				/>

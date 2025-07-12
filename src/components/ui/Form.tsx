@@ -24,7 +24,9 @@ interface Props<T extends FieldValues = TFormData> {
 	isTitleField?: boolean;
 	isEmailField?: boolean;
 	isPassowrdField?: boolean;
+	isNameField?: boolean;
 	isDataField?: boolean;
+	btnClassName?: string;
 	zodScheme: ZodSchema<T>;
 	closeModal?: () => void;
 	isEditTask?: boolean;
@@ -37,12 +39,15 @@ export default function Form<T extends FieldValues = TFormData>({
 	btnText,
 	zodScheme,
 	successMessage = 'Task edit is success!',
+	btnClassName = '',
 
 	isIconField = false,
+	isNameField = false,
 	isTitleField = false,
 	isEmailField = false,
 	isPassowrdField = false,
 	isDataField = false,
+
 
 	isEditTask = false,
 	isAddSubTask = false,
@@ -97,6 +102,10 @@ export default function Form<T extends FieldValues = TFormData>({
 			{isTitleField && (
 				<Field labelText='Title' registerName='title' placeholderText='Enter title' type='text' />
 			)}
+						{isNameField && (
+				<Field labelText='Name' registerName='name' placeholderText='your name' type='text' />
+			)}
+
 
 			{isDataField && (
 				<DateField
@@ -123,7 +132,7 @@ export default function Form<T extends FieldValues = TFormData>({
 					placeholderText='Enter to password'
 				/>
 			)}
-			<Button type='submit'>{btnText}</Button>
+			<Button type='submit' className={btnClassName}>{btnText}</Button>
 		</form>
 	);
 }

@@ -50,7 +50,7 @@ export const TASKS: ITask[] = [
 		due: {
 			date: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
 			startTime: setMinutes(setHours(new Date(), 13), 15),
-			endTime: setMinutes(setHours(new Date(), 18), 0),
+			endTime: setMinutes(setHours(new Date(), 15), 0),
 		},
 		users: PROFILES.filter(item=> +item.id % 2 === 0),
 		isCompleted: false,
@@ -70,8 +70,8 @@ export const TASKS: ITask[] = [
 		title: 'Mobile App Redesign',
 		due: {
 			date: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
-			startTime: setMinutes(setHours(new Date(), 8), 45),
-			endTime: setMinutes(setHours(new Date(), 15), 30),
+			startTime: setMinutes(setHours(new Date(), 9), 45),
+			endTime: setMinutes(setHours(new Date(), 11), 30),
 		},
 		users: PROFILES.slice(0, 2),
 		isCompleted: false,
@@ -92,7 +92,7 @@ export const TASKS: ITask[] = [
 		due: {
 			date: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
 			startTime: setMinutes(setHours(new Date(), 14), 0),
-			endTime: setMinutes(setHours(new Date(), 18), 30),
+			endTime: setMinutes(setHours(new Date(), 16), 30),
 		},
 		users: PROFILES.slice(1, 3),
 		isCompleted: true,
@@ -112,7 +112,7 @@ export const TASKS: ITask[] = [
 		due: {
 			date: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
 			startTime: setMinutes(setHours(new Date(), 11), 0),
-			endTime: setMinutes(setHours(new Date(), 17), 30),
+			endTime: setMinutes(setHours(new Date(), 13), 30),
 		},
 			users: PROFILES.filter(item=> +item.id <3 ),
 		isCompleted: false,
@@ -133,8 +133,8 @@ export const TASKS: ITask[] = [
 		title: 'Database Migration Script',
 		due: {
 			date: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000),
-			startTime: setMinutes(setHours(new Date(), 7), 30),
-			endTime: setMinutes(setHours(new Date(), 12), 0),
+			startTime: setMinutes(setHours(new Date(), 9), 30),
+			endTime: setMinutes(setHours(new Date(), 11), 0),
 		},
 		users: PROFILES.slice(0, 1),
 		isCompleted: true,
@@ -155,7 +155,7 @@ export const TASKS: ITask[] = [
 		due: {
 			date: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
 			startTime: setMinutes(setHours(new Date(), 10), 0),
-			endTime: setMinutes(setHours(new Date(), 16), 30),
+			endTime: setMinutes(setHours(new Date(), 12), 30),
 		},
 		users: PROFILES.slice(1, 2),
 		isCompleted: false,
