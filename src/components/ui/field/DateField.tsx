@@ -1,6 +1,6 @@
 'use client';
 
-import { CalendarFold, Eye, EyeOff } from 'lucide-react';
+import { CalendarFold } from 'lucide-react';
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { Controller, useForm } from 'react-hook-form';
@@ -14,7 +14,6 @@ interface Props {
 export function DateField({
 	nameController,
 	labelText,
-
 	placeholderText,
 }: Props) {
 	const {

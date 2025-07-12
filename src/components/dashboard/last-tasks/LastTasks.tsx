@@ -7,12 +7,13 @@ import { Title } from '@/components/ui/Title';
 
 import type { ITask } from '@/shared/types/task.types';
 
-import { PAGE } from '@/config/page.config';
+
 
 import { useTaskStore } from '@/store/store';
 
 import FilterTask from './FilterTask';
 import { Task } from './task/Task';
+import { DASHBOARD_PAGES } from '@/config/dashboardPage.config';
 
 export const LastTasks = () => {
 	const [select, setSelect] = useState(null);
@@ -64,8 +65,8 @@ export const LastTasks = () => {
 			<Title count={count}> Last Tasks </Title>
 			<div className='flex justify-between'>
 				<Link
-					href={PAGE.ADD_TASK}
-					className='hover:text-primary max-h-[41px] rounded-sm border border-white px-2 pt-2 text-sm font-medium text-gray-500 shadow shadow-neutral-400 transition-all duration-300 '
+					href={DASHBOARD_PAGES.ADD_TASK}
+					className='hover:text-primary max-h-[41px] rounded-sm border border-white px-2 pt-2 text-sm font-medium text-gray-500 shadow shadow-neutral-400 transition-all duration-300'
 				>
 					+ Add Task
 				</Link>

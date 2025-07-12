@@ -1,15 +1,12 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { useState } from 'react';
 
 import { BubbleBackground } from '@/components/animate-ui/backgrounds/bubble';
-import { ZRegistrationScheme } from '@/components/dashboard/modals/scheme.zod';
+import { ZLoginScheme, ZRegistrationScheme } from '@/components/dashboard/modals/scheme.zod';
 import Form from '@/components/ui/Form';
 import { Title } from '@/components/ui/Title';
-
-import { PAGE } from '@/config/page.config';
 
 export default function HomeClient() {
 	const [authCondition, setAuthCondition] = useState('register');
@@ -25,13 +22,14 @@ export default function HomeClient() {
 								<b className='font-playfair text-3xl 2xl:text-6xl'>Wellcom on task managment</b>
 							</Title>
 							<br />
-							<span className='text-[0.7rem] leading-0.5 2xl:text-[18px]'>
+							<span className='text-[0.7rem] leading-0.5 2xl:text-[1rem]'>
 								we save your time and improve the organization of projects.
 							</span>
 						</div>
-						{authCondition === 'register'? (
-							<div className='flex flex-col gap-2'>
+						{authCondition === 'register' ? (
+							<div className='flex flex-col gap-6'>
 								<Form
+								isLogin={false}
 									isNameField={true}
 									isEmailField={true}
 									isPassowrdField={true}
@@ -39,25 +37,31 @@ export default function HomeClient() {
 									btnText='Submit'
 									btnClassName='bg-white/40 py-1.5 hover:text-purple-950 duration-300 	text-sm px-3 hover:bg-white/60 w-[30%] rounded-4xl  text-white transition-colors'
 								/>
-								<div className='text-[0.6em]'>Already have on accaunt? <button className='text-cyan-400' onClick={()=>setAuthCondition('login')}>Sign In</button> </div>
-								<Link href={PAGE.DASHBOARD} className='border-b-2 text-sm'>
-									<b>CLICK ME </b>(for go to the Dashboard page)
-								</Link>
+								<div className='text-[0.6em] 2xl:text-[1rem]'>
+									Already have on accaunt?{' '}
+									<button className='text-cyan-400' onClick={() => setAuthCondition('login')}>
+										Sign In
+									</button>{' '}
+								</div>
 							</div>
-						): 							<div className='flex flex-col gap-2'>
+						) : (
+							<div className='flex flex-col gap-2'>
 								<Form
-								
+									isLogin={true}
 									isEmailField={true}
 									isPassowrdField={true}
-									zodScheme={ZRegistrationScheme}
+									zodScheme={ZLoginScheme}
 									btnText='Submit'
-									btnClassName='bg-white/40 py-1.5 hover:text-purple-950 duration-300 	text-sm px-3 hover:bg-white/60 w-[30%] rounded-4xl  text-white transition-colors'
+									btnClassName='bg-white/40 py-1.5 hover:text-purple-950 duration-300 text-sm px-3 hover:bg-white/60 w-[30%] rounded-4xl  text-white transition-colors'
 								/>
-								<div className='text-[0.6em]'>Don't have on accaunt? <button className='text-cyan-400' onClick={()=>setAuthCondition('register')}>Sign Up</button> </div>
-								<Link href={PAGE.DASHBOARD} className='border-b-2 text-sm'>
-									<b>CLICK ME </b>(for go to the Dashboard page)
-								</Link>
-							</div>}
+								<div className='text-[0.6em]'>
+									Don't have on accaunt?{' '}
+									<button className='text-cyan-400' onClick={() => setAuthCondition('register')}>
+										Sign Up
+									</button>
+								</div>
+							</div>
+						)}
 					</div>
 
 					<Image src='/chat.jpg' alt='chat' width={1100} height={1100} className='h-full w-full' />

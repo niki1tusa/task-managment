@@ -11,7 +11,7 @@ import { Header } from './header/Header';
 
 interface Props {
 	task: ITask;
-	className: string;
+	className?: string;
 	isMinimal?: boolean;
 }
 export const Task = ({ task, className, isMinimal }: Props) => {

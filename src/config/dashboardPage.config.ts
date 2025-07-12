@@ -1,5 +1,5 @@
-class PagesConfig {
-	HOME = '/';
+class DashboardPagesConfig {
+	
 	DASHBOARD = '/dashboard';
 	TASK_EDIT(id: string) {
 		return `${this.DASHBOARD}/task/${id}/edit`;
@@ -18,4 +18,4 @@ class PagesConfig {
 
 }
 
-export const PAGE = new PagesConfig();
+export const DASHBOARD_PAGES = new DashboardPagesConfig();

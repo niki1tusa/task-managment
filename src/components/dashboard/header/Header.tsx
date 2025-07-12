@@ -2,15 +2,14 @@
 
 import { Bell } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
 import { Button } from '@/components/ui/Button';
 import { Title } from '@/components/ui/Title';
 
-import { PAGE } from '@/config/page.config';
-
+import { PAGE } from '@/config/dashboardDASHBOARD_PAGEconfig';
 
 import { SearchField } from './SearchField';
-import Link from 'next/link';
 
 const DynamicToggleTheme = dynamic(
 	() => import('../../ui/toggle-theme/ToggleTheme').then(mod => mod.ToggleTheme),
@@ -27,7 +26,6 @@ export const Header = () => {
 					<Bell className='mx-2 my-2' />
 				</span>
 				<DynamicToggleTheme />
-			
 			</div>
 		</div>
 	);

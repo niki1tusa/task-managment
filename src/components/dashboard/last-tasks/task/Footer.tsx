@@ -1,21 +1,30 @@
 'use client';
 
-import { Image, Link as LucideLink, LucideTrash2, MessageSquareText, Pencil, Plus, Trash2 } from 'lucide-react';
+import {
+	Image,
+	Link as LucideLink,
+	LucideTrash2,
+	MessageSquareText,
+	Pencil,
+	Plus,
+	Trash2,
+} from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 import type { ITask } from '@/shared/types/task.types';
 
-import { PAGE } from '@/config/page.config';
+import { PAGE } from '@/config/dashboardDASHBOARD_PAGEconfig';
+
+import { useTaskStore } from '@/store/store';
 
 import { TaskBtnAction } from './TaskBtnAction';
-import  { useTaskStore } from '@/store/store';
 
 interface Props {
 	task: ITask;
 }
 export const Footer = ({ task }: Props) => {
 	const pathname = usePathname();
-	const deleteTask = useTaskStore(state=> state.deleteTask)
+	const deleteTask = useTaskStore(state => state.deleteTask);
 	return (
 		<div className='mx-5 flex items-center justify-between pb-2'>
 			<div className='flex justify-between gap-2'>
@@ -33,14 +42,17 @@ export const Footer = ({ task }: Props) => {
 				</div>
 			</div>
 			<div className='mr-2 mb-2 flex gap-2'>
-			<button className='bg-red-500/80 flex h-9 w-9 items-center justify-center rounded-full text-white shadow shadow-neutral-400' onClick={()=>deleteTask(task.id)}>
-				<Trash2 />
-			</button>
-				<TaskBtnAction href={PAGE.ADD_SUBTASK(task.id)}>
+				<button
+					className='flex h-9 w-9 items-center justify-center rounded-full bg-red-500/80 text-white shadow shadow-neutral-400'
+					onClick={() => deleteTask(task.id)}
+				>
+					<Trash2 />
+				</button>
+				<TaskBtnAction href={DASHBOARD_PAGEADD_SUBTASK(task.id)}>
 					<Plus />
 				</TaskBtnAction>
-				{pathname !== PAGE.TASK_EDIT(task.id) && (
-					<TaskBtnAction href={PAGE.TASK_EDIT(task.id)}>
+				{pathname !== DASHBOARD_PAGETASK_EDIT(task.id) && (
+					<TaskBtnAction href={DASHBOARD_PAGETASK_EDIT(task.id)}>
 						<Pencil size={21} />
 					</TaskBtnAction>
 				)}

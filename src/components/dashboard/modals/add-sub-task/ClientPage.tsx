@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { Title } from '@/components/ui/Title';
 
-import { PAGE } from '@/config/page.config';
+import { PAGE } from '@/config/dashboardDASHBOARD_PAGEconfig';
 
 import { useTaskStore } from '@/store/store';
 
@@ -21,7 +21,7 @@ export default function ClientPage({ id }: Props) {
 		<div className='px-5'>
 			<div className='flex flex-col gap-1 p-6'>
 				<Title>Add Sub Task</Title>
-				<Link href={PAGE.DASHBOARD} className='flex gap-3'>
+				<Link href={DASHBOARD_PAGEDASHBOARD} className='flex gap-3'>
 					<ArrowLeftCircle /> <span>Back to Dashboard</span>
 				</Link>
 				<p>task id "{id}"</p>

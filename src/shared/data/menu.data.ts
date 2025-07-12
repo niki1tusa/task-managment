@@ -8,44 +8,44 @@ import {
 	UsersRound,
 } from 'lucide-react';
 
-import {PAGE }from '@/config/page.config';
-
 import type { IMenuItem } from '@/shared/types/menu.item.types';
+
+import { PAGE } from '@/config/dashboardDASHBOARD_PAGEconfig';
 
 export const MENU: IMenuItem[] = [
 	{
 		title: 'Dashboard',
 		Icon: LayoutGrid,
-		link: PAGE.DASHBOARD,
+		link: DASHBOARD_PAGEDASHBOARD,
 	},
 	{
 		title: 'Message',
 		Icon: MessageCircleMore,
-		link: PAGE.MESSAGES,
+		link: DASHBOARD_PAGEMESSAGES,
 	},
 	{
 		title: 'Insight',
 		Icon: ChartColumnDecreasing,
-		link: PAGE.INSIGHT,
+		link: DASHBOARD_PAGEINSIGHT,
 	},
 	{
 		title: 'Team',
 		Icon: UsersRound,
-		link: PAGE.TEAM,
+		link: DASHBOARD_PAGETEAM,
 	},
 	{
 		title: 'Shedule',
 		Icon: CalendarDays,
-		link: PAGE.SCHEDULE,
+		link: DASHBOARD_PAGESCHEDULE,
 	},
 	{
 		title: 'Report',
 		Icon: ClipboardMinus,
-		link: PAGE.REPORT,
+		link: DASHBOARD_PAGEREPORT,
 	},
 	{
 		title: 'Settings',
 		Icon: Settings,
-		link: PAGE.SETTINGS,
+		link: DASHBOARD_PAGESETTINGS,
 	},
 ];
