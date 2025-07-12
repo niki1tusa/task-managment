@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Title } from '@/components/ui/Title';
 
-import { PAGE } from '@/config/dashboardDASHBOARD_PAGEconfig';
+
 
 import { SearchField } from './SearchField';
 

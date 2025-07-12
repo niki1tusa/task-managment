@@ -1,19 +1,11 @@
 'use client';
 
-import {
-	Image,
-	Link as LucideLink,
-	LucideTrash2,
-	MessageSquareText,
-	Pencil,
-	Plus,
-	Trash2,
-} from 'lucide-react';
+import { Image, Link as LucideLink, MessageSquareText, Pencil, Plus, Trash2 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 import type { ITask } from '@/shared/types/task.types';
 
-import { PAGE } from '@/config/dashboardDASHBOARD_PAGEconfig';
+import { DASHBOARD_PAGES } from '@/config/dashboardPage.config';
 
 import { useTaskStore } from '@/store/store';
 
@@ -48,11 +40,11 @@ export const Footer = ({ task }: Props) => {
 				>
 					<Trash2 />
 				</button>
-				<TaskBtnAction href={DASHBOARD_PAGEADD_SUBTASK(task.id)}>
+				<TaskBtnAction href={DASHBOARD_PAGES.ADD_SUBTASK(task.id)}>
 					<Plus />
 				</TaskBtnAction>
-				{pathname !== DASHBOARD_PAGETASK_EDIT(task.id) && (
-					<TaskBtnAction href={DASHBOARD_PAGETASK_EDIT(task.id)}>
+				{pathname !== DASHBOARD_PAGES.TASK_EDIT(task.id) && (
+					<TaskBtnAction href={DASHBOARD_PAGES.TASK_EDIT(task.id)}>
 						<Pencil size={21} />
 					</TaskBtnAction>
 				)}

@@ -3,12 +3,12 @@
 import clsx from 'clsx';
 import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import type{  FieldError } from 'react-hook-form';
 import { ToastContainer } from 'react-toastify';
 
 interface Props {
 	register: any
-	errors: string
+	errors: any
 	labelText: string;
 	registerName: 'title' | 'email' | 'password' | 'name';
 	type?: 'text' | 'password' | 'email';

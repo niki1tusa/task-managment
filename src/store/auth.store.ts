@@ -1,4 +1,5 @@
-'use client'
+'use client';
+
 import Cookies from 'js-cookie';
 import { create } from 'zustand';
 
@@ -8,7 +9,6 @@ interface AuthStore {
 	logout: () => void;
 	token: string | null;
 }
-
 export const useAuthStore = create<AuthStore>(set => ({
 	isLoggedIn: false,
 	token: null,
@@ -16,10 +16,10 @@ export const useAuthStore = create<AuthStore>(set => ({
 		set({ isLoggedIn: true, token });
 
 		Cookies.set('auth_token', token, {
-	expires: 7,
-	path: '/',
-	sameSite: 'lax',
-});
+			expires: 7,
+			path: '/',
+			sameSite: 'lax',
+		});
 	},
 
 	logout: () => {

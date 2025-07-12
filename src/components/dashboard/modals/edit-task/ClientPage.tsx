@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Task } from '@/components/dashboard/last-tasks/task/Task';
 import { Title } from '@/components/ui/Title';
 
-import { PAGE } from '@/config/dashboardDASHBOARD_PAGEconfig';
+import { DASHBOARD_PAGES } from '@/config/dashboardPage.config';
 
 import { useTaskStore } from '@/store/store';
 
@@ -22,7 +22,7 @@ export default function ClientPage({ id }: Props) {
 		<div className='px-5 py-3'>
 			<div className='flex flex-col gap-3 p-6'>
 				<Title>Edit Task</Title>
-				<Link href={DASHBOARD_PAGEDASHBOARD} className='flex gap-3'>
+				<Link href={DASHBOARD_PAGES.DASHBOARD} className='flex gap-3'>
 					<ArrowLeftCircle /> <span className='border-b-2'>Back to Dashboard</span>
 				</Link>
 				<h2>Task id "{id}"</h2>

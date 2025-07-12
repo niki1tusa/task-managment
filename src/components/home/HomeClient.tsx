@@ -29,7 +29,7 @@ export default function HomeClient() {
 						{authCondition === 'register' ? (
 							<div className='flex flex-col gap-6'>
 								<Form
-								isLogin={false}
+									isLogin={true}
 									isNameField={true}
 									isEmailField={true}
 									isPassowrdField={true}
