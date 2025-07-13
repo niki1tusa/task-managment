@@ -1,9 +1,10 @@
+import { useGlobalStore } from '@/store/global.store';
+
 import { Card } from './card/Card';
 import { ProjectStatisticsChart } from './chart/ProjectStatisticsChart';
-import { useTaskStore } from '@/store';
 
 export const Statistic = () => {
-	const { cards } = useTaskStore();
+	const { cards } = useGlobalStore();
 	return (
 		<div className='grid grid-cols-1 gap-5 lg:grid-cols-[30%_70%]'>
 			<div className='flex flex-col gap-3'>

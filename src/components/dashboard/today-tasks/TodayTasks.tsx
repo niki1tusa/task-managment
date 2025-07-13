@@ -8,10 +8,10 @@ import { Title } from '@/components/ui/Title';
 
 import type { ITask } from '@/shared/types/task.types';
 
+import { useTaskStore } from '@/store/task.store';
+
 import { Task } from '../last-tasks/task/Task';
 import { Avatar } from '../last-tasks/task/header/Avatar';
-
-import { useTaskStore } from '@/store';
 
 const HOURS = Array.from({ length: 9 }, (_, i) => i + 9);
 export default function TodayTasks() {

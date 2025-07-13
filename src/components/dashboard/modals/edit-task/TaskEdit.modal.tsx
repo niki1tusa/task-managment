@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 
-import Form from '@/components/ui/Form';
+import Form from '@/components/ui/form/Form';
 
 import { ZTaskScheme } from '../../../../shared/types/scheme.zod';
 import { WrapperModal } from '../Wrapper.modal';

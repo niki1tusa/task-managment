@@ -7,11 +7,12 @@ import { Title } from '@/components/ui/Title';
 
 import type { ITask } from '@/shared/types/task.types';
 
-import { DASHBOARD_PAGES } from '@/config/dashboardPage.config';
+import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
+
+import { useTaskStore } from '@/store/task.store';
 
 import FilterTask from './FilterTask';
 import { Task } from './task/Task';
-import { useTaskStore } from '@/store';
 
 export const LastTasks = () => {
 	const [select, setSelect] = useState(null);

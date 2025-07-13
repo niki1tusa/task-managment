@@ -5,10 +5,11 @@ import { usePathname } from 'next/navigation';
 
 import type { ITask } from '@/shared/types/task.types';
 
-import { DASHBOARD_PAGES } from '@/config/dashboardPage.config';
+import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
+
+import { useTaskStore } from '@/store/task.store';
 
 import { TaskBtnAction } from './TaskBtnAction';
-import { useTaskStore } from '@/store';
 
 interface Props {
 	task: ITask;

@@ -1,6 +1,6 @@
 import type { ZodSchema } from 'zod';
 
-import Form from '../ui/Form';
+import Form from '../ui/form/Form';
 
 interface Props {
 	setAuthCondition: (arg: string) => void;
@@ -11,7 +11,15 @@ interface Props {
 	isEmail?: boolean;
 	isPassword?: boolean;
 }
-export function HomeAuthForm({ setAuthCondition, zodScheme, linkText, children, isName, isEmail, isPassword }: Props) {
+export function HomeAuthForm({
+	setAuthCondition,
+	zodScheme,
+	linkText,
+	children,
+	isName,
+	isEmail,
+	isPassword,
+}: Props) {
 	return (
 		<div className='flex flex-col gap-2'>
 			<Form

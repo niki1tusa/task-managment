@@ -2,11 +2,12 @@ import clsx from 'clsx';
 
 import type { ITask } from '@/shared/types/task.types';
 
+import { useTaskStore } from '@/store/task.store';
+
 import { Footer } from './Footer';
 import { StatusBar } from './StatusBar';
 import { Avatar } from './header/Avatar';
 import { Header } from './header/Header';
-import { useTaskStore } from '@/store';
 
 interface Props {
 	task: ITask;

@@ -7,10 +7,6 @@ import { MENU } from '@/shared/data/menu.data';
 import { PROFILES } from '@/shared/data/profile.data';
 import { PROJECTS_MENU } from '@/shared/data/projects.menu.data';
 import { TASKS } from '@/shared/data/task.data';
-import type { ICard } from '@/shared/types/card.types';
-import type { IMenuItem } from '@/shared/types/menu.item.types';
-import type { IProfile } from '@/shared/types/profile.types';
-import type { IProjectsMenu } from '@/shared/types/projects.menu.types';
 import type { TFormData } from '@/shared/types/scheme.zod';
 import type { ISubTask, ITask } from '@/shared/types/task.types';
 
@@ -18,11 +14,7 @@ export interface ITaskStore {
 	statusCount: (data: ITask) => number;
 	getTodayTasks: () => ITask[];
 	tasks: ITask[];
-	profiles: IProfile[];
-	cards: ICard[];
-	menus: IMenuItem[];
-	projectMenus: IProjectsMenu[];
-	EditTask: (id: string, data: TFormData) => void;
+	editTask: (id: string, data: TFormData) => void;
 	addSubTask: (id: string, data: Pick<ISubTask, 'title'>) => void;
 	deleteTask: (id: string) => void;
 }
@@ -31,10 +23,6 @@ export const useTaskStore = create<ITaskStore>()(
 	persist(
 		(set, get) => ({
 			tasks: TASKS,
-			cards: LIST_CARD,
-			profiles: PROFILES,
-			menus: MENU,
-			projectMenus: PROJECTS_MENU,
 			getTodayTasks: (): ITask[] => {
 				return get().tasks.filter(task => isToday(new Date(task.due.date)));
 			},
@@ -48,7 +36,7 @@ export const useTaskStore = create<ITaskStore>()(
 				set(state => ({
 					tasks: [...state.tasks, data],
 				})),
-			EditTask: (id, data) =>
+			editTask: (id, data) =>
 				set(state => ({
 					tasks: state.tasks.map(task => (task.id === id ? { ...task, ...data } : task)),
 				})),

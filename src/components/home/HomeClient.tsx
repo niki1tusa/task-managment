@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import { BubbleBackground } from '@/components/animate-ui/backgrounds/bubble';
-import Form from '@/components/ui/Form';
 import { Title } from '@/components/ui/Title';
+import Form from '@/components/ui/form/Form';
 
 import { ZLoginScheme, ZRegistrationScheme } from '@/shared/types/scheme.zod';
 

@@ -9,9 +9,8 @@ import {
 } from 'lucide-react';
 
 import type { IMenuItem } from '@/shared/types/menu.item.types';
-import { DASHBOARD_PAGES } from '@/config/dashboardPage.config';
 
-
+import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
 export const MENU: IMenuItem[] = [
 	{

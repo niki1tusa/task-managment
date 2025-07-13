@@ -25,6 +25,7 @@ export default function FilterTask({ select, setSelect, sortOrder, setSortOrder 
 						{button}
 					</button>
 				))}
+			
 			</div>
 			{/* select */}
 			<select

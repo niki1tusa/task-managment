@@ -8,14 +8,14 @@ import { PROFILE } from '@/shared/data/profile.data';
 import { PROJECTS_MENU } from '@/shared/data/projects.menu.data';
 
 import { useAuthStore } from '@/store/auth.store';
+import { useGlobalStore } from '@/store/global.store';
 
 import { Menu } from './menu/Menu';
 import { Profile } from './profile/Profile';
 import { ProjectsMenu } from './project/ProjectsMenu';
-import { useTaskStore } from '@/store';
 
 export const Sidebar = () => {
-	const {menus, projectMenus} = useTaskStore()
+	const { menus, projectMenus } = useGlobalStore();
 	const { logout } = useAuthStore();
 	const router = useRouter();
 	const handleLogout = () => {
