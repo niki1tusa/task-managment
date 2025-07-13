@@ -7,9 +7,8 @@ import type { ITask } from '@/shared/types/task.types';
 
 import { DASHBOARD_PAGES } from '@/config/dashboardPage.config';
 
-import { useTaskStore } from '@/store/store';
-
 import { TaskBtnAction } from './TaskBtnAction';
+import { useTaskStore } from '@/store';
 
 interface Props {
 	task: ITask;

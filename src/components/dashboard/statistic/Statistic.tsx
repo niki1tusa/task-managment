@@ -1,12 +1,13 @@
 import { Card } from './card/Card';
 import { ProjectStatisticsChart } from './chart/ProjectStatisticsChart';
-import { LIST_CARD } from '@/shared/data/list.card.data';
+import { useTaskStore } from '@/store';
 
 export const Statistic = () => {
+	const { cards } = useTaskStore();
 	return (
-		<div className=' grid grid-cols-1 lg:grid-cols-[30%_70%] gap-5'>
+		<div className='grid grid-cols-1 gap-5 lg:grid-cols-[30%_70%]'>
 			<div className='flex flex-col gap-3'>
-				{LIST_CARD.map(card => (
+				{cards.map(card => (
 					<Card
 						key={card.id}
 						img={card.img}

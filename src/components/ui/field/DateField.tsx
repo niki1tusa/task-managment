@@ -1,25 +1,17 @@
 'use client';
 
 import { CalendarFold } from 'lucide-react';
-import { useState } from 'react';
 import DatePicker from 'react-datepicker';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, type Control, type FieldErrors} from 'react-hook-form';
 
 interface Props {
 	labelText: string;
 	nameController: 'due.date';
-
+	control?: Control<any>;
+	errors?: FieldErrors;
 	placeholderText?: string;
 }
-export function DateField({
-	nameController,
-	labelText,
-	placeholderText,
-}: Props) {
-	const {
-		control,
-		formState: { errors },
-	} = useForm();
+export function DateField({ nameController, labelText, placeholderText, control, errors }: Props) {
 	return (
 		<div>
 			<label className='mb-1 block font-medium'>{labelText}:</label>
@@ -45,7 +37,7 @@ export function DateField({
 				</button>
 			</span>
 
-			{errors.due && <p className='text-sm text-red-500'>{errors.due.message as string}</p>}
+			{errors[nameController] && <p className='text-sm text-red-500'>{errors[nameController].message as string}</p>}
 		</div>
 	);
 }

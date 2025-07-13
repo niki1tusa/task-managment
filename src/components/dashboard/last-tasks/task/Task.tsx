@@ -2,12 +2,11 @@ import clsx from 'clsx';
 
 import type { ITask } from '@/shared/types/task.types';
 
-import { useTaskStore } from '@/store/store';
-
 import { Footer } from './Footer';
 import { StatusBar } from './StatusBar';
 import { Avatar } from './header/Avatar';
 import { Header } from './header/Header';
+import { useTaskStore } from '@/store';
 
 interface Props {
 	task: ITask;
@@ -20,8 +19,8 @@ export const Task = ({ task, className, isMinimal }: Props) => {
 	return (
 		<div
 			className={clsx(
-				'grid grid-cols-1 gap-3 rounded-3xl border border-white text-sm 2xl:text-md shadow shadow-neutral-400 dark:border-none',
-				className ? `${className} text-white grid-rows-2` : 'bg-background grid-rows-3'
+				'2xl:text-md grid grid-cols-1 gap-3 rounded-3xl border border-white text-sm shadow shadow-neutral-400 dark:border-none',
+				className ? `${className} grid-rows-2 text-white` : 'bg-background grid-rows-3'
 			)}
 		>
 			{/* 1 section */}
@@ -30,7 +29,7 @@ export const Task = ({ task, className, isMinimal }: Props) => {
 			{!isMinimal && <StatusBar status={status} />}
 			{/* 3 section */}
 			{isMinimal ? (
-				<div className='flex -space-x-2 mx-5'>
+				<div className='mx-5 flex -space-x-2'>
 					{task.users.map((user, i) => {
 						if (i < 3) {
 							return <Avatar key={user.id} id={user.id} img={user.img} />;

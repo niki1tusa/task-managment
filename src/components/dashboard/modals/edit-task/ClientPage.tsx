@@ -8,9 +8,9 @@ import { Title } from '@/components/ui/Title';
 
 import { DASHBOARD_PAGES } from '@/config/dashboardPage.config';
 
-import { useTaskStore } from '@/store/store';
-
 import { ListSubTask } from '../ListSubTask';
+
+import { useTaskStore } from '@/store';
 
 interface Props {
 	id: string;

@@ -6,9 +6,9 @@ import { ToastContainer } from 'react-toastify';
 
 import Form from '@/components/ui/Form';
 
+import { ZTaskScheme } from '../../../../shared/types/scheme.zod';
 import { WrapperModal } from '../Wrapper.modal';
 import Header from '../header-modals/Header';
-import { ZTaskScheme } from '../scheme.zod';
 
 interface Props {
 	id: string;

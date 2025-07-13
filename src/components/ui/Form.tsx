@@ -13,11 +13,11 @@ import { Button } from '@/components/ui/Button';
 import { DASHBOARD_PAGES } from '@/config/dashboardPage.config';
 
 import { useAuthStore } from '@/store/auth.store';
-import { useTaskStore } from '@/store/store';
 
 import { DateField } from './field/DateField';
 import { Field } from './field/Field';
 import { IconField } from './field/IconField';
+import { useTaskStore } from '@/store';
 
 interface Props {
 	id?: string;
@@ -67,18 +67,26 @@ export default function Form({
 	const findTask = tasks.find(task => task.id === id);
 	//
 	// react-hook-form
-	const { reset, handleSubmit, register,  formState: { errors },} = useForm({
+	const {
+		reset,
+		handleSubmit,
+		register,
+		control,
+		setValue,
+		watch,
+		formState: { errors },
+	} = useForm({
 		resolver: zodResolver(zodScheme),
 	});
 
-	const onSubmit = data => {
+	const onSubmit = (data: any) => {
 		if (id && isEditTask) {
 			EditTask(id, data);
 		} else if (id && isAddSubTask) {
 			addSubTask(id, data);
 		} else if (isLogin) {
 			console.log('setting cookie');
-			Cookies.set('auth_token', 'your-token', { expires: 7 });
+			Cookies.set('auth_token', 'my-token', { expires: 7 });
 			login('token');
 			toast.success('Login successful!');
 			router.replace(DASHBOARD_PAGES.DASHBOARD);
@@ -131,17 +139,18 @@ export default function Form({
 
 			{isDataField && (
 				<DateField
+					control={control}
+					errors={errors}
 					labelText='Due date'
 					nameController='due.date'
 					placeholderText='Select due date'
-					
 				/>
 			)}
 
-			{isIconField && <IconField />}
+			{isIconField && <IconField setValue={setValue} watch={watch} />}
 			{isEmailField && (
 				<Field
-				errors={errors}
+					errors={errors}
 					register={register}
 					labelText='Email'
 					registerName='email'
@@ -151,7 +160,7 @@ export default function Form({
 			)}
 			{isPassowrdField && (
 				<Field
-				errors={errors}
+					errors={errors}
 					register={register}
 					labelText='Password'
 					registerName='password'

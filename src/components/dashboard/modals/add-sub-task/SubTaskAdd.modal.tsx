@@ -5,9 +5,9 @@ import { useEffect } from 'react';
 
 import Form from '@/components/ui/Form';
 
+import { ZSubTaskScheme } from '../../../../shared/types/scheme.zod';
 import { WrapperModal } from '../Wrapper.modal';
 import Header from '../header-modals/Header';
-import { ZSubTaskScheme } from '../scheme.zod';
 
 interface Props {
 	id: string;
@@ -33,7 +33,12 @@ export default function SubTaskModal({ id }: Props) {
 				className='fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white p-4 text-black shadow-lg'
 			>
 				<Header title={`Add Subtask "${id}"`} closeModal={closeModal} />
-				<Form btnText='Save' closeModal={closeModal} isTitleField={true} zodScheme={ZSubTaskScheme}/>
+				<Form
+					btnText='Save'
+					closeModal={closeModal}
+					isTitleField={true}
+					zodScheme={ZSubTaskScheme}
+				/>
 			</div>
 		</WrapperModal>
 	);

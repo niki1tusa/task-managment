@@ -4,7 +4,7 @@ import React from 'react';
 
 import type { ITask } from '@/shared/types/task.types';
 
-import { type IconName, MODAL_ICON } from '../../../modals/icon.data';
+import { type IconName, MODAL_ICON } from '../../../../../shared/data/icon.data';
 
 import { Avatar } from './Avatar';
 
@@ -23,13 +23,14 @@ export const Header = ({ task, isMinimal }: { task: ITask; isMinimal?: boolean }
 				<TaskIcon color='#725cee' />
 			</div>
 			<div className='flex min-w-0 flex-1 flex-col'>
-				<span className='mb-1 line-clamp-2 text-lg 2xl:text-xl leading-none font-medium break-words'>
+				<span className='mb-1 line-clamp-2 text-lg leading-none font-medium break-words 2xl:text-xl'>
 					{task.title}
 				</span>
 				<span className={clsx(isMinimal ? 'text-white' : 'text-gray')}>
 					{isMinimal ? (
 						<>
-							{format(task.due.startTime!, 'ha').toLowerCase()}- {format(task.due.endTime!, 'ha').toLowerCase()}
+							{format(task.due.startTime!, 'ha').toLowerCase()}-{' '}
+							{format(task.due.endTime!, 'ha').toLowerCase()}
 						</>
 					) : (
 						displayDue

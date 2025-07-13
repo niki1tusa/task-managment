@@ -5,12 +5,11 @@ import Link from 'next/link';
 
 import { Title } from '@/components/ui/Title';
 
-
-
-import { useTaskStore } from '@/store/store';
+import { DASHBOARD_PAGES } from '@/config/dashboardPage.config';
 
 import { ListSubTask } from '../ListSubTask';
-import { DASHBOARD_PAGES } from '@/config/dashboardPage.config';
+
+import { useTaskStore } from '@/store';
 
 interface Props {
 	id: string;

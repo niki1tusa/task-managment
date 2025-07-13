@@ -2,11 +2,16 @@ import { isToday } from 'date-fns';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import type { TFormData } from '@/components/dashboard/modals/scheme.zod';
-
+import { LIST_CARD } from '@/shared/data/list.card.data';
+import { MENU } from '@/shared/data/menu.data';
 import { PROFILES } from '@/shared/data/profile.data';
+import { PROJECTS_MENU } from '@/shared/data/projects.menu.data';
 import { TASKS } from '@/shared/data/task.data';
+import type { ICard } from '@/shared/types/card.types';
+import type { IMenuItem } from '@/shared/types/menu.item.types';
 import type { IProfile } from '@/shared/types/profile.types';
+import type { IProjectsMenu } from '@/shared/types/projects.menu.types';
+import type { TFormData } from '@/shared/types/scheme.zod';
 import type { ISubTask, ITask } from '@/shared/types/task.types';
 
 export interface ITaskStore {
@@ -14,6 +19,9 @@ export interface ITaskStore {
 	getTodayTasks: () => ITask[];
 	tasks: ITask[];
 	profiles: IProfile[];
+	cards: ICard[];
+	menus: IMenuItem[];
+	projectMenus: IProjectsMenu[];
 	EditTask: (id: string, data: TFormData) => void;
 	addSubTask: (id: string, data: Pick<ISubTask, 'title'>) => void;
 	deleteTask: (id: string) => void;
@@ -23,7 +31,10 @@ export const useTaskStore = create<ITaskStore>()(
 	persist(
 		(set, get) => ({
 			tasks: TASKS,
+			cards: LIST_CARD,
 			profiles: PROFILES,
+			menus: MENU,
+			projectMenus: PROJECTS_MENU,
 			getTodayTasks: (): ITask[] => {
 				return get().tasks.filter(task => isToday(new Date(task.due.date)));
 			},

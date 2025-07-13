@@ -22,7 +22,7 @@ export function ProjectChartHeader({ selectedRange, onChangeRange }: Props) {
 		setIsDropdownOpen(false)
 	});
 	return (
-		<div className='flex items-center justify-between px-5 pt-2'>
+		<div className='flex items-center justify-between px-5 pt-2 mb-3'>
 			<h2 className='text-xl font-semibold'>Project Statistic</h2>{' '}
 			<div ref={ref} className='relative'>
 				<button

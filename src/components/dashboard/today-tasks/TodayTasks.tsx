@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import { getHours, getMinutes } from 'date-fns';
 import { useMemo } from 'react';
 
@@ -7,11 +8,10 @@ import { Title } from '@/components/ui/Title';
 
 import type { ITask } from '@/shared/types/task.types';
 
-import { useTaskStore } from '@/store/store';
-
 import { Task } from '../last-tasks/task/Task';
 import { Avatar } from '../last-tasks/task/header/Avatar';
-import clsx from 'clsx';
+
+import { useTaskStore } from '@/store';
 
 const HOURS = Array.from({ length: 9 }, (_, i) => i + 9);
 export default function TodayTasks() {
@@ -36,7 +36,10 @@ export default function TodayTasks() {
 			<div className='w-full overflow-x-auto p-3'>
 				<div className='grid grid-cols-9 grid-rows-2'>
 					{HOURS.map(hour => (
-						<div key={hour} className={clsx('text-center text-sm',{ 'text-primary':Date.now() === hour})}>
+						<div
+							key={hour}
+							className={clsx('text-center text-sm', { 'text-primary': Date.now() === hour })}
+						>
 							{hour > 12 ? ` ${hour} pm` : `${hour} am`}
 						</div>
 					))}

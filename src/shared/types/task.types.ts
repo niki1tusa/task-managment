@@ -1,4 +1,4 @@
-import type { IconName } from '@/components/dashboard/modals/icon.data';
+import type { IconName } from '@/shared/data/icon.data';
 
 import type { IProfile } from './profile.types';
 
@@ -7,10 +7,10 @@ export interface ISubTask {
 	title: string;
 	isCompleted: boolean;
 }
-export interface IDue { 
-	date: Date
-	startTime?: Date
-	endTime?: Date
+export interface IDue {
+	date: Date;
+	startTime?: Date;
+	endTime?: Date;
 }
 export interface ITask {
 	id: string;
@@ -18,10 +18,9 @@ export interface ITask {
 	title: string;
 	isCompleted: boolean;
 	users: IProfile[];
-	due: IDue
+	due: IDue;
 	subTask: ISubTask[];
 	comment: number;
 	img: number;
 	link: number;
 }
-

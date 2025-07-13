@@ -1,13 +1,14 @@
 'use client';
 
 import cn from 'clsx';
-import { useForm } from 'react-hook-form';
 
-import { ICON_NAMES, MODAL_ICON } from '@/components/dashboard/modals/icon.data';
+import { ICON_NAMES, MODAL_ICON } from '@/shared/data/icon.data';
 
-interface Props {}
-export function IconField({}: Props) {
-	const { setValue, watch } = useForm();
+interface Props {
+	setValue: any;
+	watch: any;
+}
+export function IconField({setValue, watch}: Props) {
 	return (
 		<div className='flex items-center gap-2'>
 			<label className='font-medium'>Icon:</label>
