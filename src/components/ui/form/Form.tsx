@@ -1,23 +1,13 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import Cookies from 'js-cookie';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 import type { ZodSchema } from 'zod';
 
 import { Button } from '@/components/ui/Button';
 
-import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
-import { useAuthStore } from '@/store/auth.store';
-import { useTaskStore } from '@/store/task.store';
-
-import { DateField } from '../field/DateField';
 import { Field } from '../field/Field';
-import { IconField } from '../field/IconField';
 
 interface Props {
 	id?: string;
@@ -36,6 +26,14 @@ interface Props {
 	isAddSubTask?: boolean;
 	successMessage?: string;
 }
+export interface IField {
+	register: any
+	errors: any
+	labelText: string;
+	registerName: 'title' | 'email' | 'password' | 'name';
+	type?: 'text' | 'password' | 'email';
+	placeholderText?: string;
+}
 export default function Form({
 	id,
 	btnText,
@@ -50,7 +48,7 @@ export default function Form({
 	isPassowrdField = false,
 	isDataField = false,
 }: Props) {
-		const {
+	const {
 		reset,
 		handleSubmit,
 		register,
@@ -90,13 +88,13 @@ export default function Form({
 				},
 			]
 				.filter(Boolean)
-				.map(item => (
+				.map((item: IField )=> (
 					<Field
 						register={register}
 						labelText={item.labelText}
-						registerName='title'
-						placeholderText='Enter title'
-						type='text'
+						registerName={item.registerName}
+						placeholderText={item.placeholderText}
+						type={item.type}
 						errors={errors}
 					/>
 				))}
