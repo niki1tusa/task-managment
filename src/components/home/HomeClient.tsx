@@ -6,9 +6,10 @@ import { useState } from 'react';
 import { BubbleBackground } from '@/components/animate-ui/backgrounds/bubble';
 import { Title } from '@/components/ui/Title';
 
-import { ZLoginScheme, ZRegistrationScheme } from '@/shared/types/scheme.zod';
+import { loginFields } from './form/login.data';
+import { RegisterFields } from './form/register.data';
 
-import { HomeAuthForm } from './HomeAuthForm';
+import { AuthForm } from './form/AuthForm';
 
 export default function HomeClient() {
 	const [authCondition, setAuthCondition] = useState('register');
@@ -19,7 +20,7 @@ export default function HomeClient() {
 				<div className='flex flex-col gap-5 p-10'>
 					<div>
 						<Title>
-							<b className='font-playfair text-3xl 2xl:text-6xl'>Wellcom on task managment</b>
+							<b className='font-playfair text-3xl 2xl:text-6xl'>Welcome on task management</b>
 						</Title>
 						<br />
 						<span className='text-[0.7rem] leading-0.5 2xl:text-[1rem]'>
@@ -27,20 +28,17 @@ export default function HomeClient() {
 						</span>
 					</div>
 					{authCondition === 'register' ? (
-						<HomeAuthForm
-							isName={true}
-							isEmail={true}
-							isPassword={true}
+						<AuthForm
+							authCondition='register'
+							fields={RegisterFields}
 							setAuthCondition={setAuthCondition}
 							linkText='Sign In'
-							zodScheme={ZRegistrationScheme}
 						/>
 					) : (
-						<HomeAuthForm
-							isEmail={true}
-							isPassword={true}
+						<AuthForm
+							authCondition='login'
+							fields={loginFields}
 							setAuthCondition={setAuthCondition}
-							zodScheme={ZLoginScheme}
 							linkText='Sign Up'
 						/>
 					)}

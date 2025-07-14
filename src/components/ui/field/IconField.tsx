@@ -3,12 +3,10 @@
 import cn from 'clsx';
 
 import { ICON_NAMES, MODAL_ICON } from '@/shared/data/icon.data';
+import type { IIconField } from './field.types';
 
-interface Props {
-	setValue: any;
-	watch: any;
-}
-export function IconField({setValue, watch}: Props) {
+
+export function IconField({setValue, watch}: IIconField) {
 	return (
 		<div className='flex items-center gap-2'>
 			<label className='font-medium'>Icon:</label>

@@ -3,15 +3,10 @@
 import { CalendarFold } from 'lucide-react';
 import DatePicker from 'react-datepicker';
 import { Controller, type Control, type FieldErrors} from 'react-hook-form';
+import type { IDateField } from './field.types';
 
-interface Props {
-	labelText: string;
-	nameController: 'due.date';
-	control?: Control<any>;
-	errors?: FieldErrors;
-	placeholderText?: string;
-}
-export function DateField({ nameController, labelText, placeholderText, control, errors }: Props) {
+
+export function DateField({ nameController, labelText, placeholderText, control, errors }: IDateField) {
 	return (
 		<div>
 			<label className='mb-1 block font-medium'>{labelText}:</label>
