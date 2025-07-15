@@ -14,7 +14,7 @@ interface Props {
 	id: string;
 }
 
-export default function SubTaskModal({ id }: Props) {
+export default function SubTaskAddForm({ id }: Props) {
 	const router = useRouter();
 	const closeModal = () => router.back();
 	useEffect(() => {
