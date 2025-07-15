@@ -4,24 +4,31 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
+import type { FormElement, IForm } from '@/components/ui/form/form.types';
+
 import { ZLoginScheme, ZRegistrationScheme } from '@/shared/types/scheme.zod';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
 import { useAuthStore } from '@/store/auth.store';
 
-import type { IField } from '../../ui/field/field.types';
 import Form from '../../ui/form/Form';
 
 type TAuth = 'register' | 'login';
 interface Props {
 	authCondition: TAuth;
-	fields: IField[];
+	formElement: FormElement[];
 	setAuthCondition: (arg: TAuth) => void;
 	linkText: string;
 	children?: React.ReactNode;
 }
-export function AuthForm({ linkText, children, authCondition, setAuthCondition, fields }: Props) {
+export function AuthForm({
+	linkText,
+	children,
+	authCondition,
+	setAuthCondition,
+	formElement,
+}: Props) {
 	const { login } = useAuthStore();
 	const router = useRouter();
 	// notification
@@ -53,7 +60,7 @@ export function AuthForm({ linkText, children, authCondition, setAuthCondition, 
 	return (
 		<div className='flex flex-col gap-2'>
 			<Form
-				fields={fields}
+				formElement={formElement}
 				handleOnSubmit={handleSubmit(onSubmit)}
 				register={register}
 				errors={errors}

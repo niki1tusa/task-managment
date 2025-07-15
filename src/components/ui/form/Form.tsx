@@ -5,10 +5,8 @@ import { Button } from '@/components/ui/Button';
 import { DateField } from '../field/DateField';
 import { Field } from '../field/Field';
 import { IconField } from '../field/IconField';
-;
 
 import type { IForm } from './form.types';
-
 
 export default function Form({
 	formElement,
@@ -17,9 +15,6 @@ export default function Form({
 	errors,
 	btnText,
 	btnClassName,
-	fields,
-	IconFields,
-	DateFields,
 	setValue,
 	watch,
 	control,
@@ -27,30 +22,36 @@ export default function Form({
 }: IForm) {
 	return (
 		<form onSubmit={handleOnSubmit} className='flex flex-col gap-0.5 2xl:gap-2'>
-			{fields.filter(Boolean).map(item => (
-				<Field
-					key={item.registerName}
-					register={register}
-					labelText={item.labelText}
-					registerName={item.registerName}
-					placeholderText={item.placeholderText}
-					type={item.type}
-					errors={errors}
-				/>
-			))}
-			{DateFields.filter(Boolean).map(item => (
-				<DateField
-					key={item.registerName}
-					labelText={item.labelText}
-					nameController={nameController}
-					placeholderText={item.placeholderText}
-					control={control}
-					errors={errors}
-				/>
-			))}
-			{IconFields.filter(Boolean).map(item => (
-				<IconField key={item.registerName} setValue={setValue} watch={watch} />
-			))}
+			{formElement.map((item, i) => {
+				switch (item.type) {
+					case 'icon':
+						return <IconField key={i} setValue={setValue} watch={watch} />;
+					case 'date':
+						return (
+							<DateField
+								key={i}
+								labelText={item.props.labelText}
+								nameController={nameController}
+								// placeholderText={item.props.placeholderText}
+								control={control}
+								errors={errors}
+							/>
+						);
+					default:
+						return (
+							<Field
+								key={i}
+								register={register}
+								labelText={item.props.labelText}
+								registerName={item.props.registerName}
+								placeholderText={item.props.placeholderText}
+								type={item.type}
+								errors={errors}
+							/>
+						);
+				}
+			})}
+
 			<Button type='submit' className={btnClassName}>
 				{btnText}
 			</Button>

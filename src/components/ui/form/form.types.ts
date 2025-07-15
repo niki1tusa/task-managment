@@ -2,20 +2,26 @@ import { type FieldErrors, type UseFormRegister } from 'react-hook-form';
 
 import type { IDateField, IField, IIconField } from '../field/field.types';
 
-type FormElement =
+export type FormElement =
 	| { type: 'field'; props: IField }
-	| { type: 'date'; props: IDateField }
-	| { type: 'icon'; props: IIconField };
+	| {
+			type: 'date';
+			props: {
+				nameController: string;
+				labelText: string;
+			};
+	  }
+	| { type: 'icon' };
+
 export interface IForm {
 	formElement: FormElement[];
-	handleOnSubmit: () => void;
+	handleOnSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
 	register: UseFormRegister<any>;
 	errors: FieldErrors;
 	btnText?: string;
 	btnClassName?: string;
-	fields: IField[];
 	IconFields?: any;
-	DateFileds?: any;
+	DateFields?: any;
 	setValue?: any;
 	watch?: any;
 	nameController?: any;

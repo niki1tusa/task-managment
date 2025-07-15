@@ -9,7 +9,7 @@ import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
 import { useTaskStore } from '@/store/task.store';
 
-import { ListSubTask } from '../ListSubTask';
+import { ListSubTask } from '../component/ListSubTask';
 
 interface Props {
 	id: string;

@@ -1,4 +1,4 @@
-import SubTaskModal from '@/components/dashboard/modals/add-sub-task/SubTaskAdd.modal';
+import SubTaskModal from '@/components/dashboard/modals/add-sub-task/SubTaskAddForm';
 
 
 interface Props {

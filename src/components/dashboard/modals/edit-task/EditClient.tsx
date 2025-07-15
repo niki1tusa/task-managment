@@ -10,12 +10,12 @@ import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
 import { useTaskStore } from '@/store/task.store';
 
-import { ListSubTask } from '../ListSubTask';
+import { ListSubTask } from '../component/ListSubTask';
 
 interface Props {
 	id: string;
 }
-export default function ClientPage({ id }: Props) {
+export default function EditClient({ id }: Props) {
 	const tasks = useTaskStore(state => state.tasks);
 	const findTask = tasks.find(item => item.id === id) || tasks[0];
 	return (

@@ -1,4 +1,5 @@
-import ClientPage from '@/components/dashboard/modals/edit-task/ClientPage';
+import EditClient from "@/components/dashboard/modals/edit-task/EditClient";
+import TaskEditForm from "@/components/dashboard/modals/edit-task/form/TaskEditForm";
 
 
 interface Props {
@@ -7,5 +8,5 @@ interface Props {
 export default async function TaskEditPage({ params }: Props) {
 	const { id } = await params;
 
-	return <ClientPage id={id} />;
+	return <EditClient id={id} />;
 }

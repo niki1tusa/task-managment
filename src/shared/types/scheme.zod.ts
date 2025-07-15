@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 import { ICON_NAMES } from '../data/icon.data';
 
-export const ZTaskScheme = z.object({
+export const ZTaskEditScheme = z.object({
 	title: z.string().min(1, 'Title is required (minimal one symbol)!'),
 	due: z.object({
 		date: z

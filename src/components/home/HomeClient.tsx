@@ -30,14 +30,14 @@ export default function HomeClient() {
 					{authCondition === 'register' ? (
 						<AuthForm
 							authCondition='register'
-							fields={RegisterFields}
+							formElement={RegisterFields}
 							setAuthCondition={setAuthCondition}
 							linkText='Sign In'
 						/>
 					) : (
 						<AuthForm
 							authCondition='login'
-							fields={loginFields}
+							formElement={loginFields}
 							setAuthCondition={setAuthCondition}
 							linkText='Sign Up'
 						/>
