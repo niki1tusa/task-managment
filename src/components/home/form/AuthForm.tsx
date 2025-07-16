@@ -47,8 +47,7 @@ export function AuthForm({
 		resolver: zodResolver(authCondition === 'register' ? ZRegistrationScheme : ZLoginScheme),
 	});
 	const onSubmit = (data: any) => {
-		console.log('setting cookie');
-		Cookies.set('auth_token', 'my-token', { expires: 7 });
+
 		login('token');
 		reset();
 		notify();
