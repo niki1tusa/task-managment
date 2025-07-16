@@ -2,20 +2,17 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 
 import Form from '@/components/ui/form/Form';
 
-import { ZSubTaskScheme } from '../../../../shared/types/scheme.zod';
-import Header from '../component/Header.modal';
-import { WrapperModal } from '../component/Wrapper.modal';
-import { SUB_TASK_ADD_FIELDS } from './subtask.add.data';
+import Header from '../../../../../components/dashboard/modals/Header.modal';
+import { WrapperModal } from '../../../../../components/dashboard/modals/Wrapper.modal';
+import { TASK_EDIT_FIELDS } from '../[id]/edit/task.edit.data';
 
-interface Props {
-	id: string;
-}
-
-export default function SubTaskAddForm({ id }: Props) {
+export default function AddTaskForm() {
 	const router = useRouter();
+	const {} = useForm();
 	const closeModal = () => router.back();
 	useEffect(() => {
 		const handleEscape = (e: KeyboardEvent) => {
@@ -33,12 +30,8 @@ export default function SubTaskAddForm({ id }: Props) {
 				onClick={e => e.stopPropagation()}
 				className='fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white p-4 text-black shadow-lg'
 			>
-				<Header title={`Add Subtask "${id}"`} closeModal={closeModal} />
-				<Form
-					btnText='Save'
-					handleOnSubmit={}
-					formElement={SUB_TASK_ADD_FIELDS}
-				/>
+				<Header title={`Add task `} closeModal={closeModal} />
+				<Form formElement={TASK_EDIT_FIELDS} btnText='Save' />
 			</div>
 		</WrapperModal>
 	);

@@ -6,15 +6,15 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import Header from '@/components/dashboard/modals/component/Header.modal';
-import { WrapperModal } from '@/components/dashboard/modals/component/Wrapper.modal';
+import Header from '@/components/dashboard/modals/Header.modal';
+import { WrapperModal } from '@/components/dashboard/modals/Wrapper.modal';
 
 import { ZTaskEditScheme } from '@/shared/types/scheme.zod';
 
 import { useTaskStore } from '@/store/task.store';
 
-import Form from '../../../ui/form/Form';
-import type { FormElement } from '../../../ui/form/form.types';
+import Form from '../../../../../../components/ui/form/Form';
+import type { FormElement } from '../../../../../../components/ui/form/form.types';
 
 interface Props {
 	id: string;

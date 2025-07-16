@@ -1,5 +1,4 @@
-import SubTaskModal from '@/components/dashboard/modals/add-sub-task/SubTaskAddForm';
-
+import SubTaskModal from '@/app/dashboard/@modals/(.)task/[id]/add-sub-task/SubTaskAddForm';
 
 interface Props {
 	params: Promise<{ id: string }>;

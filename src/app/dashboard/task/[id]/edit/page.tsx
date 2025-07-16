@@ -1,6 +1,4 @@
-import EditClient from "@/components/dashboard/modals/edit-task/EditClient";
-import TaskEditForm from "@/components/dashboard/modals/edit-task/form/TaskEditForm";
-
+import EditClient from '@/app/dashboard/task/[id]/edit/EditClient';
 
 interface Props {
 	params: Promise<{ id: string }>;
