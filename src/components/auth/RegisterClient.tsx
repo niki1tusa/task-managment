@@ -1,18 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
 
 import { BubbleBackground } from '@/components/animate-ui/backgrounds/bubble';
 import { Title } from '@/components/ui/Title';
 
-import { loginFields } from './form/login.data';
-import { RegisterFields } from './form/register.data';
+import { RegisterForm } from './form/RegisterForm';
 
-import { AuthForm } from './form/AuthForm';
-
-export default function HomeClient() {
-	const [authCondition, setAuthCondition] = useState('register');
+export default function RegisterClient() {
 	return (
 		<div className='flex h-full w-full flex-col items-center justify-center gap-10 2xl:text-3xl'>
 			<BubbleBackground className='absolute inset-0 z-0 flex items-center justify-center' />
@@ -27,21 +22,8 @@ export default function HomeClient() {
 							we save your time and improve the organization of projects.
 						</span>
 					</div>
-					{authCondition === 'register' ? (
-						<AuthForm
-							authCondition='register'
-							formElement={RegisterFields}
-							setAuthCondition={setAuthCondition}
-							linkText='Sign In'
-						/>
-					) : (
-						<AuthForm
-							authCondition='login'
-							formElement={loginFields}
-							setAuthCondition={setAuthCondition}
-							linkText='Sign Up'
-						/>
-					)}
+
+					<RegisterForm linkText='Sign In' />
 				</div>
 
 				<Image src='/chat.jpg' alt='chat' width={1100} height={1100} className='h-full w-full' />

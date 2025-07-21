@@ -1,41 +1,32 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import Cookies from 'js-cookie';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import type { FormElement, IForm } from '@/components/ui/form/form.types';
 
-import { ZLoginScheme, ZRegistrationScheme } from '@/shared/types/scheme.zod';
+import type { FormElement } from '@/components/ui/form/form.types';
+
+import { ZRegistrationScheme } from '@/shared/types/scheme.zod';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
+import { PUBLIC_PAGES } from '@/config/public-page.config';
 
-import { useAuthStore } from '@/store/auth.store';
 
 import Form from '../../ui/form/Form';
+import { RegisterFields } from './register.data';
 
-type TAuth = 'register' | 'login';
 interface Props {
-	authCondition: TAuth;
-	formElement: FormElement[];
-	setAuthCondition: (arg: TAuth) => void;
+	
 	linkText: string;
 	children?: React.ReactNode;
 }
-export function AuthForm({
-	linkText,
-	children,
-	authCondition,
-	setAuthCondition,
-	formElement,
-}: Props) {
-	const { login } = useAuthStore();
+export function RegisterForm({ linkText, children }: Props) {
+	
 	const router = useRouter();
 	// notification
 	const notify = () => {
-		toast.success(
-			authCondition === 'register' ? 'Successfully registration' : 'Successfully logged!'
-		);
+		toast.success('Successfully registration!');
 	};
 	// react-hook-form
 	const {
@@ -44,11 +35,10 @@ export function AuthForm({
 		register,
 		formState: { errors },
 	} = useForm({
-		resolver: zodResolver(authCondition === 'register' ? ZRegistrationScheme : ZLoginScheme),
+		resolver: zodResolver(ZRegistrationScheme),
 	});
 	const onSubmit = (data: any) => {
-
-		login('token');
+	
 		reset();
 		notify();
 		setTimeout(() => {
@@ -59,7 +49,7 @@ export function AuthForm({
 	return (
 		<div className='flex flex-col gap-2'>
 			<Form
-				formElement={formElement}
+				formElement={RegisterFields}
 				handleOnSubmit={handleSubmit(onSubmit)}
 				register={register}
 				errors={errors}
@@ -67,13 +57,13 @@ export function AuthForm({
 				btnClassName='bg-white/40 py-1.5 hover:text-purple-950 duration-300 text-sm 2xl:text-lg px-3 hover:bg-white/60 w-[30%] rounded-4xl  text-white transition-colors'
 			/>
 			<div className='text-[0.6em]'>
-				{linkText === 'Sign Up' ? "Don't have on account?" : 'Already have on account?'}
-				<button
+				Already on account?
+				<Link
 					className='ml-1 border-b border-cyan-400 pb-[1px] text-cyan-400'
-					onClick={() => setAuthCondition(linkText === 'Sign Up' ? 'register' : 'login')}
+					href={PUBLIC_PAGES.LOGIN}
 				>
 					{linkText}
-				</button>
+				</Link>
 				{children}
 			</div>
 		</div>

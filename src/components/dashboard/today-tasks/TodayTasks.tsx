@@ -62,8 +62,6 @@ export default function TodayTasks() {
 						const startProcent = (((start - 9) * 60 + startMinutes) / ((17 - 9) * 60)) * 100;
 						const endProcent = (((end - 9) * 60 + endMinutes) / ((17 - 9) * 60)) * 100;
 						const widthProcent = endProcent - startProcent;
-						console.log('startprocent:', startProcent);
-						console.log('width', widthProcent);
 						return (
 							<div
 								key={task.id}

@@ -2,7 +2,7 @@
 
 import { CalendarFold } from 'lucide-react';
 import DatePicker from 'react-datepicker';
-import { Controller, type Control, type FieldErrors} from 'react-hook-form';
+import { Controller} from 'react-hook-form';
 import type { IDateField } from './field.types';
 
 

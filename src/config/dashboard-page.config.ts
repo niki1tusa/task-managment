@@ -9,12 +9,12 @@ class DashboardPagesConfig {
 	ADD_SUBTASK(id: string) {
 		return `${this.DASHBOARD}/task/${id}/add-sub-task`;
 	}
-	MESSAGES = '/messages';
-	TEAM = '/team';
-	INSIGHT = '/insight';
-	SCHEDULE = '/schedule';
-	REPORT = '/report';
-	SETTINGS = '/settings';
+	MESSAGES = `${this.DASHBOARD}/messages`;
+	TEAM = `${this.DASHBOARD}/team`;
+	INSIGHT = `${this.DASHBOARD}/insight`;
+	SCHEDULE = `${this.DASHBOARD}/schedule`;
+	REPORT = `${this.DASHBOARD}/report`;
+	SETTINGS = `${this.DASHBOARD}/settings`;
 
 }
 

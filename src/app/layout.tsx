@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Poppins, Playfair_Display } from 'next/font/google';
+import { Playfair_Display, Poppins } from 'next/font/google';
 
 import { SITE_NAME } from '@/constants/seo.constants';
 
@@ -10,7 +10,7 @@ import './globals.css';
 const poppins = Poppins({
 	variable: '--font-poppins-sans',
 	subsets: ['latin'],
-	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
+	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 });
 const playfairDisplay = Playfair_Display({
 	variable: '--font-playfair',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 		absolute: SITE_NAME,
 		template: `%s | ${SITE_NAME}`,
 	},
-	description: 'This is gentle app for your managment.',
+	description: 'This is gentle app for your management.',
 };
 
 export default function RootLayout({
@@ -37,8 +37,11 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en' suppressHydrationWarning>
-			<body className={`${poppins.variable} ${playfairDisplay.variable} antialiased `}>
-				<ProviderWrapper>{modals}{children}</ProviderWrapper>
+			<body className={`${poppins.variable} ${playfairDisplay.variable} antialiased`}>
+				<ProviderWrapper>
+					{modals}
+					{children}
+				</ProviderWrapper>
 			</body>
 		</html>
 	);
