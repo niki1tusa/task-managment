@@ -19,9 +19,9 @@ import { RegisterFields } from './register.data';
 interface Props {
 	
 	linkText: string;
-	children?: React.ReactNode;
+	
 }
-export function RegisterForm({ linkText, children }: Props) {
+export function RegisterForm({ linkText }: Props) {
 	
 	const router = useRouter();
 	// notification
@@ -64,7 +64,6 @@ export function RegisterForm({ linkText, children }: Props) {
 				>
 					{linkText}
 				</Link>
-				{children}
 			</div>
 		</div>
 	);

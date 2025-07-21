@@ -16,6 +16,7 @@ export async function signInWithEmail({ email }: { email: string }) {
 	});
 	console.log('is email');
 	if (error) {
+	
 		redirect('/error');
 	}
 
