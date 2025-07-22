@@ -20,7 +20,9 @@ export function ConfirmClient() {
 				type: 'email',
 				token_hash,
 			});
-			if (!error) return router.replace('/error');
+			if (error){
+				console.log(error.message)
+				router.replace('/error')};
 			router.replace(DASHBOARD_PAGES.DASHBOARD);
 		};
 		verifyToken();

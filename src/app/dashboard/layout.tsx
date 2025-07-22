@@ -14,6 +14,7 @@ export default async function DashboardLayout({ children, modals }: Props) {
 	if(!user){
 		redirect(PUBLIC_PAGES.LOGIN)
 	}
+	
 	//
 	return (
 		<div className='grid grid-cols-[15%_60%_25%]'>
