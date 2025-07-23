@@ -18,9 +18,6 @@ export default function LoginClient() {
 							<b className='font-playfair text-3xl 2xl:text-6xl'>Welcome on task management</b>
 						</Title>
 						<br />
-						<span className='text-[0.7rem] leading-0.5 2xl:text-[1rem]'>
-							(Magic link)
-						</span>
 					</div>
 
 					<LoginForm linkText='Sign Up' />

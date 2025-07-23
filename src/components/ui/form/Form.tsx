@@ -21,7 +21,7 @@ export default function Form({
 	nameController,
 }: IForm) {
 	return (
-		<form onSubmit={handleOnSubmit} className='flex flex-col gap-0.5 2xl:gap-2'>
+		<form onSubmit={handleOnSubmit} className='flex flex-col gap-0.5 2xl:gap-2 my-5'>
 			{formElement.map((item, i) => {
 				switch (item.type) {
 					case 'icon':

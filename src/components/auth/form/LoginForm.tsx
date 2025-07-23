@@ -51,28 +51,21 @@ export function LoginForm({ linkText }: Props) {
 				handleOnSubmit={handleSubmit(onSubmit)}
 				register={register}
 				errors={errors}
-				btnText='Login'
+				btnText='Send'
 				btnClassName='bg-white/40 py-1.5 hover:text-purple-950 duration-300 text-sm 2xl:text-lg px-3 hover:bg-white/60 w-[30%] rounded-4xl  text-white transition-colors'
 			/>
+
 			{/*  */}
-			<div className='text-gray flex items-center gap-1 text-[0.6em]'>
+			<div className='text-gray flex items-center gap-1 text-[0.6em] mt-8'>
 				<span className='w-full border-b' />
 				<span className='text-[0.8em] whitespace-nowrap'>Or continue with</span>
 				<span className='w-full border-b' />
 			</div>
 			{/*  */}
-			<div className='my-5 grid grid-cols-3 gap-5'>
-				<button className='bg-foreground/40 hover:bg-foreground/10 flex w-[80%] items-center justify-center rounded-lg border p-3 transition-colors'>
-					<Image src='/google.svg' alt='google' width={40} height={40} />
-				</button>
-				<div className='bg-foreground/40 flex w-[80%] items-center justify-center rounded-lg border p-3'>
-					{' '}
-					<Image src='/meta.svg' alt='google' width={40} height={40} />
-				</div>
-				<div className='bg-foreground/40 flex w-[80%] items-center justify-center rounded-lg border p-3'>
-					{' '}
-					<Image src='/github.svg' alt='google' width={40} height={40} />
-				</div>
+			<div className='my-5 flex gap-2'>
+				<BtnTabLink path='/google.svg' />
+				<BtnTabLink path='/meta.svg' />
+				<BtnTabLink path='/github.svg' />
 			</div>
 			{/*  */}
 			<div className='text-[0.6em]'>
@@ -87,9 +80,9 @@ export function LoginForm({ linkText }: Props) {
 		</div>
 	);
 }
-function BtnTabLink({path}: {path: string}) {
+function BtnTabLink({ path }: { path: string }) {
 	return (
-		<button className='bg-foreground/40 hover:bg-foreground/10 flex w-[80%] items-center justify-center rounded-lg border p-3 transition-colors'>
+		<button className='bg-background hover:bg-background/10 flex w-[40%] items-center justify-center rounded-lg border p-3 transition-colors duration-200'>
 			<Image src={path} alt='google' width={40} height={40} />
 		</button>
 	);

@@ -1,8 +1,8 @@
 class PublicPagesConfig {
 	HOME = '/';
 	AUTH = '/auth';
-	LOGIN = '/login';
-	REGISTER = '/register';
+	LOGIN = `${this.AUTH}/login`;
+	REGISTER = `${this.AUTH}/register`;
 }
 
 export const PUBLIC_PAGES = new PublicPagesConfig();
