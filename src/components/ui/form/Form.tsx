@@ -18,10 +18,9 @@ export default function Form({
 	setValue,
 	watch,
 	control,
-	nameController,
 }: IForm) {
 	return (
-		<form onSubmit={handleOnSubmit} className='flex flex-col gap-0.5 2xl:gap-2 my-5'>
+		<form onSubmit={handleOnSubmit} className='my-5 flex flex-col gap-0.5 2xl:gap-2'>
 			{formElement.map((item, i) => {
 				switch (item.type) {
 					case 'icon':
@@ -31,7 +30,7 @@ export default function Form({
 							<DateField
 								key={i}
 								labelText={item.props.labelText}
-								nameController={nameController}
+								nameController={item.props.nameController}
 								// placeholderText={item.props.placeholderText}
 								control={control}
 								errors={errors}

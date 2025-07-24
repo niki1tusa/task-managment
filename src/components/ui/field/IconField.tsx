@@ -8,8 +8,8 @@ import type { IIconField } from './field.types';
 
 export function IconField({setValue, watch}: IIconField) {
 	return (
-		<div className='flex items-center gap-2'>
-			<label className='font-medium'>Icon:</label>
+		<div className='flex items-center gap-2 mb-5'>
+			<label className='font-medium text-sm 2xl:text-lg'>Icon:</label>
 			<div className='flex gap-3'>
 				{ICON_NAMES.map(name => {
 					const Icon = MODAL_ICON[name];

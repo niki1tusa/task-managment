@@ -23,7 +23,7 @@ export const Header = ({ task, isMinimal }: { task: ITask; isMinimal?: boolean }
 				<TaskIcon color='#725cee' />
 			</div>
 			<div className='flex min-w-0 flex-1 flex-col'>
-				<span className='mb-1 line-clamp-2 text-lg leading-none font-medium break-words 2xl:text-xl'>
+				<span className='mb-1 line-clamp-2 text-md leading-none font-medium break-words 2xl:text-xl'>
 					{task.title}
 				</span>
 				<span className={clsx(isMinimal ? 'text-white' : 'text-gray')}>

@@ -9,7 +9,7 @@ import type { Control, FieldErrors } from "react-hook-form";
 
 export interface IDateField {
 	labelText: string;
-	nameController: 'due.date';
+	nameController: string;
 	control?: Control<any>;
 	errors?: FieldErrors;
 	placeholderText?: string;

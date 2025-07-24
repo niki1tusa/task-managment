@@ -14,7 +14,7 @@ export function Button({ type = 'button', children, className = '', onClick}: Pr
 			className={cn(
 				className
 					? className
-					: 'bg-primary hover:bg-primary/50 w-[30%] rounded-2xl py-2 text-white transition-colors'
+					: 'bg-primary hover:bg-primary/50 w-[30%] rounded-2xl py-2 text-white transition-colors text-sm 2xl:text-lg'
 			)}
 		>
 			{children}

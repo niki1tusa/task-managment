@@ -2,7 +2,7 @@ class DashboardPagesConfig {
 	
 	DASHBOARD = '/dashboard';
 	TASK_EDIT(id: string) {
-		return `${this.DASHBOARD}/task/${id}/edit`;
+		return `${this.DASHBOARD}/task/${id}/edit-task`;
 	}
 	ADD_TASK = `${this.DASHBOARD}/task/add-task`;
 

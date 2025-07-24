@@ -2,11 +2,16 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import Form from '@/components/ui/form/Form';
 
+import { useTaskStore } from '@/store/task.store';
+
 import Header from '../../../../../../components/dashboard/modals/Header.modal';
 import { WrapperModal } from '../../../../../../components/dashboard/modals/Wrapper.modal';
+
 import { SUB_TASK_ADD_FIELDS } from './subtask.add.data';
 
 interface Props {
@@ -15,6 +20,12 @@ interface Props {
 
 export default function SubTaskAddForm({ id }: Props) {
 	const router = useRouter();
+	const addSubTask = useTaskStore(store => store.addSubTask);
+	const {
+		register,
+		formState: { errors },
+		handleSubmit,
+	} = useForm();
 	const closeModal = () => router.back();
 	useEffect(() => {
 		const handleEscape = (e: KeyboardEvent) => {
@@ -25,7 +36,11 @@ export default function SubTaskAddForm({ id }: Props) {
 		document.addEventListener('keydown', handleEscape);
 		return () => document.removeEventListener('keydown', handleEscape);
 	}, []);
-
+	const onSubmit = (data: any) => {
+		addSubTask(id, data);
+		toast.success('SubTask is success add!');
+		closeModal();
+	};
 	return (
 		<WrapperModal closeModal={closeModal}>
 			<div
@@ -34,8 +49,10 @@ export default function SubTaskAddForm({ id }: Props) {
 			>
 				<Header title={`Add Subtask "${id}"`} closeModal={closeModal} />
 				<Form
+					register={register}
+					errors={errors}
 					btnText='Save'
-					handleOnSubmit={}
+					handleOnSubmit={handleSubmit(onSubmit)}
 					formElement={SUB_TASK_ADD_FIELDS}
 				/>
 			</div>

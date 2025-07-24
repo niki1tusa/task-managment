@@ -26,7 +26,6 @@ export function Field({
 
 	return (
 		<div className=''>
-			<ToastContainer />
 			<label className='mb-1 block font-medium xl:text-sm'>{labelText}:</label>
 			<span className='relative'>
 				{type === 'password' && (

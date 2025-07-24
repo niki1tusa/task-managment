@@ -1,5 +1,5 @@
-import TaskAddModalComponent from '@/app/dashboard/@modals/(.)task/add-task/AddTaskForm';
+import AddTaskForm from "./AddTaskForm";
 
 export default async function TaskAddModal() {
-	return <TaskAddModalComponent />;
+	return  <AddTaskForm/>
 }

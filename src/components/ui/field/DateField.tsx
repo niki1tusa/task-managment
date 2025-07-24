@@ -8,10 +8,11 @@ import type { IDateField } from './field.types';
 
 export function DateField({ nameController, labelText, placeholderText, control, errors }: IDateField) {
 	return (
-		<div>
-			<label className='mb-1 block font-medium'>{labelText}:</label>
+		<div className='mb-5'>
+			<label className='mb-1 block font-medium text-sm 2xl:text-lg'>{labelText}:</label>
 
 			<span className='relative'>
+				
 				<Controller
 					control={control}
 					name={nameController}
@@ -20,14 +21,14 @@ export function DateField({ nameController, labelText, placeholderText, control,
 							selected={field.value}
 							onChange={field.onChange}
 							dateFormat='yyyy-MM-dd'
-							className='text-gray w-full rounded border p-2 shadow shadow-neutral-400 transition-all duration-200 hover:mb-0.5 hover:bg-[#f6f4ff] focus:bg-[#f6f4ff]'
+							className='text-gray h-[30%] w-[80%] 2xl:w-full 2xl:text-lg text-sm rounded border p-2 shadow shadow-neutral-400 transition-all duration-200 hover:mb-0.5 hover:bg-[#f6f4ff] focus:bg-[#f6f4ff]'
 							minDate={new Date()}
 							placeholderText={placeholderText}
 						/>
 					)}
 				/>
 
-				<button type='button' className='text-gray absolute top-[1px] right-2'>
+				<button type='button' className='text-gray absolute top-[60%] right-[22%] z-20 -translate-y-[50%] transform'>
 					<CalendarFold />
 				</button>
 			</span>

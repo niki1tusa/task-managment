@@ -2,10 +2,6 @@ import { isToday } from 'date-fns';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import { LIST_CARD } from '@/shared/data/list.card.data';
-import { MENU } from '@/shared/data/menu.data';
-import { PROFILES } from '@/shared/data/profile.data';
-import { PROJECTS_MENU } from '@/shared/data/projects.menu.data';
 import { TASKS } from '@/shared/data/task.data';
 import type { TFormData } from '@/shared/types/scheme.zod';
 import type { ISubTask, ITask } from '@/shared/types/task.types';
@@ -14,6 +10,7 @@ export interface ITaskStore {
 	statusCount: (data: ITask) => number;
 	getTodayTasks: () => ITask[];
 	tasks: ITask[];
+	addTask: (data) => void
 	editTask: (id: string, data: TFormData) => void;
 	addSubTask: (id: string, data: Pick<ISubTask, 'title'>) => void;
 	deleteTask: (id: string) => void;

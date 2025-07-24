@@ -20,12 +20,15 @@ export function ConfirmClient() {
 				type: 'email',
 				token_hash,
 			});
-			if (error){
-				console.log(error.message)
-				router.replace('/error')};
+			if (error) {
+				console.log(error.message);
+				router.replace('/error');
+			}
 			router.replace(DASHBOARD_PAGES.DASHBOARD);
 		};
+
 		verifyToken();
 	}, []);
 	return <p>Verify is your email... please wait.</p>;
 }
+// exchangedCodeForSession or verifyOtp ?

@@ -3,16 +3,27 @@
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import Form from '@/components/ui/form/Form';
 
+import { useTaskStore } from '@/store/task.store';
+
 import Header from '../../../../../components/dashboard/modals/Header.modal';
 import { WrapperModal } from '../../../../../components/dashboard/modals/Wrapper.modal';
-import { TASK_EDIT_FIELDS } from '../[id]/edit/task.edit.data';
+import { TASK_EDIT_FIELDS } from '../[id]/edit-task/task.edit.data';
 
 export default function AddTaskForm() {
 	const router = useRouter();
-	const {} = useForm();
+	const addTask = useTaskStore(store => store.addTask);
+	const {
+		setValue,
+		control,
+		watch,
+		register,
+		formState: { errors },
+		handleSubmit,
+	} = useForm();
 	const closeModal = () => router.back();
 	useEffect(() => {
 		const handleEscape = (e: KeyboardEvent) => {
@@ -23,7 +34,11 @@ export default function AddTaskForm() {
 		document.addEventListener('keydown', handleEscape);
 		return () => document.removeEventListener('keydown', handleEscape);
 	}, []);
-
+	const onSubmit = (data: any) => {
+		addTask(data);
+		toast.success('Task is success add!');
+		closeModal();
+	};
 	return (
 		<WrapperModal closeModal={closeModal}>
 			<div
@@ -31,7 +46,16 @@ export default function AddTaskForm() {
 				className='fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white p-4 text-black shadow-lg'
 			>
 				<Header title={`Add task `} closeModal={closeModal} />
-				<Form formElement={TASK_EDIT_FIELDS} btnText='Save' />
+				<Form
+					setValue={setValue}
+					watch={watch}
+					control={control}
+					handleOnSubmit={handleSubmit(onSubmit)}
+					register={register}
+					errors={errors}
+					formElement={TASK_EDIT_FIELDS}
+					btnText='Save'
+				/>
 			</div>
 		</WrapperModal>
 	);

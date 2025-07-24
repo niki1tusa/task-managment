@@ -97,6 +97,7 @@ export default function TaskEditForm({ id, formElement }: Props) {
 						register={register}
 						errors={errors}
 						btnText='Submit'
+						
 					/>
 				)}
 			</div>

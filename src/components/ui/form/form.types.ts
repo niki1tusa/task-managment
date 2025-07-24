@@ -24,6 +24,5 @@ export interface IForm {
 	DateFields?: any;
 	setValue?: any;
 	watch?: any;
-	nameController?: any;
 	control?: any;
 }
