@@ -14,7 +14,7 @@ export const TASKS: ITask[] = [
 		},
 			users: PROFILES.filter(item=> +item.id > 4),
 		isCompleted: false,
-		subTask: [
+		sub_task: [
 			{ id: '1', title: 'fix component', isCompleted: false },
 			{ id: '2', title: 'fix component', isCompleted: false },
 			{ id: '3', title: 'fix component', isCompleted: true },
@@ -34,7 +34,7 @@ export const TASKS: ITask[] = [
 		},
 			users: PROFILES.filter(item=> +item.id % 3 === 0),
 		isCompleted: true,
-		subTask: [
+		sub_task: [
 			{ id: '1', title: 'fix component', isCompleted: true },
 			{ id: '2', title: 'fix component', isCompleted: true },
 			{ id: '3', title: 'fix component', isCompleted: true },
@@ -54,7 +54,7 @@ export const TASKS: ITask[] = [
 		},
 		users: PROFILES.filter(item=> +item.id % 2 === 0),
 		isCompleted: false,
-		subTask: [
+		sub_task: [
 			{ id: '1', title: 'fix component', isCompleted: false },
 			{ id: '2', title: 'fix component', isCompleted: true },
 			{ id: '3', title: 'fix component', isCompleted: true },
@@ -75,7 +75,7 @@ export const TASKS: ITask[] = [
 		},
 		users: PROFILES.slice(0, 2),
 		isCompleted: false,
-		subTask: [
+		sub_task: [
 			{ id: '1', title: 'create wireframes', isCompleted: true },
 			{ id: '2', title: 'design mockups', isCompleted: true },
 			{ id: '3', title: 'implement UI', isCompleted: false },
@@ -96,7 +96,7 @@ export const TASKS: ITask[] = [
 		},
 		users: PROFILES.slice(1, 3),
 		isCompleted: true,
-		subTask: [
+		sub_task: [
 			{ id: '1', title: 'identify bug source', isCompleted: true },
 			{ id: '3', title: 'implement fix', isCompleted: true },
 			{ id: '4', title: 'write tests', isCompleted: true },
@@ -116,7 +116,7 @@ export const TASKS: ITask[] = [
 		},
 			users: PROFILES.filter(item=> +item.id <3 ),
 		isCompleted: false,
-		subTask: [
+		sub_task: [
 			{ id: '1', title: 'analyze API documentation', isCompleted: true },
 			{ id: '2', title: 'create service layer', isCompleted: false },
 			{ id: '3', title: 'implement endpoints', isCompleted: false },
@@ -138,7 +138,7 @@ export const TASKS: ITask[] = [
 		},
 		users: PROFILES.slice(0, 1),
 		isCompleted: true,
-		subTask: [
+		sub_task: [
 			{ id: '1', title: 'backup current database', isCompleted: true },
 			{ id: '2', title: 'write migration script', isCompleted: true },
 			{ id: '3', title: 'test on staging', isCompleted: true },
@@ -159,7 +159,7 @@ export const TASKS: ITask[] = [
 		},
 		users: PROFILES.slice(1, 2),
 		isCompleted: false,
-		subTask: [
+		sub_task: [
 			{ id: '1', title: 'profile application', isCompleted: false },
 			{ id: '3', title: 'identify bottlenecks', isCompleted: false },
 			{ id: '4', title: 'optimize queries', isCompleted: false },

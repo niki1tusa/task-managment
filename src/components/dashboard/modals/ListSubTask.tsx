@@ -6,7 +6,7 @@ interface Props {
 export function ListSubTask({ task }: Props) {
 	return (
 		<div className='text-md flex flex-col gap-4'>
-			{task.subTask.map((subtask, i) => (
+			{task.sub_task.map((subtask, i) => (
 				<div key={subtask.id} className='flex w-[80%] gap-1 border-b-2'>
 					<span>{i}&#41;</span>
 					<div className='flex flex-col gap-1'>

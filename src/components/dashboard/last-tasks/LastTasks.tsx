@@ -28,9 +28,9 @@ export const LastTasks = () => {
 						case 'Completed':
 							return item.isCompleted;
 						case 'in-progress':
-							return item.subTask.some(subtask => subtask.isCompleted) && !item.isCompleted;
+							return item.sub_task.some(sub_task => sub_task.isCompleted) && !item.isCompleted;
 						case 'not-started':
-							return item.subTask.every(subtask => !subtask.isCompleted);
+							return item.sub_task.every(sub_task => !sub_task.isCompleted);
 						default:
 							return true;
 					}

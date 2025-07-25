@@ -1,11 +1,15 @@
 import type { Metadata } from 'next';
 
 import DashboardPageClient from '../dashboardClient';
+import { taskServiceGetAll } from '@/services/tasks/task.service';
+
 
 export const metadata: Metadata = {
 	title: 'Dashboard',
 };
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+	const { data, error } = await taskServiceGetAll()
+	console.log('task:' , data);
 	return <DashboardPageClient />;
 }

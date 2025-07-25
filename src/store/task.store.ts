@@ -10,7 +10,7 @@ export interface ITaskStore {
 	statusCount: (data: ITask) => number;
 	getTodayTasks: () => ITask[];
 	tasks: ITask[];
-	addTask: (data) => void
+	addTask: (data: TFormData) => void;
 	editTask: (id: string, data: TFormData) => void;
 	addSubTask: (id: string, data: Pick<ISubTask, 'title'>) => void;
 	deleteTask: (id: string) => void;
@@ -25,11 +25,11 @@ export const useTaskStore = create<ITaskStore>()(
 			},
 			statusCount: data => {
 				return Math.floor(
-					(data.subTask.filter(item => item.isCompleted === true).length / data.subTask.length) *
+					(data.sub_task.filter(item => item.isCompleted === true).length / data.sub_task.length) *
 						100
 				);
 			},
-			addTask: (data: ITask) =>
+			addTask: (data: any) =>
 				set(state => ({
 					tasks: [...state.tasks, data],
 				})),
@@ -41,16 +41,16 @@ export const useTaskStore = create<ITaskStore>()(
 				set(state => ({
 					tasks: state.tasks.filter(task => task.id !== id),
 				})),
-			addSubTask: (id, subTask) =>
+			addSubTask: (id, sub_task) =>
 				set(state => ({
 					tasks: state.tasks.map(task =>
 						task.id === id
 							? {
 									...task,
-									subTask: [
-										...task.subTask,
+									sub_task: [
+										...task.sub_task,
 										{
-											...subTask,
+											...sub_task,
 											id: crypto.randomUUID(),
 											isCompleted: false,
 										},

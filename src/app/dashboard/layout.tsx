@@ -10,10 +10,8 @@ interface Props {
 }
 export default async function DashboardLayout({ children, modals }: Props) {
 	// pure ssr 
-	const user = await getServerAuth()
-	if(!user){
-		redirect(PUBLIC_PAGES.LOGIN)
-	}
+	 await getServerAuth(true)
+
 	
 	//
 	return (

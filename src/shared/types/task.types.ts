@@ -19,7 +19,7 @@ export interface ITask {
 	isCompleted: boolean;
 	users: IProfile[];
 	due: IDue;
-	subTask: ISubTask[];
+	sub_task: ISubTask[];
 	comment: number;
 	img: number;
 	link: number;
