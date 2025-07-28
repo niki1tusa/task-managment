@@ -13,7 +13,6 @@ export const TASK_EDIT_FIELDS: FormElement[] = [
 	{
 		type: 'date',
 		props: {
-			nameController: 'due.date',
 			labelText: 'Due',
 		},
 	},

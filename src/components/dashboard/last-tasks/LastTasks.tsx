@@ -13,7 +13,7 @@ import { useTaskStore } from '@/store/task.store';
 
 import FilterTask from './FilterTask';
 import { Task } from './task/Task';
-
+// warn - Error: can't access property "filter", data.sub_task is undefined
 export const LastTasks = () => {
 	const [select, setSelect] = useState(null);
 	const [sortOrder, setSortOrder] = useState(null);

@@ -15,7 +15,7 @@ export function DateField({ nameController, labelText, placeholderText, control,
 				
 				<Controller
 					control={control}
-					name={nameController}
+					name='due.date'
 					render={({ field }) => (
 						<DatePicker
 							selected={field.value}
@@ -33,7 +33,7 @@ export function DateField({ nameController, labelText, placeholderText, control,
 				</button>
 			</span>
 
-			{errors[nameController] && <p className='text-sm text-red-500'>{errors[nameController].message as string}</p>}
+			{errors?.root?.message  && <p className='text-sm text-red-500'>{errors?.root?.message }</p>}
 		</div>
 	);
 }
