@@ -13,6 +13,7 @@ import { useTaskStore } from '@/store/task.store';
 
 import FilterTask from './FilterTask';
 import { Task } from './task/Task';
+
 // warn - Error: can't access property "filter", data.sub_task is undefined
 export const LastTasks = () => {
 	const [select, setSelect] = useState(null);
@@ -26,11 +27,11 @@ export const LastTasks = () => {
 			: tasks.filter(item => {
 					switch (select) {
 						case 'Completed':
-							return item.isCompleted;
+							return item.is_completed;
 						case 'in-progress':
-							return item.sub_task.some(sub_task => sub_task.isCompleted) && !item.isCompleted;
+							return item.sub_task.some(sub_task => sub_task.is_completed) && !item.is_completed;
 						case 'not-started':
-							return item.sub_task.every(sub_task => !sub_task.isCompleted);
+							return item.sub_task.every(sub_task => !sub_task.is_completed);
 						default:
 							return true;
 					}

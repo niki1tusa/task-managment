@@ -15,7 +15,7 @@ export function DateField({ nameController, labelText, placeholderText, control,
 				
 				<Controller
 					control={control}
-					name='due.date'
+					name='due'
 					render={({ field }) => (
 						<DatePicker
 							selected={field.value}

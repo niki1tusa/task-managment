@@ -5,9 +5,11 @@ import Image from 'next/image';
 
 import type { IProfile } from '@/shared/types/profile.types';
 import { Title } from '@/components/ui/Title';
+import { PROFILE } from '@/shared/data/profile.data';
 
 // import cn from 'clsx'
-export const Profile = ({ data }: { data: IProfile }) => {
+export const Profile = () => {
+	const data = PROFILE
 	// const [isShowMenu, setIsShowMenu] = useState(false);
 	return (
 		<div className='pt-4'>

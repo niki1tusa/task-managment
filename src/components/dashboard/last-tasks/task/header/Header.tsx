@@ -10,8 +10,8 @@ import { Avatar } from './Avatar';
 
 export const Header = ({ task, isMinimal }: { task: ITask; isMinimal?: boolean }) => {
 	const TaskIcon = MODAL_ICON[task.iconTheme.trim() as IconName];
-	const date = Math.ceil((task.due.date.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
-	const displayDue = date <= 0 ? (task.isCompleted ? 'Done' : 'Overdue') : ` ${date} days`;
+	const date = Math.ceil((task.due.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
+	const displayDue = date <= 0 ? (task.is_completed ? 'Done' : 'Overdue') : ` ${date} days`;
 	return (
 		<div className='mx-5 mt-3 flex gap-3 pt-2'>
 			<div
@@ -23,14 +23,14 @@ export const Header = ({ task, isMinimal }: { task: ITask; isMinimal?: boolean }
 				<TaskIcon color='#725cee' />
 			</div>
 			<div className='flex min-w-0 flex-1 flex-col'>
-				<span className='mb-1 line-clamp-2 text-md leading-none font-medium break-words 2xl:text-xl'>
+				<span className='text-md mb-1 line-clamp-2 leading-none font-medium break-words 2xl:text-xl'>
 					{task.title}
 				</span>
 				<span className={clsx(isMinimal ? 'text-white' : 'text-gray')}>
 					{isMinimal ? (
 						<>
-							{format(task.due.startTime!, 'ha').toLowerCase()}-{' '}
-							{format(task.due.endTime!, 'ha').toLowerCase()}
+							{format(task.start_time!, 'ha').toLowerCase()}-{' '}
+							{format(task.end_time!, 'ha').toLowerCase()}
 						</>
 					) : (
 						displayDue

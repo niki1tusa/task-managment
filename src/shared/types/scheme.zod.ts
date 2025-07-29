@@ -8,7 +8,7 @@ export const ZTaskEditScheme = z.object({
 		date: z
 			.date({ required_error: 'Due date is required' })
 			.min(new Date(), 'Due date must be in the future'),
-		startTime: z.date().optional(),
+		start_time: z.date().optional(),
 		endTime: z.date().optional(),
 	}),
 	iconTheme: z.enum(ICON_NAMES, { errorMap: () => ({ message: 'Invalid icon!' }) }),

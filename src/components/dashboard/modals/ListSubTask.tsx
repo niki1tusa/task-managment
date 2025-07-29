@@ -15,7 +15,7 @@ export function ListSubTask({ task }: Props) {
 							{subtask.title}
 						</span>
 						<span>
-							<i>Subtask status:</i> {subtask.isCompleted ? 'Completed' : 'In process'}
+							<i>Subtask status:</i> {subtask.is_completed ? 'Completed' : 'In process'}
 						</span>
 					</div>
 				</div>

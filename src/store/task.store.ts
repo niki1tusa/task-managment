@@ -25,13 +25,13 @@ export const useTaskStore = create<ITaskStore>()(
 			},
 			statusCount: data => {
 				return Math.floor(
-					(data.sub_task.filter(item => item.isCompleted === true).length / data.sub_task.length) *
+					(data.sub_task.filter(item => item.is_completed === true).length / data.sub_task.length) *
 						100
 				);
 			},
 			addTask: (data: any) =>
 				set(state => ({
-					tasks: [...state.tasks, { id: crypto.randomUUID()}, data],
+					tasks: [...state.tasks, { id: crypto.randomUUID() }, data],
 				})),
 			editTask: (id, data) =>
 				set(state => ({
@@ -52,7 +52,7 @@ export const useTaskStore = create<ITaskStore>()(
 										{
 											...sub_task,
 											id: crypto.randomUUID(),
-											isCompleted: false,
+											is_completed: false,
 										},
 									],
 								}
@@ -74,13 +74,13 @@ export const useTaskStore = create<ITaskStore>()(
 							...task,
 							due: {
 								date: new Date(task.due.date),
-								startTime:
-									task.due && typeof task.due.startTime === 'string'
-										? new Date(task.due.startTime)
+								start_time:
+									task.due && typeof task.start_time === 'string'
+										? new Date(task.start_time)
 										: undefined,
 								endTime:
-									task.due && typeof task.due.endTime === 'string'
-										? new Date(task.due.endTime)
+									task.due && typeof task.end_time === 'string'
+										? new Date(task.end_time)
 										: undefined,
 							},
 						}));

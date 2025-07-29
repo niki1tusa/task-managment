@@ -5,22 +5,20 @@ import type { IProfile } from './profile.types';
 export interface ISubTask {
 	id: string;
 	title: string;
-	isCompleted: boolean;
+	is_completed: boolean;
 }
-export interface IDue {
-	date: Date;
-	startTime?: Date;
-	endTime?: Date;
-}
+
 export interface ITask {
 	id: string;
 	iconTheme: IconName;
 	title: string;
-	isCompleted: boolean;
+	is_completed: boolean;
 	users: IProfile[];
-	due: IDue;
+	due: string;
+	start_time: string;
+	end_time: string;
 	sub_task: ISubTask[];
-	comment: number;
-	img: number;
-	link: number;
+	comment?: number;
+	img?: number;
+	link?: number;
 }

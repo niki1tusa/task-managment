@@ -19,8 +19,8 @@ export default function TodayTasks() {
 	const todayTasks = useMemo(() => getTodayTasks(), [getTodayTasks]);
 	const users = [...new Set(todayTasks.map((task: ITask) => task.users).flat())];
 
-	// Фильтруем задачи, у которых есть startTime и endTime
-	const tasksWithTime = todayTasks.filter(task => task.due.startTime && task.due.endTime);
+	// Фильтруем задачи, у которых есть start_time и endTime
+	const tasksWithTime = todayTasks.filter(task => task.start_time && task.end_time);
 
 	return (
 		<div className='text-foreground my-10 h-[600px] rounded-2xl border border-white px-5 pt-5 shadow shadow-neutral-500 dark:border-none'>
@@ -55,10 +55,10 @@ export default function TodayTasks() {
 					))}
 					{/* // сегодняшние задачи */}
 					{tasksWithTime.map(task => {
-						const start = getHours(task.due.startTime!);
-						const end = getHours(task.due.endTime!);
-						const startMinutes = getMinutes(task.due.startTime!);
-						const endMinutes = getMinutes(task.due.endTime!);
+						const start = getHours(task.start_time!);
+						const end = getHours(task.end_time!);
+						const startMinutes = getMinutes(task.start_time!);
+						const endMinutes = getMinutes(task.end_time!);
 						const startProcent = (((start - 9) * 60 + startMinutes) / ((17 - 9) * 60)) * 100;
 						const endProcent = (((end - 9) * 60 + endMinutes) / ((17 - 9) * 60)) * 100;
 						const widthProcent = endProcent - startProcent;

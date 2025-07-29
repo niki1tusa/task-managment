@@ -30,7 +30,7 @@ export const Sidebar = () => {
 
 	return (
 		<aside className='bg-side hidden h-full flex-col items-start gap-y-5 px-6 pt-4 lg:flex lg:px-5'>
-			<Profile data={PROFILE} />
+			<Profile  />
 			<Menu heading='Menu' menu={menus} isBorderTop={true} />
 			<ProjectsMenu heading='Projects' menu={projectMenus} isBorderTop={true} />
 			<button
