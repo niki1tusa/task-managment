@@ -1,8 +1,6 @@
 import Chat from '@/components/chat/Chat';
 import { Sidebar } from '@/components/sidebar/Sidebar';
-import { PUBLIC_PAGES } from '@/config/public-page.config';
 import { getServerAuth } from '@/utils/supabase/get-server-auth';
-import { redirect } from 'next/navigation';
 
 interface Props {
 	children: React.ReactNode;

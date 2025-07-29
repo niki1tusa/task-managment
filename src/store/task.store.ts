@@ -31,7 +31,7 @@ export const useTaskStore = create<ITaskStore>()(
 			},
 			addTask: (data: any) =>
 				set(state => ({
-					tasks: [...state.tasks, data],
+					tasks: [...state.tasks, { id: crypto.randomUUID()}, data],
 				})),
 			editTask: (id, data) =>
 				set(state => ({

@@ -1,4 +1,4 @@
-import { createServerClient } from '@supabase/ssr';
+import { createBrowserClient, createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
 export async function createFromServer() {
@@ -21,5 +21,11 @@ export async function createFromServer() {
 				},
 			},
 		}
+	);
+}
+export function createAdminClient() {
+	return createBrowserClient(
+		process.env.NEXT_PUBLIC_SUPABASE_URL!,
+		process.env.SERVICE_ROLE_KEY!
 	);
 }

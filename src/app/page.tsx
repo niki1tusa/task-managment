@@ -37,6 +37,7 @@ export default function Home() {
 					</span>
 				</nav>
 			</header>
+			<img src="/bg-home.png" alt="bg-home" />
 		</main>
 	);
 }
