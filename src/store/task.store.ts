@@ -14,12 +14,16 @@ export interface ITaskStore {
 	editTask: (id: string, data: TFormData) => void;
 	addSubTask: (id: string, data: Pick<ISubTask, 'title'>) => void;
 	deleteTask: (id: string) => void;
+	loadStoreFromServer: (tasks: ITask[]) => void
 }
 
 export const useTaskStore = create<ITaskStore>()(
 	persist(
 		(set, get) => ({
 			tasks: TASKS,
+			loadStoreFromServer: (tasks: ITask[])=>{
+tasks = tasks
+			},
 			getTodayTasks: (): ITask[] => {
 				return get().tasks.filter(task => isToday(new Date(task.due.date)));
 			},
