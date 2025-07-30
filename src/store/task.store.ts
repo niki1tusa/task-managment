@@ -21,7 +21,7 @@ export const useTaskStore = create<ITaskStore>()(
 		(set, get) => ({
 			tasks: TASKS,
 			getTodayTasks: (): ITask[] => {
-				return get().tasks.filter(task => isToday(new Date(task.due.date)));
+				return get().tasks.filter(task => isToday(new Date(task.due_date)));
 			},
 			statusCount: data => {
 				return Math.floor(
@@ -72,14 +72,14 @@ export const useTaskStore = create<ITaskStore>()(
 					if (parsed.state.tasks) {
 						parsed.state.tasks = parsed.state.tasks.map((task: ITask) => ({
 							...task,
-							due: {
-								date: new Date(task.due.date),
+							due_date: {
+								date: new Date(task.due_date),
 								start_time:
-									task.due && typeof task.start_time === 'string'
+									task.due_date && typeof task.start_time === 'string'
 										? new Date(task.start_time)
 										: undefined,
 								endTime:
-									task.due && typeof task.end_time === 'string'
+									task.due_date && typeof task.end_time === 'string'
 										? new Date(task.end_time)
 										: undefined,
 							},

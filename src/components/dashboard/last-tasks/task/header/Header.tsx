@@ -9,9 +9,9 @@ import { type IconName, MODAL_ICON } from '../../../../../shared/data/icon.data'
 import { Avatar } from './Avatar';
 
 export const Header = ({ task, isMinimal }: { task: ITask; isMinimal?: boolean }) => {
-	const TaskIcon = MODAL_ICON[task.iconTheme.trim() as IconName];
-	const date = Math.ceil((task.due.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
-	const displayDue = date <= 0 ? (task.is_completed ? 'Done' : 'Overdue') : ` ${date} days`;
+	const TaskIcon = MODAL_ICON[task.icon.trim() as IconName];
+	const date = Math.ceil((task.due_date.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
+	const displayDue = date <= 0 ? (task.is_completed ? 'Done' : 'Overdue_date') : ` ${date} days`;
 	return (
 		<div className='mx-5 mt-3 flex gap-3 pt-2'>
 			<div

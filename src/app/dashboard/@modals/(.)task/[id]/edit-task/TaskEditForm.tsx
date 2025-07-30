@@ -72,10 +72,10 @@ export default function TaskEditForm({ id, formElement }: Props) {
 		if (findTask) {
 			reset({
 				title: findTask.title,
-				due: {
-					date: new Date(findTask.due.date),
+				due_date: {
+					date: new Date(findTask.due_date),
 				},
-				iconTheme: findTask.iconTheme,
+				icon: findTask.icon,
 			});
 		}
 	}, [id, reset, findTask]);
@@ -97,7 +97,6 @@ export default function TaskEditForm({ id, formElement }: Props) {
 						register={register}
 						errors={errors}
 						btnText='Submit'
-						
 					/>
 				)}
 			</div>

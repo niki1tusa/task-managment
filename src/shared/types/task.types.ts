@@ -10,14 +10,18 @@ export interface ISubTask {
 
 export interface ITask {
 	id: string;
-	iconTheme: IconName;
+	owner_id?: string;
+	
 	title: string;
+	icon: IconName;
+	color?: string;
 	is_completed: boolean;
 	users: IProfile[];
-	due: string;
+	due_date: string;
 	start_time: string;
 	end_time: string;
 	sub_task: ISubTask[];
+
 	comment?: number;
 	img?: number;
 	link?: number;
