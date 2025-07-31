@@ -42,14 +42,14 @@ export const LastTasks = observer(() => {
 			if (sort === 'asc') {
 				return [...data].sort(
 					(a, b) =>
-						Math.ceil((a.due_date.getTime() - Date.now()) / (1000 * 60 * 60 * 24)) -
-						Math.ceil((b.due_date.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
+						Math.ceil((new Date(a.due_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24)) -
+						Math.ceil((new Date(b.due_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
 				);
 			} else {
 				return [...data].sort(
 					(a, b) =>
-						Math.ceil((b.due_date.getTime() - Date.now()) / (1000 * 60 * 60 * 24)) -
-						Math.ceil((a.due_date.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
+						Math.ceil((new Date(b.due_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24)) -
+						Math.ceil((new Date(a.due_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
 				);
 			}
 		};

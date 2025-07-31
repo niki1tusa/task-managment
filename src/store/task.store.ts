@@ -5,14 +5,13 @@ import { TASKS } from '@/shared/data/task.data';
 import type { TFormData } from '@/shared/types/scheme.zod';
 import type { TSubTask, TTask } from '@/shared/types/task.types';
 
-
 class TaskStore {
-	tasks: TTask[] = [...TASKS]; // create copy
+	tasks: TTask[] =  TASKS;
 	constructor() {
 		makeAutoObservable(this);
 	}
 	loadStoreFromServer(tasks: TTask[]) {
-		this.tasks = tasks;
+		this.tasks = tasks
 	}
 
 	addTask(data: TTask) {
@@ -53,9 +52,5 @@ class TaskStore {
 			(data.sub_task.filter(item => item.is_completed === true).length / data.sub_task.length) * 100
 		);
 	}
-
-
-
-
 }
 export const taskStore = new TaskStore();

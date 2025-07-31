@@ -74,7 +74,7 @@ export const TaskEditForm = observer(({ id, formElement }: Props) => {
 			reset({
 				title: findTask.title,
 				due_date: new Date(findTask.due_date),
-				icon: findTask.icon,
+				icon: findTask.icon || 'Plane',
 			});
 		}
 	}, [id, reset, findTask]);

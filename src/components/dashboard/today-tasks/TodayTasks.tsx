@@ -17,21 +17,19 @@ import { Avatar } from '../last-tasks/task/header/Avatar';
 const HOURS = Array.from({ length: 9 }, (_, i) => i + 9);
 
 export const TodayTasks = observer(() => {
-	const getTodayTasks = taskStore.getTodayTasks;
-	const todayTasks = useMemo(() => getTodayTasks(), [getTodayTasks]);
-	const users = [...new Set(todayTasks.map((task: TTask) => task.users).flat())];
 
-	// Фильтруем задачи, у которых есть start_time и end_time
-	const tasksWithTime = todayTasks.filter(task => task.start_time && task.end_time);
+	const todayTasks = taskStore.getTodayTasks().filter(task => task.start_time && task.end_time)
+	// const users = [...new Set(todayTasks.map((task: TTask) => task.users).flat())];
+
 
 	return (
 		<div className='text-foreground my-10 h-[600px] rounded-2xl border border-white px-5 pt-5 shadow shadow-neutral-500 dark:border-none'>
 			<div className='flex justify-between pb-5'>
 				<Title>Today Tasks</Title>
 				<div className='flex -space-x-2'>
-					{users.map(profile => (
+					{/* {users.map(profile => (
 						<Avatar key={profile.id} id={profile.id} img={profile.img} />
-					))}
+					))} */} porfile
 				</div>
 			</div>
 			{/* // часовые метки */}
@@ -56,7 +54,7 @@ export const TodayTasks = observer(() => {
 						></div>
 					))}
 					{/* // сегодняшние задачи */}
-					{tasksWithTime.map(task => {
+					{todayTasks.map(task => {
 						const start = getHours(task.start_time!);
 						const end = getHours(task.end_time!);
 						const startMinutes = getMinutes(task.start_time!);

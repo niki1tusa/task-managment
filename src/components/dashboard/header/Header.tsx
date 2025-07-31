@@ -2,12 +2,8 @@
 
 import { Bell } from 'lucide-react';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
 
-import { Button } from '@/components/ui/Button';
 import { Title } from '@/components/ui/Title';
-
-
 
 import { SearchField } from './SearchField';
 

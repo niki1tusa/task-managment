@@ -8,10 +8,14 @@ import { type IconName, MODAL_ICON } from '../../../../../shared/data/icon.data'
 
 import { Avatar } from './Avatar';
 
-export const Header = ({ task, isMinimal }: { task: TTask; isMinimal?: boolean }) => {
-	const TaskIcon = MODAL_ICON[task.icon.trim() as IconName];
-	const date = Math.ceil((task.due_date.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
-	const displayDue = date <= 0 ? (task.is_completed ? 'Done' : 'Overdue_date') : ` ${date} days`;
+interface Props {
+	task: TTask
+	isMinimal?: boolean;
+}
+export const Header = ({ task, isMinimal }: Props) => {
+	const TaskIcon = MODAL_ICON[task.icon as IconName];
+const date = Math.ceil((new Date(task.due_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24));
+	const displayDue = date <= 0 ? (task.sub_task.every(subTask=>subTask.is_completed)? 'Done' : 'Overdue_date') : ` ${date} days`;
 	return (
 		<div className='mx-5 mt-3 flex gap-3 pt-2'>
 			<div
@@ -39,12 +43,13 @@ export const Header = ({ task, isMinimal }: { task: TTask; isMinimal?: boolean }
 			</div>
 			{!isMinimal && (
 				<div className='flex -space-x-2'>
-					{task.users.map((user, i) => {
+					{/* {task.users.map((user, i) => {
 						if (i < 3) {
 							return <Avatar key={user.id} id={user.id} img={user.img} />;
 						}
 						return;
-					})}
+					})} */}
+					USERS
 				</div>
 			)}
 		</div>
