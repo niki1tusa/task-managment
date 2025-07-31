@@ -10,8 +10,9 @@ export const ZTaskEditScheme = z.object({
 
 	start_time: z.date().optional(),
 	end_time: z.date().optional(),
-	icon: z.enum(ICON_NAMES, { errorMap: () => ({ message: 'Invalid icon!' }) }),
+	icon: z.string().optional()
 });
+//	icon: z.enum(ICON_NAMES, { errorMap: () => ({ message: 'Invalid icon!' }) }),
 
 export const ZSubTaskScheme = z.object({
 	title: z.string().min(1, 'Title is required (minimal one symbol)!'),

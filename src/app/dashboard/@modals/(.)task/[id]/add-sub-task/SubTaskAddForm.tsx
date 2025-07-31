@@ -1,5 +1,6 @@
 'use client';
 
+import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -7,7 +8,7 @@ import { toast } from 'react-toastify';
 
 import Form from '@/components/ui/form/Form';
 
-import { useTaskStore } from '@/store/task.store';
+import { taskStore } from '@/store/task.store';
 
 import Header from '../../../../../../components/dashboard/modals/Header.modal';
 import { WrapperModal } from '../../../../../../components/dashboard/modals/Wrapper.modal';
@@ -18,9 +19,9 @@ interface Props {
 	id: string;
 }
 
-export default function SubTaskAddForm({ id }: Props) {
+export const SubTaskAddForm = observer(({ id }: Props) => {
 	const router = useRouter();
-	const addSubTask = useTaskStore(store => store.addSubTask);
+	const addSubTask = taskStore.addSubTask;
 	const {
 		register,
 		formState: { errors },
@@ -58,4 +59,4 @@ export default function SubTaskAddForm({ id }: Props) {
 			</div>
 		</WrapperModal>
 	);
-}
+});

@@ -1,42 +1,44 @@
 'use client';
 
+import { observer } from 'mobx-react-lite';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 
 import { Title } from '@/components/ui/Title';
 
-import type { ITask } from '@/shared/types/task.types';
+import type { TTask } from '@/shared/types/task.types';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
-import { useTaskStore } from '@/store/task.store';
+import { taskStore } from '@/store/task.store';
 
 import FilterTask from './FilterTask';
 import { Task } from './task/Task';
 
 // warn - Error: can't access property "filter", data.sub_task is undefined
-export const LastTasks = () => {
+export const LastTasks = observer(() => {
 	const [select, setSelect] = useState(null);
 	const [sortOrder, setSortOrder] = useState(null);
 
-	const tasks = useTaskStore(state => state.tasks);
-
+	const tasks = taskStore.tasks;
 	const filtered = useMemo(() => {
 		let filteredTasks = !select
 			? tasks
 			: tasks.filter(item => {
 					switch (select) {
 						case 'Completed':
-							return item.is_completed;
+							return item.sub_task.every(sub_task => sub_task.is_completed);
 						case 'in-progress':
-							return item.sub_task.some(sub_task => sub_task.is_completed) && !item.is_completed;
+							return item.sub_task.some(sub_task => sub_task.is_completed);
 						case 'not-started':
 							return item.sub_task.every(sub_task => !sub_task.is_completed);
 						default:
 							return true;
 					}
 				});
-		const sortFnc = (data: ITask[], sort?: string) => {
+		const sortFnc = (data: TTask[], sort?: string) => {
+			console.log(tasks[0].due_date);
+
 			if (sort === 'asc') {
 				return [...data].sort(
 					(a, b) =>
@@ -87,4 +89,4 @@ export const LastTasks = () => {
 			</div>
 		</div>
 	);
-};
+});

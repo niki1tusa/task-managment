@@ -7,15 +7,16 @@ import { Title } from '@/components/ui/Title';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
-import { useTaskStore } from '@/store/task.store';
+import { observer } from 'mobx-react-lite';
 
 import { ListSubTask } from '../../../../../components/dashboard/modals/ListSubTask';
+import { taskStore } from '@/store/task.store';
 
 interface Props {
 	id: string;
 }
-export default function ClientPage({ id }: Props) {
-	const tasks = useTaskStore(state => state.tasks);
+export const  ClientPage = observer(({ id }: Props)=> {
+	const tasks = taskStore.tasks
 	const findTask = tasks.find(item => item.id === id) || tasks[0];
 	return (
 		<div className='px-5'>
@@ -30,3 +31,4 @@ export default function ClientPage({ id }: Props) {
 		</div>
 	);
 }
+)

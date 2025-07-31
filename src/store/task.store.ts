@@ -1,104 +1,61 @@
 import { isToday } from 'date-fns';
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { makeAutoObservable } from 'mobx';
 
 import { TASKS } from '@/shared/data/task.data';
 import type { TFormData } from '@/shared/types/scheme.zod';
-import type { ISubTask, ITask } from '@/shared/types/task.types';
+import type { TSubTask, TTask } from '@/shared/types/task.types';
 
-export interface ITaskStore {
-	statusCount: (data: ITask) => number;
-	getTodayTasks: () => ITask[];
-	tasks: ITask[];
-	addTask: (data: TFormData) => void;
-	editTask: (id: string, data: TFormData) => void;
-	addSubTask: (id: string, data: Pick<ISubTask, 'title'>) => void;
-	deleteTask: (id: string) => void;
-	loadStoreFromServer: (tasks: ITask[]) => void
-}
 
-export const useTaskStore = create<ITaskStore>()(
-	persist(
-		(set, get) => ({
-			tasks: TASKS,
-			loadStoreFromServer: (tasks: ITask[])=>{
-tasks = tasks
-			},
-			getTodayTasks: (): ITask[] => {
-				return get().tasks.filter(task => isToday(new Date(task.due_date)));
-			},
-			statusCount: data => {
-				return Math.floor(
-					(data.sub_task.filter(item => item.is_completed === true).length / data.sub_task.length) *
-						100
-				);
-			},
-			addTask: (data: any) =>
-				set(state => ({
-					tasks: [...state.tasks, { id: crypto.randomUUID() }, data],
-				})),
-			editTask: (id, data) =>
-				set(state => ({
-					tasks: state.tasks.map(task => (task.id === id ? { ...task, ...data } : task)),
-				})),
-			deleteTask: id =>
-				set(state => ({
-					tasks: state.tasks.filter(task => task.id !== id),
-				})),
-			addSubTask: (id, sub_task) =>
-				set(state => ({
-					tasks: state.tasks.map(task =>
-						task.id === id
-							? {
-									...task,
-									sub_task: [
-										...task.sub_task,
-										{
-											...sub_task,
-											id: crypto.randomUUID(),
-											is_completed: false,
-										},
-									],
-								}
-							: task
-					),
-				})),
-		}),
-		// options
-		{
-			name: 'task-store',
-			storage: {
-				getItem: name => {
-					const str = localStorage.getItem(name);
-					if (!str) return null;
+class TaskStore {
+	tasks: TTask[] = [...TASKS]; // create copy
+	constructor() {
+		makeAutoObservable(this);
+	}
+	loadStoreFromServer(tasks: TTask[]) {
+		this.tasks = tasks;
+	}
 
-					const parsed = JSON.parse(str);
-					if (parsed.state.tasks) {
-						parsed.state.tasks = parsed.state.tasks.map((task: ITask) => ({
-							...task,
-							due_date: {
-								date: new Date(task.due_date),
-								start_time:
-									task.due_date && typeof task.start_time === 'string'
-										? new Date(task.start_time)
-										: undefined,
-								endTime:
-									task.due_date && typeof task.end_time === 'string'
-										? new Date(task.end_time)
-										: undefined,
+	addTask(data: TTask) {
+		this.tasks = [...this.tasks, { ...data, id: crypto.randomUUID() }];
+	}
+
+	editTask(id: string, data: TFormData) {
+		this.tasks = this.tasks.map(task => (task.id === id ? { ...task, ...data } : task));
+	}
+
+	deleteTask(id: string) {
+		this.tasks = this.tasks.filter((task: TTask) => task.id !== id);
+	}
+
+	addSubTask(id: string, sub_task: Pick<TSubTask, 'title'>) {
+		this.tasks = this.tasks.map((task: TTask) =>
+			task.id === id
+				? {
+						...task,
+						sub_task: [
+							...task.sub_task,
+							{
+								...sub_task,
+								id: crypto.randomUUID(),
+								is_completed: false,
 							},
-						}));
+						],
 					}
-					return parsed;
-				},
-				setItem: (name, value) => {
-					localStorage.setItem(name, JSON.stringify(value));
-				},
-				removeItem: name => localStorage.removeItem(name),
-			},
-		}
-	)
-);
-// onRehydrateStorage - должен возвращать fnc
-// первая fnc вызывается при инициализации
-// вторая fnc вызывается после востановления данных из localStorage
+				: task
+		);
+	}
+
+	getTodayTasks(): TTask[] {
+		return this.tasks.filter(task => isToday(new Date(task.due_date)));
+	}
+	statusCount(data: TTask) {
+		return Math.floor(
+			(data.sub_task.filter(item => item.is_completed === true).length / data.sub_task.length) * 100
+		);
+	}
+
+
+
+
+}
+export const taskStore = new TaskStore();

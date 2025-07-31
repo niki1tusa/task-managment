@@ -2,10 +2,9 @@ import cn from 'clsx';
 import { CircleCheck } from 'lucide-react';
 import { useMemo } from 'react';
 
-
 import '@/shared/styles/shimmer.animation.css';
 
-// type Props = Pick<ITask, 'status'>;
+// type Props = Pick<TTask, 'status'>;
 
 export const StatusBar = ({ status }: { status: number }) => {
 	const getProgressColor = useMemo(() => {

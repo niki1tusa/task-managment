@@ -9,7 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default async function DashboardPage() {
-	const tasks= await taskServiceGetAll()
-	console.log('task:' , tasks);
-	return <DashboardPageClient />;
+	
+	const tasks = await taskServiceGetAll()
+
+
+	return <DashboardPageClient tasks={tasks}/>;
 }

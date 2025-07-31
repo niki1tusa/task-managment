@@ -2,24 +2,26 @@
 
 import clsx from 'clsx';
 import { getHours, getMinutes } from 'date-fns';
+import { observer } from 'mobx-react-lite';
 import { useMemo } from 'react';
 
 import { Title } from '@/components/ui/Title';
 
-import type { ITask } from '@/shared/types/task.types';
+import type { TTask } from '@/shared/types/task.types';
 
-import { useTaskStore } from '@/store/task.store';
+import { taskStore } from '@/store/task.store';
 
 import { Task } from '../last-tasks/task/Task';
 import { Avatar } from '../last-tasks/task/header/Avatar';
 
 const HOURS = Array.from({ length: 9 }, (_, i) => i + 9);
-export default function TodayTasks() {
-	const getTodayTasks = useTaskStore(state => state.getTodayTasks);
-	const todayTasks = useMemo(() => getTodayTasks(), [getTodayTasks]);
-	const users = [...new Set(todayTasks.map((task: ITask) => task.users).flat())];
 
-	// Фильтруем задачи, у которых есть start_time и endTime
+export const TodayTasks = observer(() => {
+	const getTodayTasks = taskStore.getTodayTasks;
+	const todayTasks = useMemo(() => getTodayTasks(), [getTodayTasks]);
+	const users = [...new Set(todayTasks.map((task: TTask) => task.users).flat())];
+
+	// Фильтруем задачи, у которых есть start_time и end_time
 	const tasksWithTime = todayTasks.filter(task => task.start_time && task.end_time);
 
 	return (
@@ -79,4 +81,4 @@ export default function TodayTasks() {
 			</div>
 		</div>
 	);
-}
+});

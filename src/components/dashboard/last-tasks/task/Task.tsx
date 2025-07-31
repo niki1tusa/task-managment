@@ -1,21 +1,22 @@
 import clsx from 'clsx';
 
-import type { ITask } from '@/shared/types/task.types';
+import type { TTask } from '@/shared/types/task.types';
 
-import { useTaskStore } from '@/store/task.store';
+import { observer } from 'mobx-react-lite';
 
 import { Footer } from './Footer';
 import { StatusBar } from './StatusBar';
 import { Avatar } from './header/Avatar';
 import { Header } from './header/Header';
+import { taskStore } from '@/store/task.store';
 
 interface Props {
-	task: ITask;
+	task: TTask;
 	className?: string;
 	isMinimal?: boolean;
 }
-export const Task = ({ task, className, isMinimal }: Props) => {
-	const statusCount = useTaskStore(state => state.statusCount);
+export const Task = observer(({ task, className, isMinimal }: Props) => {
+	const statusCount = taskStore.statusCount || 0
 	const status = statusCount(task);
 	return (
 		<div
@@ -31,16 +32,17 @@ export const Task = ({ task, className, isMinimal }: Props) => {
 			{/* 3 section */}
 			{isMinimal ? (
 				<div className='mx-5 flex -space-x-2'>
-					{task.users.map((user, i) => {
+					{/* {task.users.map((user, i) => {
 						if (i < 3) {
 							return <Avatar key={user.id} id={user.id} img={user.img} />;
 						}
 						return;
-					})}
+					})} */}
+					users
 				</div>
 			) : (
 				<Footer task={task} />
 			)}
 		</div>
 	);
-};
+})

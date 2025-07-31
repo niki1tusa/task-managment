@@ -2,13 +2,13 @@ import clsx from 'clsx';
 import { format } from 'date-fns';
 import React from 'react';
 
-import type { ITask } from '@/shared/types/task.types';
+import type { TTask } from '@/shared/types/task.types';
 
 import { type IconName, MODAL_ICON } from '../../../../../shared/data/icon.data';
 
 import { Avatar } from './Avatar';
 
-export const Header = ({ task, isMinimal }: { task: ITask; isMinimal?: boolean }) => {
+export const Header = ({ task, isMinimal }: { task: TTask; isMinimal?: boolean }) => {
 	const TaskIcon = MODAL_ICON[task.icon.trim() as IconName];
 	const date = Math.ceil((task.due_date.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
 	const displayDue = date <= 0 ? (task.is_completed ? 'Done' : 'Overdue_date') : ` ${date} days`;

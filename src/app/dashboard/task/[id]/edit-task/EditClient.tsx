@@ -1,6 +1,7 @@
 'use client';
 
 import { ArrowLeftCircle } from 'lucide-react';
+import { observer } from 'mobx-react-lite';
 import Link from 'next/link';
 
 import { Task } from '@/components/dashboard/last-tasks/task/Task';
@@ -8,15 +9,14 @@ import { Title } from '@/components/ui/Title';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
-import { useTaskStore } from '@/store/task.store';
-
 import { ListSubTask } from '../../../../../components/dashboard/modals/ListSubTask';
+import { taskStore } from '@/store/task.store';
 
 interface Props {
 	id: string;
 }
-export default function EditClient({ id }: Props) {
-	const tasks = useTaskStore(state => state.tasks);
+export const  EditClient = observer(({ id }: Props)=> {
+	const tasks = taskStore.tasks
 	const findTask = tasks.find(item => item.id === id) || tasks[0];
 	return (
 		<div className='px-5 py-3'>
@@ -33,4 +33,4 @@ export default function EditClient({ id }: Props) {
 			</div>
 		</div>
 	);
-}
+})

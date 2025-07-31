@@ -1,6 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -11,7 +12,7 @@ import { WrapperModal } from '@/components/dashboard/modals/Wrapper.modal';
 
 import { ZTaskEditScheme } from '@/shared/types/scheme.zod';
 
-import { useTaskStore } from '@/store/task.store';
+import { taskStore } from '@/store/task.store';
 
 import Form from '../../../../../../components/ui/form/Form';
 import type { FormElement } from '../../../../../../components/ui/form/form.types';
@@ -20,7 +21,7 @@ interface Props {
 	id: string;
 	formElement?: FormElement[];
 }
-export default function TaskEditForm({ id, formElement }: Props) {
+export const TaskEditForm = observer(({ id, formElement }: Props) => {
 	const router = useRouter();
 	const closeModal = () => router.back();
 	useEffect(() => {
@@ -33,8 +34,8 @@ export default function TaskEditForm({ id, formElement }: Props) {
 		return () => document.removeEventListener('keydown', handleEscape);
 	}, []);
 	// store
-	const tasks = useTaskStore(state => state.tasks);
-	const editTask = useTaskStore(state => state.editTask);
+	const tasks = taskStore.tasks;
+	const editTask = taskStore.editTask;
 
 	// notification
 	const notify = () => toast.success('Task is successfully edit!');
@@ -72,9 +73,7 @@ export default function TaskEditForm({ id, formElement }: Props) {
 		if (findTask) {
 			reset({
 				title: findTask.title,
-				due_date: {
-					date: new Date(findTask.due_date),
-				},
+				due_date: new Date(findTask.due_date),
 				icon: findTask.icon,
 			});
 		}
@@ -102,4 +101,4 @@ export default function TaskEditForm({ id, formElement }: Props) {
 			</div>
 		</WrapperModal>
 	);
-}
+});

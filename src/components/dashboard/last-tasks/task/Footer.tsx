@@ -3,34 +3,35 @@
 import { Image, Link as LucideLink, MessageSquareText, Pencil, Plus, Trash2 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
-import type { ITask } from '@/shared/types/task.types';
+import type { TTask } from '@/shared/types/task.types';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
-import { useTaskStore } from '@/store/task.store';
+import { observer } from 'mobx-react-lite';
 
 import { TaskBtnAction } from './TaskBtnAction';
+import { taskStore } from '@/store/task.store';
 
 interface Props {
-	task: ITask;
+	task: TTask;
 }
-export const Footer = ({ task }: Props) => {
+export const Footer = observer(({ task }: Props) => {
 	const pathname = usePathname();
-	const deleteTask = useTaskStore(state => state.deleteTask);
+	const deleteTask = taskStore.deleteTask
 	return (
 		<div className='mx-5 flex items-center justify-between pb-2'>
 			<div className='flex justify-between gap-2'>
 				<div className='flex'>
 					<MessageSquareText size={19} />
-					{task.comment}
+					3
 				</div>
 				<div className='flex'>
 					<Image size={19} />
-					{task.img}
+					1
 				</div>
 				<div className='flex'>
 					<LucideLink size={19} />
-					{task.link}
+					1
 				</div>
 			</div>
 			<div className='mr-2 mb-2 flex gap-2'>
@@ -51,4 +52,4 @@ export const Footer = ({ task }: Props) => {
 			</div>
 		</div>
 	);
-};
+})

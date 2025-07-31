@@ -1,7 +1,7 @@
-import type { ITask } from '@/shared/types/task.types';
+import type { TTask } from '@/shared/types/task.types';
 
 interface Props {
-	task: ITask;
+	task: TTask;
 }
 export function ListSubTask({ task }: Props) {
 	return (

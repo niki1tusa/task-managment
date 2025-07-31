@@ -7,15 +7,16 @@ import { toast } from 'react-toastify';
 
 import Form from '@/components/ui/form/Form';
 
-import { useTaskStore } from '@/store/task.store';
+import { observer } from 'mobx-react-lite';
 
 import Header from '../../../../../components/dashboard/modals/Header.modal';
 import { WrapperModal } from '../../../../../components/dashboard/modals/Wrapper.modal';
 import { TASK_EDIT_FIELDS } from '../[id]/edit-task/task.edit.data';
+import { taskStore } from '@/store/task.store';
 
-export default function AddTaskForm() {
+export const AddTaskForm = observer(() =>{
 	const router = useRouter();
-	const addTask = useTaskStore(store => store.addTask);
+	const addTask = taskStore.addTask
 	const {
 		setValue,
 		control,
@@ -60,3 +61,4 @@ export default function AddTaskForm() {
 		</WrapperModal>
 	);
 }
+)

@@ -1,17 +1,15 @@
 import { addDays, setHours, setMinutes } from 'date-fns';
 
-import type { ITask } from '@/shared/types/task.types';
-
 import { PROFILES } from './profile.data';
 
-export const TASKS: ITask[] = [
+export const TASKS = [
 	{
 		id: '1',
 		icon: 'Plane',
 		title: 'Travel App User Flow',
 		due_date: new Date(),
 		start_time: setMinutes(setHours(new Date(), 14), 0),
-		endTime: setMinutes(setHours(new Date(), 16), 0),
+		end_time: setMinutes(setHours(new Date(), 16), 0),
 		users: PROFILES.filter(item => +item.id > 4),
 		is_completed: false,
 		sub_task: [
@@ -29,7 +27,7 @@ export const TASKS: ITask[] = [
 		title: 'Create next app',
 		due_date: new Date(),
 		start_time: setMinutes(setHours(new Date(), 10), 0),
-		endTime: setMinutes(setHours(new Date(), 12), 0),
+		end_time: setMinutes(setHours(new Date(), 12), 0),
 		users: PROFILES.filter(item => +item.id % 3 === 0),
 		is_completed: true,
 		sub_task: [
@@ -47,7 +45,7 @@ export const TASKS: ITask[] = [
 		title: 'Debugging AI system search.',
 		due_date: addDays(new Date(), 5),
 		start_time: setMinutes(setHours(new Date(), 13), 15),
-		endTime: setMinutes(setHours(new Date(), 15), 0),
+		end_time: setMinutes(setHours(new Date(), 15), 0),
 		users: PROFILES.filter(item => +item.id % 2 === 0),
 		is_completed: false,
 		sub_task: [
@@ -66,7 +64,7 @@ export const TASKS: ITask[] = [
 		title: 'Mobile App Redesign',
 		due_date: addDays(new Date(), 14),
 		start_time: setMinutes(setHours(new Date(), 9), 45),
-		endTime: setMinutes(setHours(new Date(), 11), 30),
+		end_time: setMinutes(setHours(new Date(), 11), 30),
 		users: PROFILES.slice(0, 2),
 		is_completed: false,
 		sub_task: [
@@ -85,7 +83,7 @@ export const TASKS: ITask[] = [
 		title: 'Fix Authentication Issues',
 		due_date: addDays(new Date(), 2),
 		start_time: setMinutes(setHours(new Date(), 14), 0),
-		endTime: setMinutes(setHours(new Date(), 16), 30),
+		end_time: setMinutes(setHours(new Date(), 16), 30),
 		users: PROFILES.slice(1, 3),
 		is_completed: true,
 		sub_task: [
@@ -103,7 +101,7 @@ export const TASKS: ITask[] = [
 		title: 'API Integration for Booking System',
 		due_date: addDays(new Date(), 5),
 		start_time: setMinutes(setHours(new Date(), 11), 0),
-		endTime: setMinutes(setHours(new Date(), 13), 30),
+		end_time: setMinutes(setHours(new Date(), 13), 30),
 		users: PROFILES.filter(item => +item.id < 3),
 		is_completed: false,
 		sub_task: [
@@ -123,7 +121,7 @@ export const TASKS: ITask[] = [
 		title: 'Database Migration Script',
 		due_date: addDays(new Date(), 6),
 		start_time: setMinutes(setHours(new Date(), 9), 30),
-		endTime: setMinutes(setHours(new Date(), 11), 0),
+		end_time: setMinutes(setHours(new Date(), 11), 0),
 		users: PROFILES.slice(0, 1),
 		is_completed: true,
 		sub_task: [
@@ -142,7 +140,7 @@ export const TASKS: ITask[] = [
 		title: 'Performance Optimization',
 		due_date: addDays(new Date(), 10),
 		start_time: setMinutes(setHours(new Date(), 10), 0),
-		endTime: setMinutes(setHours(new Date(), 12), 30),
+		end_time: setMinutes(setHours(new Date(), 12), 30),
 		users: PROFILES.slice(1, 2),
 		is_completed: false,
 		sub_task: [
