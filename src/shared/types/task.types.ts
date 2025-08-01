@@ -1,6 +1,23 @@
 import type { Database } from './db.types';
+import type { getServerAllTask } from '@/services/tasks/task-server-actions';
 
-export type TTask = Database['public']['Tables']['task']['Row'] & { sub_task: TSubTask[] };
-export type TSubTask = Database['public']['Tables']['sub_task']['Row'];
+export type TTaskRow = Database['public']['Tables']['task']['Row'];
+export type TSubTaskRow = Database['public']['Tables']['sub_task']['Row'];
+export type TProfileRow = Database['public']['Tables']['profile']['Row'];
 
-export type TTaskEditForm = Database['public']['Tables']['task']['Update']
+
+export type TParticipants = Database['public']['Tables']['task_participants']['Row'] & {
+	profile: TProfileRow;
+};
+
+export type TTask = Database['public']['Tables']['task']['Row'] & {
+	sub_task: TSubTaskRow[];
+	task_participants: TParticipants[];
+};
+
+export type TTaskEditForm = Database['public']['Tables']['task']['Update'];
+
+export type TGetTasksResponse = NonNullable<Awaited<ReturnType<typeof getServerAllTask>>['data']>;
+export type TGetTodayTasksResponse = NonNullable<
+	Awaited<ReturnType<typeof getServerAllTask>>['data']
+>;

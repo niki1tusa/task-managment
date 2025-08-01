@@ -24,4 +24,5 @@ export interface IForm {
 	setValue?: any;
 	watch?: any;
 	control?: any;
+	isPending?: boolean
 }

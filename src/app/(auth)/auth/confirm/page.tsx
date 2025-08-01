@@ -1,8 +1,5 @@
-import { ConfirmClient } from "./ConfirmClient";
-
-
+import { ConfirmClient } from './ConfirmClient';
 
 export default async function PrivatePage() {
-
-	return <ConfirmClient/>
+	return <ConfirmClient />;
 }

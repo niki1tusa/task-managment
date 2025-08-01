@@ -18,6 +18,7 @@ export default function Form({
 	setValue,
 	watch,
 	control,
+	isPending
 }: IForm) {
 	return (
 		<form onSubmit={handleOnSubmit} className='my-5 flex flex-col gap-0.5 2xl:gap-2'>
@@ -50,8 +51,8 @@ export default function Form({
 				}
 			})}
 
-			<Button type='submit' className={btnClassName}>
-				{btnText}
+			<Button type='submit' className={btnClassName} isDisable={isPending}>
+				{isPending? 'Sending...': btnText}
 			</Button>
 		</form>
 	);

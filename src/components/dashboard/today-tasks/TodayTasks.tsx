@@ -3,7 +3,6 @@
 import clsx from 'clsx';
 import { getHours, getMinutes } from 'date-fns';
 import { observer } from 'mobx-react-lite';
-import { useMemo } from 'react';
 
 import { Title } from '@/components/ui/Title';
 
@@ -15,21 +14,35 @@ import { Task } from '../last-tasks/task/Task';
 import { Avatar } from '../last-tasks/task/header/Avatar';
 
 const HOURS = Array.from({ length: 9 }, (_, i) => i + 9);
+// helpers
+const WINDOW_START_MIN = 9 * 60; // 09:00
+const WINDOW_END_MIN = 17 * 60; // 17:00
+const WINDOW_SPAN_MIN = WINDOW_END_MIN - WINDOW_START_MIN; // 480
 
-export const TodayTasks = observer(() => {
+// 'HH:mm:ss' -> минуты с начала дня
+function timeStrToMinutes(t: string) {
+	const [h, m, s] = t.split(':').map(Number);
+	return h * 60 + m + (s ? Math.floor(s / 60) : 0);
+}
 
-	const todayTasks = taskStore.getTodayTasks().filter(task => task.start_time && task.end_time)
-	// const users = [...new Set(todayTasks.map((task: TTask) => task.users).flat())];
-
+export const TodayTasks = ({ todayTasks }: { todayTasks: TTask[] }) => {
+	const profiles = [
+		...new Map(
+			todayTasks
+				.flatMap(task => task.task_participants)
+				.filter(u => Boolean(u.profile))
+				.map(p => [p.profile.id, p.profile])
+		).values()
+	];
 
 	return (
 		<div className='text-foreground my-10 h-[600px] rounded-2xl border border-white px-5 pt-5 shadow shadow-neutral-500 dark:border-none'>
 			<div className='flex justify-between pb-5'>
 				<Title>Today Tasks</Title>
 				<div className='flex -space-x-2'>
-					{/* {users.map(profile => (
-						<Avatar key={profile.id} id={profile.id} img={profile.img} />
-					))} */} porfile
+					{profiles.map(p => (
+						<Avatar key={p.id}  img={p.avatar_path || ''} />
+					))}
 				</div>
 			</div>
 			{/* // часовые метки */}
@@ -55,20 +68,25 @@ export const TodayTasks = observer(() => {
 					))}
 					{/* // сегодняшние задачи */}
 					{todayTasks.map(task => {
-						const start = getHours(task.start_time!);
-						const end = getHours(task.end_time!);
-						const startMinutes = getMinutes(task.start_time!);
-						const endMinutes = getMinutes(task.end_time!);
-						const startProcent = (((start - 9) * 60 + startMinutes) / ((17 - 9) * 60)) * 100;
-						const endProcent = (((end - 9) * 60 + endMinutes) / ((17 - 9) * 60)) * 100;
-						const widthProcent = endProcent - startProcent;
+						if (!task.start_time || !task.end_time) return null;
+
+						const startMin = timeStrToMinutes(task.start_time);
+						const endMin = timeStrToMinutes(task.end_time);
+
+						// ограничим внутри окна [09:00, 17:00]
+						const clampedStart = Math.max(WINDOW_START_MIN, Math.min(startMin, WINDOW_END_MIN));
+						const clampedEnd = Math.max(WINDOW_START_MIN, Math.min(endMin, WINDOW_END_MIN));
+
+						const startPct = ((clampedStart - WINDOW_START_MIN) / WINDOW_SPAN_MIN) * 100;
+						const endPct = ((clampedEnd - WINDOW_START_MIN) / WINDOW_SPAN_MIN) * 100;
+						const widthPct = Math.max(0, endPct - startPct);
 						return (
 							<div
 								key={task.id}
 								className='absolute top-8'
 								style={{
-									left: `${startProcent}%`,
-									width: `${widthProcent}%`,
+									left: `${startPct}%`,
+									width: `${widthPct}%`,
 								}}
 							>
 								<Task task={task} className='bg-timeline-task' isMinimal={true} />
@@ -79,4 +97,4 @@ export const TodayTasks = observer(() => {
 			</div>
 		</div>
 	);
-});
+};

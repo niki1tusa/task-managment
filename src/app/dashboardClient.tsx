@@ -8,11 +8,11 @@ import { LastTasks } from '@/components/dashboard/last-tasks/LastTasks';
 import { Statistic } from '@/components/dashboard/statistic/Statistic';
 import { TodayTasks } from '@/components/dashboard/today-tasks/TodayTasks';
 
-import type { TTask } from '@/shared/types/task.types';
+import type { TGetTasksResponse, TGetTodayTasksResponse, TTask } from '@/shared/types/task.types';
 
 import { taskStore } from '@/store/task.store';
 
-export const DashboardPageClient = observer(({ tasks }: { tasks: TTask[] }) => {
+export const DashboardPageClient = observer(({ tasks, todayTasks }: { tasks: TGetTasksResponse, todayTasks: TGetTodayTasksResponse }) => {
 	useEffect(() => {
 		taskStore.loadStoreFromServer(tasks);
 	}, []);
@@ -20,8 +20,8 @@ export const DashboardPageClient = observer(({ tasks }: { tasks: TTask[] }) => {
 		<div className='mx-12 mt-2 flex flex-col gap-y-8'>
 			<Header />
 			<Statistic />
-			<LastTasks />
-			<TodayTasks />
+			<LastTasks tasks={tasks}/>
+			<TodayTasks todayTasks={todayTasks}/>
 		</div>
 	);
 });

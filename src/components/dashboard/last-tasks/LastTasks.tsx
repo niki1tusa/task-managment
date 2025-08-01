@@ -1,6 +1,5 @@
 'use client';
 
-import { observer } from 'mobx-react-lite';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 
@@ -10,17 +9,14 @@ import type { TTask } from '@/shared/types/task.types';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
-import { taskStore } from '@/store/task.store';
-
 import FilterTask from './FilterTask';
 import { Task } from './task/Task';
 
 // warn - Error: can't access property "filter", data.sub_task is undefined
-export const LastTasks = observer(() => {
+export const LastTasks = ({ tasks }: { tasks: TTask[] }) => {
 	const [select, setSelect] = useState(null);
 	const [sortOrder, setSortOrder] = useState(null);
 
-	const tasks = taskStore.tasks;
 	const filtered = useMemo(() => {
 		let filteredTasks = !select
 			? tasks
@@ -37,8 +33,6 @@ export const LastTasks = observer(() => {
 					}
 				});
 		const sortFnc = (data: TTask[], sort?: string) => {
-			console.log(tasks[0].due_date);
-
 			if (sort === 'asc') {
 				return [...data].sort(
 					(a, b) =>
@@ -89,4 +83,4 @@ export const LastTasks = observer(() => {
 			</div>
 		</div>
 	);
-});
+};

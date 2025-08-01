@@ -3,7 +3,7 @@
 import { Image, Link as LucideLink, MessageSquareText, Pencil, Plus, Trash2 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
-import type { TTask } from '@/shared/types/task.types';
+import type { TGetTasksResponse, TTask } from '@/shared/types/task.types';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
@@ -12,10 +12,8 @@ import { observer } from 'mobx-react-lite';
 import { TaskBtnAction } from './TaskBtnAction';
 import { taskStore } from '@/store/task.store';
 
-interface Props {
-	task: TTask;
-}
-export const Footer = observer(({ task }: Props) => {
+
+export const Footer = observer(({ task }: {task: TGetTasksResponse[0]}) => {
 	const pathname = usePathname();
 	const deleteTask = taskStore.deleteTask
 	return (

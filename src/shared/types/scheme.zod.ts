@@ -1,6 +1,5 @@
 import { z } from 'zod';
 
-
 export const ZTaskEditScheme = z.object({
 	title: z.string().min(1, 'Title is required (minimal one symbol)!'),
 	due_date: z
@@ -9,7 +8,7 @@ export const ZTaskEditScheme = z.object({
 
 	start_time: z.date().optional(),
 	end_time: z.date().optional(),
-	icon: z.string().optional()
+	icon: z.string().optional(),
 });
 //	icon: z.enum(ICON_NAMES, { errorMap: () => ({ message: 'Invalid icon!' }) }),
 
@@ -27,5 +26,5 @@ export const ZLoginScheme = z.object({
 });
 export type TRegistrationForm = z.infer<typeof ZRegistrationScheme>;
 export type TFormData = z.infer<typeof ZTaskEditScheme>;
-export type TSubTaskForm = z.infer<typeof ZSubTaskScheme>;
+export type TSubTaskRowForm = z.infer<typeof ZSubTaskScheme>;
 export type TLoginForm = z.infer<typeof ZLoginScheme>;

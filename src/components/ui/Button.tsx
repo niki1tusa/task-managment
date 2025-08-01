@@ -5,8 +5,9 @@ interface Props {
 	onClick?: () => void;
 	type?: 'button' | 'submit' | 'reset';
 	children: React.ReactNode;
+	isDisable?: boolean
 }
-export function Button({ type = 'button', children, className = '', onClick}: Props) {
+export function Button({ type = 'button', children, className = '', onClick, isDisable = false}: Props) {
 	return (
 		<button
 			onClick={onClick}
@@ -16,6 +17,7 @@ export function Button({ type = 'button', children, className = '', onClick}: Pr
 					? className
 					: 'bg-primary hover:bg-primary/50 w-[30%] rounded-2xl py-2 text-white transition-colors text-sm 2xl:text-lg'
 			)}
+			disabled={isDisable}
 		>
 			{children}
 		</button>

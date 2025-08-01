@@ -18,10 +18,6 @@ interface Props {
 	linkText: string;
 }
 export function LoginForm({ linkText }: Props) {
-	// notification
-	const notify = () => {
-		toast.success('Link is send your email, please check your email!');
-	};
 	// react-hook-form
 	const {
 		reset,
@@ -34,10 +30,10 @@ export function LoginForm({ linkText }: Props) {
 	const onSubmit = (data: any) => {
 		signInWithEmail({ email: data.email })
 			.then(() => {
-				notify();
+			toast.success('Link is send your email, please check your email!');
 			})
 			.catch(error => {
-				toast.error(`Fail is send login link. Error: ${error.message}`);
+				toast.error(`Fail is send login link. Error: ${error.message}`)
 			})
 			.finally(() => {
 				reset();

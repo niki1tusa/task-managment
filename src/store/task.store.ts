@@ -1,20 +1,19 @@
 import { isToday } from 'date-fns';
 import { makeAutoObservable } from 'mobx';
 
-import { TASKS } from '@/shared/data/task.data';
-import type { TSubTask, TTask, TTaskEditForm } from '@/shared/types/task.types';
 import type { TFormData } from '@/shared/types/scheme.zod';
+import type { TGetTasksResponse, TSubTaskRow } from '@/shared/types/task.types';
 
 class TaskStore {
-	tasks: TTask[] = TASKS;
+	tasks: TGetTasksResponse = [];
 	constructor() {
 		makeAutoObservable(this);
 	}
-	loadStoreFromServer(tasks: TTask[]) {
+	loadStoreFromServer(tasks: TGetTasksResponse): void {
 		this.tasks = tasks;
 	}
 
-	addTask(data: TTask) {
+	addTask(data: TGetTasksResponse) {
 		this.tasks = [...this.tasks, { ...data, id: crypto.randomUUID() }];
 	}
 
@@ -23,19 +22,19 @@ class TaskStore {
 	}
 
 	deleteTask(id: string) {
-		this.tasks = this.tasks.filter((task: TTask) => task.id !== id);
+		this.tasks = this.tasks.filter((task: TGetTasksResponse[0]) => task.id !== id);
 	}
-	getTaskById(id: string) {
+	getTaskById(id: string): TGetTasksResponse[0] {
 		return this.tasks.find(task => task.id === id);
 	}
 
-	addSubTask(id: string, sub_task: Pick<TSubTask, 'title'>) {
-		this.tasks = this.tasks.map((task: TTask) =>
+	addSubTask(id: string, sub_task: Pick<TSubTaskRow, 'title'>) {
+		this.tasks = this.tasks.map((task: TGetTasksResponse[0]) =>
 			task.id === id
 				? {
 						...task,
 						sub_task: [
-							...task.sub_task,
+							...task[0].sub_task,
 							{
 								...sub_task,
 								id: crypto.randomUUID(),
@@ -47,12 +46,17 @@ class TaskStore {
 		);
 	}
 
-	getTodayTasks(): TTask[] {
-		return this.tasks.filter(task => isToday(new Date(task.due_date)));
+	getTodayTasks(): TGetTasksResponse {
+		return this.tasks.filter(task => {
+			const taskDate = new Date(task.due_date);
+			return isToday(taskDate) && task.start_time && task.end_time;
+		}) as TGetTasksResponse;
 	}
-	statusCount(data: TTask) {
+	statusCount(data: TGetTasksResponse[0]) {
 		return Math.floor(
-			(data.sub_task.filter(item => item.is_completed === true).length / data.sub_task.length) * 100
+			(data.sub_task.filter((item: TSubTaskRow) => item.is_completed === true).length /
+				data.sub_task.length) *
+				100
 		);
 	}
 }

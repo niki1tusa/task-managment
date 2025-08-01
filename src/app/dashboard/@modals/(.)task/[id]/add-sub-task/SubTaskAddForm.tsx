@@ -1,32 +1,38 @@
 'use client';
 
-import { observer } from 'mobx-react-lite';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import Form from '@/components/ui/form/Form';
 
-import { taskStore } from '@/store/task.store';
+import { type TSubTaskRowForm, ZSubTaskScheme } from '@/shared/types/scheme.zod';
 
 import Header from '../../../../../../components/dashboard/modals/Header.modal';
 import { WrapperModal } from '../../../../../../components/dashboard/modals/Wrapper.modal';
 
 import { SUB_TASK_ADD_FIELDS } from './subtask.add.data';
+import { createClientSubTask } from '@/services/tasks/task-client-actions';
 
-interface Props {
-	id: string;
-}
-
-export const SubTaskAddForm = observer(({ id }: Props) => {
+export const SubTaskAddForm = ({ id }: { id: string }) => {
 	const router = useRouter();
-	const addSubTask = taskStore.addSubTask;
+
+	const { mutate, isPending } = useMutation({
+		mutationKey: ['createSubTask', id],
+		mutationFn: (payload: TSubTaskRowForm) => createClientSubTask(id, payload),
+		onSuccess: () => {
+			toast.success('Subtask is successfully created!');
+		},
+		onError: () => toast.error('There was a problem during the creation of the subtask!'),
+	});
 	const {
 		register,
 		formState: { errors },
 		handleSubmit,
-	} = useForm();
+	} = useForm<TSubTaskRowForm>({ resolver: zodResolver(ZSubTaskScheme) });
 	const closeModal = () => router.back();
 	useEffect(() => {
 		const handleEscape = (e: KeyboardEvent) => {
@@ -37,9 +43,8 @@ export const SubTaskAddForm = observer(({ id }: Props) => {
 		document.addEventListener('keydown', handleEscape);
 		return () => document.removeEventListener('keydown', handleEscape);
 	}, []);
-	const onSubmit = (data: any) => {
-		addSubTask(id, data);
-		toast.success('SubTask is success add!');
+	const onSubmit: SubmitHandler<TSubTaskRowForm> = data => {
+		mutate(data);
 		closeModal();
 	};
 	return (
@@ -52,11 +57,12 @@ export const SubTaskAddForm = observer(({ id }: Props) => {
 				<Form
 					register={register}
 					errors={errors}
-					btnText='Save'
 					handleOnSubmit={handleSubmit(onSubmit)}
 					formElement={SUB_TASK_ADD_FIELDS}
+					isPending={isPending}
+					btnText='Save'
 				/>
 			</div>
 		</WrapperModal>
 	);
-});
+};

@@ -1,21 +1,29 @@
 import clsx from 'clsx';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import React from 'react';
 
-import type { TTask } from '@/shared/types/task.types';
+import type { TGetTasksResponse, TSubTaskRow, TTask } from '@/shared/types/task.types';
 
 import { type IconName, MODAL_ICON } from '../../../../../shared/data/icon.data';
 
 import { Avatar } from './Avatar';
 
 interface Props {
-	task: TTask
+	task: TGetTasksResponse[0];
 	isMinimal?: boolean;
 }
 export const Header = ({ task, isMinimal }: Props) => {
 	const TaskIcon = MODAL_ICON[task.icon as IconName];
-const date = Math.ceil((new Date(task.due_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24));
-	const displayDue = date <= 0 ? (task.sub_task.every(subTask=>subTask.is_completed)? 'Done' : 'Overdue') : ` ${date} days`;
+	const date = Math.ceil((new Date(task.due_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24));
+	const start = task.start_time ? parseISO(`${task.due_date}T${task.start_time}`) : null;
+	const end = task.end_time ? parseISO(`${task.due_date}T${task.end_time}`) : null;
+
+	const displayDue =
+		date <= 0
+			? task.sub_task.every((subTask: TSubTaskRow) => subTask.is_completed)
+				? 'Done'
+				: 'Overdue'
+			: ` ${date} days`;
 	return (
 		<div className='mx-5 mt-3 flex gap-3 pt-2'>
 			<div
@@ -33,8 +41,7 @@ const date = Math.ceil((new Date(task.due_date).getTime() - Date.now()) / (1000 
 				<span className={clsx(isMinimal ? 'text-white' : 'text-gray')}>
 					{isMinimal ? (
 						<>
-							{format(task.start_time!, 'ha').toLowerCase()}-{' '}
-							{format(task.end_time!, 'ha').toLowerCase()}
+							{format(start!, 'ha').toLowerCase()}- {format(end!, 'ha').toLowerCase()}
 						</>
 					) : (
 						displayDue

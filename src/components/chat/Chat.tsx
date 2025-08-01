@@ -5,6 +5,7 @@ import { Paperclip, Send } from 'lucide-react';
 import Image from 'next/image';
 
 import { useGlobalStore } from '@/store/global.store';
+import { Avatar } from '../dashboard/last-tasks/task/header/Avatar';
 
 export default function Chat() {
 	const profile = useGlobalStore(state => state.profiles);
@@ -54,7 +55,7 @@ export default function Chat() {
 				{/* user */}
 				<div className='bg-primary/40 flex h-16 w-full items-center gap-3 pl-10 font-semibold 2xl:h-30'>
 					<div className='bg-primary h-6 w-6 overflow-hidden rounded-full shadow shadow-neutral-400 2xl:h-8 2xl:w-8'>
-						<Image src={profile[0].img} alt='profile' width={50} height={50} />
+				<Avatar img={profile[0].img}/>		
 					</div>
 					<div className='flex flex-col'>
 						<div className='text-[1rem] lg:text-[1.5rem]'>{profile[0].name}</div>
@@ -70,16 +71,10 @@ export default function Chat() {
 								className={clsx('flex items-end gap-2', m.own ? 'justify-end' : 'justify-start')}
 							>
 								{!m.own && (
-									<Image
-										alt='profile'
-										src={m.author.img}
-										width={32}
-										height={32}
-										className='rounded-full'
-									/>
+										<Avatar img={m.author.img}/>
 								)}
 								<div className='max-w-[70%]'>
-									<div className='text-[0.9rem] text-foreground mb-0.5'>
+									<div className='text-[0.9rem]  mb-0.5'>
 										<span className='opacity-80 mr-1'>{m.own ? 'Me' : m.author.name}</span>
 										<span className='opacity-50'>{m.time}</span>
 									</div>
@@ -95,13 +90,7 @@ export default function Chat() {
 									</div>
 								</div>
 								{m.own && (
-									<Image
-										alt='profile'
-										src={m.author.img}
-										width={32}
-										height={32}
-										className='rounded-full'
-									/>
+									<Avatar img={m.author.img}/>
 								)}
 							</div>
 						))}
