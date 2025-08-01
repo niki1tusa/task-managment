@@ -16,8 +16,8 @@ interface Props {
 	isMinimal?: boolean;
 }
 export const Task = observer(({ task, className, isMinimal }: Props) => {
-	const statusCount = taskStore.statusCount || 0
-	const status = statusCount(task);
+	const status= taskStore.statusCount(task) || 0
+	
 	return (
 		<div
 			className={clsx(

@@ -15,7 +15,7 @@ interface Props {
 export const Header = ({ task, isMinimal }: Props) => {
 	const TaskIcon = MODAL_ICON[task.icon as IconName];
 const date = Math.ceil((new Date(task.due_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24));
-	const displayDue = date <= 0 ? (task.sub_task.every(subTask=>subTask.is_completed)? 'Done' : 'Overdue_date') : ` ${date} days`;
+	const displayDue = date <= 0 ? (task.sub_task.every(subTask=>subTask.is_completed)? 'Done' : 'Overdue') : ` ${date} days`;
 	return (
 		<div className='mx-5 mt-3 flex gap-3 pt-2'>
 			<div
@@ -27,7 +27,7 @@ const date = Math.ceil((new Date(task.due_date).getTime() - Date.now()) / (1000 
 				<TaskIcon color='#725cee' />
 			</div>
 			<div className='flex min-w-0 flex-1 flex-col'>
-				<span className='text-md mb-1 line-clamp-2 leading-none font-medium break-words 2xl:text-xl'>
+				<span className='text-md mb-1 leading-none font-medium break-words 2xl:text-xl'>
 					{task.title}
 				</span>
 				<span className={clsx(isMinimal ? 'text-white' : 'text-gray')}>

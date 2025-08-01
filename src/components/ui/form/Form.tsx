@@ -30,7 +30,6 @@ export default function Form({
 							<DateField
 								key={i}
 								labelText={item.props.labelText}
-								nameController={item.props.nameController}
 								// placeholderText={item.props.placeholderText}
 								control={control}
 								errors={errors}

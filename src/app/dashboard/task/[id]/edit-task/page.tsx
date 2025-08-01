@@ -1,4 +1,4 @@
-import EditClient from '@/app/dashboard/task/[id]/edit-task/EditClient';
+import {EditClient} from '@/app/dashboard/task/[id]/edit-task/EditClient';
 
 interface Props {
 	params: Promise<{ id: string }>;

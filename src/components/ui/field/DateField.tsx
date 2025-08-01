@@ -7,7 +7,6 @@ import { Controller } from 'react-hook-form';
 import type { IDateField } from './field.types';
 
 export function DateField({
-	nameController,
 	labelText,
 	placeholderText,
 	control,

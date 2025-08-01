@@ -7,7 +7,6 @@ export type FormElement =
 	| {
 			type: 'date';
 			props: {
-				nameController: string;
 				labelText: string;
 			};
 	  }

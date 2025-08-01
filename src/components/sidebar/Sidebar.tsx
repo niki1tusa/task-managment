@@ -29,13 +29,13 @@ export const Sidebar = () => {
 	}
 
 	return (
-		<aside className='bg-side hidden h-full flex-col items-start gap-y-5 px-6 pt-4 lg:flex lg:px-5'>
+		<aside className='fixed h-full flex-col items-start gap-y-5 ml-8 mt-4 lg:flex lg:px-5'>
 			<Profile  />
 			<Menu heading='Menu' menu={menus} isBorderTop={true} />
 			<ProjectsMenu heading='Projects' menu={projectMenus} isBorderTop={true} />
 			<button
 				onClick={signOut}
-				className='text-gray mt-5 flex items-center justify-between gap-2 font-medium'
+				className='text-gray 2xl:text-2xl mt-5 flex items-center justify-between gap-2 font-medium'
 			>
 				<LogOut /> Logout
 			</button>

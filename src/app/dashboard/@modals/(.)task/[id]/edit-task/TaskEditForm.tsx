@@ -1,27 +1,27 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import Header from '@/components/dashboard/modals/Header.modal';
 import { WrapperModal } from '@/components/dashboard/modals/Wrapper.modal';
 
-import { ZTaskEditScheme } from '@/shared/types/scheme.zod';
+import type { ICON_NAMES, MODAL_ICON } from '@/shared/data/icon.data';
+import { type TFormData, ZTaskEditScheme } from '@/shared/types/scheme.zod';
 
 import { taskStore } from '@/store/task.store';
 
 import Form from '../../../../../../components/ui/form/Form';
-import type { FormElement } from '../../../../../../components/ui/form/form.types';
 
-interface Props {
-	id: string;
-	formElement?: FormElement[];
-}
-export const TaskEditForm = observer(({ id, formElement }: Props) => {
+import { TASK_EDIT_FIELDS } from './task.edit.data';
+import { getClientTaskById } from '@/services/tasks/task-client-actions';
+
+export const TaskEditForm = observer(({ id }: { id: string }) => {
 	const router = useRouter();
 	const closeModal = () => router.back();
 	useEffect(() => {
@@ -34,15 +34,10 @@ export const TaskEditForm = observer(({ id, formElement }: Props) => {
 		return () => document.removeEventListener('keydown', handleEscape);
 	}, []);
 	// store
-	const tasks = taskStore.tasks;
-	const editTask = taskStore.editTask;
 
 	// notification
 	const notify = () => toast.success('Task is successfully edit!');
 
-	// find task
-	const findTask = tasks.find(task => task.id === id);
-	//
 	// react-hook-form
 	const {
 		reset,
@@ -52,12 +47,33 @@ export const TaskEditForm = observer(({ id, formElement }: Props) => {
 		setValue,
 		watch,
 		formState: { errors },
-	} = useForm({
+	} = useForm<TFormData>({
 		resolver: zodResolver(ZTaskEditScheme),
 	});
-
-	const onSubmit = (data: any) => {
-		editTask(id, data);
+	const { data, isSuccess } = useQuery({
+		queryKey: ['task', id],
+		queryFn: () => getClientTaskById(id),
+		enabled: !!id,
+	});
+	useEffect(() => {
+		if (!isSuccess || !data) {
+			toast.error('Task not found!');
+			return;
+		}
+		reset({
+			title: data.title,
+			due_date: new Date(data.due_date),
+			icon: data.icon as keyof typeof MODAL_ICON,
+		});
+	}, [isSuccess]);
+	const {} = useMutation({
+		mutationKey: ['taks', 'update', id],
+		mutationFn: (data: TFormData) => {
+			taskStore.editTask(id, data);
+		},
+	});
+	const onSubmit: SubmitHandler<TFormData> = (data: any) => {
+		taskStore.editTask(id, { ...data, due_date: data.due_date.toISOString() });
 
 		notify();
 		setTimeout(() => {
@@ -69,15 +85,6 @@ export const TaskEditForm = observer(({ id, formElement }: Props) => {
 		}, 1000);
 	};
 
-	useEffect(() => {
-		if (findTask) {
-			reset({
-				title: findTask.title,
-				due_date: new Date(findTask.due_date),
-				icon: findTask.icon || 'Plane',
-			});
-		}
-	}, [id, reset, findTask]);
 	return (
 		<WrapperModal closeModal={closeModal}>
 			<div
@@ -86,18 +93,16 @@ export const TaskEditForm = observer(({ id, formElement }: Props) => {
 			>
 				<Header title={`Edit task "${id}"`} closeModal={closeModal} />
 
-				{formElement && (
-					<Form
-						setValue={setValue}
-						watch={watch}
-						control={control}
-						formElement={formElement}
-						handleOnSubmit={handleSubmit(onSubmit)}
-						register={register}
-						errors={errors}
-						btnText='Submit'
-					/>
-				)}
+				<Form
+					setValue={setValue}
+					watch={watch}
+					control={control}
+					formElement={TASK_EDIT_FIELDS}
+					handleOnSubmit={handleSubmit(onSubmit)}
+					register={register}
+					errors={errors}
+					btnText='Submit'
+				/>
 			</div>
 		</WrapperModal>
 	);

@@ -1,5 +1,5 @@
-import AddTaskForm from "./AddTaskForm";
+import { AddTaskForm } from './AddTaskForm';
 
 export default async function TaskAddModal() {
-	return  <AddTaskForm/>
+	return <AddTaskForm />;
 }

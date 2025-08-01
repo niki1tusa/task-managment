@@ -28,6 +28,7 @@
 	--side: #fff;
 	--chat: #3c3494;
 	--chat-bg-message: #453c9c;
+		--chat-foreground: #f6f4ff;
 	--timeline-task: #725cee63;
 	--radius: 0.625rem;
 
@@ -74,6 +75,7 @@
 	--side: rgb(15, 15, 25);
 	--chat: rgb(15, 15, 25);
 	--chat-bg-message: #1c1c1c;
+		--chat-foreground: #f6f4ff;
 	--timeline-task: #030307;
 
 	--card: oklch(0.205 0 0);
@@ -120,6 +122,7 @@
 	--color-side: var(--side);
 	--color-chat: var(--chat);
 	--color-chat-bg-message: var(--chat-bg-message);
+	--color-chat-foreground: var(--chat-foreground);
 	--color-timeline-task: var(--timeline-task);
 	--color-sidebar-ring: var(--sidebar-ring);
 	--color-sidebar-border: var(--sidebar-border);
@@ -184,5 +187,10 @@ option {
 	}
 	body {
 		@apply bg-background text-foreground xl:text-xl 2xl:text-2xl;
+	}
+}
+@media(max-height: 800px){
+	.chat-header-img{
+		@apply hidden
 	}
 }

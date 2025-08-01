@@ -2,16 +2,16 @@ import { isToday } from 'date-fns';
 import { makeAutoObservable } from 'mobx';
 
 import { TASKS } from '@/shared/data/task.data';
+import type { TSubTask, TTask, TTaskEditForm } from '@/shared/types/task.types';
 import type { TFormData } from '@/shared/types/scheme.zod';
-import type { TSubTask, TTask } from '@/shared/types/task.types';
 
 class TaskStore {
-	tasks: TTask[] =  TASKS;
+	tasks: TTask[] = TASKS;
 	constructor() {
 		makeAutoObservable(this);
 	}
 	loadStoreFromServer(tasks: TTask[]) {
-		this.tasks = tasks
+		this.tasks = tasks;
 	}
 
 	addTask(data: TTask) {
@@ -24,6 +24,9 @@ class TaskStore {
 
 	deleteTask(id: string) {
 		this.tasks = this.tasks.filter((task: TTask) => task.id !== id);
+	}
+	getTaskById(id: string) {
+		return this.tasks.find(task => task.id === id);
 	}
 
 	addSubTask(id: string, sub_task: Pick<TSubTask, 'title'>) {

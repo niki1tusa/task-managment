@@ -1,4 +1,4 @@
-import SubTaskModal from '@/app/dashboard/@modals/(.)task/[id]/add-sub-task/SubTaskAddForm';
+import { SubTaskAddForm } from "./SubTaskAddForm";
 
 interface Props {
 	params: Promise<{ id: string }>;
@@ -6,5 +6,5 @@ interface Props {
 export default async function SubTaskAddModal({ params }: Props) {
 	const { id } = await params;
 
-	return <SubTaskModal id={id} />;
+	return <SubTaskAddForm id={id} />;
 }

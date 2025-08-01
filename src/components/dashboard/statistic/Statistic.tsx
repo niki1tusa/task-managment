@@ -6,7 +6,7 @@ import { ProjectStatisticsChart } from './chart/ProjectStatisticsChart';
 export const Statistic = () => {
 	const { cards } = useGlobalStore();
 	return (
-		<div className='grid grid-cols-1 gap-5 lg:grid-cols-[30%_70%]'>
+		<div className='grid grid-cols-1 gap-5 lg:grid-cols-[500px_1fr] '>
 			<div className='flex flex-col gap-3'>
 				{cards.map(card => (
 					<Card
