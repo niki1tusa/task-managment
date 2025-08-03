@@ -6,7 +6,6 @@ import { SITE_NAME } from '@/constants/seo.constants';
 import { ProviderWrapper } from '../providers/Providers';
 
 import './globals.css';
-import { ToastContainer } from 'react-toastify';
 
 const poppins = Poppins({
 	variable: '--font-poppins-sans',
@@ -40,7 +39,6 @@ export default function RootLayout({
 		<html lang='en' suppressHydrationWarning>
 			<body className={`${poppins.variable} ${playfairDisplay.variable} antialiased`}>
 				<ProviderWrapper>
-					<ToastContainer />
 					{modals}
 					{children}
 				</ProviderWrapper>

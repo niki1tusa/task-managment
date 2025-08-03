@@ -1,3 +1,4 @@
 {
-	"cSpell.words": ["авторизации", "ждём", "supabase"]
+	"cSpell.words": ["авторизации", "ждём", "supabase"],
+	"codium.codeCompletion.enable": false
 }

@@ -1,17 +1,14 @@
 'use client';
 
 import { CalendarFold } from 'lucide-react';
+import { useRef } from 'react';
 import DatePicker from 'react-datepicker';
 import { Controller } from 'react-hook-form';
 
 import type { IDateField } from './field.types';
 
-export function DateField({
-	labelText,
-	placeholderText,
-	control,
-	errors,
-}: IDateField) {
+export function DateField({ labelText, placeholderText, control, errors }: IDateField) {
+	const refDate = useRef(null);
 	return (
 		<div className='mb-5'>
 			<label className='mb-1 block text-sm font-medium 2xl:text-lg'>{labelText}:</label>
@@ -22,6 +19,7 @@ export function DateField({
 					name='due_date'
 					render={({ field }) => (
 						<DatePicker
+							ref={refDate}
 							selected={field.value}
 							onChange={field.onChange}
 							dateFormat='yyyy-MM-dd'
@@ -34,13 +32,16 @@ export function DateField({
 
 				<button
 					type='button'
+					onClick={() => (refDate.current as any)?.setFocus?.()}
 					className='text-gray absolute top-[60%] right-[22%] z-20 -translate-y-[50%] transform'
 				>
 					<CalendarFold />
 				</button>
 			</span>
 
-			{errors?.root?.message && <p className='text-sm text-red-500'>{errors?.root?.message}</p>}
+			{errors?.due_date?.message && (
+				<p className='text-sm text-red-500'>{errors?.due_date?.message as string}</p>
+			)}
 		</div>
 	);
 }

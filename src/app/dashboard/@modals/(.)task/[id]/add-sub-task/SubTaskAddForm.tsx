@@ -15,7 +15,7 @@ import Header from '../../../../../../components/dashboard/modals/Header.modal';
 import { WrapperModal } from '../../../../../../components/dashboard/modals/Wrapper.modal';
 
 import { SUB_TASK_ADD_FIELDS } from './subtask.add.data';
-import { createClientSubTask } from '@/services/tasks/task-client-actions';
+import { createClientSubTask } from '@/services/tasks/task-client.service';
 
 export const SubTaskAddForm = ({ id }: { id: string }) => {
 	const router = useRouter();
@@ -44,16 +44,18 @@ export const SubTaskAddForm = ({ id }: { id: string }) => {
 		return () => document.removeEventListener('keydown', handleEscape);
 	}, []);
 	const onSubmit: SubmitHandler<TSubTaskRowForm> = data => {
+		console.log(data)
 		mutate(data);
 		closeModal();
 	};
+	console.log(errors)
 	return (
 		<WrapperModal closeModal={closeModal}>
 			<div
 				onClick={e => e.stopPropagation()}
 				className='fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white p-4 text-black shadow-lg'
 			>
-				<Header title={`Add Subtask "${id}"`} closeModal={closeModal} />
+				<Header title={`Add Subtask`} closeModal={closeModal} />
 				<Form
 					register={register}
 					errors={errors}

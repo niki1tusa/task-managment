@@ -1,22 +1,33 @@
 'use client';
 
+import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import Form from '@/components/ui/form/Form';
 
-import { observer } from 'mobx-react-lite';
+import type { TTaskCreateForm } from '@/shared/types/task.types';
 
 import Header from '../../../../../components/dashboard/modals/Header.modal';
 import { WrapperModal } from '../../../../../components/dashboard/modals/Wrapper.modal';
 import { TASK_EDIT_FIELDS } from '../[id]/edit-task/task.edit.data';
-import { taskStore } from '@/store/task.store';
 
-export const AddTaskForm = observer(() =>{
+import { createClientTask } from '@/services/tasks/task-client.service';
+
+export const AddTaskForm = () => {
 	const router = useRouter();
-	const addTask = taskStore.addTask
+	const { mutate } = useMutation({
+		mutationKey: ['task'],
+		mutationFn: (payload: TTaskCreateForm) => createClientTask(payload),
+		onSuccess: () => {
+			toast.success('Task is success created!');
+		},
+		onError: () => {
+			toast.error('Mutation error, task is failed!');
+		},
+	});
 	const {
 		setValue,
 		control,
@@ -24,7 +35,7 @@ export const AddTaskForm = observer(() =>{
 		register,
 		formState: { errors },
 		handleSubmit,
-	} = useForm();
+	} = useForm<TTaskCreateForm>();
 	const closeModal = () => router.back();
 	useEffect(() => {
 		const handleEscape = (e: KeyboardEvent) => {
@@ -35,9 +46,9 @@ export const AddTaskForm = observer(() =>{
 		document.addEventListener('keydown', handleEscape);
 		return () => document.removeEventListener('keydown', handleEscape);
 	}, []);
-	const onSubmit = (data: any) => {
-		addTask(data);
-		toast.success('Task is success add!');
+	const onSubmit: SubmitHandler<TTaskCreateForm> = data => {
+		console.log(data)
+		mutate(data);
 		closeModal();
 	};
 	return (
@@ -60,5 +71,4 @@ export const AddTaskForm = observer(() =>{
 			</div>
 		</WrapperModal>
 	);
-}
-)
+};

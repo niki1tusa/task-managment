@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 import { DashboardPageClient } from '../dashboardClient';
 
-import { getServerAllTask, getServerTodayTasks } from '@/services/tasks/task-server-actions';
+import { getServerAllTask, getServerTodayTasks } from '@/services/tasks/task-server.service';
 
 export const metadata: Metadata = {
 	title: 'Dashboard',
@@ -13,6 +13,7 @@ export default async function DashboardPage() {
 		await getServerAllTask(),
 		await getServerTodayTasks(),
 	]);
-console.log('todayTasks:', todayTasks.data)
+	// console.log('task from pageDashboard:', tasks);
+	// console.log('todayTasks:', todayTasks.data);
 	return <DashboardPageClient tasks={tasks.data || []} todayTasks={todayTasks.data || []} />;
 }

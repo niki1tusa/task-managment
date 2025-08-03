@@ -1,16 +1,16 @@
-import { useGlobalStore } from '@/store/global.store';
 
+import { CARD } from '@/shared/data/list.card.data';
 import { Card } from './card/Card';
 import { ProjectStatisticsChart } from './chart/ProjectStatisticsChart';
 
 export const Statistic = () => {
-	const { cards } = useGlobalStore();
+	const cards = CARD
 	return (
-		<div className='grid grid-cols-1 gap-5 lg:grid-cols-[500px_1fr] '>
+		<div className='grid grid-cols-1 gap-5 lg:grid-cols-[1fr_2fr] '>
 			<div className='flex flex-col gap-3'>
-				{cards.map(card => (
+				{cards.map((card, i) => (
 					<Card
-						key={card.id}
+						key={`${card.id}-${i}`}
 						img={card.img}
 						count={card.count}
 						title={card.title}

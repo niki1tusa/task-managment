@@ -3,7 +3,10 @@
 import { createFromServer } from '@/utils/supabase/server';
 
 export async function getServerAllTask() {
-	return (await createFromServer()).from('task').select(`*, sub_task(*)`);
+	return (await createFromServer())
+		.from('task')
+		.select(`*, sub_task(*),task_participants(profile(*))`)
+		.order('due_date', { ascending: true });
 }
 
 export async function getServerTodayTasks() {
@@ -12,4 +15,3 @@ export async function getServerTodayTasks() {
 		.select(`*, sub_task(*), task_participants(profile(*))`)
 		.eq('due_date', new Date().toISOString().split('T')[0]);
 }
-

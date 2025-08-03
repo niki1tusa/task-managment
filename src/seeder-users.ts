@@ -1,6 +1,6 @@
 'use server'
 import { PROFILES } from "./shared/data/profile.data";
-import { createAdminClient } from "./utils/supabase/server";
+import { createAdminClient } from "./utils/supabase/client";
 
 export async function seedUsers() {
     const supabase = createAdminClient()

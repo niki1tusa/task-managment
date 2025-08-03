@@ -7,7 +7,7 @@ import { createFromServer } from './server';
 export async function getServerAuth(isNeedRedirect = false) {
 	const supabase = await createFromServer();
 	const { data, error } = await supabase.auth.getUser();
-	
+	// console.log('user:', data.user)
 	if (error || !data.user) {
 		return isNeedRedirect ? redirect(PUBLIC_PAGES.LOGIN) : null;
 	}

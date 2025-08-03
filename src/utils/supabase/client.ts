@@ -6,3 +6,9 @@ export function createClient() {
 		process.env.NEXT_PUBLIC_SUPABASE_KEY!
 	);
 }
+export function createAdminClient() {
+	return createBrowserClient(
+		process.env.NEXT_PUBLIC_SUPABASE_URL!,
+		process.env.SERVICE_ROLE_KEY!
+	);
+}

@@ -17,7 +17,7 @@ export function ProjectStatisticsChart() {
 	return	selectedRange.value === 'yearly' ? yearlyData : monthlyData;
 	}, [selectedRange]);
 	return (
-		<div className='text-foreground rounded-2xl border border-white shadow shadow-neutral-500 dark:border-none'>
+		<div className='text-foreground rounded-2xl border border-white shadow z-10 shadow-neutral-500 dark:border-none'>
 			<ProjectChartHeader onChangeRange={setSelectedRange} selectedRange={selectedRange} />
 			<ProjectChart data={currentData} />
 		</div>

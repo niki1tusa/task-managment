@@ -2,13 +2,10 @@
 
 import clsx from 'clsx';
 import { getHours, getMinutes } from 'date-fns';
-import { observer } from 'mobx-react-lite';
 
 import { Title } from '@/components/ui/Title';
 
 import type { TTask } from '@/shared/types/task.types';
-
-import { taskStore } from '@/store/task.store';
 
 import { Task } from '../last-tasks/task/Task';
 import { Avatar } from '../last-tasks/task/header/Avatar';
@@ -32,7 +29,7 @@ export const TodayTasks = ({ todayTasks }: { todayTasks: TTask[] }) => {
 				.flatMap(task => task.task_participants)
 				.filter(u => Boolean(u.profile))
 				.map(p => [p.profile.id, p.profile])
-		).values()
+		).values(),
 	];
 
 	return (
@@ -40,8 +37,8 @@ export const TodayTasks = ({ todayTasks }: { todayTasks: TTask[] }) => {
 			<div className='flex justify-between pb-5'>
 				<Title>Today Tasks</Title>
 				<div className='flex -space-x-2'>
-					{profiles.map(p => (
-						<Avatar key={p.id}  img={p.avatar_path || ''} />
+					{profiles.map((p, i) => (
+						<Avatar key={`${p.id}-${i}`} img={p.avatar_path || ''} />
 					))}
 				</div>
 			</div>

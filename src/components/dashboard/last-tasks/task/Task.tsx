@@ -1,9 +1,7 @@
 import clsx from 'clsx';
-import { observer } from 'mobx-react-lite';
 
-import type { TGetTasksResponse, TTask } from '@/shared/types/task.types';
+import type { TSubTaskRow, TTask } from '@/shared/types/task.types';
 
-import { taskStore } from '@/store/task.store';
 
 import { Footer } from './Footer';
 import { StatusBar } from './StatusBar';
@@ -15,9 +13,15 @@ interface Props {
 	className?: string;
 	isMinimal?: boolean;
 }
-export const Task = observer(({ task, className, isMinimal }: Props) => {
-	const status = taskStore.statusCount(task) || 0;
-	console.log('profile:', task.task_participants);
+export const Task = ({ task, className, isMinimal }: Props) => {
+	const status = (data: any) => {
+		return Math.floor(
+			(data.sub_task.filter((item: TSubTaskRow) => item.is_completed === true).length /
+				data.sub_task.length) *
+				100
+		);
+	}
+
 	return (
 		<div
 			className={clsx(
@@ -29,14 +33,14 @@ export const Task = observer(({ task, className, isMinimal }: Props) => {
 			{/* 1 section */}
 			<Header task={task} isMinimal={isMinimal} />
 			{/* 2 section */}
-			{!isMinimal && <StatusBar status={status} />}
+			{!isMinimal && <StatusBar status={status(task)} />}
 			{/* 3 section */}
 			{isMinimal ? (
 				<div className='mx-5 flex -space-x-2'>
 					{task.task_participants
 						.filter(u => Boolean(u.profile))
-						.map(profile => (
-							<Avatar key={profile.profile_id} img={profile.profile.avatar_path || ''} />
+						.map((profile, i) => (
+							<Avatar key={`${profile.profile_id}-${i}`} img={profile.profile.avatar_path || ''} />
 						))}
 				</div>
 			) : (
@@ -44,4 +48,4 @@ export const Task = observer(({ task, className, isMinimal }: Props) => {
 			)}
 		</div>
 	);
-});
+};

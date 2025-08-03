@@ -1,61 +1,30 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 
 import { Title } from '@/components/ui/Title';
 
-import type { TTask } from '@/shared/types/task.types';
+import type { TByAscOrDesc, TStatus, TTask } from '@/shared/types/task.types';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
 import FilterTask from './FilterTask';
 import { Task } from './task/Task';
+import { getClientAllTask } from '@/services/tasks/task-client.service';
 
-// warn - Error: can't access property "filter", data.sub_task is undefined
 export const LastTasks = ({ tasks }: { tasks: TTask[] }) => {
-	const [select, setSelect] = useState(null);
-	const [sortOrder, setSortOrder] = useState(null);
+	const [select, setSelect] = useState<TStatus>('All');
+	const [sortOrder, setSortOrder] = useState<TByAscOrDesc>('Asc');
+	const {data} = useQuery({
+		queryKey: ['last-task', select, sortOrder],
+		queryFn: () => getClientAllTask({ status: select, sortByDue: sortOrder }),
+		initialData: tasks
+	});
 
-	const filtered = useMemo(() => {
-		let filteredTasks = !select
-			? tasks
-			: tasks.filter(item => {
-					switch (select) {
-						case 'Completed':
-							return item.sub_task.every(sub_task => sub_task.is_completed);
-						case 'in-progress':
-							return item.sub_task.some(sub_task => sub_task.is_completed);
-						case 'not-started':
-							return item.sub_task.every(sub_task => !sub_task.is_completed);
-						default:
-							return true;
-					}
-				});
-		const sortFnc = (data: TTask[], sort?: string) => {
-			if (sort === 'asc') {
-				return [...data].sort(
-					(a, b) =>
-						Math.ceil((new Date(a.due_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24)) -
-						Math.ceil((new Date(b.due_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
-				);
-			} else {
-				return [...data].sort(
-					(a, b) =>
-						Math.ceil((new Date(b.due_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24)) -
-						Math.ceil((new Date(a.due_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
-				);
-			}
-		};
-		if (sortOrder === 'Desc') {
-			filteredTasks = sortFnc(filteredTasks);
-		} else if (sortOrder === 'Asc') {
-			filteredTasks = sortFnc(filteredTasks, 'asc');
-		}
-		return filteredTasks;
-	}, [select, sortOrder, tasks]);
 
-	const count = filtered.length;
+	const count = data.length;
 	return (
 		<div className='flex flex-col gap-5'>
 			<Title count={count}> Last Tasks </Title>
@@ -76,7 +45,7 @@ export const LastTasks = ({ tasks }: { tasks: TTask[] }) => {
 
 			<div className='grid grid-cols-1 gap-2 lg:grid-cols-3'>
 				{count ? (
-					filtered.map(task => <Task key={task.id} task={task} />)
+					data.map(task => <Task key={task.id} task={task} />)
 				) : (
 					<div>No tasks found.</div>
 				)}

@@ -7,7 +7,7 @@ export function ListSubTask({ task }: Props) {
 	return (
 		<div className='text-md flex flex-col gap-4'>
 			{task.sub_task.map((subtask, i) => (
-				<div key={subtask.id} className='flex w-[80%] gap-1 border-b-2'>
+				<div key={`${subtask.id}-${i}`} className='flex w-[80%] gap-1 border-b-2'>
 					<span>{i + 1}&#41;</span>
 					<div className='flex flex-col gap-1'>
 						<span>

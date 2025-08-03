@@ -1,7 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
@@ -17,7 +17,7 @@ import { type TFormData, ZTaskEditScheme } from '@/shared/types/scheme.zod';
 import Form from '../../../../../../components/ui/form/Form';
 
 import { TASK_EDIT_FIELDS } from './task.edit.data';
-import { getClientTaskById, updateClientTask } from '@/services/tasks/task-client-actions';
+import { getClientTaskById, updateClientTask } from '@/services/tasks/task-client.service';
 
 export const TaskEditForm = ({ id }: { id: string }) => {
 	if (!id) return null;
@@ -46,38 +46,39 @@ export const TaskEditForm = ({ id }: { id: string }) => {
 		resolver: zodResolver(ZTaskEditScheme),
 	});
 	// react query
-	const { data, isError } = useQuery({
+	const { data, isSuccess } = useQuery({
 		queryKey: ['task', id],
 		queryFn: () => getClientTaskById(id),
 		enabled: !!id,
-		
 	});
 	useEffect(() => {
-		if (isError) {
-			toast.error('Task not found!');
-			return;
-		}
+		if (!data) return;
 		reset({
 			title: data.title,
 			due_date: new Date(data.due_date),
 			icon: data.icon as keyof typeof MODAL_ICON,
 		});
-	}, [isError, data]);
+	}, [isSuccess]);
+
 	// tanstack query
-	const { mutate, isPending } = useMutation({
+
+	const queryClient = useQueryClient();
+	const { mutate, isPending, error } = useMutation({
 		mutationKey: ['task', 'update', id],
 		mutationFn: (data: Database['public']['Tables']['task']['Update']) =>
 			updateClientTask(id, data),
 		onSuccess: () => {
-			// TODO: toast не пояляется при отправке
+			queryClient.invalidateQueries({ queryKey: ['task', id] });
 			toast.success('Task updated successfully!');
 			closeModal();
 		},
-		onError: () => {
-			toast.error('Failed to update task');
+		onError: error => {
+			console.log(error);
+			toast.error(`Failed to update task, ${error?.message}`);
 		},
 	});
 	const onSubmit: SubmitHandler<TFormData> = data => {
+		console.log(data);
 		mutate({ title: data.title, due_date: data.due_date.toISOString(), icon: data.icon });
 	};
 
@@ -87,7 +88,7 @@ export const TaskEditForm = ({ id }: { id: string }) => {
 				onClick={e => e.stopPropagation()}
 				className='fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white p-4 text-black shadow-lg'
 			>
-				<Header title={`Edit task "${id}"`} closeModal={closeModal} />
+				<Header title={`Edit task`} closeModal={closeModal} />
 
 				<Form
 					setValue={setValue}

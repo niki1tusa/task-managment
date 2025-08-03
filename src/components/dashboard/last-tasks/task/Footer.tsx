@@ -3,39 +3,34 @@
 import { Image, Link as LucideLink, MessageSquareText, Pencil, Plus, Trash2 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
-import type { TGetTasksResponse, TTask } from '@/shared/types/task.types';
+import type { TTask } from '@/shared/types/task.types';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
-import { observer } from 'mobx-react-lite';
 
 import { TaskBtnAction } from './TaskBtnAction';
-import { taskStore } from '@/store/task.store';
+// import { deleteClientTask } from '@/services/tasks/task-client.service';
 
-
-export const Footer = observer(({ task }: {task: TGetTasksResponse[0]}) => {
+export const Footer = ({ task }: { task: TTask }) => {
 	const pathname = usePathname();
-	const deleteTask = taskStore.deleteTask
+
 	return (
 		<div className='mx-5 flex items-center justify-between pb-2'>
 			<div className='flex justify-between gap-2'>
 				<div className='flex'>
-					<MessageSquareText size={19} />
-					3
+					<MessageSquareText size={19} />3
 				</div>
 				<div className='flex'>
-					<Image size={19} />
-					1
+					<Image size={19} />1
 				</div>
 				<div className='flex'>
-					<LucideLink size={19} />
-					1
+					<LucideLink size={19} />1
 				</div>
 			</div>
 			<div className='mr-2 mb-2 flex gap-2'>
 				<button
 					className='flex h-9 w-9 items-center justify-center rounded-full bg-red-500/80 text-white shadow shadow-neutral-400'
-					onClick={() => deleteTask(task.id)}
+					// onClick={() => deleteClientTask(task.id)}
 				>
 					<Trash2 />
 				</button>
@@ -50,4 +45,4 @@ export const Footer = observer(({ task }: {task: TGetTasksResponse[0]}) => {
 			</div>
 		</div>
 	);
-})
+};

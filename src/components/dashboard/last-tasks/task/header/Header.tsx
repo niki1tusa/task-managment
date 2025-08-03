@@ -9,7 +9,7 @@ import { type IconName, MODAL_ICON } from '../../../../../shared/data/icon.data'
 import { Avatar } from './Avatar';
 
 interface Props {
-	task: TGetTasksResponse[0];
+	task: TTask;
 	isMinimal?: boolean;
 }
 export const Header = ({ task, isMinimal }: Props) => {
@@ -35,7 +35,7 @@ export const Header = ({ task, isMinimal }: Props) => {
 				<TaskIcon color='#725cee' />
 			</div>
 			<div className='flex min-w-0 flex-1 flex-col'>
-				<span className='text-md mb-1 leading-none font-medium break-words 2xl:text-xl'>
+				<span className='[font-size:clamp(0.75rem,5vw,1rem) mb-1 [max-width:5ch] text-base leading-none font-medium'>
 					{task.title}
 				</span>
 				<span className={clsx(isMinimal ? 'text-white' : 'text-gray')}>
@@ -50,15 +50,33 @@ export const Header = ({ task, isMinimal }: Props) => {
 			</div>
 			{!isMinimal && (
 				<div className='flex -space-x-2'>
-					{/* {task.users.map((user, i) => {
-						if (i < 3) {
-							return <Avatar key={user.id} id={user.id} img={user.img} />;
-						}
-						return;
-					})} */}
-					USERS
+					{task.task_participants
+						.filter(u => Boolean(u.profile))
+						.map((user, i) => {
+							return (
+								<Avatar key={`${user.profile_id}-${i}`} img={user.profile.avatar_path || ''} />
+							);
+						})}
 				</div>
 			)}
 		</div>
 	);
 };
+import { useMemo } from 'react';
+
+export function SymbolTitle({ title }: { title: string }) {
+	const fontSizeClass = useMemo(() => {
+		const len = title.length;
+		if (len <= 10) return 'text-xl';
+		if (len <= 20) return 'text-lg';
+		if (len <= 30) return 'text-base';
+		if (len <= 50) return 'text-sm';
+		return 'text-xs';
+	}, [title]);
+
+	return (
+		<span className={`${fontSizeClass} mb-1 leading-none font-medium break-words`}>
+			{title}
+		</span>
+	);
+}
