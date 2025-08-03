@@ -3,20 +3,20 @@
 import { LogOut } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-import { PUBLIC_PAGES } from '@/config/public-page.config';
+import { MENU } from '@/shared/data/menu.data';
+import { PROJECTS_MENU } from '@/shared/data/projects.menu.data';
 
+import { PUBLIC_PAGES } from '@/config/public-page.config';
 
 import { createClient } from '@/utils/supabase/client';
 
 import { Menu } from './menu/Menu';
 import { Profile } from './profile/Profile';
 import { ProjectsMenu } from './project/ProjectsMenu';
-import { MENU } from '@/shared/data/menu.data';
-import { PROJECTS_MENU } from '@/shared/data/projects.menu.data';
 
-export const Sidebar = () => {
-	const menus = MENU
-	const projectMenus = PROJECTS_MENU
+export const Sidebar = ({data}:{data: any}) => {
+	const menus = MENU;
+	const projectMenus = PROJECTS_MENU;
 	const router = useRouter();
 
 	async function signOut() {
@@ -29,7 +29,7 @@ export const Sidebar = () => {
 
 	return (
 		<aside className='fixed mt-4 ml-8 h-full flex-col items-start gap-y-5 lg:flex lg:px-5'>
-			<Profile />
+			<Profile data={data}/>
 			<Menu heading='Menu' menu={menus} isBorderTop={true} />
 			<ProjectsMenu heading='Projects' menu={projectMenus} isBorderTop={true} />
 			<button

@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { format, parseISO } from 'date-fns';
 import React from 'react';
+import { useMemo } from 'react';
 
 import type { TGetTasksResponse, TSubTaskRow, TTask } from '@/shared/types/task.types';
 
@@ -62,7 +63,6 @@ export const Header = ({ task, isMinimal }: Props) => {
 		</div>
 	);
 };
-import { useMemo } from 'react';
 
 export function SymbolTitle({ title }: { title: string }) {
 	const fontSizeClass = useMemo(() => {
@@ -75,8 +75,6 @@ export function SymbolTitle({ title }: { title: string }) {
 	}, [title]);
 
 	return (
-		<span className={`${fontSizeClass} mb-1 leading-none font-medium break-words`}>
-			{title}
-		</span>
+		<span className={`${fontSizeClass} mb-1 leading-none font-medium break-words`}>{title}</span>
 	);
 }

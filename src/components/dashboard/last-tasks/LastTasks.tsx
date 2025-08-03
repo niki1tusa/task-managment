@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 
+import Skeleton from '@/components/ui/Skeleton';
 import { Title } from '@/components/ui/Title';
 
 import type { TByAscOrDesc, TStatus, TTask } from '@/shared/types/task.types';
@@ -17,17 +18,16 @@ import { getClientAllTask } from '@/services/tasks/task-client.service';
 export const LastTasks = ({ tasks }: { tasks: TTask[] }) => {
 	const [select, setSelect] = useState<TStatus>('All');
 	const [sortOrder, setSortOrder] = useState<TByAscOrDesc>('Asc');
-	const {data} = useQuery({
+	const { data, isPending } = useQuery({
 		queryKey: ['last-task', select, sortOrder],
 		queryFn: () => getClientAllTask({ status: select, sortByDue: sortOrder }),
-		initialData: tasks
+		initialData: tasks,
+		
 	});
-
-
-	const count = data.length;
+	if (!data) return null;
 	return (
 		<div className='flex flex-col gap-5'>
-			<Title count={count}> Last Tasks </Title>
+			<Title count={data.length}> Last Tasks </Title>
 			<div className='flex justify-between'>
 				<Link
 					href={DASHBOARD_PAGES.ADD_TASK}
@@ -44,7 +44,9 @@ export const LastTasks = ({ tasks }: { tasks: TTask[] }) => {
 			</div>
 
 			<div className='grid grid-cols-1 gap-2 lg:grid-cols-3'>
-				{count ? (
+				{isPending ? (
+					<Skeleton length={3} />
+				) : data.length ? (
 					data.map(task => <Task key={task.id} task={task} />)
 				) : (
 					<div>No tasks found.</div>
