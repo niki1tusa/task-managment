@@ -22,7 +22,7 @@ export default async function DashboardLayout({ children, modals }: Props) {
 			<main className='h-[100%] flex-1 dark:border-r dark:border-l dark:border-neutral-800'>
 				{modals} {children}
 			</main>
-			<div className='bg-chat shadow shadow-neutral-400'>
+			<div className='bg-chat text-chat-foreground shadow shadow-neutral-400 h-full overflow-hidden '>
 				<Chat data={data}/>
 			</div>
 		</div>

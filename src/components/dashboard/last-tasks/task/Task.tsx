@@ -2,10 +2,10 @@ import clsx from 'clsx';
 
 import type { TSubTaskRow, TTask } from '@/shared/types/task.types';
 
+import { Avatar } from '../../../ui/Avatar';
 
 import { Footer } from './Footer';
 import { StatusBar } from './StatusBar';
-import { Avatar } from './header/Avatar';
 import { Header } from './header/Header';
 
 interface Props {
@@ -20,7 +20,7 @@ export const Task = ({ task, className, isMinimal }: Props) => {
 				data.sub_task.length) *
 				100
 		);
-	}
+	};
 
 	return (
 		<div

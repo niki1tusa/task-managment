@@ -7,8 +7,8 @@ import { Title } from '@/components/ui/Title';
 
 import type { TTask } from '@/shared/types/task.types';
 
+import { Avatar } from '../../ui/Avatar';
 import { Task } from '../last-tasks/task/Task';
-import { Avatar } from '../last-tasks/task/header/Avatar';
 
 const HOURS = Array.from({ length: 9 }, (_, i) => i + 9);
 // helpers

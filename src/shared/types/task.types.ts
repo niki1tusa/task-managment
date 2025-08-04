@@ -1,6 +1,9 @@
 import type { Database } from './db.types';
 import type { getServerAllTask } from '@/services/tasks/task-server.service';
 
+export type TChatMessageRow = Database['public']['Tables']['chat_message']['Row'] & {
+	profile: TProfileRow
+}
 export type TTaskRow = Database['public']['Tables']['task']['Row'];
 export type TSubTaskRow = Database['public']['Tables']['sub_task']['Row'];
 export type TProfileRow = Database['public']['Tables']['profile']['Row'];

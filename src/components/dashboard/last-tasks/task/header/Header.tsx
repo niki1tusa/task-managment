@@ -6,8 +6,7 @@ import { useMemo } from 'react';
 import type { TGetTasksResponse, TSubTaskRow, TTask } from '@/shared/types/task.types';
 
 import { type IconName, MODAL_ICON } from '../../../../../shared/data/icon.data';
-
-import { Avatar } from './Avatar';
+import { Avatar } from '../../../../ui/Avatar';
 
 interface Props {
 	task: TTask;

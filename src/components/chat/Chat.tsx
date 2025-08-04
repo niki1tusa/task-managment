@@ -1,113 +1,144 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
-import clsx from 'clsx';
 import { Paperclip, Send } from 'lucide-react';
 import Image from 'next/image';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
-import { PROFILES } from '@/shared/data/profile.data';
-import type { TProfileRow } from '@/shared/types/task.types';
+import type { TChatMessageRow, TProfileRow } from '@/shared/types/task.types';
 
-import { Avatar } from '../dashboard/last-tasks/task/header/Avatar';
-import Skeleton from '../ui/Skeleton';
+import { createClient } from '@/utils/supabase/client';
+
+import { Avatar } from '../ui/Avatar';
+
+import ChatMessage from './ChatMessage';
 
 export default function Chat({ data }: { data: TProfileRow }) {
-	const profile = PROFILES;
-	const messages = [
-		{
-			id: 1,
-			text: 'Hi, have you already completed your work?',
-			author: profile[1],
-			own: false,
-			time: '09:30',
-		},
-		{
-			id: 2,
-			text: "I'm working on the final touches. Will send it soon!",
-			author: profile[0],
-			own: true,
-			time: '09:31',
-		},
-		{
-			id: 3,
-			text: "Awesome, can't wait to see it. Let me know if you need feedback.",
-			author: profile[1],
-			own: false,
-			time: '09:32',
-		},
-		{
-			id: 4,
-			text: 'Sure, thank you!',
-			author: profile[0],
-			own: true,
-			time: '09:33',
-		},
-	];
-	// TODO: чат должен быть на месте
-	return (
-		<aside className='text-chat-foreground z-10 flex h-full w-full flex-col items-center'>
-			{/* image */}
+	const supabase = useRef(createClient());
+	const [messages, setMessages] = useState<TChatMessageRow[]>([]);
+	const [text, setText] = useState('');
 
-			<Image
-				alt='chat'
-				src='/chat.jpg'
-				width={575}
-				height={100}
-				className='chat-header-img flex-shrink-0'
-			/>
-			<div className='grid w-full grid-rows-2'>
-				{/* user */}
-				<div className='bg-primary/40 flex h-16 w-full items-center gap-3 pl-10 font-semibold 2xl:h-30'>
-					<Avatar img={data.avatar_path || ''} />
-					<div className='flex flex-col'>
-						<div className='text-[1rem] lg:text-[1.2rem]'>{data.name}</div>
-						<div className='text-[0.8rem] lg:text-[1rem]'>occupation</div>
-					</div>
-				</div>
-				{/* chat */}
-				<div className='flex-1 overflow-y-auto px-2 py-2'>
-					<div className='flex flex-col gap-3'>
-						{messages.map((m, i) => (
-							<div
-								key={`${m.id}-${i}`}
-								className={clsx('flex items-end gap-2', m.own ? 'justify-end' : 'justify-start')}
-							>
-								{!m.own && <Avatar img={m.author.img} />}
-								<div className='max-w-[70%]'>
-									<div className='mb-0.5 text-[0.9rem]'>
-										<span className='mr-1 opacity-80'>{m.own ? 'Me' : m.author.name}</span>
-										<span className='opacity-50'>{m.time}</span>
-									</div>
-									<div
-										className={clsx(
-											'px-3 py-2',
-											m.own
-												? 'rounded-lg rounded-br-none bg-indigo-500'
-												: 'rounded-lg rounded-bl-none bg-indigo-300'
-										)}
-									>
-										{m.text}
-									</div>
-								</div>
-								{m.own && data.avatar_path && <Avatar img={data.avatar_path} />}
-							</div>
-						))}
-					</div>
+	useEffect(() => {
+		supabase.current
+			.from('chat_message')
+			.select(
+				`*, profile:profile(
+					id,
+					name,
+					avatar_path)`
+			)
+			.order('created_at', { ascending: true })
+			.then(({ data }) => {
+				if (!data) return;
+				setMessages(data);
+			});
+
+		const channel = supabase.current
+			.channel('chat_message')
+			.on(
+				'postgres_changes',
+				{ event: 'INSERT', schema: 'public', table: 'chat_message' },
+				async payload => {
+					const { data } = await supabase.current
+						.from('chat_message')
+						.select(`*, profile:profile(id,name, avatar_path)`)
+						.eq('id', payload.new.id)
+						.single();
+					if (data) {
+						setMessages(prev => [...prev, data]);
+					}
+				}
+			)
+			.subscribe();
+		return () => {
+			supabase.current.removeChannel(channel);
+		};
+	}, []);
+
+	const handleSend = async () => {
+		if (!text.trim()) return;
+
+		const { data: userData } = await supabase.current.auth.getUser();
+		if (!userData?.user) return;
+
+		const { data, error } = await supabase.current
+			.from('chat_message')
+			.insert({ text, user_id: userData.user.id });
+
+		if (error) {
+			console.error('Failed to send message:', error.message);
+			return;
+		}
+
+		setText('');
+	};
+
+	const messagesEndRef = useRef<HTMLDivElement>(null);
+
+	useLayoutEffect(() => {
+		if (messagesEndRef.current) {
+			messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+		}
+	}, [messages]);
+	return (
+		<aside className='fixed z-10 flex h-screen flex-col'>
+			{/* Header image */}
+
+			<div className='h-[300px] w-full'>
+				<Image
+					alt='chat'
+					src='/chat.jpg'
+					width={305}
+					height={100}
+					className='chat-header-img h-full w-full object-cover'
+				/>
+			</div>
+
+			{/* User info */}
+			<div className='bg-primary/40 flex h-16 w-full flex-shrink-0 items-center gap-3 pl-10 font-semibold 2xl:h-30'>
+				<Avatar img={data.avatar_path || ''} />
+				<div className='flex flex-col'>
+					<div className='text-[1rem] 2xl:text-[1.2rem]'>{data.name}</div>
+					<div className='text-[0.8rem] 2xl:text-[1rem]'>occupation</div>
 				</div>
 			</div>
 
-			{/* field */}
-			<span className='bg-primary/40 mt-3 flex w-full items-center justify-between px-8 py-3'>
-				<div className='flex gap-2'>
+			{/* Messages */}
+			<div className='flex-1 overflow-y-auto px-2 py-2'>
+				<div className='flex flex-col gap-3'>
+					{messages.map((m, i) => (
+						<ChatMessage key={m.id} message={m} />
+					))}
+					<div ref={messagesEndRef} />
+				</div>
+			</div>
+
+			{/* Input field */}
+			<div className='bg-primary/40 flex w-full flex-shrink-0 items-center justify-between px-4 py-3 text-[1rem] 2xl:px-8 2xl:text-xl'>
+				<div className='flex flex-1 items-center gap-2'>
 					<button type='button'>
 						<Paperclip />
 					</button>
-					<input type='text' placeholder='Enter your message...' />
+					<input
+						type='text'
+						placeholder='Enter your message...'
+						value={text}
+						onChange={e => setText(e.target.value)}
+						className='w-full bg-transparent outline-none'
+						onKeyDown={e => {
+							if (e.key === 'Enter' && !e.shiftKey) {
+								e.preventDefault();
+								handleSend();
+							}
+						}}
+					/>
 				</div>
-				<button className='relative h-10 w-10 rounded-full bg-indigo-400 transition-colors hover:opacity-80'>
-					<Send className='absolute top-[25%] right-[23%]' />
+				<button
+					onClick={handleSend}
+					className='flex h-10 w-10 items-center justify-center rounded-full bg-indigo-400 transition-colors hover:opacity-80'
+				>
+					<Send className='text-white' />
 				</button>
-			</span>
+			</div>
 		</aside>
 	);
 }
