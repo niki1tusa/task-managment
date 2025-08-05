@@ -1,11 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
+import { useForm, type SubmitHandler } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 
-import { ZRegistrationScheme } from '@/shared/types/form/scheme.zod';
+import { ZRegistrationScheme, type TRegistrationForm } from '@/shared/types/form/scheme.zod';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 import { PUBLIC_PAGES } from '@/config/public-page.config';
@@ -29,10 +29,10 @@ export function RegisterForm({ linkText }: Props) {
 		handleSubmit,
 		register,
 		formState: { errors },
-	} = useForm({
+	} = useForm<TRegistrationForm>({
 		resolver: zodResolver(ZRegistrationScheme),
 	});
-	const onSubmit = (data: any) => {
+	const onSubmit: SubmitHandler<TRegistrationForm> = data => {
 		reset();
 		console.log(data)
 		notify();

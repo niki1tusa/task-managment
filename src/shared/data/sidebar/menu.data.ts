@@ -17,7 +17,7 @@ import { SettingsIcon } from '@/components/animate-ui/icons/settings';
 import { MessageCircleMoreIcon } from '@/components/animate-ui/icons/message-circle-more';
 import { Kanban } from '@/components/animate-ui/icons/kanban';
 
-export const MENU: IMenuItem = [
+export const MENU: IMenuItem[] = [
 	{
 		title: 'Dashboard',
 		Icon: LayoutDashboard,

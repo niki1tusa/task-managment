@@ -24,7 +24,7 @@ export const ClientPage = ({ id, tasks }: Props) => {
 				<Link href={DASHBOARD_PAGES.DASHBOARD} className='flex gap-3'>
 					<ArrowLeftCircle /> <span>Back to Dashboard</span>
 				</Link>
-				<p>task id "{id}"</p>
+				<p>task id &rdquo;{id}&rdquo;;</p>
 				<ListSubTask task={findTask} />
 			</div>
 		</div>

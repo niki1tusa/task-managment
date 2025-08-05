@@ -1,12 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useForm } from 'react-hook-form';
+import { useForm, type SubmitHandler } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { signInWithEmail } from '@/app/(auth)/actions';
 
-import { ZLoginScheme } from '@/shared/types/form/scheme.zod';
+import { ZLoginScheme, type TLoginForm } from '@/shared/types/form/scheme.zod';
 
 import { PUBLIC_PAGES } from '@/config/public-page.config';
 
@@ -24,10 +24,10 @@ export function LoginForm({ linkText }: Props) {
 		handleSubmit,
 		register,
 		formState: { errors },
-	} = useForm({
+	} = useForm<TLoginForm>({
 		resolver: zodResolver(ZLoginScheme),
 	});
-	const onSubmit = (data: any) => {
+	const onSubmit: SubmitHandler<TLoginForm> = data => {
 		signInWithEmail({ email: data.email })
 			.then(() => {
 				toast.success('Link is send your email, please check your email!');
@@ -65,7 +65,7 @@ export function LoginForm({ linkText }: Props) {
 			</div>
 			{/*  */}
 			<div className='text-[0.6em]'>
-				Don't have on account?
+				Don&apos;t have on account?
 				<Link
 					className='ml-1 border-b border-cyan-400 pb-[1px] text-cyan-400'
 					href={PUBLIC_PAGES.REGISTER}

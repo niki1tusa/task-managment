@@ -107,7 +107,7 @@ export default function Chat({ data }: { data: TProfileRow }) {
 			{/* Messages */}
 			<div className='flex-1 overflow-y-auto px-2 py-2'>
 				<div className='flex flex-col gap-3'>
-					{messages.map((m, i) => (
+					{messages.map(m => (
 						<ChatMessage key={m.id} message={m} />
 					))}
 					<div ref={messagesEndRef} />

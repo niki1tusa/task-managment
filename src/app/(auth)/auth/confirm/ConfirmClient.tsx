@@ -28,7 +28,7 @@ export function ConfirmClient() {
 		};
 
 		verifyToken();
-	}, []);
+	}, [params, router]);
 	return <p>Verify is your email... please wait.</p>;
 }
 // exchangedCodeForSession or verifyOtp ?

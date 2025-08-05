@@ -25,7 +25,7 @@ export const EditClient = ({ id, tasks }: Props) => {
 				<Link href={DASHBOARD_PAGES.DASHBOARD} className='flex gap-3'>
 					<ArrowLeftCircle /> <span className='border-b-2'>Back to Dashboard</span>
 				</Link>
-				<h2>Task id "{id}"</h2>
+				<h2>Task id &rdquo;{id}&rdquo;</h2>
 				<div className='w-[60%]'>
 					<Task task={findTask} />
 				</div>
