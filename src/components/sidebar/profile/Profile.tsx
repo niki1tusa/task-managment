@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Skeleton from '@/components/ui/Skeleton';
 import { Title } from '@/components/ui/Title';
 
-import type { TProfileRow } from '@/shared/types/task.types';
+import type { TProfileRow } from '@/shared/types/task/task.types';
 
 // import cn from 'clsx'
 export const Profile = ({ data }: { data: TProfileRow }) => {

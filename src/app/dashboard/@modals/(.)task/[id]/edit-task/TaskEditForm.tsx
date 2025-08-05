@@ -11,8 +11,8 @@ import Header from '@/components/dashboard/modals/Header.modal';
 import { WrapperModal } from '@/components/dashboard/modals/Wrapper.modal';
 
 import type { MODAL_ICON } from '@/shared/data/icon.data';
-import type { Database } from '@/shared/types/db.types';
-import { type TFormData, ZTaskEditScheme } from '@/shared/types/scheme.zod';
+import type { Database } from '@/shared/types/db/db.types';
+import { type TFormData, ZTaskEditScheme } from '@/shared/types/form/scheme.zod';
 
 import Form from '../../../../../../components/ui/form/Form';
 
@@ -78,7 +78,6 @@ export const TaskEditForm = ({ id }: { id: string }) => {
 		},
 	});
 	const onSubmit: SubmitHandler<TFormData> = data => {
-		console.log(data);
 		mutate({ title: data.title, due_date: data.due_date.toISOString(), icon: data.icon });
 	};
 

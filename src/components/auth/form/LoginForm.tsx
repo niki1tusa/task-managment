@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 import { signInWithEmail } from '@/app/(auth)/actions';
 
-import { ZLoginScheme } from '@/shared/types/scheme.zod';
+import { ZLoginScheme } from '@/shared/types/form/scheme.zod';
 
 import { PUBLIC_PAGES } from '@/config/public-page.config';
 
@@ -30,10 +30,10 @@ export function LoginForm({ linkText }: Props) {
 	const onSubmit = (data: any) => {
 		signInWithEmail({ email: data.email })
 			.then(() => {
-			toast.success('Link is send your email, please check your email!');
+				toast.success('Link is send your email, please check your email!');
 			})
 			.catch(error => {
-				toast.error(`Fail is send login link. Error: ${error.message}`)
+				toast.error(`Fail is send login link. Error: ${error.message}`);
 			})
 			.finally(() => {
 				reset();
@@ -52,7 +52,7 @@ export function LoginForm({ linkText }: Props) {
 			/>
 
 			{/*  */}
-			<div className='text-gray flex items-center gap-1 text-[0.6em] mt-8'>
+			<div className='text-gray mt-8 flex items-center gap-1 text-[0.6em]'>
 				<span className='w-full border-b' />
 				<span className='text-[0.8em] whitespace-nowrap'>Or continue with</span>
 				<span className='w-full border-b' />

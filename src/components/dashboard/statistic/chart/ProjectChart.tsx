@@ -10,12 +10,12 @@ import {
 	YAxis,
 } from 'recharts';
 
-import type { IChartDataPoint } from '../../../../shared/types/project-chart.types';
 
 import { ProjectChartToolTip } from './tool-tip/ProjectChartToolTip';
+import type { TGetChartPointResponse } from '@/shared/types/statistics/statistics.types';
 
 interface Props {
-	data: IChartDataPoint[];
+	data: TGetChartPointResponse;
 }
 
 export const ProjectChart = ({ data }: Props) => {

@@ -7,7 +7,7 @@ import { useMemo, useState } from 'react';
 import Skeleton from '@/components/ui/Skeleton';
 import { Title } from '@/components/ui/Title';
 
-import type { TByAscOrDesc, TStatus, TTask } from '@/shared/types/task.types';
+import type { TByAscOrDesc, TStatus, TTask } from '@/shared/types/task/task.types';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
@@ -22,7 +22,6 @@ export const LastTasks = ({ tasks }: { tasks: TTask[] }) => {
 		queryKey: ['last-task', select, sortOrder],
 		queryFn: () => getClientAllTask({ status: select, sortByDue: sortOrder }),
 		initialData: tasks,
-		
 	});
 	if (!data) return null;
 	return (

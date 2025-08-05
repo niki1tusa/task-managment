@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import type { IMenuItem } from '@/shared/types/menu.item.types';
+import type { IMenuItem } from '@/shared/types/sidebar/menu.item.types';
 
 export const MenuItem = ({ item }: { item: IMenuItem }) => {
 	const pathname = usePathname();
@@ -17,7 +17,9 @@ export const MenuItem = ({ item }: { item: IMenuItem }) => {
 			{item.color && <div className={`h-3 w-3 ${item.color}`} />}
 			{}{' '}
 			{activeLink ? (
-				<div className='text-foreground/50 border-b-2 font-bold hover:text-white transition-colors'>{item.title}</div>
+				<div className='text-foreground/50 border-b-2 font-bold transition-colors hover:text-white'>
+					{item.title}
+				</div>
 			) : (
 				<div>{item.title}</div>
 			)}

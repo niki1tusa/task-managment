@@ -3,7 +3,7 @@ import { format, parseISO } from 'date-fns';
 import React from 'react';
 import { useMemo } from 'react';
 
-import type { TGetTasksResponse, TSubTaskRow, TTask } from '@/shared/types/task.types';
+import type { TGetTasksResponse, TSubTaskRow, TTask } from '@/shared/types/task/task.types';
 
 import { type IconName, MODAL_ICON } from '../../../../../shared/data/icon.data';
 import { Avatar } from '../../../../ui/Avatar';

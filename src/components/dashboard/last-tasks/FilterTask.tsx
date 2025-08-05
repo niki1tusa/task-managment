@@ -1,4 +1,4 @@
-import type { TByAscOrDesc, TStatus } from '@/shared/types/task.types';
+import type { TByAscOrDesc, TStatus } from '@/shared/types/task/task.types';
 
 const BUTTONS_OPTIONS = ['All', 'Completed', 'in-progress', 'not-started'];
 const SELECT_OPTIONS = ['Asc', 'Desc'];

@@ -14,6 +14,27 @@ export type Database = {
   }
   public: {
     Tables: {
+      chart_point: {
+        Row: {
+          id: string
+          period: string
+          type: string
+          value: number
+        }
+        Insert: {
+          id?: string
+          period: string
+          type: string
+          value: number
+        }
+        Update: {
+          id?: string
+          period?: string
+          type?: string
+          value?: number
+        }
+        Relationships: []
+      }
       chat_message: {
         Row: {
           created_at: string | null
@@ -61,6 +82,30 @@ export type Database = {
           email?: string | null
           id?: string
           name?: string | null
+        }
+        Relationships: []
+      }
+      project_stat: {
+        Row: {
+          bg_color: string | null
+          icon: string | null
+          id: string
+          label: string
+          number: string
+        }
+        Insert: {
+          bg_color?: string | null
+          icon?: string | null
+          id?: string
+          label: string
+          number: string
+        }
+        Update: {
+          bg_color?: string | null
+          icon?: string | null
+          id?: string
+          label?: string
+          number?: string
         }
         Relationships: []
       }
@@ -163,6 +208,21 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      time_ranges: {
+        Row: {
+          label: string
+          value: string
+        }
+        Insert: {
+          label: string
+          value: string
+        }
+        Update: {
+          label?: string
+          value?: string
+        }
+        Relationships: []
       }
     }
     Views: {

@@ -4,9 +4,12 @@ import { ChevronDown } from 'lucide-react';
 import React, { useState } from 'react';
 
 import { useClickOutside } from '@/hooks/useClickOutside';
+import type { ITimeRange } from '@/shared/types/statistics/statistics.types';
 
-import { timeRange } from '../../../../../shared/data/project-chart.data';
-import type { ITimeRange } from '../../../../../shared/types/project-chart.types';
+const timeRange: ITimeRange[] = [
+	{ label: 'Yearly', value: 'yearly' },
+	{ label: 'Monthly', value: 'monthly' },
+];
 
 interface Props {
 	selectedRange: ITimeRange;

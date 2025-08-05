@@ -1,4 +1,4 @@
-import type { IProjectsMenu } from '@/shared/types/projects.menu.types';
+import type { IProjectsMenu } from '../../types/sidebar/menu.item.types';
 
 export const PROJECTS_MENU: IProjectsMenu[] = [
 	{

@@ -1,11 +1,11 @@
 'use client';
 
-import type { IProjectsMenu } from '@/shared/types/projects.menu.types';
+import type { IProjectsMenu } from '@/shared/types/sidebar/menu.item.types';
 
 export const ProjectMenuItem = ({ item }: { item: IProjectsMenu }) => {
 	return (
-		<div className='flex items-center rounded-4xl gap-1.5 font-semibold text-sm 2xl:text-lg px-3 py-1 text-gray  hover:bg-primary hover:text-white'>
-			{item.color && <div className={`w-3 h-3  ${item.color}`} />}
+		<div className='text-gray hover:bg-primary flex items-center gap-1.5 rounded-4xl px-3 py-1 text-sm font-semibold hover:text-white 2xl:text-lg'>
+			{item.color && <div className={`h-3 w-3 ${item.color}`} />}
 
 			<div>{item.title}</div>
 		</div>

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import type { TSubTaskRow, TTask } from '@/shared/types/task.types';
+import type { TSubTaskRow, TTask } from '@/shared/types/task/task.types';
 
 import { Avatar } from '../../../ui/Avatar';
 

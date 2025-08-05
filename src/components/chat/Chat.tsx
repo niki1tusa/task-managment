@@ -4,7 +4,7 @@ import { Paperclip, Send } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
-import type { TChatMessageRow, TProfileRow } from '@/shared/types/task.types';
+import type { TChatMessageRow, TProfileRow } from '@/shared/types/task/task.types';
 
 import { createClient } from '@/utils/supabase/client';
 

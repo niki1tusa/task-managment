@@ -1,7 +1,7 @@
 'use client';
 
-import type { Database } from '@/shared/types/db.types';
-import type { TByAscOrDesc, TStatus, TTask, TTaskCreateForm } from '@/shared/types/task.types';
+import type { Database } from '@/shared/types/db/db.types';
+import type { TByAscOrDesc, TStatus, TTask, TTaskCreateForm } from '@/shared/types/task/task.types';
 
 import { createClient } from '@/utils/supabase/client';
 

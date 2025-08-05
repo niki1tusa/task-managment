@@ -3,12 +3,12 @@
 import { Image, Link as LucideLink, MessageSquareText, Pencil, Plus, Trash2 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
-import type { TTask } from '@/shared/types/task.types';
+import type { TTask } from '@/shared/types/task/task.types';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
-
 import { TaskBtnAction } from './TaskBtnAction';
+
 // import { deleteClientTask } from '@/services/tasks/task-client.service';
 
 export const Footer = ({ task }: { task: TTask }) => {

@@ -5,7 +5,7 @@ import { getHours, getMinutes } from 'date-fns';
 
 import { Title } from '@/components/ui/Title';
 
-import type { TTask } from '@/shared/types/task.types';
+import type { TTask } from '@/shared/types/task/task.types';
 
 import { Avatar } from '../../ui/Avatar';
 import { Task } from '../last-tasks/task/Task';

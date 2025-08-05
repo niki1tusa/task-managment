@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 import Form from '@/components/ui/form/Form';
 
-import type { TTaskCreateForm } from '@/shared/types/task.types';
+import type { TTaskCreateForm } from '@/shared/types/task/task.types';
 
 import Header from '../../../../../components/dashboard/modals/Header.modal';
 import { WrapperModal } from '../../../../../components/dashboard/modals/Wrapper.modal';
@@ -47,7 +47,6 @@ export const AddTaskForm = () => {
 		return () => document.removeEventListener('keydown', handleEscape);
 	}, []);
 	const onSubmit: SubmitHandler<TTaskCreateForm> = data => {
-		console.log(data)
 		mutate(data);
 		closeModal();
 	};

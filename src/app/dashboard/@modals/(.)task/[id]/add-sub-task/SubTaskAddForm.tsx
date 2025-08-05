@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 
 import Form from '@/components/ui/form/Form';
 
-import { type TSubTaskRowForm, ZSubTaskScheme } from '@/shared/types/scheme.zod';
+import { type TSubTaskRowForm, ZSubTaskScheme } from '@/shared/types/form/scheme.zod';
 
 import Header from '../../../../../../components/dashboard/modals/Header.modal';
 import { WrapperModal } from '../../../../../../components/dashboard/modals/Wrapper.modal';
@@ -44,11 +44,9 @@ export const SubTaskAddForm = ({ id }: { id: string }) => {
 		return () => document.removeEventListener('keydown', handleEscape);
 	}, []);
 	const onSubmit: SubmitHandler<TSubTaskRowForm> = data => {
-		console.log(data)
 		mutate(data);
 		closeModal();
 	};
-	console.log(errors)
 	return (
 		<WrapperModal closeModal={closeModal}>
 			<div

@@ -6,3 +6,8 @@ export interface IMenuItem {
 	link: string;
 	color?: string;
 }
+
+export interface IProjectsMenu {
+    title: string
+    color: string
+}

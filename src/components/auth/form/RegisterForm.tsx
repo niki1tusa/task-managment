@@ -4,25 +4,21 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-
 import type { FormElement } from '@/components/ui/form/form.types';
 
-import { ZRegistrationScheme } from '@/shared/types/scheme.zod';
+import { ZRegistrationScheme } from '@/shared/types/form/scheme.zod';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 import { PUBLIC_PAGES } from '@/config/public-page.config';
 
-
 import Form from '../../ui/form/Form';
+
 import { RegisterFields } from './register.data';
 
 interface Props {
-	
 	linkText: string;
-	
 }
 export function RegisterForm({ linkText }: Props) {
-	
 	const router = useRouter();
 	// notification
 	const notify = () => {
@@ -38,7 +34,6 @@ export function RegisterForm({ linkText }: Props) {
 		resolver: zodResolver(ZRegistrationScheme),
 	});
 	const onSubmit = (data: any) => {
-	
 		reset();
 		notify();
 		setTimeout(() => {

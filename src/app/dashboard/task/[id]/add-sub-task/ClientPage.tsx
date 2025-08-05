@@ -5,10 +5,9 @@ import Link from 'next/link';
 
 import { Title } from '@/components/ui/Title';
 
-import type { TGetTasksResponse, TTask } from '@/shared/types/task.types';
+import type { TGetTasksResponse, TTask } from '@/shared/types/task/task.types';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
-
 
 import { ListSubTask } from '../../../../../components/dashboard/modals/ListSubTask';
 
