@@ -5,7 +5,7 @@ import { LastTasks } from '@/components/dashboard/last-tasks/LastTasks';
 import { Statistic } from '@/components/dashboard/statistic/Statistic';
 import { TodayTasks } from '@/components/dashboard/today-tasks/TodayTasks';
 
-import type { TChartPointRow, TGetChartPointResponse, TGetProjectStatResponse, TProjectStatRow } from '@/shared/types/statistics/statistics.types';
+import type {  TGetChartPointResponse, TGetProjectStatResponse, TProjectStatRow } from '@/shared/types/statistics/statistics.types';
 import type { TGetTasksResponse, TGetTodayTasksResponse } from '@/shared/types/task/task.types';
 
 export const DashboardPageClient = ({

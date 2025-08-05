@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import Skeleton from '@/components/ui/Skeleton';
 import { Title } from '@/components/ui/Title';

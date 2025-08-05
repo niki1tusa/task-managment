@@ -8,6 +8,7 @@
 		"start": "next start",
 		"lint": "next lint",
 		"ts-check": "tsc --noEmit",
+		"clean": "rimraf .next",
 		"db-gen-types": "supabase gen types typescript --project-id \"codlpjskalcsqhfquecs\" --schema public > src/shared/types/db.types.ts"
 	},
 	"dependencies": {
@@ -45,6 +46,7 @@
 		"eslint-config-next": "15.3.4",
 		"js-cookie": "^3.0.5",
 		"prettier-plugin-tailwindcss": "^0.6.13",
+		"rimraf": "^6.0.1",
 		"supabase": "^2.33.5",
 		"tailwindcss": "^4",
 		"tw-animate-css": "^1.3.5",

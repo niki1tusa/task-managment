@@ -1,6 +1,13 @@
-import { type FieldErrors, type UseFormRegister } from 'react-hook-form';
+import { 
+	type FieldErrors, 
+	type UseFormRegister, 
+	type UseFormSetValue,
+	type UseFormWatch,
+	type Control,
+	type FieldValues 
+} from 'react-hook-form';
 
-import type { IDateField, IField, IIconField } from '../field/field.types';
+import type { IField } from '../field/field.types';
 
 export type FormElement =
 	| { type: 'field'; props: IField }
@@ -12,17 +19,32 @@ export type FormElement =
 	  }
 	| { type: 'icon' };
 
-export interface IForm {
+export interface IconFieldsProps {
+	[key: string]: React.ComponentType<any> | React.ReactNode;
+}
+
+export interface DateFieldsProps {
+	[key: string]: {
+		value?: Date | string;
+		onChange?: (date: Date | string) => void;
+		placeholder?: string;
+		disabled?: boolean;
+	};
+}
+
+export interface IForm<TFieldValues extends FieldValues = FieldValues> {
 	formElement: FormElement[];
 	handleOnSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
-	register: UseFormRegister<any>;
-	errors: FieldErrors;
+	register: UseFormRegister<TFieldValues>;
+	errors: FieldErrors<TFieldValues>;
 	btnText?: string;
 	btnClassName?: string;
-	IconFields?: any;
-	DateFields?: any;
-	setValue?: any;
-	watch?: any;
-	control?: any;
-	isPending?: boolean
+	IconFields?: IconFieldsProps;
+	DateFields?: DateFieldsProps;
+	setValue?: UseFormSetValue<TFieldValues>;
+	watch?: UseFormWatch<TFieldValues>;
+	control?: Control<TFieldValues>;
+	isPending?: boolean;
 }
+	
+

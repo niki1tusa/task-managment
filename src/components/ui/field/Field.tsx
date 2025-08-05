@@ -4,7 +4,6 @@ import clsx from 'clsx';
 import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
 import { useState } from 'react';
 import { type FieldErrors, type UseFormRegister } from 'react-hook-form';
-import { ToastContainer } from 'react-toastify';
 
 interface Props {
 	register: UseFormRegister<any>;

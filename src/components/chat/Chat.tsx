@@ -1,6 +1,6 @@
 'use client';
 
-import { Paperclip, Send } from 'lucide-react';
+import { Paperclip } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 

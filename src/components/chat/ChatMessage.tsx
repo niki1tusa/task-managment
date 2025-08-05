@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import { format, parseISO } from 'date-fns';
-import { useEffect, useRef } from 'react';
 
 import type { TChatMessageRow } from '@/shared/types/task/task.types';
 

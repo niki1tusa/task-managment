@@ -1,6 +1,6 @@
 'use client';
 
-import { Image, Link as LucideLink, MessageSquareText, Pencil, Plus, Trash2 } from 'lucide-react';
+import { Image, Link as LucideLink, MessageSquareText, Plus, Trash2 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 import { Brush } from '@/components/animate-ui/icons/brush';

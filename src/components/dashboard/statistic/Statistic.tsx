@@ -1,5 +1,7 @@
-import type { TGetChartPointResponse, TGetProjectStatResponse } from '@/shared/types/statistics/statistics.types';
-import type { TProfileRow } from '@/shared/types/task/task.types';
+import type {
+	TGetChartPointResponse,
+	TGetProjectStatResponse,
+} from '@/shared/types/statistics/statistics.types';
 
 import { Card } from './card/Card';
 import { ProjectStatisticsChart } from './chart/ProjectStatisticsChart';
@@ -25,7 +27,7 @@ export const Statistic = ({
 					/>
 				))}
 			</div>
-			<ProjectStatisticsChart chartPoints={chartPoints}/>
+			<ProjectStatisticsChart chartPoints={chartPoints} />
 		</div>
 	);
 };

@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import type { FormElement } from '@/components/ui/form/form.types';
 
 import { ZRegistrationScheme } from '@/shared/types/form/scheme.zod';
 
@@ -35,6 +34,7 @@ export function RegisterForm({ linkText }: Props) {
 	});
 	const onSubmit = (data: any) => {
 		reset();
+		console.log(data)
 		notify();
 		setTimeout(() => {
 			router.replace(DASHBOARD_PAGES.DASHBOARD);

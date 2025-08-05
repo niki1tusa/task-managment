@@ -1,11 +1,10 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import type {
 	ITimeRange,
-	TGetChartPointResponse,
 	TGetClientChartPointResponse,
 } from '@/shared/types/statistics/statistics.types';
 

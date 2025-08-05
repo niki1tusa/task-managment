@@ -15,8 +15,9 @@ import { PUBLIC_PAGES } from '@/config/public-page.config';
 import { createClient } from '@/utils/supabase/client';
 
 export const Profile = ({ data }: { data: TProfileRow }) => {
-	if (!data) return null;
 	const router = useRouter();
+	if (!data) return null;
+
 	async function signOut() {
 		const { error } = await createClient().auth.signOut();
 
@@ -26,7 +27,7 @@ export const Profile = ({ data }: { data: TProfileRow }) => {
 	}
 	return (
 		<div className='w-[160px] pt-4 2xl:min-w-[230px]'>
-			<div className='flex items-center justify-between '>
+			<div className='flex items-center justify-between'>
 				<Title isMenuTitle={true}>Account</Title>
 
 				<AnimateIcon animateOnHover>

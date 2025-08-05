@@ -45,7 +45,7 @@ export const AddTaskForm = () => {
 		};
 		document.addEventListener('keydown', handleEscape);
 		return () => document.removeEventListener('keydown', handleEscape);
-	}, []);
+	}, [closeModal]);
 	const onSubmit: SubmitHandler<TTaskCreateForm> = data => {
 		mutate(data);
 		closeModal();

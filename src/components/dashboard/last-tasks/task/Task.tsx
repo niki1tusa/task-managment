@@ -14,7 +14,7 @@ interface Props {
 	isMinimal?: boolean;
 }
 export const Task = ({ task, className, isMinimal }: Props) => {
-	const status = (data: any) => {
+	const status = (data: TTask) => {
 		return Math.floor(
 			(data.sub_task.filter((item: TSubTaskRow) => item.is_completed === true).length /
 				data.sub_task.length) *
