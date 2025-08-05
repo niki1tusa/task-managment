@@ -8,6 +8,8 @@ import type { TChatMessageRow, TProfileRow } from '@/shared/types/task/task.type
 
 import { createClient } from '@/utils/supabase/client';
 
+import { AnimateIcon } from '../animate-ui/icons/icon';
+import { SendIcon } from '../animate-ui/icons/send';
 import { Avatar } from '../ui/Avatar';
 
 import ChatMessage from './ChatMessage';
@@ -132,12 +134,14 @@ export default function Chat({ data }: { data: TProfileRow }) {
 						}}
 					/>
 				</div>
-				<button
-					onClick={handleSend}
-					className='flex h-10 w-10 items-center justify-center rounded-full bg-indigo-400 transition-colors hover:opacity-80'
-				>
-					<Send className='text-white' />
-				</button>
+				<AnimateIcon animateOnHover>
+					<button
+						onClick={handleSend}
+						className='flex h-10 w-10 items-center justify-center rounded-full bg-indigo-400/20 transition-colors hover:opacity-50'
+					>
+						<SendIcon size={22} className='text-white' />
+					</button>
+				</AnimateIcon>
 			</div>
 		</aside>
 	);

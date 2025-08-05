@@ -3,6 +3,9 @@
 import { Image, Link as LucideLink, MessageSquareText, Pencil, Plus, Trash2 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
+import { Brush } from '@/components/animate-ui/icons/brush';
+import { AnimateIcon } from '@/components/animate-ui/icons/icon';
+
 import type { TTask } from '@/shared/types/task/task.types';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
@@ -39,7 +42,9 @@ export const Footer = ({ task }: { task: TTask }) => {
 				</TaskBtnAction>
 				{pathname !== DASHBOARD_PAGES.TASK_EDIT(task.id) && (
 					<TaskBtnAction href={DASHBOARD_PAGES.TASK_EDIT(task.id)}>
-						<Pencil size={21} />
+						<AnimateIcon animateOnHover>
+							<Brush size={22} />
+						</AnimateIcon>
 					</TaskBtnAction>
 				)}
 			</div>

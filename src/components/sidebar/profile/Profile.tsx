@@ -2,25 +2,41 @@
 
 import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
-import Skeleton from '@/components/ui/Skeleton';
+import { AnimateIcon } from '@/components/animate-ui/icons/icon';
+import { LogOut } from '@/components/animate-ui/icons/log-out';
 import { Title } from '@/components/ui/Title';
 
 import type { TProfileRow } from '@/shared/types/task/task.types';
 
-// import cn from 'clsx'
+import { PUBLIC_PAGES } from '@/config/public-page.config';
+
+import { createClient } from '@/utils/supabase/client';
+
 export const Profile = ({ data }: { data: TProfileRow }) => {
-	const isPending = false;
 	if (!data) return null;
-	// const [isShowMenu, setIsShowMenu] = useState(false);
+	const router = useRouter();
+	async function signOut() {
+		const { error } = await createClient().auth.signOut();
+
+		if (!error) {
+			router.push(PUBLIC_PAGES.LOGIN);
+		}
+	}
 	return (
 		<div className='w-[160px] pt-4 2xl:min-w-[230px]'>
-			<div className='flex items-center justify-between'>
+			<div className='flex items-center justify-between '>
 				<Title isMenuTitle={true}>Account</Title>
-				{/* {isShowMenu ? <PanelLeftOpen color='gray' /> : <PanelLeftClose color='gray' />} */}
+
+				<AnimateIcon animateOnHover>
+					<button onClick={signOut} className='text-gray'>
+						<LogOut size={22} />
+					</button>
+				</AnimateIcon>
 			</div>
 
-			<div className='bg-gray/10 text-gray mt-2 flex items-center rounded-xl border px-0.5 py-1 font-semibold shadow shadow-neutral-400 2xl:px-1.5'>
+			<div className='bg-gray/10 text-gray mt-4 flex items-center rounded-xl border px-0.5 py-1 font-semibold shadow shadow-neutral-400 2xl:px-1.5'>
 				<div className='flex items-center gap-3 py-1 pl-1'>
 					{data.avatar_path ? (
 						<Image

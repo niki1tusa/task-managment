@@ -1,3 +1,6 @@
+
+
+import { LayoutDashboard } from '@/components/animate-ui/icons/layout-dashboard';
 import {
 	CalendarDays,
 	ChartColumnDecreasing,
@@ -7,25 +10,27 @@ import {
 	Settings,
 	UsersRound,
 } from 'lucide-react';
-
 import type { IMenuItem } from '@/shared/types/sidebar/menu.item.types';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
+import { SettingsIcon } from '@/components/animate-ui/icons/settings';
+import { MessageCircleMoreIcon } from '@/components/animate-ui/icons/message-circle-more';
+import { Kanban } from '@/components/animate-ui/icons/kanban';
 
-export const MENU: IMenuItem[] = [
+export const MENU: IMenuItem = [
 	{
 		title: 'Dashboard',
-		Icon: LayoutGrid,
+		Icon: LayoutDashboard,
 		link: DASHBOARD_PAGES.DASHBOARD,
 	},
 	{
 		title: 'Message',
-		Icon: MessageCircleMore,
+		Icon: MessageCircleMoreIcon,
 		link: DASHBOARD_PAGES.MESSAGES,
 	},
 	{
 		title: 'Insight',
-		Icon: ChartColumnDecreasing,
+		Icon: Kanban,
 		link: DASHBOARD_PAGES.INSIGHT,
 	},
 	{
@@ -45,7 +50,7 @@ export const MENU: IMenuItem[] = [
 	},
 	{
 		title: 'Settings',
-		Icon: Settings,
+		Icon: SettingsIcon,
 		link: DASHBOARD_PAGES.SETTINGS,
 	},
 ];

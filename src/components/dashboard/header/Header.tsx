@@ -1,8 +1,9 @@
 'use client';
 
-import { Bell } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
+import { Bell } from '@/components/animate-ui/icons/bell';
+import { AnimateIcon } from '@/components/animate-ui/icons/icon';
 import { Title } from '@/components/ui/Title';
 
 import { SearchField } from './SearchField';
@@ -18,9 +19,12 @@ export const Header = () => {
 			<Title heading='page'>Dashboard</Title>
 			<div className='flex flex-col items-center gap-2 lg:flex-row'>
 				<SearchField />
-				<span className='bg-background dark:bg-dark rounded-full text-center shadow shadow-neutral-400'>
-					<Bell className='mx-2 my-2' />
-				</span>
+				<AnimateIcon animateOnHover>
+					<span className='bg-background dark:bg-dark rounded-full text-center shadow shadow-neutral-400'>
+						<Bell className='mx-2 my-2' />
+					</span>
+				</AnimateIcon>
+
 				<DynamicToggleTheme />
 			</div>
 		</div>

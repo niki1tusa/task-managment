@@ -3,7 +3,7 @@ import { format, parseISO } from 'date-fns';
 import React from 'react';
 import { useMemo } from 'react';
 
-import type { TGetTasksResponse, TSubTaskRow, TTask } from '@/shared/types/task/task.types';
+import type {  TSubTaskRow, TTask } from '@/shared/types/task/task.types';
 
 import { type IconName, MODAL_ICON } from '../../../../../shared/data/icon.data';
 import { Avatar } from '../../../../ui/Avatar';
@@ -34,11 +34,9 @@ export const Header = ({ task, isMinimal }: Props) => {
 			>
 				<TaskIcon color='#725cee' />
 			</div>
-			<div className='flex min-w-0 flex-1 flex-col'>
-				<span className='[font-size:clamp(0.75rem,5vw,1rem) mb-1 [max-width:5ch] text-base leading-none font-medium'>
-					{task.title}
-				</span>
-				<span className={clsx(isMinimal ? 'text-white' : 'text-gray')}>
+			<div className='flex min-w-0 flex-1 flex-col max-h-6 min-h-6'>
+			<SymbolTitle title={task.title}/>
+				<span className={clsx('max-h-6 min-h-6 mt-1',isMinimal ? 'text-white' : 'text-gray')}>
 					{isMinimal ? (
 						<>
 							{format(start!, 'ha').toLowerCase()}- {format(end!, 'ha').toLowerCase()}
@@ -66,10 +64,10 @@ export const Header = ({ task, isMinimal }: Props) => {
 export function SymbolTitle({ title }: { title: string }) {
 	const fontSizeClass = useMemo(() => {
 		const len = title.length;
-		if (len <= 10) return 'text-xl';
-		if (len <= 20) return 'text-lg';
-		if (len <= 30) return 'text-base';
-		if (len <= 50) return 'text-sm';
+		if (len <= 2) return 'text-xl';
+		if (len <= 5) return 'text-lg';
+		if (len <= 10) return 'text-base';
+		if (len <= 20) return 'text-sm';
 		return 'text-xs';
 	}, [title]);
 

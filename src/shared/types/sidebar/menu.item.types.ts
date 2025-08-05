@@ -1,12 +1,11 @@
-import type { LucideIcon } from 'lucide-react';
+import type { LucideIcon } from "lucide-react";
 
 export interface IMenuItem {
 	title: string;
-	Icon?: LucideIcon;
+	Icon: React.ComponentType<React.SVGProps<SVGSVGElement>> | LucideIcon
 	link: string;
-	color?: string;
+	color?: string; 
 }
-
 export interface IProjectsMenu {
     title: string
     color: string
