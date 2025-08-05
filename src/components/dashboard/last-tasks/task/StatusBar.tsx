@@ -14,7 +14,7 @@ export const StatusBar = ({ status }: { status: number }) => {
 		return 'bg-shimmer-green';
 	}, [status]);
 	return (
-		<div className='bg-gray relative mx-5 my-5 h-10 rounded-full'>
+		<div className='bg-gray relative mx-5 my-4 h-10 rounded-full'>
 			<div
 				className={cn(`${getProgressColor} h-full rounded-full transition-all duration-500`)}
 				style={{ width: `${status}%`, minWidth: status > 0 ? '4px' : '0' }}

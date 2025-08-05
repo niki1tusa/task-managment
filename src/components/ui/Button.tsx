@@ -7,7 +7,7 @@ interface Props {
 	children: React.ReactNode;
 	isDisable?: boolean
 }
-export function Button({ type = 'button', children, className = '', onClick, isDisable = false}: Props) {
+export function Button({ type = 'button', children, className, onClick, isDisable = false}: Props) {
 	return (
 		<button
 			onClick={onClick}

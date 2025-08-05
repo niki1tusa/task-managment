@@ -3,7 +3,7 @@ import { format, parseISO } from 'date-fns';
 import React from 'react';
 import { useMemo } from 'react';
 
-import type {  TSubTaskRow, TTask } from '@/shared/types/task/task.types';
+import type { TSubTaskRow, TTask } from '@/shared/types/task/task.types';
 
 import { type IconName, MODAL_ICON } from '../../../../../shared/data/icon.data';
 import { Avatar } from '../../../../ui/Avatar';
@@ -28,15 +28,15 @@ export const Header = ({ task, isMinimal }: Props) => {
 		<div className='mx-5 mt-3 flex gap-3 pt-2'>
 			<div
 				className={clsx(
-					'flex h-9 w-9 items-center justify-center rounded-full shadow shadow-neutral-400',
+					'flex h-9 min-w-9 items-center justify-center rounded-full shadow shadow-neutral-400',
 					isMinimal ? 'bg-white/90 shadow-white' : 'shadow-neutral-400'
 				)}
 			>
 				<TaskIcon color='#725cee' />
 			</div>
-			<div className='flex min-w-0 flex-1 flex-col max-h-6 min-h-6'>
-			<SymbolTitle title={task.title}/>
-				<span className={clsx('max-h-6 min-h-6 mt-1',isMinimal ? 'text-white' : 'text-gray')}>
+			<div className='m grid grid-rows-2'>
+				<SymbolTitle title={task.title} />
+				<span className={clsx('mt-1', isMinimal ? 'text-white' : 'text-gray')}>
 					{isMinimal ? (
 						<>
 							{format(start!, 'ha').toLowerCase()}- {format(end!, 'ha').toLowerCase()}
@@ -51,9 +51,12 @@ export const Header = ({ task, isMinimal }: Props) => {
 					{task.task_participants
 						.filter(u => Boolean(u.profile))
 						.map((user, i) => {
-							return (
+							if(i<3){
+									return (
 								<Avatar key={`${user.profile_id}-${i}`} img={user.profile.avatar_path || ''} />
 							);
+							}
+						return
 						})}
 				</div>
 			)}

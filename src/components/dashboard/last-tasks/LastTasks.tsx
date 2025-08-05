@@ -42,7 +42,7 @@ export const LastTasks = ({ tasks }: { tasks: TTask[] }) => {
 				/>
 			</div>
 
-			<div className='grid grid-cols-1 gap-2 lg:grid-cols-3'>
+			<div className='grid grid-cols-1 gap-4 lg:grid-cols-3'>
 				{isPending ? (
 					<Skeleton length={3} />
 				) : data.length ? (
