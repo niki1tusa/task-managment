@@ -1,12 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useForm, type SubmitHandler } from 'react-hook-form';
+import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import { signInWithEmail } from '@/app/(auth)/actions';
+import { signInWithEmail, signInWithGoogle } from '@/app/(auth)/actions';
 
-import { ZLoginScheme, type TLoginForm } from '@/shared/types/form/scheme.zod';
+import { type TLoginForm, ZLoginScheme } from '@/shared/types/form/scheme.zod';
 
 import { PUBLIC_PAGES } from '@/config/public-page.config';
 
@@ -14,10 +14,7 @@ import Form from '../../ui/form/Form';
 
 import { loginFields } from './login.data';
 
-interface Props {
-	linkText: string;
-}
-export function LoginForm({ linkText }: Props) {
+export function LoginForm() {
 	// react-hook-form
 	const {
 		reset,
@@ -42,7 +39,7 @@ export function LoginForm({ linkText }: Props) {
 
 	return (
 		<div className='flex flex-col gap-2'>
-			<Form
+			<Form<TLoginForm>
 				formElement={loginFields}
 				handleOnSubmit={handleSubmit(onSubmit)}
 				register={register}
@@ -59,7 +56,7 @@ export function LoginForm({ linkText }: Props) {
 			</div>
 			{/*  */}
 			<div className='my-5 flex gap-2'>
-				<BtnTabLink path='/google.svg' />
+				<BtnTabLink path='/google.svg' onClick={signInWithGoogle} />
 				<BtnTabLink path='/meta.svg' />
 				<BtnTabLink path='/github.svg' />
 			</div>
@@ -70,15 +67,16 @@ export function LoginForm({ linkText }: Props) {
 					className='ml-1 border-b border-cyan-400 pb-[1px] text-cyan-400'
 					href={PUBLIC_PAGES.REGISTER}
 				>
-					{linkText}
+					Sign Up
 				</Link>
 			</div>
 		</div>
 	);
 }
-function BtnTabLink({ path }: { path: string }) {
+function BtnTabLink({ path, onClick }: { path: string, onClick?: ()=> void }) {
 	return (
-		<button className='bg-background hover:bg-background/10 flex w-[40%] items-center justify-center rounded-lg border p-3 transition-colors duration-200'>
+		<button onClick={onClick}
+		 className='bg-background hover:bg-background/90 flex w-[40%] scale-75 items-center justify-center rounded-lg border p-3 transition-colors duration-200 2xl:scale-100'>
 			<Image src={path} alt='google' width={40} height={40} />
 		</button>
 	);

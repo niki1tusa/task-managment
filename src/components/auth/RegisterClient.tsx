@@ -15,12 +15,8 @@ export default function RegisterClient() {
 				<div className='flex flex-col gap-5 p-10'>
 					<div>
 						<Title>
-							<b className='font-playfair text-3xl 2xl:text-6xl'>Welcome on task management</b>
+							<b className='font-playfair text-3xl 2xl:text-6xl'>Welcome to the task management app.</b>
 						</Title>
-						<br />
-						<span className='text-[0.7rem] leading-0.5 2xl:text-[1rem]'>
-							we save your time and improve the organization of projects.
-						</span>
 					</div>
 
 					<RegisterForm linkText='Sign In' />

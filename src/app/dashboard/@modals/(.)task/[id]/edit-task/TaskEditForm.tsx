@@ -20,7 +20,6 @@ import { TASK_EDIT_FIELDS } from './task.edit.data';
 import { getClientTaskById, updateClientTask } from '@/services/tasks/task-client.service';
 
 export const TaskEditForm = ({ id }: { id: string }) => {
-	if (!id) return null;
 	const router = useRouter();
 	const closeModal = () => router.back();
 	useEffect(() => {
@@ -58,12 +57,12 @@ export const TaskEditForm = ({ id }: { id: string }) => {
 			due_date: new Date(data.due_date),
 			icon: data.icon as keyof typeof MODAL_ICON,
 		});
-	}, [isSuccess]);
+	}, [isSuccess, data, reset]);
 
 	// tanstack query
 
 	const queryClient = useQueryClient();
-	const { mutate, isPending, error } = useMutation({
+	const { mutate, isPending } = useMutation({
 		mutationKey: ['task', 'update', id],
 		mutationFn: (data: Database['public']['Tables']['task']['Update']) =>
 			updateClientTask(id, data),
@@ -80,7 +79,7 @@ export const TaskEditForm = ({ id }: { id: string }) => {
 	const onSubmit: SubmitHandler<TFormData> = data => {
 		mutate({ title: data.title, due_date: data.due_date.toISOString(), icon: data.icon });
 	};
-
+	if (!id) return null;
 	return (
 		<WrapperModal closeModal={closeModal}>
 			<div

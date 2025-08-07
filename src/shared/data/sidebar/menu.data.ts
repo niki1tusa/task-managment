@@ -3,11 +3,7 @@
 import { LayoutDashboard } from '@/components/animate-ui/icons/layout-dashboard';
 import {
 	CalendarDays,
-	ChartColumnDecreasing,
 	ClipboardMinus,
-	LayoutGrid,
-	MessageCircleMore,
-	Settings,
 	UsersRound,
 } from 'lucide-react';
 import type { IMenuItem } from '@/shared/types/sidebar/menu.item.types';

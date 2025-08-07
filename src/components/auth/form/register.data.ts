@@ -1,6 +1,7 @@
 import type { FormElement } from "@/components/ui/form/form.types";
+import type { TRegistrationForm } from "@/shared/types/form/scheme.zod";
 
-export const RegisterFields: FormElement[] = [
+export const RegisterFields: FormElement<TRegistrationForm>[] = [
 	{
 		type: 'field',
 		props: {

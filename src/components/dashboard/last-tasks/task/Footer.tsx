@@ -1,6 +1,6 @@
 'use client';
 
-import { Image, Link as LucideLink, MessageSquareText, Plus, Trash2 } from 'lucide-react';
+import { Image as ImageIcon, Link as LucideLink, MessageSquareText, Plus, Trash2 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 import { Brush } from '@/components/animate-ui/icons/brush';
@@ -24,7 +24,7 @@ export const Footer = ({ task }: { task: TTask }) => {
 					<MessageSquareText size={19} />3
 				</div>
 				<div className='flex'>
-					<Image size={19} />1
+					<ImageIcon size={19} />1
 				</div>
 				<div className='flex'>
 					<LucideLink size={19} />1

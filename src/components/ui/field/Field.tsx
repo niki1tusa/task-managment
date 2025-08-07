@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { type FieldErrors, type UseFormRegister } from 'react-hook-form';
 
 interface Props {
+	// @ts-ignore
 	register: UseFormRegister<any>;
 	errors: FieldErrors;
 	labelText: string;

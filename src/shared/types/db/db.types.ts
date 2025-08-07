@@ -154,7 +154,7 @@ export type Database = {
           due_date: string
           end_time?: string | null
           icon?: string | null
-          id?: string
+          id: string
           owner_id?: string | null
           start_time?: string | null
           title: string

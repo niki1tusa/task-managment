@@ -62,7 +62,7 @@ export default function Chat({ data }: { data: TProfileRow }) {
 		const { data: userData } = await supabase.current.auth.getUser();
 		if (!userData?.user) return;
 
-		const { data, error } = await supabase.current
+		const { data: _data, error } = await supabase.current
 			.from('chat_message')
 			.insert({ text, user_id: userData.user.id });
 

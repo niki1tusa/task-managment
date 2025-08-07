@@ -15,12 +15,11 @@ export default function LoginClient() {
 				<div className='flex flex-col gap-5 p-10'>
 					<div>
 						<Title>
-							<b className='font-playfair text-3xl 2xl:text-6xl'>Welcome on task management</b>
+							<b className='font-playfair text-3xl 2xl:text-6xl'>Welcome back</b>
 						</Title>
-						<br />
 					</div>
 
-					<LoginForm linkText='Sign Up' />
+					<LoginForm />
 				</div>
 
 				<Image src='/chat.jpg' alt='chat' width={1100} height={1100} className='h-full w-full' />

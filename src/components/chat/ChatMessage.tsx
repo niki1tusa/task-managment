@@ -16,13 +16,15 @@ export default function ChatMessage({ message }: { message: TChatMessageRow }) {
 	}
 
 	const isOwnMessage = user.id === message.user_id;
+	const profileName = message.profile?.name || 'Unknown User';
+	const avatarPath = message.profile?.avatar_path || '';
 
 	return (
 		<div className={clsx('flex items-end gap-2', isOwnMessage ? 'justify-end' : 'justify-start')}>
-			{!isOwnMessage && <Avatar img={message.profile.avatar_path || ''} />}
+			{!isOwnMessage && <Avatar img={avatarPath} />}
 			<div className='max-w-[70%]'>
 				<div className='mb-0.5 text-[0.8rem] 2xl:text-[0.9rem]'>
-					<span className='mr-1 opacity-80'>{isOwnMessage ? 'Me' : message.profile.name}</span>
+					<span className='mr-1 opacity-80'>{isOwnMessage ? 'Me' : profileName}</span>
 					<span className='opacity-50'>
 						{format(parseISO(message.created_at!), 'hh:mm a').toLowerCase()}
 					</span>
@@ -38,8 +40,8 @@ export default function ChatMessage({ message }: { message: TChatMessageRow }) {
 					{message.text}
 				</div>
 			</div>
-			{isOwnMessage && message.profile.avatar_path && (
-				<Avatar img={message.profile.avatar_path || ''} />
+			{isOwnMessage && avatarPath && (
+				<Avatar img={avatarPath} />
 			)}
 		</div>
 	);

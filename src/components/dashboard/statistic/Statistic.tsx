@@ -13,7 +13,6 @@ export const Statistic = ({
 	projectStats: TGetProjectStatResponse;
 	chartPoints: TGetChartPointResponse;
 }) => {
-	console.log('project', projectStats);
 	return (
 		<div className='grid grid-cols-1 gap-5 lg:grid-cols-[1fr_2fr]'>
 			<div className='flex flex-col gap-3'>
