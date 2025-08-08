@@ -23,7 +23,7 @@ export const DashboardPageClient = ({
 	chartPoints: TGetChartPointResponse;
 }) => {
 	return (
-		<div className='mx-12 mt-2 flex flex-col gap-y-8'>
+		<div className='mx-9 2xl:mx-12 mt-2 flex flex-col gap-y-8'>
 			<Header />
 			<Statistic projectStats={projectStats} chartPoints={chartPoints} />
 			<LastTasks tasks={tasks} />

@@ -7,6 +7,7 @@
 	}
 }
 
+/*  status bar */
 .bg-shimmer-done {
 	background: linear-gradient(110deg, #a855f7 0%, #6366f1 50%, #a855f7 100%);
 	background-size: 200% 100%;
@@ -26,4 +27,16 @@
 	background: linear-gradient(110deg, #ef4444 0%, #dc2626 50%, #ef4444 100%);
 	background-size: 200% 100%;
 	animation: shimmer 2s linear infinite;
+}
+
+/* task card hover */
+.bg-task-base {
+	background-color: #f6f4ff;
+}
+
+/* Запускаем градиент только при ховере */
+.bg-task-base:hover {
+	background: linear-gradient(110deg, #f6f4ff 0%, #ffffff 50%, #f6f4ff 100%);
+	background-size: 200% 100%;
+	animation: shimmer 1.5s linear 1; /* 1 — проигрывается один раз */
 }
