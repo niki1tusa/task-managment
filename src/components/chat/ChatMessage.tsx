@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { format, parseISO } from 'date-fns';
+import { memo } from 'react';
 
 import type { TChatMessageRow } from '@/shared/types/task/task.types';
 
@@ -8,7 +9,7 @@ import { useProfile } from '@/hooks/useProfile';
 import { Avatar } from '../ui/Avatar';
 import Skeleton from '../ui/Skeleton';
 
-export default function ChatMessage({ message }: { message: TChatMessageRow }) {
+function ChatMessage({ message }: { message: TChatMessageRow }) {
 	const { user, isLoading } = useProfile();
 
 	if (isLoading || !user) {
@@ -40,9 +41,8 @@ export default function ChatMessage({ message }: { message: TChatMessageRow }) {
 					{message.text}
 				</div>
 			</div>
-			{isOwnMessage && avatarPath && (
-				<Avatar img={avatarPath} />
-			)}
+			{isOwnMessage && avatarPath && <Avatar img={avatarPath} />}
 		</div>
 	);
 }
+export default memo(ChatMessage);

@@ -19,6 +19,7 @@ export type TTask = Database['public']['Tables']['task']['Row'] & {
 };
 export type TTaskCreateForm = Database['public']['Tables']['task']['Insert'];
 export type TTaskEditForm = Database['public']['Tables']['task']['Update'];
+export type TSubTaskInsert = Database['public']['Tables']['sub_task']['Insert']
 
 export type TGetTasksResponse = NonNullable<Awaited<ReturnType<typeof getServerAllTask>>['data']>;
 export type TGetTodayTasksResponse = NonNullable<

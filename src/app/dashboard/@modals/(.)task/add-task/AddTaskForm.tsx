@@ -8,8 +8,9 @@ import { toast } from 'react-toastify';
 
 import Form from '@/components/ui/form/Form';
 
-import type { TSubTaskRowForm } from '@/shared/types/form/scheme.zod';
-import type { TTaskCreateForm } from '@/shared/types/task/task.types';
+import type { TSubTaskInsert, TTaskCreateForm } from '@/shared/types/task/task.types';
+
+import { prepareTaskPayload } from '@/utils/format-date-createTask';
 
 import Header from '../../../../../components/dashboard/modals/Header.modal';
 import { WrapperModal } from '../../../../../components/dashboard/modals/Wrapper.modal';
@@ -19,30 +20,40 @@ import { createClientSubTask, createClientTask } from '@/services/tasks/task-cli
 
 export const AddTaskForm = () => {
 	const router = useRouter();
-// TODO: Subtask не добавляется при создании task
-	const { mutate } = useMutation({
+	const { mutateAsync: createTask } = useMutation({
 		mutationKey: ['add-task'],
 		mutationFn: (payload: TTaskCreateForm) => createClientTask(payload),
-		onSuccess: (createTask) => {
-			console.log('Created task:', createTask);
-			toast.success('Task is success created!');
-			if (createTask && createTask.id) {
-				mutateSubTask({ id: createTask.id, payload: { title: 'Example subtask' } });
-			}
-			closeModal();
-		},
-		onError: () => {
-			toast.error('Mutation error, task is failed!');
-		},
 	});
-	const { mutate: mutateSubTask } = useMutation({
+
+	const { mutateAsync: createSubTask } = useMutation({
 		mutationKey: ['add-subtask'],
-		mutationFn: ({ id, payload }: { id: string; payload: TSubTaskRowForm }) =>
+		mutationFn: ({ id, payload }: { id: string; payload: TSubTaskInsert }) =>
 			createClientSubTask(id, payload),
-		onError: () => {
-			toast.error('Mutation error, subtask is failed!');
-		},
 	});
+
+	const onSubmit: SubmitHandler<TTaskCreateForm> = async data => {
+		// fnc payload -> обработанная date: 
+		const taskPayload = prepareTaskPayload(data);
+		console.log('taskPayload:', taskPayload)
+		try {
+			const task = await createTask(taskPayload); // ждём завершения создания task
+			// Сабтаск создаём только после того, как task гарантированно есть в БД
+			await createSubTask({
+				id: task.id,
+				payload: {
+					title: 'Example subtask',
+					is_completed: false, // явно, чтобы не было NULL
+				},
+			});
+
+			toast.success('Task and subtask created!');
+			closeModal();
+		} catch (err) {
+			toast.error('Error creating task or subtask');
+			console.error(err);
+		}
+	};
+
 	const {
 		setValue,
 		control,
@@ -61,9 +72,7 @@ export const AddTaskForm = () => {
 		document.addEventListener('keydown', handleEscape);
 		return () => document.removeEventListener('keydown', handleEscape);
 	}, [closeModal]);
-	const onSubmit: SubmitHandler<TTaskCreateForm> = data => {
-		mutate(data);
-	};
+
 	return (
 		<WrapperModal closeModal={closeModal}>
 			<div

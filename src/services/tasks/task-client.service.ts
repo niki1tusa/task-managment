@@ -3,22 +3,9 @@
 import type { Database } from '@/shared/types/db/db.types';
 import type { TByAscOrDesc, TStatus, TTask, TTaskCreateForm } from '@/shared/types/task/task.types';
 
+import { filterStatusTasks } from '@/utils/filterStatusTasks';
 import { createClient } from '@/utils/supabase/client';
 
-function filterTasks(tasks: TTask[], status?: TStatus) {
-	return tasks.filter(item => {
-		switch (status) {
-			case 'Completed':
-				return item.sub_task.every(sub_task => sub_task.is_completed);
-			case 'in-progress':
-				return item.sub_task.some(sub_task => sub_task.is_completed);
-			case 'not-started':
-				return item.sub_task.every(sub_task => !sub_task.is_completed);
-			default:
-				return true;
-		}
-	});
-}
 export async function getClientAllTask({
 	status,
 	sortByDue,
@@ -34,9 +21,9 @@ export async function getClientAllTask({
 		});
 	}
 	const { data, error } = await query;
-	if (error || !data) throw new Error(error?.message || 'Task not found');
+	if (error || !data) throw new Error(error?.message || 'Task not found/ get-all-task');
 	if (status) {
-		return filterTasks(data, status);
+		return filterStatusTasks(data, status);
 	}
 	return data;
 }
@@ -47,7 +34,7 @@ export async function getClientTaskById(id: string) {
 		.select(`*, sub_task(*)`)
 		.eq('id', id)
 		.single();
-	if (error || !data) throw new Error(error?.message || 'Task not found');
+	if (error || !data) throw new Error(error?.message || 'Task not found/ task by id');
 	return data;
 }
 export async function createClientTask(task: TTaskCreateForm) {
@@ -57,9 +44,13 @@ export async function createClientTask(task: TTaskCreateForm) {
 	} = await supabase.auth.getUser();
 	const { data, error } = await createClient()
 		.from('task')
-		.insert({ ...task, owner_id: user?.id })
+		.insert({
+			...task,
+			owner_id: user?.id,
+		})
+		.select()
 		.single();
-	if (error || !data) throw new Error(error?.message || 'Task not found');
+	if (error || !data) throw new Error(error?.message || 'create task is failed');
 	return data;
 }
 
@@ -74,12 +65,12 @@ export async function updateClientTask(
 		.select(`*, sub_task(*)`)
 		.single();
 
-	if (error || !data) throw new Error(error?.message || 'Task not found');
+	if (error || !data) throw new Error(error?.message || 'Task not found/ update-task');
 	return data;
 }
 export async function deleteClientTask(id: string) {
 	const { data, error } = await createClient().from('task').delete().eq('id', id);
-	if (error || !data) throw new Error(error?.message || 'Task not found');
+	if (error || !data) throw new Error(error?.message || 'Task not found/ delete-task');
 	return data;
 }
 export async function createClientSubTask(
@@ -89,7 +80,8 @@ export async function createClientSubTask(
 	const { data, error } = await createClient()
 		.from('sub_task')
 		.insert({ ...sub_task, task_id: id })
+		.select()
 		.single();
-	if (error || !data) throw new Error(error?.message || 'Task not found');
+	if (error || !data) throw new Error(error?.message || 'Task not found/ create-sub-task');
 	return data;
 }
