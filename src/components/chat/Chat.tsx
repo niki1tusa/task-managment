@@ -6,11 +6,11 @@ import { useMemo } from 'react';
 import type { TProfileRow } from '@/shared/types/task/task.types';
 
 import { Avatar } from '../ui/Avatar';
+import { ToggleTheme } from '../ui/toggle-theme/ToggleTheme';
 
 import ChatInput from './ChatInput';
 import ChatMessage from './ChatMessage';
 import { useChat } from './useChat';
-
 
 // TODO: проверить chatMessage и добавить каналы (общий, бухгалтерия, )
 export default function Chat({ data }: { data: TProfileRow }) {
@@ -20,6 +20,9 @@ export default function Chat({ data }: { data: TProfileRow }) {
 	}, [messages, data.id]);
 	return (
 		<aside className='fixed z-10 flex h-screen flex-col'>
+			<div className='absolute top-5 right-5 z-50'>
+				<ToggleTheme />
+			</div>
 			{/* Header image */}
 			<div className='h-[300px] w-full'>
 				<Image

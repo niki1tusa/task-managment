@@ -8,11 +8,6 @@ import { Title } from '@/components/ui/Title';
 
 import { SearchField } from './SearchField';
 
-const DynamicToggleTheme = dynamic(
-	() => import('../../ui/toggle-theme/ToggleTheme').then(mod => mod.ToggleTheme),
-	{ ssr: false }
-);
-
 export const Header = () => {
 	return (
 		<div className='flex flex-col items-center justify-between bg-transparent pt-4 lg:flex-row'>
@@ -24,8 +19,6 @@ export const Header = () => {
 						<Bell className='mx-2 my-2' />
 					</span>
 				</AnimateIcon>
-
-				<DynamicToggleTheme />
 			</div>
 		</div>
 	);

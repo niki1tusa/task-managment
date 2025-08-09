@@ -1,13 +1,9 @@
 'use client';
 
-import { ArrowLeftCircle } from 'lucide-react';
-import Link from 'next/link';
-
+import BackLink from '@/components/ui/BackLink';
 import { Title } from '@/components/ui/Title';
 
 import type { TGetTasksResponse, TTask } from '@/shared/types/task/task.types';
-
-import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
 import { ListSubTask } from '../../../../../components/dashboard/modals/ListSubTask';
 
@@ -21,9 +17,7 @@ export const ClientPage = ({ id, tasks }: Props) => {
 		<div className='px-5'>
 			<div className='flex flex-col gap-1 p-6'>
 				<Title>Add Sub Task</Title>
-				<Link href={DASHBOARD_PAGES.DASHBOARD} className='flex gap-3'>
-					<ArrowLeftCircle /> <span>Back to Dashboard</span>
-				</Link>
+				<BackLink text='BackLink ' />
 				<p>task id &rdquo;{id}&rdquo;;</p>
 				<ListSubTask task={findTask} />
 			</div>

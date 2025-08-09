@@ -8,6 +8,7 @@ import type { TTask } from '@/shared/types/task/task.types';
 
 import { Avatar } from '../../ui/Avatar';
 import { Task } from '../last-tasks/task/Task';
+import TimelineTask from './TimelineTask';
 
 const HOURS = Array.from({ length: 9 }, (_, i) => i + 9);
 // helpers
@@ -20,7 +21,7 @@ function timeStrToMinutes(t: string) {
 	return h * 60 + m + (s ? Math.floor(s / 60) : 0);
 }
 
-export const TodayTasks = ({ todayTasks }: { todayTasks: TTask[] }) => {
+export const Timeline = ({ todayTasks }: { todayTasks: TTask[] }) => {
 	const profiles = [
 		...new Map(
 			todayTasks
@@ -80,7 +81,7 @@ export const TodayTasks = ({ todayTasks }: { todayTasks: TTask[] }) => {
 									width: `${widthPct}%`,
 								}}
 							>
-								<Task task={task} className='bg-timeline-task' isMinimal={true} />
+								<TimelineTask task={task}  />
 							</div>
 						);
 					})}

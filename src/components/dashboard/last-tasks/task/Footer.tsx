@@ -1,7 +1,14 @@
 'use client';
 
-import { Image as ImageIcon, Link as LucideLink, MessageSquareText, Plus, Trash2 } from 'lucide-react';
-import { usePathname } from 'next/navigation';
+import { useMutation } from '@tanstack/react-query';
+import {
+	Image as ImageIcon,
+	Link as LucideLink,
+	MessageSquareText,
+	Plus,
+	Trash2,
+} from 'lucide-react';
+import { usePathname} from 'next/navigation';
 
 import { Brush } from '@/components/animate-ui/icons/brush';
 import { AnimateIcon } from '@/components/animate-ui/icons/icon';
@@ -11,12 +18,20 @@ import type { TTask } from '@/shared/types/task/task.types';
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
 import { TaskBtnAction } from './TaskBtnAction';
-
-// import { deleteClientTask } from '@/services/tasks/task-client.service';
+import { deleteClientTask } from '@/services/tasks/task-client.service';
+import { toast } from 'react-toastify';
 
 export const Footer = ({ task }: { task: TTask }) => {
 	const pathname = usePathname();
-
+	const { mutate } = useMutation({
+		mutationFn: (id: string) => deleteClientTask(id),
+		onSuccess: () => {
+			toast.success('Task is success deleted!')
+		},
+		onError: (error: unknown) => {
+			alert(`Ошибка при удалении: ${error instanceof Error ? error.message : 'неизвестная'}`);
+		},
+	});
 	return (
 		<div className='mx-5 flex items-center justify-between pb-2'>
 			<div className='flex justify-between gap-2'>
@@ -33,7 +48,13 @@ export const Footer = ({ task }: { task: TTask }) => {
 			<div className='mr-2 mb-2 flex gap-2'>
 				<button
 					className='flex h-9 w-9 items-center justify-center rounded-full bg-red-500/80 text-white shadow shadow-neutral-400'
-					// onClick={() => deleteClientTask(task.id)}
+					onClick={e => {
+						e.stopPropagation();
+						// TODO: create modal window for delete confirm
+						if (confirm('Удалить задачу?')) {
+							mutate(task.id);
+						}
+					}}
 				>
 					<Trash2 />
 				</button>

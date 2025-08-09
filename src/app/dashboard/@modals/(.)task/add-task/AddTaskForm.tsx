@@ -34,7 +34,7 @@ export const AddTaskForm = () => {
 	const onSubmit: SubmitHandler<TTaskCreateForm> = async data => {
 		// fnc payload -> обработанная date: 
 		const taskPayload = prepareTaskPayload(data);
-		console.log('taskPayload:', taskPayload)
+		
 		try {
 			const task = await createTask(taskPayload); // ждём завершения создания task
 			// Сабтаск создаём только после того, как task гарантированно есть в БД

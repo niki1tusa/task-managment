@@ -6,6 +6,7 @@ import type { TByAscOrDesc, TStatus, TTask, TTaskCreateForm } from '@/shared/typ
 import { filterStatusTasks } from '@/utils/filterStatusTasks';
 import { createClient } from '@/utils/supabase/client';
 
+// read
 export async function getClientAllTask({
 	status,
 	sortByDue,
@@ -37,6 +38,7 @@ export async function getClientTaskById(id: string) {
 	if (error || !data) throw new Error(error?.message || 'Task not found/ task by id');
 	return data;
 }
+// create
 export async function createClientTask(task: TTaskCreateForm) {
 	const supabase = createClient();
 	const {
@@ -53,7 +55,20 @@ export async function createClientTask(task: TTaskCreateForm) {
 	if (error || !data) throw new Error(error?.message || 'create task is failed');
 	return data;
 }
+export async function createClientSubTask(
+	id: string,
+	sub_task: Database['public']['Tables']['sub_task']['Insert']
+) {
+	const { data, error } = await createClient()
+		.from('sub_task')
+		.insert({ ...sub_task, task_id: id })
+		.select()
+		.single();
+	if (error || !data) throw new Error(error?.message || 'Task not found/ create-sub-task');
+	return data;
+}
 
+// update
 export async function updateClientTask(
 	id: string,
 	task: Database['public']['Tables']['task']['Update']
@@ -68,20 +83,9 @@ export async function updateClientTask(
 	if (error || !data) throw new Error(error?.message || 'Task not found/ update-task');
 	return data;
 }
+// delete
 export async function deleteClientTask(id: string) {
 	const { data, error } = await createClient().from('task').delete().eq('id', id);
-	if (error || !data) throw new Error(error?.message || 'Task not found/ delete-task');
-	return data;
-}
-export async function createClientSubTask(
-	id: string,
-	sub_task: Database['public']['Tables']['sub_task']['Insert']
-) {
-	const { data, error } = await createClient()
-		.from('sub_task')
-		.insert({ ...sub_task, task_id: id })
-		.select()
-		.single();
-	if (error || !data) throw new Error(error?.message || 'Task not found/ create-sub-task');
+	if (error) throw new Error(error?.message || 'Task not found/ delete-task');
 	return data;
 }

@@ -12,7 +12,6 @@ export async function fetchCreateUser(fields: TRegistrationForm) {
 		email: fields.email,
 		password: fields.password,
 	});
-	console.log('authData:', authData);
 	if (authError || !authData?.user) {
 		throw new Error(authError?.message || 'Не удалось зарегистрировать пользователя');
 	}

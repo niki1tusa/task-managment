@@ -3,7 +3,7 @@
 import { Header } from '@/components/dashboard/header/Header';
 import { LastTasks } from '@/components/dashboard/last-tasks/LastTasks';
 import { Statistic } from '@/components/dashboard/statistic/Statistic';
-import { TodayTasks } from '@/components/dashboard/today-tasks/TodayTasks';
+import { Timeline } from '@/components/dashboard/timeline/Timeline';
 
 import type {
 	TGetChartPointResponse,
@@ -27,7 +27,7 @@ export const DashboardPageClient = ({
 			<Header />
 			<Statistic projectStats={projectStats} chartPoints={chartPoints} />
 			<LastTasks tasks={tasks} />
-			<TodayTasks todayTasks={todayTasks} />
+			<Timeline todayTasks={todayTasks} />
 		</div>
 	);
 };
