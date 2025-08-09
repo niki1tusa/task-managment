@@ -38,7 +38,7 @@ function TimelineTask({ task }: { task: TTask }) {
 						</span>
 						<span className='mt-1 text-white'>
 							<>
-								{format(start!, 'ha').toLowerCase()}- {format(end!, 'ha').toLowerCase()}
+								{format(start!, 'ha').toLowerCase()} - {format(end!, 'ha').toLowerCase()}
 							</>
 						</span>
 					</div>

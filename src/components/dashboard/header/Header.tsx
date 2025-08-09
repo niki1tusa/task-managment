@@ -1,7 +1,5 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-
 import { Bell } from '@/components/animate-ui/icons/bell';
 import { AnimateIcon } from '@/components/animate-ui/icons/icon';
 import { Title } from '@/components/ui/Title';

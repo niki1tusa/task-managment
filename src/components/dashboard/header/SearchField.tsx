@@ -8,6 +8,7 @@ export const SearchField = () => {
 				type='text'
 				className='px-2 py-2 outline-none w-[300px] '
 				placeholder='Search something...'
+				autoComplete="off"
 			/>
 		</span>
 	);

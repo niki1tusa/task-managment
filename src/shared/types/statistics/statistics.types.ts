@@ -20,6 +20,5 @@ export type TGetChartPointResponse = NonNullable<
 	Awaited<ReturnType<typeof fetchChartPoint>>['data']
 >;
 
-export type TGetClientChartPointResponse = NonNullable<
-	Awaited<ReturnType<typeof fetchClientChartPoint>>['data']
->;
+export type TGetClientChartPointResponse = NonNullable<Awaited<ReturnType<typeof fetchClientChartPoint>>['data']>
+

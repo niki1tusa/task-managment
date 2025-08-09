@@ -6,7 +6,6 @@ import { useFormatDateForTask } from '@/hooks/useFormatDateForTask';
 
 import { Avatar } from '../../../../ui/Avatar';
 
-
 export const Header = ({ task }: { task: TTask }) => {
 	const { TaskIcon, displayDue } = useFormatDateForTask(task);
 
@@ -28,7 +27,11 @@ export const Header = ({ task }: { task: TTask }) => {
 					.map((user, i) => {
 						if (i < 3) {
 							return (
-								<Avatar key={`${user.profile_id}-${i}`} img={user.profile.avatar_path || ''} />
+								<Avatar
+									key={`${user.profile_id}-${i}`}	
+									img={user.profile.avatar_path || ''}
+									isHoverResolution={true}
+								/>
 							);
 						}
 						return;

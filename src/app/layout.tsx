@@ -38,9 +38,19 @@ export default function RootLayout({
 	return (
 		<html lang='en' suppressHydrationWarning>
 			<body className={`${poppins.variable} ${playfairDisplay.variable} antialiased`}>
+				{/* Skip to main content link for keyboard navigation */}
+				<a 
+					href="#main-content" 
+					className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+				>
+					Skip to main content
+				</a>
+				
 				<ProviderWrapper>
 					{modals}
-					{children}
+					<main id="main-content" role="main">
+						{children}
+					</main>
 				</ProviderWrapper>
 			</body>
 		</html>

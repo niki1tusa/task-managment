@@ -9,7 +9,8 @@ export const useChat = () => {
 	const [messages, setMessages] = useState<TChatMessageRow[]>([]);
 
 	useEffect(() => {
-		supabase.current
+		const client = supabase.current;
+		client
 			.from('chat_message')
 			.select(
 				`*, profile:profile(
@@ -23,13 +24,13 @@ export const useChat = () => {
 				setMessages(data);
 			});
 
-		const channel = supabase.current
+		const channel = client
 			.channel('chat_message')
 			.on(
 				'postgres_changes',
 				{ event: 'INSERT', schema: 'public', table: 'chat_message' },
 				async payload => {
-					const { data } = await supabase.current
+					const { data } = await client
 						.from('chat_message')
 						.select(`*, profile:profile(id,name, avatar_path)`)
 						.eq('id', payload.new.id)
@@ -44,7 +45,7 @@ export const useChat = () => {
 			)
 			.subscribe();
 		return () => {
-			supabase.current.removeChannel(channel);
+			client.removeChannel(channel);
 		};
 	}, []);
 
@@ -62,7 +63,7 @@ export const useChat = () => {
 		const { data: userData } = await supabase.current.auth.getUser();
 		if (!userData?.user) return;
 
-		const { data: _data, error } = await supabase.current
+		const { error } = await supabase.current
 			.from('chat_message')
 			.insert({ text, user_id: userData.user.id });
 

@@ -17,16 +17,20 @@ export default function Chat({ data }: { data: TProfileRow }) {
 	const { messages, messagesEndRef, handleSend } = useChat();
 	const renderMessages = useMemo(() => {
 		return messages.map(m => <ChatMessage key={m.id} message={m} />);
-	}, [messages, data.id]);
+	}, [messages]);
 	return (
-		<aside className='fixed z-10 flex h-screen flex-col'>
+		<aside
+			className='fixed z-10 flex h-screen flex-col'
+			role='complementary'
+			aria-label='Chat panel'
+		>
 			<div className='absolute top-5 right-5 z-50'>
 				<ToggleTheme />
 			</div>
 			{/* Header image */}
-			<div className='h-[300px] w-full'>
+			<div className='h-[300px] w-full' role='img' aria-label='Chat header background'>
 				<Image
-					alt='chat'
+					alt='Chat header background'
 					src='/chat.jpg'
 					width={305}
 					height={100}
@@ -38,16 +42,25 @@ export default function Chat({ data }: { data: TProfileRow }) {
 			<div className='bg-primary/40 flex h-16 w-full flex-shrink-0 items-center gap-3 pl-10 font-semibold 2xl:h-30'>
 				<Avatar img={data.avatar_path || ''} />
 				<div className='flex flex-col'>
-					<div className='text-[1rem] 2xl:text-[1.2rem]'>{data.name}</div>
-					<div className='text-[0.8rem] 2xl:text-[1rem]'>occupation</div>
+					<div className='text-[1rem] 2xl:text-[1.2rem]' id='chat-user-name'>
+						{data.name}
+					</div>
+					<div className='text-[0.8rem] 2xl:text-[1rem]' aria-label='User occupation'>
+						occupation
+					</div>
 				</div>
 			</div>
 
 			{/* Messages */}
-			<div className='flex-1 overflow-y-auto px-2 py-2'>
+			<div
+				className='flex-1 overflow-y-auto px-2 py-2'
+				role='log'
+				aria-label='Chat messages'
+				aria-live='polite'
+			>
 				<div className='flex flex-col gap-3'>
 					{renderMessages}
-					<div ref={messagesEndRef} />
+					<div ref={messagesEndRef} aria-hidden='true' />
 				</div>
 			</div>
 

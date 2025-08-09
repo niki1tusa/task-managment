@@ -2,7 +2,6 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 

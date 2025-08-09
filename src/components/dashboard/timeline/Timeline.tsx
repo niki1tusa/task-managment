@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 
 import { Title } from '@/components/ui/Title';
 
@@ -14,7 +14,7 @@ import { timelineTaskPercent } from './timelineTaskPercent';
 
 const HOURS = Array.from({ length: 9 }, (_, i) => i + 9);
 
-function Timeline  ({ todayTasks }: { todayTasks: TTask[] }){
+function Timeline({ todayTasks }: { todayTasks: TTask[] }) {
 	const profiles = [
 		...new Map(
 			todayTasks
@@ -55,9 +55,7 @@ function Timeline  ({ todayTasks }: { todayTasks: TTask[] }){
 					))}
 					{todayTasks.map(task => {
 						if (!task.start_time || !task.end_time) return null;
-						const pct = useMemo(() => {
-							return timelineTaskPercent(task);
-						}, [task]);
+						const pct = timelineTaskPercent(task);
 
 						return (
 							<div
@@ -76,5 +74,5 @@ function Timeline  ({ todayTasks }: { todayTasks: TTask[] }){
 			</div>
 		</div>
 	);
-};
-export default memo(Timeline)
+}
+export default memo(Timeline);

@@ -3,25 +3,30 @@
 import clsx from 'clsx';
 import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
 import { useState } from 'react';
-import { type FieldErrors, type UseFormRegister } from 'react-hook-form';
+import {
+	type FieldErrors,
+	type FieldValues,
+	type Path,
+	type UseFormRegister,
+} from 'react-hook-form';
 
-interface Props {
-	// @ts-ignore
-	register: UseFormRegister<any>;
-	errors: FieldErrors;
+interface Props<T extends FieldValues> {
+	register: UseFormRegister<T>;
+	errors: FieldErrors<T>;
 	labelText: string;
-	registerName: string;
+	registerName: Path<T>;
 	type?: string;
 	placeholderText?: string;
 }
-export function Field({
+
+export function Field<T extends FieldValues>({
 	labelText,
 	registerName,
 	type = 'text',
 	placeholderText,
 	register,
 	errors,
-}: Props) {
+}: Props<T>) {
 	const [isShowEye, setIsShowEye] = useState(false);
 
 	return (

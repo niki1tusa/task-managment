@@ -11,7 +11,7 @@ export function useCloseModal() {
 		};
 		document.addEventListener('keydown', handleEscape);
 		return () => document.removeEventListener('keydown', handleEscape);
-	}, []);
+	}, [router]);
 
 	return;
 }
