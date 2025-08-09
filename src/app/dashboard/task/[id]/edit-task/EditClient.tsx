@@ -1,17 +1,12 @@
 'use client';
 
-import { ArrowLeftCircle } from 'lucide-react';
-import Link from 'next/link';
-
 import { Task } from '@/components/dashboard/last-tasks/task/Task';
+import BackLink from '@/components/ui/BackLink';
 import { Title } from '@/components/ui/Title';
 
 import type { TGetTasksResponse, TTask } from '@/shared/types/task/task.types';
 
-import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
-
 import { ListSubTask } from '../../../../../components/dashboard/modals/ListSubTask';
-import BackLink from '@/components/ui/BackLink';
 
 interface Props {
 	id: string;
@@ -23,7 +18,7 @@ export const EditClient = ({ id, tasks }: Props) => {
 		<div className='px-5 py-3'>
 			<div className='flex flex-col gap-3 p-6'>
 				<Title>Edit Task</Title>
-		<BackLink text='Back to Dashboard'/>
+				<BackLink text='Back to Dashboard' />
 				<h2>Task id &rdquo;{id}&rdquo;</h2>
 				<div className='w-[60%]'>
 					<Task task={findTask} />

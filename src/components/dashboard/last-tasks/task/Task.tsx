@@ -9,19 +9,13 @@ import type { TSubTaskRow, TTask } from '@/shared/types/task/task.types';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
-import { Avatar } from '../../../ui/Avatar';
-
 import { Footer } from './Footer';
 import { StatusBar } from './StatusBar';
 import { Header } from './header/Header';
 
-interface Props {
-	task: TTask;
-	className?: string;
-}
-
-export const Task = ({ task, className }: Props) => {
+export const Task = ({ task }: { task: TTask }) => {
 	const router = useRouter();
+
 	const status = (data: TTask) => {
 		return Math.floor(
 			(data.sub_task.filter((item: TSubTaskRow) => item.is_completed === true).length /
@@ -59,7 +53,6 @@ export const Task = ({ task, className }: Props) => {
 				<StatusBar status={status(task)} />
 
 				<Footer task={task} />
-				
 			</motion.div>
 		</div>
 	);

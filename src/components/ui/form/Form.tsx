@@ -1,9 +1,11 @@
 import type { FieldValues } from 'react-hook-form';
-import type { IForm } from './form.types';
-import { IconField } from '../field/IconField';
+
+import { Button } from '../Button';
 import { DateField } from '../field/DateField';
 import { Field } from '../field/Field';
-import { Button } from '../Button';
+import { IconField } from '../field/IconField';
+
+import type { IForm } from './form.types';
 
 export default function Form<T extends FieldValues>({
 	formElement,
@@ -29,7 +31,7 @@ export default function Form<T extends FieldValues>({
 								key={i}
 								labelText={item.props.labelText}
 								placeholderText={item.props.placeholderText}
-								control={control} 
+								control={control}
 								errors={errors}
 							/>
 						);
@@ -48,7 +50,7 @@ export default function Form<T extends FieldValues>({
 				}
 			})}
 
-			<Button type='submit' className={btnClassName} isDisable={isPending}>
+			<Button type='submit' className={btnClassName} disable={isPending}>
 				{isPending ? 'Sending...' : btnText}
 			</Button>
 		</form>

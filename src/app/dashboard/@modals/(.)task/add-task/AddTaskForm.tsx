@@ -17,6 +17,7 @@ import { WrapperModal } from '../../../../../components/dashboard/modals/Wrapper
 import { TASK_EDIT_FIELDS } from '../[id]/edit-task/task.edit.data';
 
 import { createClientSubTask, createClientTask } from '@/services/tasks/task-client.service';
+import { useCloseModal } from '@/hooks/useCloseModal';
 
 export const AddTaskForm = () => {
 	const router = useRouter();
@@ -62,16 +63,10 @@ export const AddTaskForm = () => {
 		formState: { errors },
 		handleSubmit,
 	} = useForm<TTaskCreateForm>();
+
+
 	const closeModal = () => router.back();
-	useEffect(() => {
-		const handleEscape = (e: KeyboardEvent) => {
-			if (e.key === 'Escape') {
-				closeModal();
-			}
-		};
-		document.addEventListener('keydown', handleEscape);
-		return () => document.removeEventListener('keydown', handleEscape);
-	}, [closeModal]);
+	useCloseModal()
 
 	return (
 		<WrapperModal closeModal={closeModal}>

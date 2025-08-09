@@ -11,7 +11,7 @@ interface Props {
 }
 export default function FilterTask({ select, setSelect, sortOrder, setSortOrder }: Props) {
 	return (
-		<div>
+		<div className='flex gap-2'>
 			{/* tabs */}
 			<div className='mb-4 flex gap-2 rounded-[4px] border border-white py-1 pl-2 shadow shadow-neutral-400'>
 				{BUTTONS_OPTIONS.map(button => (
@@ -27,12 +27,12 @@ export default function FilterTask({ select, setSelect, sortOrder, setSortOrder 
 					>
 						{button}
 					</button>
-				))}
+				))}{' '}
 			</div>
 			{/* select */}
 			<select
 				value={sortOrder}
-				onChange={e => setSortOrder(e.target.value as TByAscOrDesc) }
+				onChange={e => setSortOrder(e.target.value as TByAscOrDesc)}
 				className='mb-4 rounded-[4px] border border-white px-4 py-1.5 text-sm text-gray-500 shadow shadow-neutral-400 dark:bg-black'
 			>
 				{SELECT_OPTIONS.map(option => (

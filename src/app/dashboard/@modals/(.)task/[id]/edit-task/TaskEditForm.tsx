@@ -14,6 +14,8 @@ import type { MODAL_ICON } from '@/shared/data/icon.data';
 import type { Database } from '@/shared/types/db/db.types';
 import { type TFormData, ZTaskEditScheme } from '@/shared/types/form/scheme.zod';
 
+import { useCloseModal } from '@/hooks/useCloseModal';
+
 import Form from '../../../../../../components/ui/form/Form';
 
 import { TASK_EDIT_FIELDS } from './task.edit.data';
@@ -22,15 +24,7 @@ import { getClientTaskById, updateClientTask } from '@/services/tasks/task-clien
 export const TaskEditForm = ({ id }: { id: string }) => {
 	const router = useRouter();
 	const closeModal = () => router.back();
-	useEffect(() => {
-		const handleEscape = (e: KeyboardEvent) => {
-			if (e.key === 'Escape') {
-				closeModal();
-			}
-		};
-		document.addEventListener('keydown', handleEscape);
-		return () => document.removeEventListener('keydown', handleEscape);
-	}, [closeModal]);
+	useCloseModal();
 
 	// react-hook-form
 	const {

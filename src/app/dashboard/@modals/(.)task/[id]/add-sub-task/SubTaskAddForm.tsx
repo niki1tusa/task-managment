@@ -3,13 +3,14 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import Form from '@/components/ui/form/Form';
 
 import { type TSubTaskRowForm, ZSubTaskScheme } from '@/shared/types/form/scheme.zod';
+
+import { useCloseModal } from '@/hooks/useCloseModal';
 
 import Header from '../../../../../../components/dashboard/modals/Header.modal';
 import { WrapperModal } from '../../../../../../components/dashboard/modals/Wrapper.modal';
@@ -19,6 +20,7 @@ import { createClientSubTask } from '@/services/tasks/task-client.service';
 
 export const SubTaskAddForm = ({ id }: { id: string }) => {
 	const router = useRouter();
+	const closeModal = () => router.back();
 
 	const { mutate, isPending } = useMutation({
 		mutationKey: ['createSubTask', id],
@@ -33,16 +35,7 @@ export const SubTaskAddForm = ({ id }: { id: string }) => {
 		formState: { errors },
 		handleSubmit,
 	} = useForm<TSubTaskRowForm>({ resolver: zodResolver(ZSubTaskScheme) });
-	const closeModal = () => router.back();
-	useEffect(() => {
-		const handleEscape = (e: KeyboardEvent) => {
-			if (e.key === 'Escape') {
-				closeModal();
-			}
-		};
-		document.addEventListener('keydown', handleEscape);
-		return () => document.removeEventListener('keydown', handleEscape);
-	}, []);
+	useCloseModal();
 	const onSubmit: SubmitHandler<TSubTaskRowForm> = data => {
 		mutate(data);
 		closeModal();

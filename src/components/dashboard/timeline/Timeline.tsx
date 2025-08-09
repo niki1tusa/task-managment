@@ -1,27 +1,20 @@
 'use client';
 
 import clsx from 'clsx';
+import { memo, useMemo } from 'react';
 
 import { Title } from '@/components/ui/Title';
 
 import type { TTask } from '@/shared/types/task/task.types';
 
 import { Avatar } from '../../ui/Avatar';
-import { Task } from '../last-tasks/task/Task';
+
 import TimelineTask from './TimelineTask';
+import { timelineTaskPercent } from './timelineTaskPercent';
 
 const HOURS = Array.from({ length: 9 }, (_, i) => i + 9);
-// helpers
-const WINDOW_START_MIN = 9 * 60; // 09:00
-const WINDOW_END_MIN = 17 * 60; // 17:00
-const WINDOW_SPAN_MIN = WINDOW_END_MIN - WINDOW_START_MIN; // 480
 
-function timeStrToMinutes(t: string) {
-	const [h, m, s] = t.split(':').map(Number);
-	return h * 60 + m + (s ? Math.floor(s / 60) : 0);
-}
-
-export const Timeline = ({ todayTasks }: { todayTasks: TTask[] }) => {
+function Timeline  ({ todayTasks }: { todayTasks: TTask[] }){
 	const profiles = [
 		...new Map(
 			todayTasks
@@ -62,26 +55,20 @@ export const Timeline = ({ todayTasks }: { todayTasks: TTask[] }) => {
 					))}
 					{todayTasks.map(task => {
 						if (!task.start_time || !task.end_time) return null;
+						const pct = useMemo(() => {
+							return timelineTaskPercent(task);
+						}, [task]);
 
-						const startMin = timeStrToMinutes(task.start_time);
-						const endMin = timeStrToMinutes(task.end_time);
-
-						const clampedStart = Math.max(WINDOW_START_MIN, Math.min(startMin, WINDOW_END_MIN));
-						const clampedEnd = Math.max(WINDOW_START_MIN, Math.min(endMin, WINDOW_END_MIN));
-
-						const startPct = ((clampedStart - WINDOW_START_MIN) / WINDOW_SPAN_MIN) * 100;
-						const endPct = ((clampedEnd - WINDOW_START_MIN) / WINDOW_SPAN_MIN) * 100;
-						const widthPct = Math.max(0, endPct - startPct);
 						return (
 							<div
 								key={task.id}
 								className='absolute top-8'
 								style={{
-									left: `${startPct}%`,
-									width: `${widthPct}%`,
+									left: `${pct.startPct}%`,
+									width: `${pct.widthPct}%`,
 								}}
 							>
-								<TimelineTask task={task}  />
+								<TimelineTask task={task} />
 							</div>
 						);
 					})}
@@ -90,3 +77,4 @@ export const Timeline = ({ todayTasks }: { todayTasks: TTask[] }) => {
 		</div>
 	);
 };
+export default memo(Timeline)
