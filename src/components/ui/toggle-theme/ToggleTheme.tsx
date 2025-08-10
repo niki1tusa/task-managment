@@ -18,7 +18,7 @@ export const ToggleTheme = () => {
 
 	return (
 		<button
-			className='bg-background rounded-full px-1 py-1 text-center shadow shadow-neutral-600 transition-colors duration-1000'
+			className='bg-background border rounded-full px-1 py-1 text-center shadow shadow-neutral-600 transition-colors duration-1000'
 			onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
 		>
 			{theme === 'dark' ? <Moon size={30} /> : <SunDim className='text-yellow' size={30} />}

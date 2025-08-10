@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 	},
 	title: {
 		absolute: SITE_NAME,
-		template: `%s | ${SITE_NAME}`,
+		template: `${SITE_NAME} | %s`,
 	},
 	description: 'This is gentle app for your management.',
 };

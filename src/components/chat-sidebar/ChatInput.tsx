@@ -40,13 +40,13 @@ const ChatInput = ({ handleSend }: { handleSend: (text: string) => Promise<void>
 				<button
 					disabled={!text.trim()}
 					onClick={sendMessage}
-					className={`flex h-10 w-10 items-center shadow shadow-neutral-400 justify-center rounded-full transition-colors ${
+					className={`relative h-10 w-10  shadow shadow-neutral-400  rounded-full transition-colors ${
 						text.trim()
 							? 'bg-indigo-500 hover:bg-indigo-600'
 							: 'cursor-not-allowed bg-gray-300 dark:bg-gray-600'
 					}`}
 				>
-					<SendIcon size={22} className='text-white' />
+					<SendIcon size={24} className='text-white absolute right-2.5 top-2.5' />
 				</button>
 			</AnimateIcon>
 		</div>

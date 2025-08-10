@@ -12,12 +12,18 @@ export default function HomeClient() {
 			{/* Header */}
 			<header className='mx-5 mt-6 flex items-center justify-around text-lg'>
 				<GradientText className='text-2xl font-bold' text='Task Hub' />
-				<div className='flex gap-2 items-center'>
-					<Link href={PUBLIC_PAGES.LOGIN}>
+				<div className='flex items-center gap-2'>
+					<Link
+						href={PUBLIC_PAGES.LOGIN}
+						className='rounded-xl border px-3 py-0.5 shadow shadow-neutral-400'
+					>
 						<GradientText text='Login' className='font-medium' />
 					</Link>
-                   <i className='text-[1rem] font-medium'>/</i> 
-					<Link href={PUBLIC_PAGES.REGISTER}>
+					<i className='text-[1rem] font-medium'></i>
+					<Link
+						href={PUBLIC_PAGES.REGISTER}
+						className='rounded-xl border px-3 py-0.5 shadow shadow-neutral-400'
+					>
 						<GradientText text='Register' className='font-medium' />
 					</Link>
 				</div>
@@ -33,7 +39,7 @@ export default function HomeClient() {
 				</p>
 				<Link
 					href={PUBLIC_PAGES.LOGIN}
-					className='bg-primary hover:bg-primary/90 mt-8 rounded-xl px-6 py-3 text-base font-semibold text-white transition'
+					className='bg-primary hover:bg-primary/90 mt-8 rounded-xl px-6 py-3 text-base font-semibold text-white transition hover:text-white/70 dark:border-2'
 				>
 					Get Started
 				</Link>
