@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -14,17 +15,17 @@ export const MenuItem = ({ item }: { item: IMenuItem }) => {
 		<AnimateIcon animateOnHover>
 			<Link
 				href={item.link}
-				className='text-gray hover:bg-primary flex items-center gap-1.5 rounded-4xl px-3 py-1 text-sm font-semibold transition-colors duration-300 hover:text-white 2xl:text-lg'
+				className={clsx(
+					'text-gray flex items-center gap-1.5 rounded-4xl px-3 py-1 text-sm font-semibold transition-colors duration-300  2xl:text-lg',
+					activeLink  ? 'bg-primary dark:bg-transparent dark:border-2  text-white' : 'hover:text-primary'
+				)}
 			>
 				<item.Icon />
 				{item.color && <div className={`h-3 w-3 ${item.color}`} />}
-				{activeLink ? (
-					<div className='text-foreground/50 border-b-2 font-bold transition-colors hover:text-white'>
-						{item.title}
-					</div>
-				) : (
-					<div>{item.title}</div>
-				)}
+
+				<div className=' font-bold transition-colors '>
+					{item.title}
+				</div>
 			</Link>
 		</AnimateIcon>
 	);

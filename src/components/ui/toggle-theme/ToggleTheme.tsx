@@ -2,9 +2,19 @@
 
 import { Moon, SunDim } from 'lucide-react';
 import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 export const ToggleTheme = () => {
 	const { theme, setTheme } = useTheme();
+	const [mounted, setMounted] = useState(false);
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	if (!mounted) {
+		return null; // избегаем SSR-клиент различий
+	}
 
 	return (
 		<button

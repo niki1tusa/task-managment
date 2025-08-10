@@ -70,18 +70,21 @@ export type Database = {
           email: string | null
           id: string
           name: string | null
+          occupation: string | null
         }
         Insert: {
           avatar_path?: string | null
           email?: string | null
           id: string
           name?: string | null
+          occupation?: string | null
         }
         Update: {
           avatar_path?: string | null
           email?: string | null
           id?: string
           name?: string | null
+          occupation?: string | null
         }
         Relationships: []
       }
@@ -154,7 +157,7 @@ export type Database = {
           due_date: string
           end_time?: string | null
           icon?: string | null
-          id: string
+          id?: string
           owner_id?: string | null
           start_time?: string | null
           title: string
@@ -208,21 +211,6 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
-      }
-      time_ranges: {
-        Row: {
-          label: string
-          value: string
-        }
-        Insert: {
-          label: string
-          value: string
-        }
-        Update: {
-          label?: string
-          value?: string
-        }
-        Relationships: []
       }
     }
     Views: {
