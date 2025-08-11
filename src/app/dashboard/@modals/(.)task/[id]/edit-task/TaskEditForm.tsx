@@ -7,8 +7,8 @@ import { useEffect } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import Header from '@/components/dashboard/modals/Header.modal';
-import { WrapperModal } from '@/components/dashboard/modals/Wrapper.modal';
+import Header from '@/components/ui/modal/Header.modal';
+import { WrapperModal } from '@/components/ui/modal/wrapper.modal';
 
 import type { MODAL_ICON } from '@/shared/data/icon.data';
 import type { Database } from '@/shared/types/db/db.types';

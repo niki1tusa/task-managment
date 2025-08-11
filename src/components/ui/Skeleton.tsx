@@ -13,7 +13,7 @@ export default function Skeleton({
 	height?: string;
 	className?: string;
 }) {
-	const arr = Array.from({ length: length }, (v, i) => i);
+	const arr = Array.from({ length: length }, (_, i) => i);
 
 	return length > 1 ? (
 		<>

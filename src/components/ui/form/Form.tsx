@@ -41,7 +41,7 @@ export default function Form<T extends FieldValues>({
 								key={i}
 								register={register}
 								labelText={item.props.labelText}
-								registerName={item.props.registerName as string}
+								registerName={item.props.registerName}
 								placeholderText={item.props.placeholderText}
 								type={item.props.type}
 								errors={errors}

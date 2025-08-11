@@ -1,12 +1,13 @@
 'use client';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-// import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ThemeProvider } from 'next-themes';
 import { type ReactNode, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 
 import { ToggleTheme } from '@/components/ui/toggle-theme/ToggleTheme';
+
+import { ModalProvider } from './ModalProvider';
 
 export const ProviderWrapper = ({ children }: { children: ReactNode }) => {
 	const [queryClient] = useState(() => new QueryClient());
@@ -17,9 +18,9 @@ export const ProviderWrapper = ({ children }: { children: ReactNode }) => {
 					<ToggleTheme />
 				</div>
 				<ToastContainer />
+				<ModalProvider />
 				{children}
 			</ThemeProvider>
-			{/* <ReactQueryDevtools initialIsOpen={false} /> */}
 		</QueryClientProvider>
 	);
 };

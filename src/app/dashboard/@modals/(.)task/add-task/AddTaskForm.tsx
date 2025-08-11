@@ -9,14 +9,15 @@ import Form from '@/components/ui/form/Form';
 
 import type { TSubTaskInsert, TTaskCreateForm } from '@/shared/types/task/task.types';
 
+import { useCloseModal } from '@/hooks/useCloseModal';
+
 import { prepareTaskPayload } from '@/utils/format-date-createTask';
 
-import Header from '../../../../../components/dashboard/modals/Header.modal';
-import { WrapperModal } from '../../../../../components/dashboard/modals/Wrapper.modal';
+import Header from '../../../../../components/ui/modal/Header.modal';
+import { WrapperModal } from '../../../../../components/ui/modal/wrapper.modal';
 import { TASK_EDIT_FIELDS } from '../[id]/edit-task/task.edit.data';
 
 import { createClientSubTask, createClientTask } from '@/services/tasks/task-client.service';
-import { useCloseModal } from '@/hooks/useCloseModal';
 
 export const AddTaskForm = () => {
 	const router = useRouter();
@@ -32,9 +33,9 @@ export const AddTaskForm = () => {
 	});
 
 	const onSubmit: SubmitHandler<TTaskCreateForm> = async data => {
-		// fnc payload -> обработанная date: 
+		// fnc payload -> обработанная date:
 		const taskPayload = prepareTaskPayload(data);
-		
+
 		try {
 			const task = await createTask(taskPayload); // ждём завершения создания task
 			// Сабтаск создаём только после того, как task гарантированно есть в БД
@@ -63,9 +64,8 @@ export const AddTaskForm = () => {
 		handleSubmit,
 	} = useForm<TTaskCreateForm>();
 
-
 	const closeModal = () => router.back();
-	useCloseModal()
+	useCloseModal();
 
 	return (
 		<WrapperModal closeModal={closeModal}>

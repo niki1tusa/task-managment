@@ -1,8 +1,4 @@
-import type { TTaskCreateForm } from '@/shared/types/task/task.types';
-import type { FormElement } from '../../../../../../components/ui/form/form.types';
-
-
-export const TASK_EDIT_FIELDS: FormElement<TTaskCreateForm>[] = [
+export const TASK_EDIT_FIELDS = [
 	{
 		type: 'field',
 		props: {

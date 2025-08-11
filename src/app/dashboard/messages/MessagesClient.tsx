@@ -1,72 +1,41 @@
 'use client';
 
-import clsx from 'clsx';
+import { useQuery } from '@tanstack/react-query';
 import { SquarePlus } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
-import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/components/tabs';
 import ChatInput from '@/components/chat-sidebar/ChatInput';
 import ChatMessage from '@/components/chat-sidebar/ChatMessage';
 import { useChat } from '@/components/chat-sidebar/useChat';
 import { Avatar } from '@/components/ui/Avatar';
-import { Button } from '@/components/ui/Button';
+import Skeleton from '@/components/ui/Skeleton';
 import { Title } from '@/components/ui/Title';
 
 import type { TProfileRow } from '@/shared/types/task/task.types';
 
-import type { TChannelRow } from './channel.types';
+import ChannelsSide from './ChannelsSide';
+import PartySide from './PartySide';
+import { getClientChannels } from '@/services/channel/channel-client.service';
 
 interface Props {
 	data: TProfileRow;
-	channels: TChannelRow[];
 }
-export function MessagesClient({ data, channels }: Props) {
-	console.log(channels)
+export function MessagesClient({ data }: Props) {
+	const { data: channels, isLoading } = useQuery({
+		queryKey: ['channels'],
+		queryFn: async () => await getClientChannels(),
+	});
+	console.log(channels);
 	const { messages, messagesEndRef, handleSend } = useChat();
 	const renderMessages = useMemo(() => {
 		return messages.map(m => <ChatMessage key={m.id} message={m} />);
 	}, [messages]);
-	const [sortType, setSortType] = useState<string>('all');
-	const sortedChannels =
-		sortType === 'all' ? channels : channels.filter(channel => channel.type === sortType);
+
 	return (
-		<div className='grid h-full w-full grid-cols-[1fr_3fr] border-l-2 bg-gray-50 dark:bg-gray-900'>
+		<div className='grid h-full w-full grid-cols-[3fr_5fr] border-l-2 bg-gray-50 dark:bg-gray-900'>
 			{/* Channel */}
-			<div className='border-r-2'>
-				<div className='mx-5 mt-7 flex items-center justify-between'>
-					<Title heading='page'>Channels</Title>
-					<SquarePlus />
-				</div>
-				<div className='mt-1 border-t-2' />
-				<Tabs defaultValue='All' className='dark:bg-muted bg-gray w-full'>
-					<TabsList className='grid w-full grid-cols-3 rounded-none border-b-2'>
-						<TabsTrigger onClick={() => setSortType('all')} value='All'>
-							All
-						</TabsTrigger>
-						<TabsTrigger onClick={() => setSortType('group')} value='Group'>
-							Group
-						</TabsTrigger>
-						<TabsTrigger onClick={() => setSortType('direct')} value='Direct'>
-							Direct
-						</TabsTrigger>
-					</TabsList>
-				</Tabs>
-				<div className='mt-5 ml-5 flex flex-col items-start gap-2'>
-					{sortedChannels.map((channel, i) => (
-						<Button
-							className={clsx(
-								'bg-primary rounded-sm px-2 py-2 text-sm shadow shadow-neutral-400 transition-colors 2xl:text-lg dark:text-white',
-								i < 1
-									? 'bg-primary text-white'
-									: 'bg-primary/40 text-primary hover:bg-primary/50 dark:text-white/40'
-							)}
-							key={i}
-						>
-							# {channel.name}
-						</Button>
-					))}
-				</div>
-			</div>
+			{isLoading ? <Skeleton  height='h-screen' /> : <ChannelsSide channels={channels || []} />}
+
 			{/* Chat */}
 			<div className='flex h-screen flex-col' role='complementary' aria-label='Chat panel'>
 				{/* User info */}

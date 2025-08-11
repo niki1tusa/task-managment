@@ -12,8 +12,8 @@ import { type TSubTaskRowForm, ZSubTaskScheme } from '@/shared/types/form/scheme
 
 import { useCloseModal } from '@/hooks/useCloseModal';
 
-import Header from '../../../../../../components/dashboard/modals/Header.modal';
-import { WrapperModal } from '../../../../../../components/dashboard/modals/Wrapper.modal';
+import Header from '../../../../../../components/ui/modal/Header.modal';
+import { WrapperModal } from '../../../../../../components/ui/modal/wrapper.modal';
 
 import { SUB_TASK_ADD_FIELDS } from './subtask.add.data';
 import { createClientSubTask } from '@/services/tasks/task-client.service';

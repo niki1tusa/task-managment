@@ -1,10 +1,10 @@
 'use client';
 
-import cn from 'clsx';
+import clsx from 'clsx';
 
 import { ICON_NAMES, MODAL_ICON } from '@/shared/data/icon.data';
+import type { IIconField } from '../form/form.types';
 
-import type { IIconField } from './field.types';
 
 export function IconField({ setValue, watch }: IIconField) {
 	return (
@@ -18,7 +18,7 @@ export function IconField({ setValue, watch }: IIconField) {
 							onClick={() => setValue('icon', name)}
 							type='button'
 							key={name}
-							className={cn(
+							className={clsx(
 								'bg-primary hover:bg-primary/50 rounded-sm p-2 text-white transition-colors',
 								{
 									'border-2 border-indigo-800 shadow shadow-neutral-400': watch('icon') === name,

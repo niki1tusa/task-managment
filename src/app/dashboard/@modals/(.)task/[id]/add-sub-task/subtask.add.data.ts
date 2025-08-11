@@ -1,6 +1,5 @@
-import type { FormElement } from '../../../../../../components/ui/form/form.types';
 
-export const SUB_TASK_ADD_FIELDS: FormElement[] = [
+export const SUB_TASK_ADD_FIELDS = [
 	{
 		type: 'field',
 		props: {

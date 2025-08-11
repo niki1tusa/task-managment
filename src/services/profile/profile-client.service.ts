@@ -15,3 +15,11 @@ export async function getProfile() {
 
     return { ...user, ...data };
 }
+
+
+export async function getAllProfile() {
+    const client = createClient();
+    const { data, error } = await client.from('profile').select('*');
+    if (error || !data) throw new Error(error?.message || 'Profiles not found');
+    return data 
+}

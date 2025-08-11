@@ -16,17 +16,17 @@ import { Kanban } from '@/components/animate-ui/icons/kanban';
 export const MENU: IMenuItem[] = [
 	{
 		title: 'Dashboard',
-		Icon: LayoutDashboard,
+		Icon: LayoutDashboard as React.ComponentType<React.SVGProps<SVGSVGElement>>,
 		link: DASHBOARD_PAGES.DASHBOARD,
 	},
 	{
 		title: 'Message',
-		Icon: MessageCircleMoreIcon,
+		Icon: MessageCircleMoreIcon as React.ComponentType<React.SVGProps<SVGSVGElement>>,
 		link: DASHBOARD_PAGES.MESSAGES,
 	},
 	{
 		title: 'Insight',
-		Icon: Kanban,
+		Icon: Kanban as React.ComponentType<React.SVGProps<SVGSVGElement>>,
 		link: DASHBOARD_PAGES.INSIGHT,
 	},
 	{
@@ -46,7 +46,7 @@ export const MENU: IMenuItem[] = [
 	},
 	{
 		title: 'Settings',
-		Icon: SettingsIcon,
+		Icon: SettingsIcon as React.ComponentType<React.SVGProps<SVGSVGElement>>,
 		link: DASHBOARD_PAGES.SETTINGS,
 	},
 ];
