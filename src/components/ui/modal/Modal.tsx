@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/Button';
 
 import { useClickOutside } from '@/hooks/useClickOutside';
 
-import { WrapperModal } from './wrapper.modal';
+import { WrapperModal } from './WrapperModal';
 
 interface Props {
 	title: string;

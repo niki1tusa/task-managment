@@ -2,30 +2,29 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import Header from '@/components/ui/modal/Header.modal';
-import { WrapperModal } from '@/components/ui/modal/wrapper.modal';
+import Modal from '@/components/ui/modal/Modal';
 
 import type { MODAL_ICON } from '@/shared/data/icon.data';
 import type { Database } from '@/shared/types/db/db.types';
 import { type TFormData, ZTaskEditScheme } from '@/shared/types/form/scheme.zod';
 
-import { useCloseModal } from '@/hooks/useCloseModal';
 
-import Form from '../../../../../../components/ui/form/Form';
 
 import { TASK_EDIT_FIELDS } from './task.edit.data';
 import { getClientTaskById, updateClientTask } from '@/services/tasks/task-client.service';
+import { useModalStore } from '@/store/modals.store';
+import Form from '@/components/ui/form/Form';
 
-export const TaskEditForm = ({ id }: { id: string }) => {
-	const router = useRouter();
-	const closeModal = () => router.back();
-	useCloseModal();
 
+
+
+export const UpdateTaskModal = ({ id }: { id: string }) => {
+
+	const {close} = useModalStore()
 	// react-hook-form
 	const {
 		reset,
@@ -63,7 +62,7 @@ export const TaskEditForm = ({ id }: { id: string }) => {
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ['task', id] });
 			toast.success('Task updated successfully!');
-			closeModal();
+			close();
 		},
 		onError: error => {
 			console.log(error);
@@ -75,25 +74,18 @@ export const TaskEditForm = ({ id }: { id: string }) => {
 	};
 	if (!id) return null;
 	return (
-		<WrapperModal closeModal={closeModal}>
-			<div
-				onClick={e => e.stopPropagation()}
-				className='fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white p-4 text-black shadow-lg'
-			>
-				<Header title={`Edit task`} closeModal={closeModal} />
-
-				<Form
-					setValue={setValue}
-					watch={watch}
-					control={control}
-					formElement={TASK_EDIT_FIELDS}
-					handleOnSubmit={handleSubmit(onSubmit)}
-					register={register}
-					errors={errors}
-					isPending={isPending}
-					btnText='Submit'
-				/>
-			</div>
-		</WrapperModal>
+		<Modal title='Edit Task' close={close}>
+			<Form
+				setValue={setValue}
+				watch={watch}
+				control={control}
+				formElement={TASK_EDIT_FIELDS}
+				handleOnSubmit={handleSubmit(onSubmit)}
+				register={register}
+				errors={errors}
+				isPending={isPending}
+				btnText='Submit'
+			/>
+		</Modal>
 	);
 };

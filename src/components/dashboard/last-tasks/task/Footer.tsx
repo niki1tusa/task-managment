@@ -7,7 +7,6 @@ import {
 	Plus,
 	Trash2,
 } from 'lucide-react';
-import { usePathname } from 'next/navigation';
 
 import { Brush } from '@/components/animate-ui/icons/brush';
 import { AnimateIcon } from '@/components/animate-ui/icons/icon';
@@ -18,10 +17,7 @@ import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
 import { useModalStore } from '@/store/modals.store';
 
-import { TaskBtnAction } from './TaskBtnAction';
-
 export const Footer = ({ task }: { task: TTask }) => {
-	const pathname = usePathname();
 	const { open } = useModalStore();
 	return (
 		<div className='mx-5 flex items-center justify-between pb-2'>
@@ -41,22 +37,32 @@ export const Footer = ({ task }: { task: TTask }) => {
 					className='flex h-9 w-9 items-center justify-center rounded-full bg-red-500/80 text-white shadow shadow-neutral-400'
 					onClick={e => {
 						e.stopPropagation();
-						console.log('delete confirm');
 						open('deleteTask', task);
 					}}
 				>
 					<Trash2 />
 				</button>
-				<TaskBtnAction href={DASHBOARD_PAGES.ADD_SUBTASK(task.id)}>
+
+				<button
+					onClick={e => {
+						e.stopPropagation();
+						open('createSubTask', task.id);
+					}}
+					className='bg-primary flex h-9 w-9 items-center justify-center rounded-full text-white shadow shadow-neutral-400'
+				>
 					<Plus />
-				</TaskBtnAction>
-				{pathname !== DASHBOARD_PAGES.TASK_EDIT(task.id) && (
-					<TaskBtnAction href={DASHBOARD_PAGES.TASK_EDIT(task.id)}>
-						<AnimateIcon animateOnHover>
-							<Brush size={22} />
-						</AnimateIcon>
-					</TaskBtnAction>
-				)}
+				</button>
+				<button
+					onClick={e => {
+						e.stopPropagation();
+						open('updateTask', task.id);
+					}}
+					className='bg-primary flex h-9 w-9 items-center justify-center rounded-full text-white shadow shadow-neutral-400'
+				>
+					<AnimateIcon animateOnHover>
+						<Brush size={22} />
+					</AnimateIcon>
+				</button>
 			</div>
 		</div>
 	);

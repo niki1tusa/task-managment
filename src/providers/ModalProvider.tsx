@@ -1,6 +1,9 @@
 import { CreateChannelModal } from '@/app/dashboard/messages/CreateChannelModal';
+import { CreateSubtaskModal } from '@/components/modals/add-sub-task/CreateSubtaskModal';
+import { CreateTaskModal } from '@/components/modals/add-task/CreateTaskModal';
+import DeleteConfirmModals from '@/components/modals/DeleteConfirmModals';
+import { UpdateTaskModal } from '@/components/modals/edit-task/UpdateTaskModal';
 
-import DeleteConfirmModals from '@/components/dashboard/modals/DeleteConfirmModals';
 
 import { useModalStore } from '@/store/modals.store';
 
@@ -16,13 +19,13 @@ export const ModalProvider = () => {
 		return <DeleteConfirmModals {...payload} close={close} />;
 	}
 		if (type === 'createTask') {
-		return <DeleteConfirmModals {...payload} close={close} />;
+		return <CreateTaskModal {...payload} close={close} />;
 	}
 		if (type === 'createSubTask') {
-		return <DeleteConfirmModals {...payload} close={close} />;
+		return <CreateSubtaskModal {...payload} close={close} />;
 	}
 		if (type === 'updateTask') {
-		return <DeleteConfirmModals {...payload} close={close} />;
+		return <UpdateTaskModal {...payload} close={close} />;
 	}
 
 	return null;
