@@ -34,7 +34,7 @@ export function MessagesClient({ data }: Props) {
 	return (
 		<div className='grid h-full w-full grid-cols-[3fr_5fr] border-l-2 bg-gray-50 dark:bg-gray-900'>
 			{/* Channel */}
-			{isLoading ? <Skeleton  height='h-screen' /> : <ChannelsSide channels={channels || []} />}
+			{isLoading ? <Skeleton length={1}  height='h-screen' /> : <ChannelsSide channels={channels || []} />}
 
 			{/* Chat */}
 			<div className='flex h-screen flex-col' role='complementary' aria-label='Chat panel'>
@@ -49,7 +49,7 @@ export function MessagesClient({ data }: Props) {
 							</span>
 						</div>
 						<div
-							className='text-sidebar-primary/80 text-[0.8rem] 2xl:text-[1rem]'
+							className='text-sidebar-primary/80 dark:text-white text-[0.8rem] 2xl:text-[1rem]'
 							aria-label='User occupation'
 						>
 							{data.occupation}

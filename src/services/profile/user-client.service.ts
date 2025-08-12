@@ -6,25 +6,32 @@ import { createClient } from '@/utils/supabase/client';
 
 export async function fetchCreateUser(fields: TRegistrationForm) {
 	const client = createClient();
-// TODO: сделать проверку на существующего пользователя и у меня не создается profile, хотя user создаётся
-	// Регистрация в Supabase Auth
+	// Проверяем, есть ли профиль с таким email
+	const { data: existingProfile, error: profileCheckError } = await client
+		.from('profile')
+		.select('id')
+		.eq('email', fields.email)
+		.single();
+
+	if (profileCheckError && profileCheckError.code !== 'PGRST116') {
+		// PGRST116 — это "row not found" для single()
+		throw profileCheckError;
+	}
+	if (existingProfile) {
+		throw new Error('Профиль с таким email уже существует');
+	}
+
 	const { data: authData, error: authError } = await client.auth.signUp({
 		email: fields.email,
 		password: fields.password,
+		options: {
+			data: {
+				name: fields.name,
+			},
+		},
 	});
 	if (authError || !authData?.user) {
 		throw new Error(authError?.message || 'Не удалось зарегистрировать пользователя');
-	}
-
-	// Создание профиля
-	const { error: profileError } = await client.from('profile').insert({
-		id: authData.user.id, // важно! id должен совпадать с auth.uid()
-		name: fields.name,
-		avatar_path: null,
-	});
-
-	if (profileError) {
-		throw new Error(profileError.message || 'Ошибка при создании профиля');
 	}
 
 	return authData.user;

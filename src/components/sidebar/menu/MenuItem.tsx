@@ -16,7 +16,7 @@ export const MenuItem = ({ item }: { item: IMenuItem }) => {
 			<Link
 				href={item.link}
 				className={clsx(
-					'text-gray flex items-center gap-1.5 rounded-4xl px-3 py-1 text-sm font-semibold transition-colors duration-300  2xl:text-lg',
+					'text-gray flex items-center gap-1.5 rounded-sm px-3 py-1 text-sm font-semibold transition-colors duration-300  2xl:text-lg',
 					activeLink  ? 'bg-primary dark:bg-transparent dark:border-2  text-white' : 'hover:text-primary'
 				)}
 			>

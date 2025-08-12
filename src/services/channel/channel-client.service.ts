@@ -89,3 +89,10 @@ export async function createClientChannelDirect(channelFields: TChannelInsert, p
 
 	return newChannel;
 }
+
+// delete
+export async function deleteClientChannel(id: string) {
+	const { error } = await createClient().from('channel').delete().eq('id', id);
+	if (error) throw new Error(error.message);
+	return;
+}

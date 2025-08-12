@@ -15,11 +15,11 @@ export default function Skeleton({
 }) {
 	const arr = Array.from({ length: length }, (_, i) => i);
 
-	return length > 1 ? (
+	return length > 0 ? (
 		<>
 			{arr.map((_, i) => (
 				<div
-					className={clsx(`bg-gray animate-pulse ${rounded} ${width} ${height} `, className)}
+					className={clsx(`bg-gray mx-1 my-1 animate-pulse ${rounded} ${width} ${height} `, className)}
 					key={i}
 					aria-hidden={true}
 				/>
