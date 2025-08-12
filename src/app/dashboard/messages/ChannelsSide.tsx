@@ -21,7 +21,7 @@ export default function ChannelsSide({ channels }: Props) {
 	const [sortType, setSortType] = useState<string>('all');
 	const sortedChannels =
 		sortType === 'all' ? channels : channels.filter(channel => channel.type === sortType);
-
+	
 	return (
 		<div className='border-r-2 grid grid-cols-[3fr_2fr]'>
 			<div>

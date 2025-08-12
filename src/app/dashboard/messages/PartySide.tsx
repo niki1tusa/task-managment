@@ -5,10 +5,12 @@ import { SquarePlus } from 'lucide-react';
 
 import { Title } from '@/components/ui/Title';
 
+import type { TChannelRow } from './channel.types';
 import { getChannelParticipantsById } from '@/services/channel/channel-client.service';
 
-export default function PartySide() {
-	const channelId = '65bae38a-570a-4a36-8844-70b592dba87d';
+export default function PartySide({ channel }: { channel: TChannelRow }) {
+	
+	const channelId = channel?.id || '65bae38a-570a-4a36-8844-70b592dba87d';
 
 	const { data: participants, isLoading } = useQuery({
 		queryKey: ['channel_participants', channelId],

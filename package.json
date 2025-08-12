@@ -12,6 +12,7 @@
 		"db-gen-types": "supabase gen types typescript --project-id \"codlpjskalcsqhfquecs\" --schema public > src/shared/types/db.types.ts"
 	},
 	"dependencies": {
+		"@base-ui-components/react": "1.0.0-beta.2",
 		"@hookform/resolvers": "^5.1.1",
 		"@supabase/ssr": "^0.6.1",
 		"@supabase/supabase-js": "^2.51.0",

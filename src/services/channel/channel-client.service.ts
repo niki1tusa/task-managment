@@ -20,7 +20,7 @@ export async function getChannelParticipantsById(id: string) {
 		.eq('channel_id', id);
 
 	if (error || !data) throw new Error(error?.message || 'Channel not found');
-	return {data};
+	return data;
 }
 
 // create

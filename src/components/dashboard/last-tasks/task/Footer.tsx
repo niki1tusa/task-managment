@@ -54,7 +54,7 @@ export const Footer = ({ task }: { task: TTask }) => {
 				</button>
 				<button
 					onClick={e => {
-						e.stopPropagation();
+						
 						open('updateTask', task.id);
 					}}
 					className='bg-primary flex h-9 w-9 items-center justify-center rounded-full text-white shadow shadow-neutral-400'
