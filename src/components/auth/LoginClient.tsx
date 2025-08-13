@@ -9,7 +9,7 @@ import { LoginForm } from './form/LoginForm';
 
 export default function LoginClient() {
 	return (
-		<div className='flex h-full w-full flex-col items-center justify-center gap-10 2xl:text-3xl'>
+		<div className='flex min-h-screen w-full flex-col items-center justify-center gap-10 2xl:text-3xl'>
 			<BubbleBackground className='absolute inset-0 z-0 flex items-center justify-center' />
 			<div className='z-20 grid h-[70%] w-[50%] grid-cols-2 overflow-hidden rounded-4xl bg-purple-950/80 text-white/90'>
 				<div className='flex flex-col gap-5 p-10'>

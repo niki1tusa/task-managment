@@ -78,25 +78,26 @@ const profilesData = [
 export async function seedUsers() {
 	const supabase = createAdminClient();
 
-	// const users = await supabase.auth.admin.listUsers()
+	const users = await supabase.auth.admin.listUsers();
 
-	// console.log('existing users:', users.data.users)
+	console.log('existing users:', users.data.users);
 
-	// for(const user of users.data.users){
+	for (const user of users.data.users) {
+		if (
+			user.id === '9155af86-1856-4cfe-814b-5fbd6ec89a27'
+		) {
+			await supabase.auth.admin.deleteUser(user.id);
+		}
+	}
 
-	//     await supabase.auth.admin.deleteUser(user.id)
+	// for (const user of profilesData) {
+	// 	const { data } = await supabase.auth.admin.createUser({
+	// 		id: user.id,
+
+	// 		email: user.email,
+
+	// 		password: '123456',
+	// 	});
 
 	// }
-
-	for (const user of profilesData) {
-		const { data } = await supabase.auth.admin.createUser({
-			id: user.id,
-
-			email: user.email,
-
-			password: '123456',
-		});
-
-		
-	}
 }

@@ -1,5 +1,6 @@
 'use client';
 
+import { PUBLIC_PAGES } from '@/config/public-page.config';
 import type { TRegistrationForm } from '@/shared/types/form/scheme.zod';
 
 import { createClient } from '@/utils/supabase/client';
@@ -28,6 +29,7 @@ export async function fetchCreateUser(fields: TRegistrationForm) {
 			data: {
 				name: fields.name,
 			},
+			emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}${PUBLIC_PAGES.AUTH_CALLBACK}`,
 		},
 	});
 	if (authError || !authData?.user) {
