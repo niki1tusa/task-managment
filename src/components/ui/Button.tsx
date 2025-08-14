@@ -13,6 +13,7 @@ export function Button({ type = 'button', children, className, onClick, disable 
 			onClick={onClick}
 			type={type}
 			className={cn(
+				{ 'bg-primary/50 cursor-not-allowed': disable },
 				className
 					? className
 					: 'bg-primary hover:bg-primary/50 w-[30%] rounded-sm py-2 text-sm text-white transition-colors 2xl:text-lg'

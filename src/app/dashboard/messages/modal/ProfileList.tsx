@@ -14,7 +14,7 @@ import {
 	createClientChannelDirect,
 	createClientChannelGroup,
 } from '@/services/channel/channel-client.service';
-import { getAllProfile } from '@/services/profile/profile-client.service';
+import { getAllProfile, getProfile } from '@/services/profile/profile-client.service';
 
 interface Props {
 	close: () => void;
@@ -25,10 +25,18 @@ interface Props {
 export default function ProfileList({ profile, typeChannel, setOpenList, close }: Props) {
 	const [addProfileArr, setAddProfileArr] = useState<string[]>([]);
 	const [nameChannel, setNameChannel] = useState('');
-	const { data: profiles } = useQuery({
+	// profile
+	const { data: currentPorfile } = useQuery<TProfileRow>({
+		queryKey: ['profile'],
+		queryFn: () => getProfile(),
+	});
+	const { data: profilesData } = useQuery<TProfileRow[]>({
 		queryKey: ['profiles'],
 		queryFn: () => getAllProfile(),
 	});
+	console.log(profilesData)
+	const profiles = profilesData?.filter(item => item.id !== currentPorfile?.id);
+	// create channel
 	const { mutate: mutateChannelGroup } = useMutation({
 		mutationFn: ({ fields, profilesId }: { fields: TChannelInsert; profilesId: string[] }) =>
 			createClientChannelGroup(fields, profilesId),
@@ -45,6 +53,7 @@ export default function ProfileList({ profile, typeChannel, setOpenList, close }
 			close();
 		},
 	});
+	// handle
 	const handleCreateGroup = (profilesId: string[]) => {
 		if (nameChannel.length < 1) {
 			toast.error('Min symbol is one in name channel!');
@@ -61,7 +70,6 @@ export default function ProfileList({ profile, typeChannel, setOpenList, close }
 			mutateChannelDirect({ fields: { name: nameChannel, created_by: profile.id }, profileId });
 			setNameChannel('');
 			setAddProfileArr([]);
-			
 		}
 	};
 	const handleAddProfile = (profileToAdd: TProfileRow) => {
@@ -96,8 +104,11 @@ export default function ProfileList({ profile, typeChannel, setOpenList, close }
 							<Avatar img={p.avatar_path || ''} />
 							<span className='text-sm'>{p.name}</span>
 						</div>
-						{/* TODO: после того как я убираю галочку, profile не убирается из addProfileArr */}
 						<Checkbox
+							disabled={
+								!addProfileArr.includes(p.id) &&
+								(typeChannel === 'group' ? addProfileArr.length === 30 : addProfileArr.length === 1)
+							}
 							checked={addProfileArr.includes(p.id)}
 							onCheckedChange={checked => {
 								if (checked) {
@@ -113,6 +124,7 @@ export default function ProfileList({ profile, typeChannel, setOpenList, close }
 
 			<div className='flex w-full gap-3 px-4 py-2'>
 				<Button
+					disable={addProfileArr.length < 1}
 					onClick={() => {
 						typeChannel === 'group'
 							? handleCreateGroup(addProfileArr)

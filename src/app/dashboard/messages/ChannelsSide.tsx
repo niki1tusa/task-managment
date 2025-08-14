@@ -2,12 +2,13 @@
 
 import clsx from 'clsx';
 import { SquarePlus } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/components/tabs';
 import { Button } from '@/components/ui/Button';
 import { Title } from '@/components/ui/Title';
 
+import { useChannelStore } from '@/store/channel.store';
 import { useModalStore } from '@/store/modals.store';
 
 import PartySide from './PartySide';
@@ -25,6 +26,13 @@ export default function ChannelsSide({ channels }: Props) {
 	const [activeChannelId, setActiveChannelId] = useState(defaultChannel?.id);
 
 	const findActiveChannel = channels.find(channel => channel.id === activeChannelId);
+	const { activeChannel, setActiveChannel } = useChannelStore();
+
+	useEffect(() => {
+		if (!activeChannel && channels.length > 0) {
+			setActiveChannel(findActiveChannel || defaultChannel!);
+		}
+	}, [activeChannel, channels, setActiveChannel]);
 	return (
 		<div className='grid grid-cols-[3fr_2fr] border-r-2'>
 			<div className='flex flex-col justify-between'>
@@ -40,8 +48,8 @@ export default function ChannelsSide({ channels }: Props) {
 							<SquarePlus />
 						</button>
 					</div>
-					<div className='mt-1 border-t-2' />
-					<Tabs defaultValue='All' className='dark:bg-muted bg-gray w-full'>
+					<div className='mt-1 border-t-2 shadow-sm' />
+					<Tabs defaultValue='All' className='dark:bg-muted bg-gray w-full shadow-sm'>
 						<TabsList className='grid w-full grid-cols-4 rounded-none border-b-2'>
 							<TabsTrigger onClick={() => setSortType('all')} value='All'>
 								All
@@ -57,7 +65,7 @@ export default function ChannelsSide({ channels }: Props) {
 							</TabsTrigger>
 						</TabsList>
 					</Tabs>
-					<div className='mt-5 ml-5 pl-1 py-2 flex flex-col overflow-y-auto items-start gap-2'>
+					<div className='mt-5 ml-5 flex flex-col items-start gap-2 overflow-y-auto py-2 pl-1'>
 						{sortedChannels?.map(channel => (
 							<Button
 								onClick={() => setActiveChannelId(channel.id)}

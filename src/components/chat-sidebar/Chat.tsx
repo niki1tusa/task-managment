@@ -14,7 +14,7 @@ import { useChat } from './useChat';
 
 // TODO: проверить chatMessage и добавить каналы (общий, бухгалтерия, )
 export default function Chat({ data }: { data: TProfileRow }) {
-	const { messages, messagesEndRef, handleSend } = useChat();
+	const { messages, messagesEndRef, handleSend } = useChat('69d922e1-63f4-4f1d-9627-97aa6319902a');
 	const renderMessages = useMemo(() => {
 		return messages.map(m => <ChatMessage key={m.id} message={m} />);
 	}, [messages]);

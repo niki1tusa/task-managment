@@ -15,7 +15,7 @@ import type { TChannelInsert } from '../channel.types';
 
 import ProfileList from './ProfileList';
 import { createClientChannelByTaskId } from '@/services/channel/channel-client.service';
-import { getAllProfile, getProfile } from '@/services/profile/profile-client.service';
+import { getProfile } from '@/services/profile/profile-client.service';
 import { getServerAllTask } from '@/services/tasks/task-server.service';
 
 interface Props {
@@ -53,7 +53,6 @@ export function CreateChannelModal({ close }: Props) {
 	}
 
 	// TODO: сделать нормальный инпут как в Chat.tsx
-	// TODO: сделать ограничение чтобы можно было добавлять макс 30 мин 1 в группу и макс 1 в директ
 	return (
 		<Modal close={close} title={`Create new channel ${typeChannel}`}>
 			<div className='flex w-full flex-col gap-3'>

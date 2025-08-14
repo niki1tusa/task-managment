@@ -1,24 +1,26 @@
 'use client'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-
 import type { TChatMessageRow } from '@/shared/types/task/task.types';
-
 import { createClient } from '@/utils/supabase/client';
 
-export const useChat = () => {
+export const useChat = (channelId: string | null) => { 
 	const supabase = useRef(createClient());
 	const [messages, setMessages] = useState<TChatMessageRow[]>([]);
 
 	useEffect(() => {
+		if(!channelId) return;
 		const client = supabase.current;
+
 		client
 			.from('chat_message')
 			.select(
 				`*, profile:profile(
 					id,
 					name,
-					avatar_path)`
+					avatar_path
+				)`
 			)
+			.eq('channel_id', channelId) 
 			.order('created_at', { ascending: true })
 			.then(({ data }) => {
 				if (!data) return;
@@ -29,13 +31,19 @@ export const useChat = () => {
 			.channel('chat_message')
 			.on(
 				'postgres_changes',
-				{ event: 'INSERT', schema: 'public', table: 'chat_message' },
+				{
+					event: 'INSERT',
+					schema: 'public',
+					table: 'chat_message',
+					filter: `channel_id=eq.${channelId}` // ← слушаем только этот канал
+				},
 				async payload => {
 					const { data } = await client
 						.from('chat_message')
 						.select(`*, profile:profile(id,name, avatar_path)`)
 						.eq('id', payload.new.id)
 						.single();
+
 					if (data) {
 						setMessages(prev => {
 							if (prev.some(msg => msg.id === data.id)) return prev;
@@ -45,10 +53,11 @@ export const useChat = () => {
 				}
 			)
 			.subscribe();
+
 		return () => {
 			client.removeChannel(channel);
 		};
-	}, []);
+	}, [channelId]);
 
 	const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -66,12 +75,16 @@ export const useChat = () => {
 
 		const { error } = await supabase.current
 			.from('chat_message')
-			.insert({ text, user_id: userData.user.id });
+			.insert({
+				text,
+				user_id: userData.user.id,
+				channel_id: channelId // ← теперь не null
+			});
 
 		if (error) {
 			console.error('Failed to send message:', error.message);
-			return;
 		}
 	};
+
 	return { messages, messagesEndRef, handleSend };
 };

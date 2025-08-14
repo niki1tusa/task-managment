@@ -13,6 +13,8 @@ import { Title } from '@/components/ui/Title';
 
 import type { TProfileRow } from '@/shared/types/task/task.types';
 
+import { useChannelStore } from '@/store/channel.store';
+
 import ChannelsSide from './ChannelsSide';
 import PartySide from './PartySide';
 import { getClientChannels } from '@/services/channel/channel-client.service';
@@ -26,15 +28,22 @@ export function MessagesClient({ data }: Props) {
 		queryFn: async () => await getClientChannels(),
 	});
 	console.log(channels);
-	const { messages, messagesEndRef, handleSend } = useChat();
+	const { activeChannel } = useChannelStore();
+
+	const chat = useChat(activeChannel ? activeChannel.id : null);
 	const renderMessages = useMemo(() => {
-		return messages.map(m => <ChatMessage key={m.id} message={m} />);
-	}, [messages]);
+		if (!chat) return null;
+		return chat.messages.map(m => <ChatMessage key={m.id} message={m} />);
+	}, [chat?.messages]);
 
 	return (
 		<div className='grid h-full w-full grid-cols-[3fr_5fr] border-l-2 bg-gray-50 dark:bg-gray-900'>
 			{/* Channel */}
-			{isLoading ? <Skeleton length={1}  height='h-screen' /> : <ChannelsSide channels={channels || []} />}
+			{isLoading ? (
+				<Skeleton length={1} height='h-screen' />
+			) : (
+				<ChannelsSide channels={channels || []} />
+			)}
 
 			{/* Chat */}
 			<div className='flex h-screen flex-col' role='complementary' aria-label='Chat panel'>
@@ -49,7 +58,7 @@ export function MessagesClient({ data }: Props) {
 							</span>
 						</div>
 						<div
-							className='text-sidebar-primary/80 dark:text-white text-[0.8rem] 2xl:text-[1rem]'
+							className='text-sidebar-primary/80 text-[0.8rem] 2xl:text-[1rem] dark:text-white'
 							aria-label='User occupation'
 						>
 							{data.occupation}
@@ -66,12 +75,12 @@ export function MessagesClient({ data }: Props) {
 				>
 					<div className='flex flex-col gap-3'>
 						{renderMessages}
-						<div ref={messagesEndRef} aria-hidden='true' />
+						{chat && <div ref={chat.messagesEndRef} aria-hidden='true' />}
 					</div>
 				</div>
 
 				{/* Input field */}
-				<ChatInput handleSend={handleSend} />
+				{chat && <ChatInput handleSend={chat.handleSend} />}
 			</div>
 		</div>
 	);

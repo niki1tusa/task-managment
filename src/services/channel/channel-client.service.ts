@@ -3,6 +3,9 @@ import type { TChannelInsert } from '@/app/dashboard/messages/channel.types';
 import { createClient } from '@/utils/supabase/client';
 
 // read
+
+// TODO: сделать так чтобы пользователь не мог добавить себя
+
 export async function getClientChannels() {
 	const { data, error } = await createClient()
 		.from('channel')
@@ -25,12 +28,20 @@ export async function getChannelParticipantsById(id: string) {
 
 // create
 export async function createClientChannelByTaskId(channelFields: TChannelInsert, taskId: string) {
-	const { data: newChannel, error: newChannelError } = await createClient()
+	const client = createClient();
+	// получаем текущего пользователя
+	const {
+		data: { user },
+		error: userError,
+	} = await client.auth.getUser();
+	if (userError || !user) throw new Error('Not authenticated');
+	const { data: newChannel, error: newChannelError } = await client
 		.from('channel')
 		.insert({
 			...channelFields,
 			task_id: taskId,
 			type: 'task',
+			created_by: user.id,
 		})
 		.select()
 		.single();
@@ -38,6 +49,11 @@ export async function createClientChannelByTaskId(channelFields: TChannelInsert,
 	if (newChannelError || !newChannel) {
 		throw new Error(newChannelError?.message || 'Failed to create channel');
 	}
+	// add owner channel in participants
+	const { error: pErr } = await client
+		.from('channel_participants')
+		.insert({ channel_id: newChannel.id, profile_id: user.id, role: 'owner' });
+	if (pErr) throw new Error(pErr.message);
 
 	// Участники добавятся автоматически триггером в БД
 	return newChannel;
@@ -48,10 +64,17 @@ export async function createClientChannelGroup(
 	channelFields: TChannelInsert,
 	profilesId: string[]
 ) {
+	const client = createClient();
+	// получаем текущего пользователя
+	const {
+		data: { user },
+		error: userError,
+	} = await client.auth.getUser();
+	if (userError || !user) throw new Error('Not authenticated');
 	// 1) create channel
-	const { data: newChannel, error } = await createClient()
+	const { data: newChannel, error } = await client
 		.from('channel')
-		.insert({ ...channelFields, type: 'group' })
+		.insert({ ...channelFields, type: 'group', created_by: user.id })
 		.select()
 		.single();
 	if (error) throw new Error(error.message);
@@ -66,26 +89,44 @@ export async function createClientChannelGroup(
 			}))
 		);
 	if (insertError) throw new Error(insertError?.message);
+	// add owner channel in participants
+	const { error: pErr } = await client
+		.from('channel_participants')
+		.insert({ channel_id: newChannel.id, profile_id: user.id, role: 'owner' });
+	if (pErr) throw new Error(pErr.message);
 
 	return newChannel;
 }
 
 // direct
 export async function createClientChannelDirect(channelFields: TChannelInsert, profileId: string) {
+	const client = createClient();
+	// получаем текущего пользователя
+	const {
+		data: { user },
+		error: userError,
+	} = await client.auth.getUser();
+	if (userError || !user) throw new Error('Not authenticated');
 	// 1) create channel
-	const { data: newChannel, error } = await createClient()
+	const { data: newChannel, error } = await client
 		.from('channel')
-		.insert({ ...channelFields, type: 'direct' })
+		.insert({ ...channelFields, type: 'direct', created_by: user.id })
 		.select()
 		.single();
 	if (error) throw new Error(error.message);
+
 	// 2) add participants in channel_participants table
-	const { error: insertError } = await createClient().from('channel_participants').insert({
+	const { error: insertError } = await client.from('channel_participants').insert({
 		channel_id: newChannel.id,
 		profile_id: profileId,
 		role: 'member',
 	});
 	if (insertError) throw new Error(insertError?.message);
+	// add owner channel in participants
+	const { error: pErr } = await client
+		.from('channel_participants')
+		.insert({ channel_id: newChannel.id, profile_id: user.id, role: 'owner' });
+	if (pErr) throw new Error(pErr.message);
 
 	return newChannel;
 }
