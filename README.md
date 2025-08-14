@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TaskHub — Next.js + Supabase  
+> Production-ready task+chat demo: channels (group/task/direct), realtime messages, participants & roles, tasks/subtasks — built with **Next.js (App Router)**, **TypeScript**, **Tailwind CSS v4** and **Supabase** (Postgres / Auth / Realtime / Storage).
 
-## Getting Started
+---
 
-First, run the development server:
+[![Vercel](https://img.shields.io/badge/deploy-vercel-000000?logo=vercel)](#) [![Supabase](https://img.shields.io/badge/backend-supabase-3ECF8E?logo=supabase)](#) [![TypeScript](https://img.shields.io/badge/lang-typescript-3178C6?logo=typescript)](#)
 
+---
+
+## Quick summary
+This repository is a compact full-stack app that demonstrates a real-world architecture:
+- Frontend: **Next.js (App Router)** + React + **TypeScript** + **Tailwind CSS v4**
+- Backend: **Supabase** (Postgres, Auth, Realtime, Storage)
+- Data fetching: **React Query**
+- Client state: **Zustand**
+- Server State: **Tanstack-query**
+- Forms & validation: **react-hook-form** + **Zod**
+- Realtime: Supabase `postgres_changes` channels
+
+Features: auth (magic link/email), profiles, tasks & participants, multi-type channels, RLS & DB triggers, realtime chat messages.
+
+---
+
+## Table of contents
+- [Quick start](#quick-start)
+- [Environment variables](#environment-variables)
+- [Supabase setup](#supabase-setup)
+- [Database snippets (recommended)](#database-snippets-recommended)
+- [Development workflow](#development-workflow)
+- [Architecture notes & gotchas](#architecture-notes--gotchas)
+- [Deployment](#deployment)
+- [License](#license)
+
+---
+
+## Quick start
+
+1. Clone repo
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+git clone <https://github.com/niki1tusa/task-managment.git>
+cd <task-managment>

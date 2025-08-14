@@ -32,10 +32,10 @@ export default function ChannelsSide({ channels }: Props) {
 		if (!activeChannel && channels.length > 0) {
 			setActiveChannel(findActiveChannel || defaultChannel!);
 		}
-	}, [activeChannel, channels, setActiveChannel]);
+	}, [activeChannel, channels, setActiveChannel, activeChannelId]);
 	return (
-		<div className='grid grid-cols-[3fr_2fr] border-r-2'>
-			<div className='flex flex-col justify-between'>
+		<div className='grid grid-cols-[3fr_2fr] border-r-2 xl:grid-cols-[1fr_200px]'>
+			<div className='relative flex flex-col justify-between'>
 				<div>
 					<div className='mx-5 mt-7 flex items-center justify-between'>
 						<Title heading='page'>Channels</Title>
@@ -68,7 +68,10 @@ export default function ChannelsSide({ channels }: Props) {
 					<div className='mt-5 ml-5 flex flex-col items-start gap-2 overflow-y-auto py-2 pl-1'>
 						{sortedChannels?.map(channel => (
 							<Button
-								onClick={() => setActiveChannelId(channel.id)}
+								onClick={() => {
+									setActiveChannelId(channel.id);
+									setActiveChannel(channel);
+								}}
 								className={clsx(
 									'bg-primary rounded-sm px-2 py-2 text-sm shadow shadow-neutral-400 transition-colors 2xl:text-lg dark:text-white',
 									activeChannelId === channel.id
@@ -85,12 +88,14 @@ export default function ChannelsSide({ channels }: Props) {
 
 				<div className='flex justify-center'>
 					<button
-						className='mb-7 rounded-sm bg-red-500 px-2 py-1 text-base text-white hover:bg-red-400'
+						className='mb-4 rounded-sm bg-red-500 px-2 py-1 text-base text-white hover:bg-red-400'
 						onClick={() => open('deleteChannel', findActiveChannel)}
 					>
 						Delete
 					</button>
 				</div>
+				{/* Fade overlay */}
+				<div className='from-primary/10 dark:from-gray/5 pointer-events-none absolute bottom-0 left-0 z-50 h-8 w-full bg-gradient-to-t to-transparent' />
 			</div>
 			{/*Participants  */}
 			<PartySide channel={findActiveChannel!} />

@@ -1,7 +1,6 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { SquarePlus } from 'lucide-react';
 import { useMemo } from 'react';
 
 import ChatInput from '@/components/chat-sidebar/ChatInput';
@@ -9,14 +8,12 @@ import ChatMessage from '@/components/chat-sidebar/ChatMessage';
 import { useChat } from '@/components/chat-sidebar/useChat';
 import { Avatar } from '@/components/ui/Avatar';
 import Skeleton from '@/components/ui/Skeleton';
-import { Title } from '@/components/ui/Title';
 
 import type { TProfileRow } from '@/shared/types/task/task.types';
 
 import { useChannelStore } from '@/store/channel.store';
 
 import ChannelsSide from './ChannelsSide';
-import PartySide from './PartySide';
 import { getClientChannels } from '@/services/channel/channel-client.service';
 
 interface Props {
@@ -27,7 +24,6 @@ export function MessagesClient({ data }: Props) {
 		queryKey: ['channels'],
 		queryFn: async () => await getClientChannels(),
 	});
-	console.log(channels);
 	const { activeChannel } = useChannelStore();
 
 	const chat = useChat(activeChannel ? activeChannel.id : null);
@@ -35,7 +31,7 @@ export function MessagesClient({ data }: Props) {
 		if (!chat) return null;
 		return chat.messages.map(m => <ChatMessage key={m.id} message={m} />);
 	}, [chat?.messages]);
-
+console.log({ activeChannel, chat });
 	return (
 		<div className='grid h-full w-full grid-cols-[3fr_5fr] border-l-2 bg-gray-50 dark:bg-gray-900'>
 			{/* Channel */}
@@ -48,7 +44,7 @@ export function MessagesClient({ data }: Props) {
 			{/* Chat */}
 			<div className='flex h-screen flex-col' role='complementary' aria-label='Chat panel'>
 				{/* User info */}
-				<div className='bg-primary/40 flex h-[69.5px] w-full flex-shrink-0 items-center gap-3 pl-10 font-semibold 2xl:h-30'>
+				<div className='bg-primary/40 flex h-[69.5px] w-full shadow-sm border-gray/20 border-b-2 flex-shrink-0 items-center gap-3 pl-10 font-semibold 2xl:h-30'>
 					<Avatar img={data.avatar_path || ''} />
 					<div className='flex flex-col'>
 						<div className='text-[1rem] 2xl:text-[1.2rem]' id='chat-user-name'>
@@ -68,11 +64,14 @@ export function MessagesClient({ data }: Props) {
 
 				{/* Messages */}
 				<div
-					className='flex-1 overflow-y-auto px-2 py-2'
+					className='flex-1 relative overflow-y-auto px-2 py-2'
 					role='log'
 					aria-label='Chat messages'
 					aria-live='polite'
 				>
+								{/* Fade overlay */}
+			<div className='pointer-events-none absolute top-0 left-0 h-50 w-full z-50 bg-gradient-to-b from-primary/10 to-transparent dark:from-gray/5' />
+
 					<div className='flex flex-col gap-3'>
 						{renderMessages}
 						{chat && <div ref={chat.messagesEndRef} aria-hidden='true' />}
