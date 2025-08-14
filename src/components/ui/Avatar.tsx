@@ -13,8 +13,10 @@ export function Avatar({ img, isHoverResolution }: { img: string; isHoverResolut
 			{img && <Image src={img} alt='user' width={36} height={36} className='shrink-0' priority />}
 		</motion.div>
 	) : (
-		<div className='bg-primary flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border shadow shadow-neutral-400'>
-			{img && <Image src={img} alt='user' width={32} height={32} className='shrink-0 w-8 h-8' priority />}
+		<div className=' bg-primary flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border shadow shadow-neutral-400'>
+			{img && (
+				<Image src={img} alt='user' width={32} height={32} className='h-8 w-8 shrink-0' priority />
+			)}
 		</div>
 	);
 }

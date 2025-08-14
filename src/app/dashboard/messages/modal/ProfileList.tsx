@@ -34,7 +34,7 @@ export default function ProfileList({ profile, typeChannel, setOpenList, close }
 		queryKey: ['profiles'],
 		queryFn: () => getAllProfile(),
 	});
-	console.log(profilesData)
+	console.log(profilesData);
 	const profiles = profilesData?.filter(item => item.id !== currentPorfile?.id);
 	// create channel
 	const { mutate: mutateChannelGroup } = useMutation({
@@ -46,8 +46,13 @@ export default function ProfileList({ profile, typeChannel, setOpenList, close }
 		},
 	});
 	const { mutate: mutateChannelDirect } = useMutation({
-		mutationFn: ({ fields, profileId }: { fields: TChannelInsert; profileId: string }) =>
-			createClientChannelDirect(fields, profileId),
+		mutationFn: ({
+			fields,
+			profileDirect,
+		}: {
+			fields: TChannelInsert;
+			profileDirect: TProfileRow;
+		}) => createClientChannelDirect(fields, profileDirect),
 		onSuccess: () => {
 			toast.success('Channel direct is success created!');
 			close();
@@ -63,14 +68,10 @@ export default function ProfileList({ profile, typeChannel, setOpenList, close }
 			setAddProfileArr([]);
 		}
 	};
-	const handleCreateDirect = (profileId: string) => {
-		if (nameChannel.length < 1) {
-			toast.error('Min symbol is one in name channel!');
-		} else {
-			mutateChannelDirect({ fields: { name: nameChannel, created_by: profile.id }, profileId });
-			setNameChannel('');
-			setAddProfileArr([]);
-		}
+	const handleCreateDirect = (profileDirect: TProfileRow) => {
+		mutateChannelDirect({ fields: { name: nameChannel, created_by: profile.id }, profileDirect });
+		setNameChannel('');
+		setAddProfileArr([]);
 	};
 	const handleAddProfile = (profileToAdd: TProfileRow) => {
 		if (!addProfileArr.some(p => p === profileToAdd.id)) {
@@ -89,13 +90,15 @@ export default function ProfileList({ profile, typeChannel, setOpenList, close }
 					{addProfileArr.length}/{typeChannel === 'group' ? 30 : 1}
 				</span>
 			</span>
-			<textarea
-				rows={1}
-				placeholder={`Enter ${typeChannel} name...`}
-				value={nameChannel}
-				onChange={e => setNameChannel(e.target.value)}
-				className='flex-1 resize-none rounded-lg bg-gray-50 px-3 py-2 text-sm placeholder-gray-400 shadow shadow-neutral-400 outline-none dark:bg-gray-700 dark:placeholder-gray-500'
-			/>
+			{typeChannel === 'group' && (
+				<textarea
+					rows={1}
+					placeholder={`Enter group name...`}
+					value={nameChannel}
+					onChange={e => setNameChannel(e.target.value)}
+					className='flex-1 resize-none rounded-lg bg-gray-50 px-3 py-2 text-sm placeholder-gray-400 shadow shadow-neutral-400 outline-none dark:bg-gray-700 dark:placeholder-gray-500'
+				/>
+			)}
 
 			<ul className='bg-background flex flex-col overflow-y-auto rounded-lg border-2 px-4'>
 				{profiles?.map((p: TProfileRow) => (
@@ -128,7 +131,7 @@ export default function ProfileList({ profile, typeChannel, setOpenList, close }
 					onClick={() => {
 						typeChannel === 'group'
 							? handleCreateGroup(addProfileArr)
-							: handleCreateDirect(addProfileArr[0]);
+							: handleCreateDirect(profilesData?.find(profile => profile.id === addProfileArr[0])!);
 					}}
 				>
 					Create

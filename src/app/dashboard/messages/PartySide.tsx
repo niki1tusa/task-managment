@@ -56,6 +56,8 @@ export default function PartySide({ channel }: { channel: TChannelRow }) {
 					?.map(p => p.profile)
 					.flat()
 					.sort((a, b) => a.name.localeCompare(b.name));
+
+	const ownerChannel = participants?.find(p => p.role === 'owner');
 	return (
 		<div className='relative border-l-2'>
 			{/* Header */}
@@ -82,24 +84,33 @@ export default function PartySide({ channel }: { channel: TChannelRow }) {
 					<Skeleton width='w-[97%]' length={1} />
 				) : (
 					sortedProfiles?.map(profile => (
-						<button
+						<div
 							key={profile.id}
 							className='group flex max-w-[200px] items-center justify-between gap-2 px-2 py-2 text-sm font-medium transition-colors hover:bg-gray-100 dark:hover:bg-gray-800'
 						>
-							<div className='flex items-center gap-2 truncate p-1'>
-								<Avatar img={profile.avatar_path || ''} />
-								<span className='group-hover:text-primary relative truncate transition-colors'>
+							<div className='relative flex items-center gap-2 truncate p-1'>
+								<div className='relative'>
+									<Avatar img={profile.avatar_path || ''} />
+									<div className='absolute top-5.5 right-0 z-50 h-2 w-2 animate-pulse rounded-full border border-green-900 bg-green-500' />
+								</div>
+								<span className='group-hover:text-primary relative transition-colors'>
 									{profile.name}
-									<div className='absolute top-0.5 -right-[9px] h-2 w-2 animate-pulse rounded-full border border-green-900 bg-green-500' />
 								</span>
+								{ownerChannel?.profile?.[0]?.id === profile.id && (
+									<span className='ml-2 rounded-full bg-yellow-300 px-2 py-0.5 text-[10px] font-semibold'>
+										OWNER
+									</span>
+								)}
 							</div>
 							{!(currentProfile?.id === profile.id) && (
-								<Trash2Icon
-									size={18}
-									className='text-red-400 opacity-0 transition-opacity group-hover:opacity-100'
-								/>
+								<button title='Remove user from a channel' type='button'>
+									<Trash2Icon
+										size={18}
+										className='text-red-400 opacity-0 transition-opacity group-hover:opacity-100'
+									/>
+								</button>
 							)}
-						</button>
+						</div>
 					))
 				)}
 			</div>

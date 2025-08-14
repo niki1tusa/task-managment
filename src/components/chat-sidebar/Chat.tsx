@@ -5,7 +5,6 @@ import { useMemo } from 'react';
 
 import type { TProfileRow } from '@/shared/types/task/task.types';
 
-
 import { Avatar } from '../ui/Avatar';
 
 import ChatInput from './ChatInput';
@@ -16,7 +15,20 @@ import { useChat } from './useChat';
 export default function Chat({ data }: { data: TProfileRow }) {
 	const { messages, messagesEndRef, handleSend } = useChat('69d922e1-63f4-4f1d-9627-97aa6319902a');
 	const renderMessages = useMemo(() => {
-		return messages.map(m => <ChatMessage key={m.id} message={m} />);
+		return messages.map((m, i) => {
+			const prev = messages[i - 1];
+			const next = messages[i + 1];
+const isFirstMessageInChannel =
+			!prev ||
+			prev.user_id !== m.user_id ||
+			Math.abs(new Date(m.created_at!).getTime() - new Date(prev.created_at!).getTime()) > 10 * 60 * 1000;
+
+		const isLastMessageInChannel =
+			!next ||
+			next.user_id !== m.user_id ||
+			Math.abs(new Date(next.created_at!).getTime() - new Date(m.created_at!).getTime()) > 10 * 60 * 1000;
+			return <ChatMessage key={m.id} message={m} isFirstMessageInChannel={isFirstMessageInChannel} isLastMessageInChannel={isLastMessageInChannel}/>;
+		});
 	}, [messages]);
 	return (
 		<aside

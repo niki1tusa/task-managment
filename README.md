@@ -11,9 +11,8 @@
 This repository is a compact full-stack app that demonstrates a real-world architecture:
 - Frontend: **Next.js (App Router)** + React + **TypeScript** + **Tailwind CSS v4**
 - Backend: **Supabase** (Postgres, Auth, Realtime, Storage)
-- Data fetching: **React Query**
+- Data fetching: **Tanstack/React Query**
 - Client state: **Zustand**
-- Server State: **Tanstack-query**
 - Forms & validation: **react-hook-form** + **Zod**
 - Realtime: Supabase `postgres_changes` channels
 
@@ -37,5 +36,9 @@ Features: auth (magic link/email), profiles, tasks & participants, multi-type ch
 
 1. Clone repo
 ```bash
-git clone <https://github.com/niki1tusa/task-managment.git>
-cd <task-managment>
+git clone https://github.com/niki1tusa/task-managment.git
+cd task-managment
+
+--- 
+## Generated type db
+https://supabase.com/docs/guides/api/rest/generating-types

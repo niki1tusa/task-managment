@@ -1,4 +1,5 @@
 import type { TChannelInsert } from '@/app/dashboard/messages/channel.types';
+import type { TProfileRow } from '@/shared/types/task/task.types';
 
 import { createClient } from '@/utils/supabase/client';
 
@@ -99,7 +100,7 @@ export async function createClientChannelGroup(
 }
 
 // direct
-export async function createClientChannelDirect(channelFields: TChannelInsert, profileId: string) {
+export async function createClientChannelDirect(channelFields: TChannelInsert, profile: TProfileRow) {
 	const client = createClient();
 	// получаем текущего пользователя
 	const {
@@ -110,7 +111,7 @@ export async function createClientChannelDirect(channelFields: TChannelInsert, p
 	// 1) create channel
 	const { data: newChannel, error } = await client
 		.from('channel')
-		.insert({ ...channelFields, type: 'direct', created_by: user.id })
+		.insert({ ...channelFields, type: 'direct', created_by: user.id, name: profile.name  })
 		.select()
 		.single();
 	if (error) throw new Error(error.message);
@@ -118,7 +119,7 @@ export async function createClientChannelDirect(channelFields: TChannelInsert, p
 	// 2) add participants in channel_participants table
 	const { error: insertError } = await client.from('channel_participants').insert({
 		channel_id: newChannel.id,
-		profile_id: profileId,
+		profile_id: profile.id,
 		role: 'member',
 	});
 	if (insertError) throw new Error(insertError?.message);

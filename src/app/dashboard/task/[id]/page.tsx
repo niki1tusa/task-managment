@@ -35,7 +35,7 @@ export default async function Page({ params }: Props) {
 					: 'Overdue'
 				: ` ${date} days`;
 	return (
-		<div className='space-y-6 px-7 py-6'>
+		<div className='space-y-6 px-7 py-3.5'>
 			<BackLink text='Back to Dashboard' />
 
 			<header className='border-b pb-4'>
