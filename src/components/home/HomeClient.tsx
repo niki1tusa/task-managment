@@ -8,7 +8,7 @@ import { HomeSection } from './HomeSection';
 
 export default function HomeClient() {
 	return (
-		<main className='bg-background text-foreground flex min-h-screen flex-col'>
+		<main className='bg-background text-foreground min-h-screen flex flex-col'>
 			{/* Header */}
 			<header className='mx-5 mt-6 flex items-center justify-around text-lg'>
 				<GradientText className='text-2xl font-bold' text='Task Hub' />

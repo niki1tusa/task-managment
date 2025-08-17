@@ -7,6 +7,7 @@ type ModalType =
 	| 'createSubTask'
 	| 'updateTask'
 	| 'deleteChannel'
+	| 'deleteProfileFromPartyChannel'
 	| null;
 
 interface ModalState {

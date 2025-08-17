@@ -42,11 +42,12 @@ export function CreateChannelModal({ close }: Props) {
 			createClientChannelByTaskId(fields, taskId),
 	});
 
-	useEffect(() => {
+	const handleCreateChannelTask = () => {
 		if (!taskState) return;
 		mutate({ fields: { name: taskState!.title, created_by: profile.id }, taskId: taskState!.id });
 		close();
-	}, [taskState]);
+	};
+
 	if (pathname !== DASHBOARD_PAGES.MESSAGES) {
 		console.log('close modal use if condiiton');
 		close();
@@ -70,18 +71,23 @@ export function CreateChannelModal({ close }: Props) {
 						<div className='flex flex-wrap gap-2 border-t-2 border-b-2 py-2'>
 							{tasks?.data?.length &&
 								tasks.data.map((task: TTask) => (
-									<Button key={task.id} onClick={() => setTtaskState(task)}>
+									<Button border={taskState?.id === task.id} onClick={() => setTtaskState(task)} key={task.id}>
 										{task.title}
 									</Button>
 								))}
 						</div>
 						<div className='flex w-full gap-3'>
-							<Button>Add</Button>
+							<Button onClick={() => handleCreateChannelTask()}>Add</Button>
 							<Button onClick={() => setTypeChannel('')}>Back</Button>
 						</div>
 					</>
 				) : openList ? (
-					<ProfileList close={close} profile={profile} setOpenList={setOpenList} typeChannel={typeChannel} />
+					<ProfileList
+						close={close}
+						profile={profile}
+						setOpenList={setOpenList}
+						typeChannel={typeChannel}
+					/>
 				) : (
 					<>
 						<span className='text-lg'>Who should I add to this channel?</span>

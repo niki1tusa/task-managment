@@ -1,5 +1,6 @@
 import { CreateChannelModal } from '@/app/dashboard/messages/modal/CreateChannelModal';
 import DeleteChannelModal from '@/app/dashboard/messages/modal/DeleteChannel';
+import DeleteProfileFromPartyChannel from '@/app/dashboard/messages/modal/DeleteProfileFromPartyChannel';
 
 import DeleteConfirmModals from '@/components/modals/DeleteConfirmModals';
 import { CreateSubtaskModal } from '@/components/modals/add-sub-task/CreateSubtaskModal';
@@ -20,7 +21,7 @@ export const ModalProvider = () => {
 		return <DeleteConfirmModals {...payload} close={close} />;
 	}
 	if (type === 'createTask') {
-		return <CreateTaskModal  close={close} />;
+		return <CreateTaskModal close={close} />;
 	}
 	if (type === 'createSubTask') {
 		return <CreateSubtaskModal id={payload} close={close} />;
@@ -28,8 +29,11 @@ export const ModalProvider = () => {
 	if (type === 'updateTask') {
 		return <UpdateTaskModal id={payload} close={close} />;
 	}
-		if (type === 'deleteChannel') {
+	if (type === 'deleteChannel') {
 		return <DeleteChannelModal {...payload} close={close} />;
+	}
+	if (type === 'deleteProfileFromPartyChannel') {
+		return <DeleteProfileFromPartyChannel profile={payload} close={close} />;
 	}
 
 	return null;

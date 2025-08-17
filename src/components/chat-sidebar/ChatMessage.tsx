@@ -1,21 +1,23 @@
 import clsx from 'clsx';
 import { format, parseISO } from 'date-fns';
-import { CornerUpRight, Pencil, Trash } from 'lucide-react';
 import { memo } from 'react';
 
 import type { TChatMessageRow } from '@/shared/types/task/task.types';
 
 import { useProfile } from '@/hooks/useProfile';
 
-import { CopyButton } from '../animate-ui/buttons/copy';
 import { Avatar } from '../ui/Avatar';
 import Skeleton from '../ui/Skeleton';
 
+import { MenuMessage } from './MenuMessage';
+
 interface Props {
 	message: TChatMessageRow;
+	isFirstInGroup: boolean;
+	isLastInGroup: boolean;
 }
 
-function ChatMessage({ message }: Props) {
+function ChatMessage({ message, isFirstInGroup, isLastInGroup }: Props) {
 	const { user, isLoading } = useProfile();
 
 	if (isLoading || !user) {
@@ -23,58 +25,54 @@ function ChatMessage({ message }: Props) {
 	}
 
 	const isOwnMessage = user.id === message.user_id;
-	const profileName = message.profile?.name || 'Unknown User';
-	const avatarPath = message.profile?.avatar_path || '';
+	const profileName = message.profile?.name;
+	const avatarPath = message.profile?.avatar_path;
 
+	// показываем аватар только у "последнего" сообщения группы
+	const isShowAvatar = isLastInGroup && !!avatarPath;
 	return (
-		<div className={clsx('flex items-end border', isOwnMessage ? 'justify-end' : 'justify-start')}>
-			<div className='group relative flex w-auto items-end gap-2 border'>
-				{!isOwnMessage && <Avatar img={avatarPath} />}
-				{!isOwnMessage && <MenuMessage side='left' />}
-				<div className='max-w-[70%]'>
-					<div className='mb-0.5 flex text-[0.8rem] 2xl:text-[0.9rem]'>
-						<span className='mr-1 opacity-80'>{isOwnMessage ? 'Me' : profileName}</span>
-						<span className='opacity-50'>
-							{format(parseISO(message.created_at!), 'hh:mm a').toLowerCase()}
-						</span>
-					</div>
+		<div className={clsx('flex items-end', isOwnMessage ? 'justify-end' : 'justify-start')}>
+			<div
+				className={clsx(
+					'group relative flex w-auto items-end gap-2',
+					isOwnMessage && 'flex-row-reverse',
+					isFirstInGroup ? 'mt-3' : 'mt-0.5 gap-0'
+				)}
+			>
+				{isShowAvatar ? <Avatar img={avatarPath} /> : <div className='w-8' />}
+				<div className={clsx('flex min-w-0 flex-col', isOwnMessage ? 'items-end' : 'items-start')}>
+					{/* time + name owner */}
+					{isFirstInGroup && (
+						<div className='mb-0.5 flex gap-1 text-[0.8rem] 2xl:text-[0.9rem]'>
+							<span className='mr-1 opacity-80'>{isOwnMessage ? 'Me' : profileName}</span>
+							<span className='opacity-50'>
+								{format(parseISO(message.created_at!), 'hh:mm a').toLowerCase()}
+							</span>
+						</div>
+					)}
+					{/* message */}
 					<div
 						className={clsx(
-							'rounded-lg px-3 py-2 text-[1rem] 2xl:text-xl',
+							'relative w-fit rounded-2xl px-3 py-2 text-[1rem] 2xl:max-w-[600px] 2xl:text-xl',
+							// устойчивость к любым строкам + переносы
+							'[overflow-wrap:anywhere] break-words hyphens-auto whitespace-pre-wrap',
 							isOwnMessage
-								? 'rounded-br-none bg-indigo-500 text-white'
-								: 'rounded-bl-none bg-indigo-300 text-black'
+								? clsx(
+										'bg-indigo-600 text-white',
+										isLastInGroup ? 'rounded-tr-sm rounded-br-none' : 'rounded-tr-sm rounded-br-sm'
+									)
+								: clsx(
+										'rounded-tl-sm rounded-bl-sm bg-indigo-300 text-white',
+										isLastInGroup ? 'rounded-tl-sm rounded-bl-none' : 'rounded-tl-sm rounded-bl-sm'
+									)
 						)}
 					>
 						{message.text}
+						<MenuMessage side={isOwnMessage ? 'right' : 'left'} />
 					</div>
 				</div>
-				{isOwnMessage && avatarPath && <Avatar img={avatarPath} />}
-				{isOwnMessage && <MenuMessage side='right' />}
 			</div>
 		</div>
 	);
 }
 export default memo(ChatMessage);
-
-function MenuMessage({ side }: { side: 'left' | 'right' }) {
-	return (
-		<div
-			className={clsx(
-				side === 'left' ? 'bottom-14.5 left-10' : 'right-10 bottom-14',
-				'border-primary absolute flex items-center gap-1 rounded-sm border bg-white p-1 opacity-0 transition-opacity group-hover:opacity-100'
-			)}
-		>
-			<button title='Edit message'>
-				<Pencil size={20} />
-			</button>
-			<CopyButton title='Copy message' variant={'outline'} size={'sm'} />
-			<button title='Resend message'>
-				<CornerUpRight size={20} />
-			</button>
-			<button title='Delete message'>
-				<Trash size={20} />
-			</button>
-		</div>
-	);
-}

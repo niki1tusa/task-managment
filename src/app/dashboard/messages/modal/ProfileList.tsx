@@ -96,11 +96,11 @@ export default function ProfileList({ profile, typeChannel, setOpenList, close }
 					placeholder={`Enter group name...`}
 					value={nameChannel}
 					onChange={e => setNameChannel(e.target.value)}
-					className='flex-1 resize-none rounded-lg bg-gray-50 px-3 py-2 text-sm placeholder-gray-400 shadow shadow-neutral-400 outline-none dark:bg-gray-700 dark:placeholder-gray-500'
+					className='flex-1 resize-none rounded-lg bg-gray-50 px-3 py-2 text-sm placeholder-gray-400 shadow shadow-neutral-400 outline-none dark:bg-gray-700 dark:placeholder-gray-500 dark:text-white'
 				/>
 			)}
 
-			<ul className='bg-background flex flex-col overflow-y-auto rounded-lg border-2 px-4'>
+			<ul className='bg-[#f6f4ff] dark:bg-gray flex flex-col overflow-y-auto  rounded-lg border-2 px-4'>
 				{profiles?.map((p: TProfileRow) => (
 					<li key={p.id} className='flex items-center justify-between border-b-2 py-2.5'>
 						<div className='flex items-center gap-3'>
@@ -108,6 +108,7 @@ export default function ProfileList({ profile, typeChannel, setOpenList, close }
 							<span className='text-sm'>{p.name}</span>
 						</div>
 						<Checkbox
+						className={'bg-white'}
 							disabled={
 								!addProfileArr.includes(p.id) &&
 								(typeChannel === 'group' ? addProfileArr.length === 30 : addProfileArr.length === 1)

@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { SquarePlus } from 'lucide-react';
+import { EllipsisVertical, SquarePlus } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 
 import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/components/tabs';
@@ -54,8 +54,8 @@ export default function ChannelsSide({ channels }: Props) {
 	}, [channels, defaultChannel, activeChannel, setActiveChannel]);
 
 	return (
-		<div className='grid grid-cols-[3fr_2fr] border-r-2 xl:grid-cols-[1fr_200px]'>
-			<div className='relative flex flex-col justify-between'>
+		<div className='grid grid-cols-[3fr_2fr] h-full min-h-0 border-r-2 xl:grid-cols-[1fr_200px]'>
+			<div className='relative h-full min-h-0 flex flex-col justify-between'>
 				<div>
 					<div className='mx-5 mt-7 flex items-center justify-between'>
 						<Title heading='page'>Channels</Title>
@@ -88,43 +88,60 @@ export default function ChannelsSide({ channels }: Props) {
 						</TabsList>
 					</Tabs>
 
-					<div className='mt-2 ml-5 flex flex-col items-start gap-2 overflow-y-auto py-2 pl-1'>
+					<div className='mt-2 mr-2 ml-5 flex flex-col items-start gap-2 overflow-y-auto py-2 pl-1'>
 						{sortedChannels?.map(channel => {
 							const isActive = activeChannel?.id === channel.id;
 							return (
-								<Button
-									onClick={() => setActiveChannel(channel)}
-									className={clsx(
-										'bg-primary rounded-sm px-2 py-2 text-sm shadow shadow-neutral-400 transition-colors 2xl:text-lg dark:text-white',
-										isActive
-											? 'bg-primary text-white'
-											: 'bg-primary/40 text-primary hover:bg-primary/50 dark:text-white/40'
-									)}
+								<div
 									key={channel.id}
+									className={clsx(
+										isActive && 'bg-gray/40 flex w-full justify-between rounded-sm p-1'
+									)}
 								>
-									# {channel.name}
-								</Button>
+									<Button
+										onClick={() => setActiveChannel(channel)}
+										className={clsx(
+											'bg-primary rounded-sm px-2 py-2 text-sm shadow shadow-neutral-400 transition-colors 2xl:text-lg dark:text-white',
+											isActive
+												? 'bg-primary text-white'
+												: 'bg-primary/40 text-primary hover:bg-primary/50 dark:text-white/40'
+										)}
+									>
+										# {channel.name}
+									</Button>
+									{isActive && (
+										<button className='mr-5'>
+											<EllipsisVertical size={22} />
+										</button>
+									)}
+								</div>
 							);
 						})}
 					</div>
 				</div>
 
-				<div className='flex justify-center'>
-					<button
-						className='mb-4 rounded-sm bg-red-500 px-2 py-1 text-base text-white hover:bg-red-400'
-						onClick={() => open('deleteChannel', activeChannel)}
-						disabled={!activeChannel}
-					>
-						Delete
-					</button>
-				</div>
+				{activeChannel?.name !== 'General' && (
+					<div className='flex justify-center'>
+						<button
+							className='mb-4 rounded-sm bg-red-500 px-2 py-1 text-base text-white hover:bg-red-400'
+							onClick={() => open('deleteChannel', activeChannel)}
+							disabled={!activeChannel}
+						>
+							Delete
+						</button>
+					</div>
+				)}
 
 				{/* Fade overlay */}
 				<div className='from-primary/10 dark:from-gray/5 pointer-events-none absolute bottom-0 left-0 z-50 h-8 w-full bg-gradient-to-t to-transparent' />
 			</div>
 
 			{/* Participants */}
-			{activeChannel && <PartySide channel={activeChannel} />}
+			{activeChannel && (
+				<div className='min-h-0'>
+					<PartySide channel={activeChannel} />
+				</div>
+			)}
 		</div>
 	);
 }

@@ -14,7 +14,7 @@ export const ProviderWrapper = ({ children }: { children: ReactNode }) => {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-				<div className='absolute top-5 right-5 z-50'>
+				<div className='absolute top-5 right-5'>
 					<ToggleTheme />
 				</div>
 				<ToastContainer />

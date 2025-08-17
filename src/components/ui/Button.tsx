@@ -1,4 +1,4 @@
-import cn from 'clsx';
+import clsx from 'clsx';
 
 interface Props {
 	className?: string;
@@ -6,13 +6,15 @@ interface Props {
 	type?: 'button' | 'submit' | 'reset';
 	children: React.ReactNode;
 	disable?: boolean;
+	border?: boolean
 }
-export function Button({ type = 'button', children, className, onClick, disable = false }: Props) {
+export function Button({ type = 'button', children, className, onClick, disable = false, border = false }: Props) {
 	return (
 		<button
 			onClick={onClick}
 			type={type}
-			className={cn(
+			className={clsx(
+				border && 'border-2 border-indigo-900 box-border',
 				{ 'bg-primary/50 cursor-not-allowed': disable },
 				className
 					? className

@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { SquarePlus, Trash2Icon } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/components/tabs';
 import { Avatar } from '@/components/ui/Avatar';
@@ -10,6 +10,9 @@ import Skeleton from '@/components/ui/Skeleton';
 import { Title } from '@/components/ui/Title';
 
 import type { TProfileRow } from '@/shared/types/task/task.types';
+
+import { useChannelStore } from '@/store/channel.store';
+import { useModalStore } from '@/store/modals.store';
 
 import type { TChannelRow } from './channel.types';
 import { getChannelParticipantsById } from '@/services/channel/channel-client.service';
@@ -29,7 +32,8 @@ type TChannelParticipant = {
 };
 export default function PartySide({ channel }: { channel: TChannelRow }) {
 	const [sortedParty, setSortedPaty] = useState<'role' | 'a-z'>('role');
-
+	const { activeChannel } = useChannelStore();
+	const { open } = useModalStore();
 	const channelId = channel?.id;
 	const { data: currentProfile } = useQuery<TProfileRow>({
 		queryKey: ['profile'],
@@ -40,7 +44,6 @@ export default function PartySide({ channel }: { channel: TChannelRow }) {
 		queryFn: () => getChannelParticipantsById(channelId),
 		enabled: !!channelId,
 	});
-
 	const sortedProfiles =
 		sortedParty === 'role'
 			? participants
@@ -59,16 +62,16 @@ export default function PartySide({ channel }: { channel: TChannelRow }) {
 
 	const ownerChannel = participants?.find(p => p.role === 'owner');
 	return (
-		<div className='relative border-l-2'>
+		<div className='relative flex flex-col h-full min-h-0 border-l-2 '>
 			{/* Header */}
-			<div className='mx-5 mt-7 mb-1 flex items-center justify-between'>
+			<div className='mx-5 mt-7 mb-1 flex items-center justify-between shrink-0'>
 				<Title heading='page'>Party</Title>
 				<button type='button'>
 					<SquarePlus />
 				</button>
 			</div>
 			<div className='border-b-2 shadow-sm' />
-			<Tabs defaultValue='role' className='dark:bg-muted bg-gray w-full shadow-sm'>
+			<Tabs defaultValue='role' className='dark:bg-muted bg-gray w-full shadow-sm shrink-0'>
 				<TabsList className='grid w-full grid-cols-2 rounded-none border-b-2'>
 					<TabsTrigger onClick={() => setSortedPaty('role')} value='role'>
 						Role
@@ -79,7 +82,8 @@ export default function PartySide({ channel }: { channel: TChannelRow }) {
 				</TabsList>
 			</Tabs>
 			{/* List */}
-			<div className='flex flex-col gap-1 overflow-y-auto py-2'>
+    <div className='flex-1 min-h-0 overflow-y-auto py-2'> {/* ВАЖНО: flex-1 + min-h-0 */}
+   <div className='flex flex-col gap-1'>
 				{isLoading ? (
 					<Skeleton width='w-[97%]' length={1} />
 				) : (
@@ -91,9 +95,9 @@ export default function PartySide({ channel }: { channel: TChannelRow }) {
 							<div className='relative flex items-center gap-2 truncate p-1'>
 								<div className='relative'>
 									<Avatar img={profile.avatar_path || ''} />
-									<div className='absolute top-5.5 right-0 z-50 h-2 w-2 animate-pulse rounded-full border border-green-900 bg-green-500' />
+									<div className='absolute top-5.5 right-0 h-2 w-2 animate-pulse rounded-full border border-green-900 bg-green-500' />
 								</div>
-								<span className='group-hover:text-primary relative transition-colors'>
+								<span className='group-hover:text-primary relative transition-colors dark:group-hover:text-white'>
 									{profile.name}
 								</span>
 								{ownerChannel?.profile?.[0]?.id === profile.id && (
@@ -102,8 +106,12 @@ export default function PartySide({ channel }: { channel: TChannelRow }) {
 									</span>
 								)}
 							</div>
-							{!(currentProfile?.id === profile.id) && (
-								<button title='Remove user from a channel' type='button'>
+							{activeChannel?.type === 'group' && !(currentProfile?.id === profile.id) && (
+								<button
+									title='Remove user from a channel'
+									type='button'
+									onClick={() => open('deleteProfileFromPartyChannel', profile)}
+								>
 									<Trash2Icon
 										size={18}
 										className='text-red-400 opacity-0 transition-opacity group-hover:opacity-100'
@@ -113,6 +121,7 @@ export default function PartySide({ channel }: { channel: TChannelRow }) {
 						</div>
 					))
 				)}
+				</div>
 			</div>
 			{/* Fade overlay */}
 			<div className='from-primary/10 dark:from-gray/5 pointer-events-none absolute bottom-0 left-0 z-50 h-8 w-full bg-gradient-to-t to-transparent' />
