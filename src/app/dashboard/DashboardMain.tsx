@@ -19,7 +19,7 @@ export default function DashboardMain({ data, children }: Props) {
 	return (
 		<main
 			className={clsx(
-				'grid h-[100%] flex-1 dark:border-r dark:border-l dark:border-neutral-800',
+				'grid h-full flex-1 dark:border-r dark:border-l dark:border-neutral-800',
 				isShowChat ? 'grid-cols-[75%_25%]' : 'grid-cols-1'
 			)}
 			role='main'

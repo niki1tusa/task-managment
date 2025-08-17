@@ -65,7 +65,7 @@ export function MessagesClient({ data }: Props) {
 			)}
 
 			{/* Chat */}
-			<div className='flex h-screen flex-col' role='complementary' aria-label='Chat panel'>
+			<div className='flex h-full min-h-0 flex-col' role='complementary' aria-label='Chat panel'>
 				{/* User info */}
 				<div className='bg-primary/40 border-gray/20 flex h-[69.5px] w-full flex-shrink-0 items-center gap-3 border-b-2 pl-10 font-semibold shadow-sm 2xl:h-30'>
 					<div className='relative'>

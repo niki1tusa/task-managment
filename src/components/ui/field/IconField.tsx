@@ -3,8 +3,8 @@
 import clsx from 'clsx';
 
 import { ICON_NAMES, MODAL_ICON } from '@/shared/data/icon.data';
-import type { IIconField } from '../form/form.types';
 
+import type { IIconField } from '../form/form.types';
 
 export function IconField({ setValue, watch }: IIconField) {
 	return (
@@ -19,9 +19,10 @@ export function IconField({ setValue, watch }: IIconField) {
 							type='button'
 							key={name}
 							className={clsx(
-								'bg-primary hover:bg-primary/50 rounded-sm p-2 text-white transition-colors',
+								'bg-primary hover:bg-primary/50 rounded-sm p-2 text-white transition-all',
 								{
-									'border-2 border-indigo-800 shadow shadow-neutral-400': watch('icon') === name,
+									'shadow-lg ring-2 shadow-indigo-400/40 ring-indigo-500 ring-offset-2':
+										watch('icon') === name,
 								}
 							)}
 						>

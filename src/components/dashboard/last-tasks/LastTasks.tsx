@@ -32,7 +32,7 @@ export const LastTasks = ({ tasks }: { tasks: TTask[] }) => {
 					onClick={() => {
 						open('createTask');
 					}}
-					className='hover:text-primary max-h-[41px] rounded-sm border border-white px-2 pt-2 text-sm font-medium text-gray-500 shadow shadow-neutral-400 transition-all duration-300'
+					className='hover:text-primary flex dark:hover:text-white max-h-[41px] rounded-sm border border-white px-2 pt-2 text-sm font-medium text-gray-500 shadow shadow-neutral-400 transition-all duration-300'
 				>
 					+ Add Task
 				</button>

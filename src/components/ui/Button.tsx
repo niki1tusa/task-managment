@@ -14,7 +14,6 @@ export function Button({ type = 'button', children, className, onClick, disable 
 			onClick={onClick}
 			type={type}
 			className={clsx(
-				border && 'border-2 border-indigo-900 box-border',
 				{ 'bg-primary/50 cursor-not-allowed': disable },
 				className
 					? className

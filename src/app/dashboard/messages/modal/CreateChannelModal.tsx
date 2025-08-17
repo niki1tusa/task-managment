@@ -1,6 +1,7 @@
 'use client';
 
 import { useMutation, useQuery } from '@tanstack/react-query';
+import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -71,7 +72,15 @@ export function CreateChannelModal({ close }: Props) {
 						<div className='flex flex-wrap gap-2 border-t-2 border-b-2 py-2'>
 							{tasks?.data?.length &&
 								tasks.data.map((task: TTask) => (
-									<Button border={taskState?.id === task.id} onClick={() => setTtaskState(task)} key={task.id}>
+									<Button
+										className={clsx(
+											taskState?.id === task.id &&
+												'shadow-lg ring-2 shadow-indigo-400/40 ring-indigo-500 ring-offset-2',
+											'bg-primary hover:bg-primary/50 w-[30%] rounded-sm py-2 text-sm text-white transition-colors 2xl:text-lg'
+										)}
+										onClick={() => setTtaskState(task)}
+										key={task.id}
+									>
 										{task.title}
 									</Button>
 								))}

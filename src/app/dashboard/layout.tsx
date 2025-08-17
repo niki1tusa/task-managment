@@ -15,7 +15,7 @@ export default async function DashboardLayout({ children, modals }: Props) {
 	const data = await getServerProfile();
 	if (!data) return null;
 	return (
-		<div className={'grid h-screen grid-cols-[15%_85%]'}>
+		<div className='grid h-full grid-cols-[15%_85%]'>
 			<div className='bg-side' role='navigation' aria-label='Main navigation'>
 				<Sidebar data={data} />
 			</div>

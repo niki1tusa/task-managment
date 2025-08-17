@@ -54,8 +54,8 @@ export default function ChannelsSide({ channels }: Props) {
 	}, [channels, defaultChannel, activeChannel, setActiveChannel]);
 
 	return (
-		<div className='grid grid-cols-[3fr_2fr] h-full min-h-0 border-r-2 xl:grid-cols-[1fr_200px]'>
-			<div className='relative h-full min-h-0 flex flex-col justify-between'>
+		<div className='grid h-full min-h-0 grid-cols-[3fr_2fr] border-r-2 xl:grid-cols-[1fr_200px]'>
+			<div className='relative flex h-full min-h-0 flex-col justify-between'>
 				<div>
 					<div className='mx-5 mt-7 flex items-center justify-between'>
 						<Title heading='page'>Channels</Title>
@@ -94,17 +94,15 @@ export default function ChannelsSide({ channels }: Props) {
 							return (
 								<div
 									key={channel.id}
-									className={clsx(
-										isActive && 'bg-gray/40 flex w-full justify-between rounded-sm p-1'
-									)}
+									className={clsx(isActive && 'bg-gray/40 flex w-full justify-between rounded-sm')}
 								>
 									<Button
 										onClick={() => setActiveChannel(channel)}
 										className={clsx(
-											'bg-primary rounded-sm px-2 py-2 text-sm shadow shadow-neutral-400 transition-colors 2xl:text-lg dark:text-white',
+											'bg-primary m-1 rounded-sm px-2 py-2 text-sm shadow shadow-neutral-400 transition-colors 2xl:text-lg dark:text-white',
 											isActive
 												? 'bg-primary text-white'
-												: 'bg-primary/40 text-primary hover:bg-primary/50 dark:text-white/40'
+												: 'bg-primary/40 text-primary hover:bg-primary/50 dark:hover:bg-primary/80 dark:text-white/40'
 										)}
 									>
 										# {channel.name}
@@ -138,7 +136,7 @@ export default function ChannelsSide({ channels }: Props) {
 
 			{/* Participants */}
 			{activeChannel && (
-				<div className='min-h-0'>
+				<div className='h-full min-h-0'>
 					<PartySide channel={activeChannel} />
 				</div>
 			)}

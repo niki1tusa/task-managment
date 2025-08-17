@@ -1,7 +1,7 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { SquarePlus, Trash2Icon } from 'lucide-react';
+import { Trash2Icon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/components/tabs';
@@ -62,16 +62,13 @@ export default function PartySide({ channel }: { channel: TChannelRow }) {
 
 	const ownerChannel = participants?.find(p => p.role === 'owner');
 	return (
-		<div className='relative flex flex-col h-full min-h-0 border-l-2 '>
+		<div className='relative flex h-full min-h-0 flex-col border-l-2'>
 			{/* Header */}
-			<div className='mx-5 mt-7 mb-1 flex items-center justify-between shrink-0'>
+			<div className='mx-5 mt-7 mb-1'>
 				<Title heading='page'>Party</Title>
-				<button type='button'>
-					<SquarePlus />
-				</button>
 			</div>
 			<div className='border-b-2 shadow-sm' />
-			<Tabs defaultValue='role' className='dark:bg-muted bg-gray w-full shadow-sm shrink-0'>
+			<Tabs defaultValue='role' className='dark:bg-muted bg-gray w-full shrink-0 shadow-sm'>
 				<TabsList className='grid w-full grid-cols-2 rounded-none border-b-2'>
 					<TabsTrigger onClick={() => setSortedPaty('role')} value='role'>
 						Role
@@ -82,8 +79,7 @@ export default function PartySide({ channel }: { channel: TChannelRow }) {
 				</TabsList>
 			</Tabs>
 			{/* List */}
-    <div className='flex-1 min-h-0 overflow-y-auto py-2'> {/* ВАЖНО: flex-1 + min-h-0 */}
-   <div className='flex flex-col gap-1'>
+			<div className='flex min-h-0 flex-1 flex-col  gap-1 overflow-y-auto py-2'>
 				{isLoading ? (
 					<Skeleton width='w-[97%]' length={1} />
 				) : (
@@ -121,7 +117,6 @@ export default function PartySide({ channel }: { channel: TChannelRow }) {
 						</div>
 					))
 				)}
-				</div>
 			</div>
 			{/* Fade overlay */}
 			<div className='from-primary/10 dark:from-gray/5 pointer-events-none absolute bottom-0 left-0 z-50 h-8 w-full bg-gradient-to-t to-transparent' />
