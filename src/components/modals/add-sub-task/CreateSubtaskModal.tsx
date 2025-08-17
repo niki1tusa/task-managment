@@ -15,8 +15,11 @@ import { useModalStore } from '@/store/modals.store';
 import { SUB_TASK_ADD_FIELDS } from './subtask.add.data';
 import { createClientSubTask } from '@/services/tasks/task-client.service';
 
-export const CreateSubtaskModal = ({ id }: { id: string }) => {
-	const { close } = useModalStore();
+interface Props { 
+	id: string
+	close: ()=> void
+}
+export const CreateSubtaskModal = ({ id, close }:Props) => {
 
 	const { mutate, isPending } = useMutation({
 		mutationKey: ['createSubTask', id],

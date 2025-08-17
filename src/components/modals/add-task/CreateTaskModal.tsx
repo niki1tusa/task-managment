@@ -9,17 +9,13 @@ import Modal from '@/components/ui/modal/Modal';
 
 import type { TSubTaskInsert, TTaskCreateForm } from '@/shared/types/task/task.types';
 
-import { useModalStore } from '@/store/modals.store';
-
-
 import { prepareTaskPayload } from '@/utils/format-date-createTask';
 
-
-import { createClientSubTask, createClientTask } from '@/services/tasks/task-client.service';
 import { TASK_EDIT_FIELDS } from '../edit-task/task.edit.data';
 
-export const CreateTaskModal= () => {
-	const { close } = useModalStore();
+import { createClientSubTask, createClientTask } from '@/services/tasks/task-client.service';
+
+export const CreateTaskModal = ({ close }: { close: () => void }) => {
 	const { mutateAsync: createTask } = useMutation({
 		mutationKey: ['add-task'],
 		mutationFn: (payload: TTaskCreateForm) => createClientTask(payload),

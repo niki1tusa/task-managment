@@ -20,13 +20,13 @@ export const ModalProvider = () => {
 		return <DeleteConfirmModals {...payload} close={close} />;
 	}
 	if (type === 'createTask') {
-		return <CreateTaskModal {...payload} close={close} />;
+		return <CreateTaskModal  close={close} />;
 	}
 	if (type === 'createSubTask') {
-		return <CreateSubtaskModal {...payload} close={close} />;
+		return <CreateSubtaskModal id={payload} close={close} />;
 	}
 	if (type === 'updateTask') {
-		return <UpdateTaskModal {...payload} close={close} />;
+		return <UpdateTaskModal id={payload} close={close} />;
 	}
 		if (type === 'deleteChannel') {
 		return <DeleteChannelModal {...payload} close={close} />;

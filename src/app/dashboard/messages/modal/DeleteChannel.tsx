@@ -8,8 +8,11 @@ import { useModalStore } from '@/store/modals.store';
 
 import { deleteClientChannel } from '@/services/channel/channel-client.service';
 
-export default function DeleteChannelModal() {
-	const { close, type, payload } = useModalStore();
+interface Props {
+	close: () => void;
+}
+export default function DeleteChannelModal({ close }: Props) {
+	const { type, payload } = useModalStore();
 
 	const { mutate, isPending } = useMutation({
 		mutationFn: (id: string) => deleteClientChannel(id),

@@ -13,8 +13,6 @@ import { AnimateIcon } from '@/components/animate-ui/icons/icon';
 
 import type { TTask } from '@/shared/types/task/task.types';
 
-import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
-
 import { useModalStore } from '@/store/modals.store';
 
 export const Footer = ({ task }: { task: TTask }) => {
@@ -54,8 +52,8 @@ export const Footer = ({ task }: { task: TTask }) => {
 				</button>
 				<button
 					onClick={e => {
-						
-						open('updateTask', task.id);
+						e.stopPropagation();
+						open('updateTask', task);
 					}}
 					className='bg-primary flex h-9 w-9 items-center justify-center rounded-full text-white shadow shadow-neutral-400'
 				>

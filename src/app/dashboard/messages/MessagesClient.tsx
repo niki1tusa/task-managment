@@ -31,7 +31,7 @@ export function MessagesClient({ data }: Props) {
 		if (!chat) return null;
 		return chat.messages.map(m => <ChatMessage key={m.id} message={m} />);
 	}, [chat?.messages]);
-console.log({ activeChannel, chat });
+	console.log({ activeChannel, chat });
 	return (
 		<div className='grid h-full w-full grid-cols-[3fr_5fr] border-l-2 bg-gray-50 dark:bg-gray-900'>
 			{/* Channel */}
@@ -44,14 +44,14 @@ console.log({ activeChannel, chat });
 			{/* Chat */}
 			<div className='flex h-screen flex-col' role='complementary' aria-label='Chat panel'>
 				{/* User info */}
-				<div className='bg-primary/40 flex h-[69.5px] w-full shadow-sm border-gray/20 border-b-2 flex-shrink-0 items-center gap-3 pl-10 font-semibold 2xl:h-30'>
-					<Avatar img={data.avatar_path || ''} />
+				<div className='bg-primary/40 border-gray/20 flex h-[69.5px] w-full flex-shrink-0 items-center gap-3 border-b-2 pl-10 font-semibold shadow-sm 2xl:h-30'>
+					<div className='relative'>
+						<Avatar img={data.avatar_path || ''} />
+						<div className='absolute top-5.5 right-0 z-50 h-2 w-2 animate-pulse rounded-full border border-green-900 bg-green-500' />
+					</div>
 					<div className='flex flex-col'>
 						<div className='text-[1rem] 2xl:text-[1.2rem]' id='chat-user-name'>
-							<span className='relative'>
-								{data.name}
-								<div className='absolute top-0.5 -right-[9px] h-2 w-2 animate-pulse rounded-full border border-green-900 bg-green-500' />
-							</span>
+							{data.name}
 						</div>
 						<div
 							className='text-sidebar-primary/80 text-[0.8rem] 2xl:text-[1rem] dark:text-white'
@@ -64,13 +64,13 @@ console.log({ activeChannel, chat });
 
 				{/* Messages */}
 				<div
-					className='flex-1 relative overflow-y-auto px-2 py-2'
+					className='relative flex-1 overflow-y-auto px-2 py-2'
 					role='log'
 					aria-label='Chat messages'
 					aria-live='polite'
 				>
-								{/* Fade overlay */}
-			<div className='pointer-events-none absolute top-0 left-0 h-50 w-full z-50 bg-gradient-to-b from-primary/10 to-transparent dark:from-gray/5' />
+					{/* Fade overlay */}
+					<div className='from-primary/10 dark:from-gray/5 pointer-events-none absolute top-0 left-0 z-50 h-50 w-full bg-gradient-to-b to-transparent' />
 
 					<div className='flex flex-col gap-3'>
 						{renderMessages}

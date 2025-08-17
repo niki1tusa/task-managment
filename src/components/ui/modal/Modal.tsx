@@ -19,7 +19,7 @@ export default function Modal({ title, children, close }: Props) {
 		<WrapperModal>
 			<div
 				ref={ref}
-				className='fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white p-4 text-black shadow-lg'
+				className='fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white p-4 text-black shadow-lg shadow-neutral-400'
 			>
 				<div className='mb-6 flex items-center justify-between'>
 					<h1 className='text-xl font-medium'>{title}</h1>

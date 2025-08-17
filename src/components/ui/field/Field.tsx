@@ -30,7 +30,7 @@ export function Field<T extends FieldValues>({
 	const [isShowEye, setIsShowEye] = useState(false);
 
 	return (
-		<div className=''>
+		<div>
 			<label className='mb-1 block font-medium xl:text-sm'>{labelText}:</label>
 			<span className='relative'>
 				{type === 'password' && (
@@ -48,7 +48,7 @@ export function Field<T extends FieldValues>({
 				<input
 					{...register(registerName)}
 					className={clsx(
-						'text-gray h-[30%] w-[80%] rounded border py-5 text-sm shadow shadow-neutral-400 transition-all duration-200 hover:scale-y-105 hover:bg-[#f6f4ff]/50 focus:border-2 focus:border-sky-600 focus:bg-[#f6f4ff] focus:shadow-none 2xl:w-full 2xl:text-lg',
+						'text-gray h-[30%] w-[80%] rounded border py-5 text-sm shadow shadow-neutral-400 transition-all duration-200  hover:bg-[#f6f4ff]/50 focus:border focus:border-sky-600 focus:bg-[#f6f4ff] focus:shadow-none 2xl:w-full 2xl:text-lg',
 						type === 'password' || type === 'email' ? 'pl-8' : 'pl-4'
 					)}
 					type={type === 'password' ? (isShowEye ? 'text' : 'password') : 'text'}

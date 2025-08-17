@@ -6,25 +6,21 @@ import { useEffect } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
+import Form from '@/components/ui/form/Form';
 import Modal from '@/components/ui/modal/Modal';
 
 import type { MODAL_ICON } from '@/shared/data/icon.data';
 import type { Database } from '@/shared/types/db/db.types';
 import { type TFormData, ZTaskEditScheme } from '@/shared/types/form/scheme.zod';
 
-
-
 import { TASK_EDIT_FIELDS } from './task.edit.data';
 import { getClientTaskById, updateClientTask } from '@/services/tasks/task-client.service';
-import { useModalStore } from '@/store/modals.store';
-import Form from '@/components/ui/form/Form';
 
-
-
-
-export const UpdateTaskModal = ({ id }: { id: string }) => {
-
-	const {close} = useModalStore()
+interface Props {
+	id: string;
+	close: () => void;
+}
+export const UpdateTaskModal = ({ id, close }: Props) => {
 	// react-hook-form
 	const {
 		reset,

@@ -13,11 +13,9 @@ import Skeleton from '../ui/Skeleton';
 
 interface Props {
 	message: TChatMessageRow;
-	isFirstMessageInChannel: boolean;
-	isLastMessageInChannel: boolean;
 }
 
-function ChatMessage({ message, isFirstMessageInChannel, isLastMessageInChannel }: Props) {
+function ChatMessage({ message }: Props) {
 	const { user, isLoading } = useProfile();
 
 	if (isLoading || !user) {
@@ -29,8 +27,8 @@ function ChatMessage({ message, isFirstMessageInChannel, isLastMessageInChannel 
 	const avatarPath = message.profile?.avatar_path || '';
 
 	return (
-		<div className={clsx('flex items-end', isOwnMessage ? 'justify-end' : 'justify-start')}>
-			<div className='group relative flex w-auto items-end gap-2'>
+		<div className={clsx('flex items-end border', isOwnMessage ? 'justify-end' : 'justify-start')}>
+			<div className='group relative flex w-auto items-end gap-2 border'>
 				{!isOwnMessage && <Avatar img={avatarPath} />}
 				{!isOwnMessage && <MenuMessage side='left' />}
 				<div className='max-w-[70%]'>
@@ -42,8 +40,10 @@ function ChatMessage({ message, isFirstMessageInChannel, isLastMessageInChannel 
 					</div>
 					<div
 						className={clsx(
-							'px-3 py-2 text-[1rem] 2xl:text-xl rounded-lg',
-							isOwnMessage ? 'bg-indigo-500 text-white rounded-br-none' : 'bg-indigo-300 text-black rounded-bl-none'
+							'rounded-lg px-3 py-2 text-[1rem] 2xl:text-xl',
+							isOwnMessage
+								? 'rounded-br-none bg-indigo-500 text-white'
+								: 'rounded-bl-none bg-indigo-300 text-black'
 						)}
 					>
 						{message.text}
