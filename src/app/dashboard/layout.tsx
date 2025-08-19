@@ -2,7 +2,8 @@ import { Sidebar } from '@/components/sidebar/Sidebar';
 
 import { getServerAuth } from '@/utils/supabase/get-server-auth';
 
-import DashboardMain from './DashboardMain';
+import MainLayout from '../../components/pages/dashboard/MainLayout';
+
 import { getServerProfile } from '@/services/profile/profile-server.service';
 
 interface Props {
@@ -16,11 +17,15 @@ export default async function DashboardLayout({ children, modals }: Props) {
 	if (!data) return null;
 	return (
 		<div className='grid grid-cols-[15%_85%]'>
-			<div className='bg-side' role='navigation' aria-label='Main navigation'>
+			<aside
+				className='bg-side sticky top-0 h-[100dvh] overflow-y-auto'
+				role='navigation'
+				aria-label='Main navigation'
+			>
 				<Sidebar data={data} />
-			</div>
+			</aside>
 			{modals}
-			<DashboardMain data={data}>{children}</DashboardMain>
+			<MainLayout data={data}>{children}</MainLayout>
 		</div>
 	);
 }

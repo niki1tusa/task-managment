@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { DashboardPageClient } from '../dashboardClient';
+import { DashboardClient } from '../../components/pages/dashboard/DashboardClient';
 
 import { fetchChartPoint } from '@/services/statistics/chart-point-server.service';
 import { fetchProjectStat } from '@/services/statistics/project-stat-server.service';
@@ -18,7 +18,7 @@ export default async function DashboardPage() {
 		fetchChartPoint('yearly'),
 	]);
 	return (
-		<DashboardPageClient
+		<DashboardClient
 			tasks={tasks.data || []}
 			todayTasks={todayTasks.data || []}
 			projectStats={projectStats.data || []}

@@ -7,7 +7,7 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "12.2.3 (519615d)"
@@ -115,24 +115,34 @@ export type Database = {
       }
       chat_message: {
         Row: {
+          channel_id: string
           created_at: string | null
           id: string
           text: string
           user_id: string | null
         }
         Insert: {
+          channel_id: string
           created_at?: string | null
           id?: string
           text: string
           user_id?: string | null
         }
         Update: {
+          channel_id?: string
           created_at?: string | null
           id?: string
           text?: string
           user_id?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "chat_message_channel_id_fkey"
+            columns: ["channel_id"]
+            isOneToOne: false
+            referencedRelation: "channel"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "chat_message_user_id_fkey"
             columns: ["user_id"]
@@ -295,7 +305,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_channel_member: {
+        Args: { p_channel: string; p_uid: string }
+        Returns: boolean
+      }
+      is_channel_owner: {
+        Args: { p_channel: string; p_uid: string }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never

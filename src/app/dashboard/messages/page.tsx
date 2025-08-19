@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
-import { MessagesClient } from './MessagesClient';
+import { MessagesClient } from '../../../components/pages/messages/MessagesClient';
+
 import { getServerProfile } from '@/services/profile/profile-server.service';
 
 export const metadata: Metadata = {
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 
 export default async function MessagesPage() {
 	const data = await getServerProfile();
-
-	if (!data) return null;
-	return <MessagesClient data={data} />;
+	const profile = data;
+	if (!profile) return null;
+	return <MessagesClient profile={profile} />;
 }

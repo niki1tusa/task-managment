@@ -10,7 +10,7 @@ import type { TProfileRow } from '@/shared/types/task/task.types';
 
 export const Sidebar = ({ data }: { data: TProfileRow }) => {
 	return (
-		<aside className='fixed mt-4 ml-8 h-full flex-col items-start gap-y-5 lg:flex lg:px-5'>
+		<aside className=' mt-4 ml-8 h-full flex-col items-start gap-y-5 lg:flex lg:px-5'>
 			<Profile data={data} />
 			<Menu heading='Menu' menu={MENU} isBorderTop={true} />
 			<ProjectsMenu heading='Projects' menu={PROJECTS_MENU} isBorderTop={true} />

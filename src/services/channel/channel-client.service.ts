@@ -1,15 +1,18 @@
-import type {
-	TChannelInsert,
-	TChannelUpdate,
-} from '@/app/dashboard/messages/channel/channel.types';
 
+
+import type { TChannelInsert, TChannelParticipantsRow, TChannelUpdate } from '@/components/pages/messages/channel/channel.types';
 import type { TProfileRow } from '@/shared/types/task/task.types';
 
 import { createClient } from '@/utils/supabase/client';
 
 // read
+function throwSB(error: any) {
+  const msg = [error?.message, error?.code, error?.details, error?.hint]
+    .filter(Boolean)
+    .join(' | ');
+  throw new Error(msg || 'Unknown Supabase error');
+}
 
-// TODO: сделать так чтобы пользователь не мог добавить себя
 
 export async function getClientChannels() {
   const supabase = createClient();
@@ -23,18 +26,22 @@ export async function getClientChannels() {
     .select('*')
     .order('created_at', { ascending: true });
 
-  if (error) throw new Error(error.message);
+  if (error) throwSB(error.message);
   return data ?? [];
 }
-
+	const UUID_V4 =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 export async function getChannelParticipantsById(id: string) {
+  if (!UUID_V4.test(id)) {
+    throw new Error('Invalid channel id');
+  }
 	const { data, error } = await createClient()
 		.from('channel_participants')
 		.select('role, profile:profile_id(id, name, avatar_path, email)')
 		.eq('channel_id', id);
 
-	if (error || !data) throw new Error(error?.message || 'Channel not found');
-	return data;
+	if (error || !data) throwSB(error?.message || 'Channel not found');
+	return (data ?? []) as TChannelParticipantsRow[];
 }
 
 // create
@@ -90,7 +97,7 @@ export async function createClientChannelGroup(
 		.single();
 	if (error) throw new Error(error.message);
 	// 2) add participants in channel_participants table
-	const { error: insertError } = await createClient()
+	const { error: insertError } = await client
 		.from('channel_participants')
 		.insert(
 			profilesId.map(p => ({

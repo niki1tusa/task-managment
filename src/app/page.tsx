@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import HomeClient from '@/components/home/HomeClient';
+import HomeClient from '@/components/pages/home/HomeClient';
 
 import { OG_IMAGE, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/constants/seo.constants';
 
