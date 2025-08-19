@@ -8,6 +8,8 @@ type ModalType =
 	| 'updateTask'
 	| 'deleteChannel'
 	| 'deleteProfileFromPartyChannel'
+	| 'renameChannel'
+	| 'insertProfileInChannel'
 	| null;
 
 interface ModalState {

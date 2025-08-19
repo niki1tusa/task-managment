@@ -12,7 +12,7 @@ import type { TTask } from '@/shared/types/task/task.types';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
-import type { TChannelInsert } from '../channel.types';
+import type { TChannelInsert } from '../channel/channel.types';
 
 import ProfileList from './ProfileList';
 import { createClientChannelByTaskId } from '@/services/channel/channel-client.service';

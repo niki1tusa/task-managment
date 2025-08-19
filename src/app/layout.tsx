@@ -36,8 +36,8 @@ export default function RootLayout({
 	modals: React.ReactNode;
 }>) {
 	return (
-		<html lang='en' className='h-full' suppressHydrationWarning>
-			<body className={`${poppins.variable} ${playfairDisplay.variable} antialiased h-full`}>
+		<html lang='en' suppressHydrationWarning>
+			<body className={`${poppins.variable} ${playfairDisplay.variable} h-full antialiased`}>
 				{/* Skip to main content link for keyboard navigation */}
 				<a
 					href='#main-content'
@@ -48,7 +48,7 @@ export default function RootLayout({
 
 				<ProviderWrapper>
 					{modals}
-					<main id='main-content' className='h-full' role='main'>
+					<main id='main-content' role='main'>
 						{children}
 					</main>
 				</ProviderWrapper>

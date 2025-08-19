@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import type { TChannelRow } from '@/app/dashboard/messages/channel.types';
+import type { TChannelRow } from '@/app/dashboard/messages/channel/channel.types';
 
 interface ChannelState {
 	activeChannel: TChannelRow | null;

@@ -13,9 +13,10 @@ import type { TProfileRow } from '@/shared/types/task/task.types';
 
 import { useChannelStore } from '@/store/channel.store';
 
-import ChannelsSide from './ChannelsSide';
-import { GROUP_GAP_MINUTES, minsDiff } from './utils/messageUtils';
+import ChannelsSide from './channel/ChannelsSide';
+
 import { getClientChannels } from '@/services/channel/channel-client.service';
+import { GROUP_GAP_MINUTES, minsDiff } from './chat/messageUtils';
 
 interface Props {
 	data: TProfileRow;
@@ -56,7 +57,7 @@ export function MessagesClient({ data }: Props) {
 	}, [chat?.messages]);
 
 	return (
-		<div className='grid h-full w-full grid-cols-[3fr_5fr] border-l-2 bg-gray-50 dark:bg-gray-900'>
+		<div className='grid w-full grid-cols-[3fr_5fr] border-l-2 bg-gray-50 dark:bg-gray-900'>
 			{/* Channel */}
 			{isLoading ? (
 				<Skeleton length={1} height='h-screen' />
@@ -65,12 +66,12 @@ export function MessagesClient({ data }: Props) {
 			)}
 
 			{/* Chat */}
-			<div className='flex h-full min-h-0 flex-col' role='complementary' aria-label='Chat panel'>
+			<div className='flex h-screen flex-col' role='complementary' aria-label='Chat panel'>
 				{/* User info */}
 				<div className='bg-primary/40 border-gray/20 flex h-[69.5px] w-full flex-shrink-0 items-center gap-3 border-b-2 pl-10 font-semibold shadow-sm 2xl:h-30'>
 					<div className='relative'>
 						<Avatar img={data.avatar_path || ''} />
-						<div className='absolute top-5.5 right-0  h-2 w-2 animate-pulse rounded-full border border-green-900 bg-green-500' />
+						<div className='absolute top-5.5 right-0 h-2 w-2 animate-pulse rounded-full border border-green-900 bg-green-500' />
 					</div>
 					<div className='flex flex-col'>
 						<div className='text-[1rem] 2xl:text-[1.2rem]' id='chat-user-name'>
@@ -93,7 +94,7 @@ export function MessagesClient({ data }: Props) {
 					aria-live='polite'
 				>
 					{/* Fade overlay */}
-					<div className='from-primary/10 dark:from-gray/5 pointer-events-none absolute top-0 left-0 z-50 h-50 w-full bg-gradient-to-b to-transparent' />
+					<div className='from-primary/20 dark:from-gray/5 pointer-events-none absolute top-0 left-0 z-50 h-50 w-full bg-gradient-to-b to-transparent' />
 
 					<div className='flex flex-col'>
 						{renderMessages}

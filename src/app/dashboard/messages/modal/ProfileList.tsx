@@ -5,37 +5,39 @@ import { toast } from 'react-toastify';
 import { Checkbox } from '@/components/animate-ui/base/checkbox';
 import { Avatar } from '@/components/ui/Avatar';
 import { Button } from '@/components/ui/Button';
+import Textarea from '@/components/ui/field/Textarea';
 
 import type { TProfileRow } from '@/shared/types/task/task.types';
 
-import type { TChannelInsert } from '../channel.types';
+import type { TChannelInsert } from '../channel/channel.types';
 
 import {
 	createClientChannelDirect,
 	createClientChannelGroup,
 } from '@/services/channel/channel-client.service';
 import { getAllProfile, getProfile } from '@/services/profile/profile-client.service';
+import { useChannelStore } from '@/store/channel.store';
 
 interface Props {
 	close: () => void;
 	profile: TProfileRow;
 	typeChannel: string;
-	setOpenList: (arg: boolean) => void;
+	setOpenList?: (arg: boolean) => void;
+	mutateFnc?: (arg: any)=>void
+	isPending?: boolean
 }
-export default function ProfileList({ profile, typeChannel, setOpenList, close }: Props) {
+// TODO: здесь не нужен props profile
+export default function ProfileList({ profile, typeChannel, setOpenList, close, mutateFnc, isPending }: Props) {
+
 	const [addProfileArr, setAddProfileArr] = useState<string[]>([]);
 	const [nameChannel, setNameChannel] = useState('');
-	// profile
-	const { data: currentPorfile } = useQuery<TProfileRow>({
-		queryKey: ['profile'],
-		queryFn: () => getProfile(),
-	});
+	// profiles
 	const { data: profilesData } = useQuery<TProfileRow[]>({
-		queryKey: ['profiles'],
+		queryKey: ['profiles/all'],
 		queryFn: () => getAllProfile(),
 	});
 	console.log(profilesData);
-	const profiles = profilesData?.filter(item => item.id !== currentPorfile?.id);
+	const profiles = profilesData?.filter(item => item.id !== profile?.id);
 	// create channel
 	const { mutate: mutateChannelGroup } = useMutation({
 		mutationFn: ({ fields, profilesId }: { fields: TChannelInsert; profilesId: string[] }) =>
@@ -90,17 +92,9 @@ export default function ProfileList({ profile, typeChannel, setOpenList, close }
 					{addProfileArr.length}/{typeChannel === 'group' ? 30 : 1}
 				</span>
 			</span>
-			{typeChannel === 'group' && (
-				<textarea
-					rows={1}
-					placeholder={`Enter group name...`}
-					value={nameChannel}
-					onChange={e => setNameChannel(e.target.value)}
-					className='flex-1 resize-none rounded-lg bg-gray-50 px-3 py-2 text-sm placeholder-gray-400 shadow shadow-neutral-400 outline-none dark:bg-gray-700 dark:placeholder-gray-500 dark:text-white'
-				/>
-			)}
+			{typeChannel === 'group' && <Textarea value={nameChannel} setValue={setNameChannel} />}
 
-			<ul className='bg-[#f6f4ff] dark:bg-gray flex flex-col overflow-y-auto  rounded-lg border-2 px-4'>
+			<ul className='dark:bg-gray flex flex-col overflow-y-auto rounded-lg border-2 bg-[#f6f4ff] px-4'>
 				{profiles?.map((p: TProfileRow) => (
 					<li key={p.id} className='flex items-center justify-between border-b-2 py-2.5'>
 						<div className='flex items-center gap-3'>
@@ -108,7 +102,7 @@ export default function ProfileList({ profile, typeChannel, setOpenList, close }
 							<span className='text-sm'>{p.name}</span>
 						</div>
 						<Checkbox
-						className={'bg-white'}
+							className={'bg-white'}
 							disabled={
 								!addProfileArr.includes(p.id) &&
 								(typeChannel === 'group' ? addProfileArr.length === 30 : addProfileArr.length === 1)
@@ -125,27 +119,37 @@ export default function ProfileList({ profile, typeChannel, setOpenList, close }
 					</li>
 				))}
 			</ul>
-
-			<div className='flex w-full gap-3 px-4 py-2'>
-				<Button
-					disable={addProfileArr.length < 1}
-					onClick={() => {
-						typeChannel === 'group'
-							? handleCreateGroup(addProfileArr)
-							: handleCreateDirect(profilesData?.find(profile => profile.id === addProfileArr[0])!);
-					}}
-				>
-					Create
-				</Button>
-				<Button
-					onClick={() => {
-						setOpenList(false);
-						setNameChannel('');
-					}}
-				>
-					Back
-				</Button>
-			</div>
+			{setOpenList ? (
+				<div className='flex w-full gap-3 px-4 py-2'>
+					<Button
+						disable={addProfileArr.length < 1}
+						onClick={() => {
+							typeChannel === 'group'
+								? handleCreateGroup(addProfileArr)
+								: handleCreateDirect(
+										profilesData?.find(profile => profile.id === addProfileArr[0])!
+									);
+						}}
+					>
+						Create
+					</Button>
+					<Button
+						onClick={() => {
+							setOpenList(false);
+							setNameChannel('');
+						}}
+					>
+						Back
+					</Button>
+				</div>
+			) : mutateFnc && (
+				<div className='flex gap-4'>
+					<Button disable={isPending} onClick={() => mutateFnc(addProfileArr)} >
+						Save
+					</Button>
+					<Button onClick={close}>No</Button>
+				</div>
+			)}
 		</div>
 	);
 }

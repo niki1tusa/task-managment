@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { format, parseISO } from 'date-fns';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 
 import type { TChatMessageRow } from '@/shared/types/task/task.types';
 
@@ -19,7 +19,7 @@ interface Props {
 
 function ChatMessage({ message, isFirstInGroup, isLastInGroup }: Props) {
 	const { user, isLoading } = useProfile();
-
+	const [isShowMenuMessage, setIsShowMenuMessage] = useState(false);
 	if (isLoading || !user) {
 		return <Skeleton />;
 	}
@@ -52,6 +52,10 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup }: Props) {
 					)}
 					{/* message */}
 					<div
+						onMouseDown={e => {
+							e.preventDefault();
+							setIsShowMenuMessage(true);
+						}}
 						className={clsx(
 							'relative w-fit rounded-2xl px-3 py-2 text-[1rem] 2xl:max-w-[600px] 2xl:text-xl',
 							// устойчивость к любым строкам + переносы
@@ -68,7 +72,7 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup }: Props) {
 						)}
 					>
 						{message.text}
-						<MenuMessage side={isOwnMessage ? 'right' : 'left'} />
+						{isShowMenuMessage && <MenuMessage side={isOwnMessage ? 'right' : 'left'} />}
 					</div>
 				</div>
 			</div>

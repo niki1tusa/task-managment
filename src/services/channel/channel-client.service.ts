@@ -1,4 +1,8 @@
-import type { TChannelInsert } from '@/app/dashboard/messages/channel.types';
+import type {
+	TChannelInsert,
+	TChannelUpdate,
+} from '@/app/dashboard/messages/channel/channel.types';
+
 import type { TProfileRow } from '@/shared/types/task/task.types';
 
 import { createClient } from '@/utils/supabase/client';
@@ -8,13 +12,19 @@ import { createClient } from '@/utils/supabase/client';
 // TODO: сделать так чтобы пользователь не мог добавить себя
 
 export async function getClientChannels() {
-	const { data, error } = await createClient()
-		.from('channel')
-		.select('*')
-		.order('created_at', { ascending: true });
-	if (error || !data) throw new Error(error?.message || 'Channel not found');
+  const supabase = createClient();
 
-	return data;
+  // важно: должен быть активный user (иначе auth.uid() = null и RLS всё отрежет)
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) throw new Error('Not authenticated');
+
+  const { data, error } = await supabase
+    .from('channel')
+    .select('*')
+    .order('created_at', { ascending: true });
+
+  if (error) throw new Error(error.message);
+  return data ?? [];
 }
 
 export async function getChannelParticipantsById(id: string) {
@@ -100,7 +110,10 @@ export async function createClientChannelGroup(
 }
 
 // direct
-export async function createClientChannelDirect(channelFields: TChannelInsert, profile: TProfileRow) {
+export async function createClientChannelDirect(
+	channelFields: TChannelInsert,
+	profile: TProfileRow
+) {
 	const client = createClient();
 	// получаем текущего пользователя
 	const {
@@ -111,7 +124,7 @@ export async function createClientChannelDirect(channelFields: TChannelInsert, p
 	// 1) create channel
 	const { data: newChannel, error } = await client
 		.from('channel')
-		.insert({ ...channelFields, type: 'direct', created_by: user.id, name: profile.name  })
+		.insert({ ...channelFields, type: 'direct', created_by: user.id, name: profile.name })
 		.select()
 		.single();
 	if (error) throw new Error(error.message);
@@ -131,7 +144,12 @@ export async function createClientChannelDirect(channelFields: TChannelInsert, p
 
 	return newChannel;
 }
-
+// update
+export async function renameChannel(channel: TChannelUpdate) {
+	const { data, error } = await createClient().from('channel').update(channel).eq('id', channel.id);
+	if (error) throw new Error(error.message);
+	return data;
+}
 // delete
 export async function deleteClientChannel(id: string) {
 	const { error } = await createClient().from('channel').delete().eq('id', id);

@@ -1,6 +1,8 @@
-import { CreateChannelModal } from '@/app/dashboard/messages/modal/CreateChannelModal';
-import DeleteChannelModal from '@/app/dashboard/messages/modal/DeleteChannel';
-import DeleteProfileFromPartyChannel from '@/app/dashboard/messages/modal/DeleteProfileFromPartyChannel';
+import AddProfileInChannel from '@/app/dashboard/messages/modal/add.profile.modal';
+import { CreateChannelModal } from '@/app/dashboard/messages/modal/create.channel.modal';
+import DeleteChannelModal from '@/app/dashboard/messages/modal/delete.channel.modal';
+import DeleteProfileFromPartyChannel from '@/app/dashboard/messages/modal/delete.profile.modal';
+import RenameChannel from '@/app/dashboard/messages/modal/rename.channel.modal';
 
 import DeleteConfirmModals from '@/components/modals/DeleteConfirmModals';
 import { CreateSubtaskModal } from '@/components/modals/add-sub-task/CreateSubtaskModal';
@@ -35,6 +37,11 @@ export const ModalProvider = () => {
 	if (type === 'deleteProfileFromPartyChannel') {
 		return <DeleteProfileFromPartyChannel profile={payload} close={close} />;
 	}
-
+	if (type === 'renameChannel') {
+		return <RenameChannel activeChannel={payload} close={close} />;
+	}
+		if (type === 'insertProfileInChannel') {
+		return <AddProfileInChannel activeChannel={payload} close={close} />;
+	}
 	return null;
 };
