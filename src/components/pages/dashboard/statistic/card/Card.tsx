@@ -13,15 +13,15 @@ export const Card = ({ icon, number, label, bg_color }: TGetProjectStatResponse[
 	return (
 		<div
 			className={clsx(
-				`text-dark dark:bg-dark flex justify-around rounded-2xl border border-white px-2 py-7 shadow shadow-neutral-400 dark:border-none dark:text-white`,
+				`text-dark dark:bg-dark flex justify-between items-center rounded-2xl border border-white px-10 py-7 shadow shadow-neutral-400 dark:border-none dark:text-white`,
 				bgClass
 			)}
 		>
 			<div>
 				<div className='text-3xl font-semibold'>{number}</div>
-				<div className='text-sm'>{label}</div>
+				<div className='text-base'>{label}</div>
 			</div>
-			<Image src={icon || ''} alt='picture' width={60} height={80} />
+			<Image src={icon || ''} alt='picture' width={60} height={60} />
 		</div>
 	);
 };

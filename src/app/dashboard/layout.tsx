@@ -8,23 +8,21 @@ import { getServerProfile } from '@/services/profile/profile-server.service';
 
 interface Props {
 	children: React.ReactNode;
-	modals: React.ReactNode;
 }
-export default async function DashboardLayout({ children, modals }: Props) {
+export default async function DashboardLayout({ children }: Props) {
 	// pure ssr
 	await getServerAuth(true);
 	const data = await getServerProfile();
 	if (!data) return null;
 	return (
-		<div className='grid grid-cols-[15%_85%]'>
+		<div className='grid grid-cols-[12%_88%]'>
 			<aside
-				className='bg-side sticky top-0 h-[100dvh] overflow-y-auto'
+				className='bg-side sticky top-0 h-[100dvh]'
 				role='navigation'
 				aria-label='Main navigation'
 			>
 				<Sidebar data={data} />
 			</aside>
-			{modals}
 			<MainLayout data={data}>{children}</MainLayout>
 		</div>
 	);

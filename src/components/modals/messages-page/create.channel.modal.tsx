@@ -67,14 +67,15 @@ export function CreateChannelModal({ close }: Props) {
 					</>
 				) : typeChannel === 'task' ? (
 					<>
-						<div className='flex flex-wrap gap-2 border-t-2 border-b-2 py-2'>
+						<div className='flex flex-col items-center gap-4 border-t-2 border-b-2 py-4'>
 							{tasks?.data?.length &&
 								tasks.data.map((task: TTask) => (
 									<Button
+									variant='transparent'
 										className={clsx(
 											taskState?.id === task.id &&
-												'shadow-lg ring-2 shadow-indigo-400/40 ring-indigo-500 ring-offset-2',
-											'bg-primary hover:bg-primary/50 w-[30%] rounded-sm py-2 text-sm text-white transition-colors 2xl:text-lg'
+												'shadow-lg ring-2 shadow-indigo-400/40 ring-indigo-500! ring-offset-2',
+											' hover:bg-primary/50 w-[80%] 2xl:text-lg'
 										)}
 										onClick={() => setTtaskState(task)}
 										key={task.id}
@@ -98,9 +99,9 @@ export function CreateChannelModal({ close }: Props) {
 				) : (
 					<>
 						<span className='text-lg'>Who should I add to this channel?</span>
-						<div className='flex w-full gap-3'>
-							<Button onClick={() => setOpenList(true)}>Open porifle list</Button>
-							<Button onClick={() => setTypeChannel('')}>Back</Button>
+						<div className='flex w-full gap-3 py-2'>
+							<Button  onClick={() => setOpenList(true)}>Open List</Button>
+							<Button  onClick={() => setTypeChannel('')}>Back</Button>
 						</div>
 					</>
 				)}

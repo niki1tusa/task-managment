@@ -22,7 +22,6 @@ interface Props {
 	mutateFnc?: (arg: any) => void;
 	isPending?: boolean;
 }
-// TODO: здесь не нужен props profile
 export default function ProfileModalList({
 	profile,
 	typeChannel,
@@ -138,7 +137,7 @@ export default function ProfileModalList({
 						<Button disable={isPending} onClick={() => mutateFnc(selectProfileIds)}>
 							Save
 						</Button>
-						<Button onClick={close}>No</Button>
+						<Button onClick={close}>Close</Button>
 					</div>
 				)
 			)}

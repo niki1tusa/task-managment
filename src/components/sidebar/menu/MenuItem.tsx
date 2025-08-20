@@ -16,16 +16,14 @@ export const MenuItem = ({ item }: { item: IMenuItem }) => {
 			<Link
 				href={item.link}
 				className={clsx(
-					'text-gray flex items-center gap-1.5 rounded-sm px-3 py-1 text-sm  transition-colors duration-300  ',
-					activeLink  ? 'bg-primary dark:bg-transparent dark:border-2  text-white' : 'hover:text-primary dark:hover:text-white'
+					'text-gray flex items-center gap-2  rounded-sm px-3 py-1 text-sm transition-colors duration-300',
+					activeLink
+						? 'bg-primary text-white dark:border-2 dark:bg-transparent '
+						: 'hover:text-primary dark:hover:text-white'
 				)}
 			>
-				<item.Icon />
-				{item.color && <div className={`h-3 w-3 ${item.color}`} />}
-
-				<div className=' font-bold transition-colors '>
-					{item.title}
-				</div>
+					<item.Icon size={22}/>
+				<div className='font-medium transition-colors'>{item.title}</div>
 			</Link>
 		</AnimateIcon>
 	);

@@ -23,9 +23,9 @@ export default function Modal({ title, children, close }: Props) {
 			>
 				<div className='mb-6 flex items-center justify-between'>
 					<h1 className='text-xl font-medium'>{title}</h1>
-					<Button onClick={close} className='hover:text-red-600'>
+					<button type='button' onClick={close} className='hover:text-red-600'>
 						<SquareX />
-					</Button>
+					</button>
 				</div>
 				<div className='flex gap-3'>{children}</div>
 			</div>

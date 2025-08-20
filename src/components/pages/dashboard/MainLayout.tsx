@@ -28,8 +28,7 @@ export default function MainLayout({ data, children }: Props) {
 			{children}
 
 			{isShowChat && (
-				<aside className='sticky top-0 h-[100dvh] overflow-y-auto shadow shadow-neutral-400'>
-					{' '}
+				<aside className='sticky top-0 h-[100dvh] shadow shadow-neutral-400'>
 					<Chat profile={data} />
 				</aside>
 			)}

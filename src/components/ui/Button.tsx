@@ -6,18 +6,28 @@ interface Props {
 	type?: 'button' | 'submit' | 'reset';
 	children: React.ReactNode;
 	disable?: boolean;
-	border?: boolean
+	variant?: 'transparent' | 'primary';
 }
-export function Button({ type = 'button', children, className, onClick, disable = false, border = false }: Props) {
+export function Button({
+	type = 'button',
+	children,
+	className,
+	onClick,
+	disable = false,
+	variant = 'primary',
+}: Props) {
 	return (
 		<button
 			onClick={onClick}
 			type={type}
 			className={clsx(
-				{ 'bg-primary/50 cursor-not-allowed': disable },
-				className
-					? className
-					: 'bg-primary hover:bg-primary/50 w-[30%] rounded-sm py-2 text-sm text-white transition-colors 2xl:text-lg'
+				'w-[30%] rounded-sm p-2 text-sm',
+				disable && 'bg-primary/50 cursor-not-allowed',
+				className,
+				variant === 'primary' &&
+					'bg-primary hover:bg-primary/50 text-white transition-colors 2xl:text-lg',
+				variant === 'transparent' &&
+					'bg-background text-foreground shadow-lg ring-1 shadow-neutral-400/40 ring-neutral-500 ring-offset-1 transition-colors hover:bg-gray-200 dark:hover:text-black'
 			)}
 			disabled={disable}
 		>

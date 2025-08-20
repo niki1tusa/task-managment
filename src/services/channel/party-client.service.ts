@@ -1,6 +1,6 @@
 import { createClient } from '@/utils/supabase/client';
 
-// TODO: чтобы нельзя было вставить тех кто уже в channel
+
 // update
 
 export async function insertProfilesIntoChannel(channelId: string, profileIds: string[]) {

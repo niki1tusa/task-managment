@@ -37,9 +37,9 @@ export const Task = ({ task }: { task: TTask }) => {
 				tabIndex={-1}
 			/>
 			<motion.div
-				initial={{ rotateY: 0, boxShadow: '0px 4px 10px rgba(0,0,0,0.15)' }}
+				initial={{ y: 0, boxShadow: '0px 4px 10px rgba(0,0,0,0.15)' }}
 				whileHover={{
-					rotateY: -10,
+					y: -5,
 					boxShadow: '5px 10px 15px rgba(0,0,0,0.45)',
 				}}
 				transition={{ type: 'spring', stiffness: 200, damping: 18 }}

@@ -1,4 +1,5 @@
-import { Copy } from 'lucide-react';
+import clsx from 'clsx';
+import { Copy, SquareCheckBig } from 'lucide-react';
 import { useState } from 'react';
 
 export function BtnCopyName({ text }: { text: string | null }) {
@@ -7,7 +8,7 @@ export function BtnCopyName({ text }: { text: string | null }) {
 		try {
 			await navigator.clipboard.writeText(text || '');
 			setCopied(true);
-			setTimeout(() => setCopied(false), 1200);
+			setTimeout(() => setCopied(false), 2000);
 		} catch (e) {
 			console.error(e);
 		}
@@ -16,10 +17,14 @@ export function BtnCopyName({ text }: { text: string | null }) {
 		<button
 			onClick={handleCopy}
 			type='button'
-			className='flex items-center gap-3'
+			className={clsx(
+				copied ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200',
+				'flex items-center rounded p-1 gap-3 transition-all duration-200'
+			)}
 			title='Click to copy'
 		>
-			<Copy size={18} /> <div>{copied ? 'Copied!' : 'Copy name'}</div>
+			{copied ? <SquareCheckBig size={18} /> : <Copy size={18} />}
+			<div>{copied ? 'Copied!' : 'Copy name'}</div>
 		</button>
 	);
 }

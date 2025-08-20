@@ -1,8 +1,8 @@
 'use client';
 
-import { ChevronDown } from 'lucide-react';
-import Image from 'next/image';
+import { Mail, PanelTopClose, PanelTopOpen } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 import { AnimateIcon } from '@/components/animate-ui/icons/icon';
 import { LogOut } from '@/components/animate-ui/icons/log-out';
@@ -14,7 +14,8 @@ import { PUBLIC_PAGES } from '@/config/public-page.config';
 
 import { createClient } from '@/utils/supabase/client';
 
-export const Profile = ({ data }: { data: TProfileRow }) => {
+export const ProfileMenu = ({ data }: { data: TProfileRow }) => {
+	const [isShowProfile, setIsShowProfile] = useState(true);
 	const router = useRouter();
 	if (!data) return null;
 
@@ -26,40 +27,30 @@ export const Profile = ({ data }: { data: TProfileRow }) => {
 		}
 	}
 	return (
-		<div className='w-[160px] pt-4 2xl:min-w-[230px]'>
-			<div className='flex items-center justify-between'>
-				<Title isMenuTitle={true}>Account</Title>
-
-				<AnimateIcon animateOnHover>
-					<button onClick={signOut} className='text-gray'>
-						<LogOut size={22} />
-					</button>
-				</AnimateIcon>
+		<nav className='text-gray flex w-full flex-col pt-4 gap-4 text-base'>
+			<div className='flex items-center gap-2'>
+				<Title isMenuTitle={true}>PROFILE</Title>
+				{isShowProfile ? (
+					<PanelTopClose onClick={() => setIsShowProfile(false)} />
+				) : (
+					<PanelTopOpen onClick={() => setIsShowProfile(true)} />
+				)}
 			</div>
-
-			<div className='bg-gray/10 text-gray mt-4 flex items-center rounded-xl border px-0.5 py-1 font-semibold shadow shadow-neutral-400 2xl:px-1.5'>
-				<div className='flex items-center gap-3 py-1 pl-1'>
-					{data.avatar_path ? (
-						<Image
-							src={data.avatar_path}
-							className='rounded-full'
-							alt='profile'
-							width={32}
-							height={32}
-						/>
-					) : (
-						<div className='bg-primary h-8 w-8 overflow-hidden rounded-full shadow shadow-neutral-400 2xl:h-8 2xl:w-8' />
-					)}
-
-					<div className='flex flex-col text-[0.5rem] lg:text-[0.8rem]'>
-						<div className='text-dark text-[0.8rem] 2xl:text-[1rem] dark:text-white'>
-							{data.name}
-						</div>
-						<div className='hidden 2xl:block'>{data.email}</div>
+			{isShowProfile && (
+				<>
+					<div className='flex items-center gap-2'>
+						<span> {data.name}</span>
 					</div>
-					<ChevronDown />
-				</div>
-			</div>
-		</div>
+					<div className='flex items-center gap-2'>
+						<Mail size={20} /> <span>{data.email}</span>
+					</div>
+					<AnimateIcon animateOnHover>
+						<button onClick={signOut} className='flex items-center gap-2'>
+							<LogOut size={20} /> Logout
+						</button>
+					</AnimateIcon>
+				</>
+			)}
+		</nav>
 	);
 };

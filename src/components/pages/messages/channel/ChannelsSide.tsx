@@ -115,7 +115,7 @@ export default function ChannelsSide({ channels, isLoading }: Props) {
 									>
 										<Button
 											className={clsx(
-												'bg-primary m-1 rounded-sm px-2 py-2 text-sm shadow shadow-neutral-400 transition-colors 2xl:text-lg dark:text-white',
+												'bg-primary m-1 px-5 py-3 text-sm w-auto shadow shadow-neutral-400 transition-colors 2xl:text-lg dark:text-white',
 												isActive
 													? 'bg-primary text-white'
 													: 'bg-primary/40 text-primary hover:bg-primary/50 dark:hover:bg-primary/80 dark:text-white/40'
