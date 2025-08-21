@@ -2,20 +2,22 @@ import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 
 import { Button } from '@/components/ui/button/Button';
+import Modal from '@/components/ui/modal/Modal';
 
 import { useModalStore } from '@/store/modals.store';
 
-import Modal from '../../ui/modal/Modal';
+import { deleteClientChannel } from '@/services/channel/channel-client.service';
 
-import { deleteClientTask } from '@/services/tasks/task-client.service';
-
-export default function DeleteConfirmModals() {
-	const { close, type, payload } = useModalStore();
+interface Props {
+	close: () => void;
+}
+export default function DeleteChannelModal({ close }: Props) {
+	const { type, payload } = useModalStore();
 
 	const { mutate, isPending } = useMutation({
-		mutationFn: (id: string) => deleteClientTask(id),
+		mutationFn: (id: string) => deleteClientChannel(id),
 		onSuccess: () => {
-			toast.success('Task deleted!');
+			toast.success('Channel deleted!');
 			close();
 		},
 		onError: (error: unknown) => {
@@ -23,10 +25,10 @@ export default function DeleteConfirmModals() {
 		},
 	});
 
-	if (type !== 'deleteTask' || !payload) return null;
+	if (type !== 'deleteChannel' || !payload) return null;
 
 	return (
-		<Modal close={close} title='Do you really want to delete the task?'>
+		<Modal close={close} title={`Do you really want to delete the channel "${payload.name}"?`}>
 			<Button onClick={() => mutate(payload.id)} disable={isPending}>
 				Yes
 			</Button>

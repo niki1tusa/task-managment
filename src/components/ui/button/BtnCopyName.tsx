@@ -24,7 +24,7 @@ export function BtnCopyName({ text }: { text: string | null }) {
 			title='Click to copy'
 		>
 			{copied ? <SquareCheckBig size={18} /> : <Copy size={18} />}
-			<div>{copied ? 'Copied!' : 'Copy name'}</div>
+			<div>{copied ? 'Copied!' : 'Copy text'}</div>
 		</button>
 	);
 }

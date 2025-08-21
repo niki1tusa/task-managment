@@ -7,9 +7,8 @@ import type { TProfileRow } from '@/shared/types/task/task.types';
 import { Menu } from './menu/Menu';
 import { ProfileMenu} from './profile/Profile';
 import { ProjectsMenu } from './project/ProjectsMenu';
-import { Title } from '../ui/Title';
-import { ToggleTheme } from '../ui/toggle-theme/ToggleTheme';
 import ThemeMenu from './theme-menu/ThemeMenu';
+import Logout from './Logout';
 
 export const Sidebar = ({ data }: { data: TProfileRow }) => {
 	return (
@@ -19,7 +18,7 @@ export const Sidebar = ({ data }: { data: TProfileRow }) => {
 			<Menu heading='MENU' menu={MENU} isBorderTop={true} />
 			<ProjectsMenu heading='PROJECTS' menu={PROJECTS_MENU} isBorderTop={true} />
 			<ThemeMenu/>
-
+			<Logout/>
 		</aside>
 	);
 };

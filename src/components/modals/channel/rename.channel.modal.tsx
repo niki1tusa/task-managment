@@ -2,15 +2,17 @@ import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { Button } from '@/components/ui/Button';
+import type {
+	TChannelRow,
+	TChannelUpdate,
+} from '@/components/pages/messages/channel/channel.types';
+import { Button } from '@/components/ui/button/Button';
 import Textarea from '@/components/ui/field/Textarea';
 import Modal from '@/components/ui/modal/Modal';
 
 import { useModalStore } from '@/store/modals.store';
 
-import type { TChannelRow, TChannelUpdate } from '../channel/channel.types';
-
-import { deleteClientChannel, renameChannel } from '@/services/channel/channel-client.service';
+import { renameChannel } from '@/services/channel/channel-client.service';
 
 interface Props {
 	close: () => void;
@@ -34,7 +36,7 @@ export default function RenameChannel({ close, activeChannel }: Props) {
 
 	return (
 		<Modal close={close} title={`Channel "${activeChannel.name}"`}>
-			<div className='flex  flex-col gap-5'>
+			<div className='flex flex-col gap-5'>
 				<Textarea value={value} setValue={setValue} />
 				<div className='flex gap-4'>
 					<Button onClick={() => mutate({ ...activeChannel, name: value })} disable={isPending}>

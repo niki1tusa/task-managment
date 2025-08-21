@@ -16,14 +16,14 @@ export default function HomeClient() {
 				<div className='flex items-center gap-2'>
 					<Link
 						href={PUBLIC_PAGES.LOGIN}
-						className='rounded-md px-6 py-1 shadow shadow-neutral-400 transition-colors hover:bg-gray-200/50'
+						className='rounded-md px-6 py-1 shadow shadow-neutral-400 transition-colors hover:bg-gray-200/50 dark:hover:bg-gray/15'
 					>
 						<GradientText text='Login' className='font-medium' />
 					</Link>
 					<i className='text-[1rem] font-medium'></i>
 					<Link
 						href={PUBLIC_PAGES.REGISTER}
-						className='rounded-md px-6 py-1 shadow shadow-neutral-400 transition-colors hover:bg-gray-200/50'
+						className='rounded-md px-6 py-1 shadow shadow-neutral-400 transition-colors hover:bg-gray-200/50 dark:hover:bg-gray/15'
 					>
 						<GradientText text='Register' className='font-medium' />
 					</Link>

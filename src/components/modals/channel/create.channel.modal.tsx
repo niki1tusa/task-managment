@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import type { TChannelInsert } from '@/components/pages/messages/channel/channel.types';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button/Button';
 import Modal from '@/components/ui/modal/Modal';
 
 import type { TTask } from '@/shared/types/task/task.types';
@@ -71,11 +71,11 @@ export function CreateChannelModal({ close }: Props) {
 							{tasks?.data?.length &&
 								tasks.data.map((task: TTask) => (
 									<Button
-									variant='transparent'
+										variant='transparent'
 										className={clsx(
 											taskState?.id === task.id &&
 												'shadow-lg ring-2 shadow-indigo-400/40 ring-indigo-500! ring-offset-2',
-											' hover:bg-primary/50 w-[80%] 2xl:text-lg'
+											'hover:bg-primary/50 w-[80%] 2xl:text-lg'
 										)}
 										onClick={() => setTtaskState(task)}
 										key={task.id}
@@ -100,8 +100,8 @@ export function CreateChannelModal({ close }: Props) {
 					<>
 						<span className='text-lg'>Who should I add to this channel?</span>
 						<div className='flex w-full gap-3 py-2'>
-							<Button  onClick={() => setOpenList(true)}>Open List</Button>
-							<Button  onClick={() => setTypeChannel('')}>Back</Button>
+							<Button onClick={() => setOpenList(true)}>Open List</Button>
+							<Button onClick={() => setTypeChannel('')}>Back</Button>
 						</div>
 					</>
 				)}

@@ -30,7 +30,7 @@ export const Footer = ({ task }: { task: TTask }) => {
 					<LucideLink size={19} />1
 				</div>
 			</div>
-			<div className='mr-2 mb-2 flex gap-2'>
+			<div className=' mb-2 flex gap-2'>
 				<button
 					className='flex h-9 w-9 items-center justify-center rounded-full bg-red-500/80 text-white shadow shadow-neutral-400'
 					onClick={e => {

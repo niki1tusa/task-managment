@@ -2,7 +2,7 @@
 
 import { SquareX } from 'lucide-react';
 
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button/Button';
 
 import { useClickOutside } from '@/hooks/useClickOutside';
 

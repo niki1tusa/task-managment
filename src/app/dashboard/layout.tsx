@@ -2,8 +2,7 @@ import { Sidebar } from '@/components/sidebar/Sidebar';
 
 import { getServerAuth } from '@/utils/supabase/get-server-auth';
 
-import MainLayout from '../../components/pages/dashboard/MainLayout';
-
+import MainLayout from './MainLayout';
 import { getServerProfile } from '@/services/profile/profile-server.service';
 
 interface Props {

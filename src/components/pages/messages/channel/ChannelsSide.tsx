@@ -5,18 +5,18 @@ import { EllipsisVertical, SquarePlus } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/animate-ui/base/popover';
-import { Button } from '@/components/ui/Button';
 import Skeleton from '@/components/ui/Skeleton';
 import { Title } from '@/components/ui/Title';
+import { Button } from '@/components/ui/button/Button';
 import Textarea from '@/components/ui/field/Textarea';
 
 import { useChannelStore } from '@/store/channel.store';
 import { useModalStore } from '@/store/modals.store';
 
+import ChannelMenuPopover from '../../../ui/popover/ChannelMenuPopover';
 import ChannelTabs from '../filters/ChannelTabs';
 import PartySide from '../party/PartySide';
 
-import ChannelMenuPopover from './ChannelMenuPopover';
 import type { TChannelRow } from './channel.types';
 
 interface Props {
@@ -69,7 +69,7 @@ export default function ChannelsSide({ channels, isLoading }: Props) {
 			)
 		: sortedChannels;
 	return (
-		<div className='grid h-full min-h-0 grid-cols-[3fr_2fr] border-r-2 xl:grid-cols-[1fr_200px]'>
+		<div className='grid h-full min-h-0 grid-cols-[4fr_2fr] border-r-2'>
 			<div className='relative flex h-full min-h-0 flex-col justify-between'>
 				<div>
 					{/* header */}
@@ -87,7 +87,7 @@ export default function ChannelsSide({ channels, isLoading }: Props) {
 					<div className='mt-1 border-t-2 shadow-sm' />
 					{/* filters */}
 					<ChannelTabs setSortType={setSortType} />
-					<div className='mt-2 mr-2 ml-5'>
+					<div className='mx-5 mt-2'>
 						<Textarea
 							value={searchChannelByName}
 							setValue={setSearchChannelByName}
@@ -97,69 +97,70 @@ export default function ChannelsSide({ channels, isLoading }: Props) {
 						/>
 					</div>
 					{/* channels */}
-
-					<div className='mt-2 mr-2 ml-5 flex flex-col items-start gap-2 overflow-y-auto rounded border p-2 py-2 pl-1 shadow shadow-neutral-400 2xl:max-h-[1100px]'>
-						{isLoading ? (
-							<Skeleton length={1} className='w-full px-8 2xl:h-[600px]' />
-						) : (
-							handleSearch?.map(channel => {
-								const isActive = activeChannel?.id === channel.id;
-								return (
-									<div
-										onClick={() => setActiveChannel(channel)}
-										key={channel.id}
-										className={clsx(
-											isActive && 'bg-gray/40 flex justify-between rounded-sm',
-											'hover:bg-gray/10 w-full transition-colors'
-										)}
-									>
-										<Button
+					<div className='mx-5 mt-2 mb-2 min-h-0 flex-1'>
+						<div className='h-full overflow-y-auto rounded border p-2 shadow shadow-neutral-400'>
+							{isLoading ? (
+								<Skeleton length={1} className='w-full px-8 2xl:h-[600px]' />
+							) : (
+								handleSearch?.map(channel => {
+									const isActive = activeChannel?.id === channel.id;
+									return (
+										<div
+											onClick={() => setActiveChannel(channel)}
+											key={channel.id}
 											className={clsx(
-												'bg-primary m-1 px-5 py-3 text-sm w-auto shadow shadow-neutral-400 transition-colors 2xl:text-lg dark:text-white',
-												isActive
-													? 'bg-primary text-white'
-													: 'bg-primary/40 text-primary hover:bg-primary/50 dark:hover:bg-primary/80 dark:text-white/40'
+												isActive && 'bg-gray/40 flex justify-between rounded-sm',
+												'hover:bg-gray/10 w-full transition-colors'
 											)}
 										>
-											# {channel.name}
-										</Button>
-										{isActive && (
-											<div className='flex items-center'>
-												<Popover
-													open={openId === channel.id}
-													onOpenChange={(v: boolean) => setOpenId(v ? channel.id : null)}
-												>
-													<PopoverTrigger
-														render={
-															<button
-																type='button'
-																className='mr-5 p-1'
-																onClick={e => e.stopPropagation()}
-																aria-haspopup='menu'
-															>
-																<EllipsisVertical size={22} />
-															</button>
-														}
-													/>
-
-													<PopoverContent
-														side='bottom'
-														align='end'
-														sideOffset={8}
-														className='bg-background w-[220px] rounded-sm border p-3 shadow shadow-neutral-400'
+											<Button
+												className={clsx(
+													'bg-primary m-1 w-auto px-5 py-3 text-sm shadow shadow-neutral-400 transition-colors 2xl:text-lg dark:text-white',
+													isActive
+														? 'bg-primary text-white'
+														: 'bg-primary/40 text-primary hover:bg-primary/50 dark:hover:bg-primary/80 dark:text-white/40'
+												)}
+											>
+												# {channel.name}
+											</Button>
+											{isActive && (
+												<div className='flex items-center'>
+													<Popover
+														open={openId === channel.id}
+														onOpenChange={(v: boolean) => setOpenId(v ? channel.id : null)}
 													>
-														<ChannelMenuPopover
-															activeChannel={channel}
-															onClose={() => setOpenId(null)}
+														<PopoverTrigger
+															render={
+																<button
+																	type='button'
+																	className='mr-5 p-1'
+																	onClick={e => e.stopPropagation()}
+																	aria-haspopup='menu'
+																>
+																	<EllipsisVertical size={22} />
+																</button>
+															}
 														/>
-													</PopoverContent>
-												</Popover>
-											</div>
-										)}
-									</div>
-								);
-							})
-						)}
+
+														<PopoverContent
+															side='bottom'
+															align='end'
+															sideOffset={8}
+															className='bg-background w-[220px] rounded-sm border p-3 shadow shadow-neutral-400'
+														>
+															<ChannelMenuPopover
+																activeChannel={channel}
+																onClose={() => setOpenId(null)}
+															/>
+														</PopoverContent>
+													</Popover>
+												</div>
+											)}
+										</div>
+									);
+								})
+							)}
+						</div>
 					</div>
 				</div>
 

@@ -1,6 +1,6 @@
 import type { FieldValues } from 'react-hook-form';
 
-import { Button } from '../Button';
+import { Button } from '../button/Button';
 import { DateField } from '../field/DateField';
 import { Field } from '../field/Field';
 import { IconField } from '../field/IconField';

@@ -63,7 +63,7 @@ export default function PartySide({ channel }: Props) {
 			)
 		: sortedProfiles;
 	return (
-		<div className='relative flex flex-col border-l-2'>
+		<div className='relative flex h-full flex-col border-l-2'>
 			{/* Header */}
 			<div className='mx-5 mt-7 mb-1'>
 				<Title heading='page'>Party</Title>
@@ -91,14 +91,14 @@ export default function PartySide({ channel }: Props) {
 				/>
 			</div>
 			{/* List */}
-			<div className='mx-2 mt-2 flex flex-col gap-1 overflow-y-auto rounded border p-2 py-2 shadow shadow-neutral-400 2xl:max-h-[1100px]'>
+			<div className='mx-2 mt-2 flex h-full min-h-0 flex-col gap-1 overflow-y-auto rounded border p-2 py-2 shadow shadow-neutral-400'>
 				{isLoading ? (
 					<Skeleton width='mx-3 2xl:h-[300px]' length={1} />
 				) : (
 					handleSearch?.map(profile => (
 						<div
 							key={profile.id}
-							className='group flex max-w-[200px] items-center justify-between gap-2 px-2 py-2 text-sm font-medium transition-colors hover:bg-gray-100 dark:hover:bg-gray-800'
+							className='group flex  items-center justify-between gap-2 px-2 py-2 text-sm font-medium transition-colors hover:bg-gray-100 dark:hover:bg-gray-800'
 						>
 							<div className='relative flex items-center gap-2 truncate p-1'>
 								<div className='relative'>
@@ -108,12 +108,12 @@ export default function PartySide({ channel }: Props) {
 								<span className='group-hover:text-primary relative transition-colors dark:group-hover:text-white'>
 									{profile.name}
 								</span>
-								{ownerChannel?.profile?.[0]?.id === profile.id && (
-									<span className='ml-2 rounded-full bg-yellow-300 px-2 py-0.5 text-[10px] font-semibold'>
-										OWNER
-									</span>
-								)}
 							</div>
+							{activeChannel.created_by === profile.id  && (
+								<span className='ml-2 rounded-full text-black bg-yellow-300 px-2 py-0.5 text-[10px] font-semibold'>
+									OWNER
+								</span>
+							)}
 							{activeChannel?.type === 'group' && !(currentProfile?.id === profile.id) && (
 								<button
 									title='Remove user from a channel'

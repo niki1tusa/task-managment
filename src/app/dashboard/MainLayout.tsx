@@ -7,7 +7,7 @@ import type { TProfileRow } from '@/shared/types/task/task.types';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
-import Chat from '../../ui/chat/Chat';
+import Chat from '../../components/ui/chat/Chat';
 
 interface Props {
 	data: TProfileRow;
@@ -20,18 +20,16 @@ export default function MainLayout({ data, children }: Props) {
 		<main
 			className={clsx(
 				'grid flex-1 dark:border-r dark:border-l dark:border-neutral-800',
-				isShowChat ? 'grid-cols-[75%_25%]' : 'grid-cols-1'
+				isShowChat ? 'grid-cols-[75%_25%]' : 'grid-cols-[40%_60%]'
 			)}
 			role='main'
 			aria-label='Dashboard content'
 		>
 			{children}
 
-			{isShowChat && (
-				<aside className='sticky top-0 h-[100dvh] shadow shadow-neutral-400'>
-					<Chat profile={data} />
-				</aside>
-			)}
+			<aside className='sticky top-0 h-[100dvh] shadow shadow-neutral-400'>
+				<Chat profile={data} />
+			</aside>
 		</main>
 	);
 }

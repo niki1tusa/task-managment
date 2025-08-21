@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 
 import type { TChannelInsert } from '@/components/pages/messages/channel/channel.types';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button/Button';
 import Textarea from '@/components/ui/field/Textarea';
 
 import type { TProfileRow } from '@/shared/types/task/task.types';
@@ -87,7 +87,7 @@ export default function ProfileModalList({
 	};
 	const isAddProfileModal = type === 'insertProfileInChannel';
 	return (
-		<div className='flex max-h-[60vh] h-auto flex-col justify-start gap-2'>
+		<div className='flex h-auto max-h-[60vh] flex-col justify-start gap-2'>
 			<span className='flex gap-2 py-2 text-base font-medium'>
 				<span>Choice profile:</span>
 				<span>

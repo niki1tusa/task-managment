@@ -1,6 +1,6 @@
-import { Button } from '@/components/ui/Button';
-import { seedUsers } from '@/seeder';
+import { Button } from '@/components/ui/button/Button';
 
+import { seedUsers } from '@/seeder';
 
 export function Seed() {
 	return (

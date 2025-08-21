@@ -14,7 +14,7 @@ import { getProfile } from '@/services/profile/profile-client.service';
 
 interface Props {
 	close: () => void;
-	activeChannel: TChannelRow;
+	activeChannel: TChannelRow; 
 }
 
 export default function AddProfileInChannel({ close, activeChannel }: Props) {
