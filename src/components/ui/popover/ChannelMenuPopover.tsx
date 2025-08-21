@@ -32,7 +32,7 @@ export default function ChannelMenuPopover({ activeChannel, onClose }: Props) {
 				className={clsx(
 					(activeChannel?.type === 'task' || activeChannel?.name === 'General') &&
 						'cursor-not-allowed text-black/20',
-					'flex items-center gap-3'
+					'flex items-center gap-3 rounded p-1 transition-colors hover:bg-gray-200 bg-gray-100'
 				)}
 				disabled={activeChannel?.type === 'task' || activeChannel?.name === 'General'}
 			>
@@ -45,7 +45,7 @@ export default function ChannelMenuPopover({ activeChannel, onClose }: Props) {
 				onClick={() => open('insertProfileInChannel', activeChannel)}
 				className={clsx(
 					activeChannel?.type !== 'group' && 'cursor-not-allowed text-black/20',
-					'flex items-center gap-3'
+					'flex items-center gap-3 rounded p-1 transition-colors hover:bg-gray-200 bg-gray-100'
 				)}
 				disabled={activeChannel?.type !== 'group'}
 			>
@@ -56,7 +56,7 @@ export default function ChannelMenuPopover({ activeChannel, onClose }: Props) {
 				type='button'
 				className={clsx(
 					activeChannel?.name === 'General' && 'cursor-not-allowed text-black/20',
-					'flex items-center gap-3'
+					'flex items-center gap-3 rounded p-1 transition-colors hover:bg-gray-200 bg-gray-100'
 				)}
 				onClick={() => open('deleteChannel', activeChannel)}
 				disabled={activeChannel?.name === 'General'}

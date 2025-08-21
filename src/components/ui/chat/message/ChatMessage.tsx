@@ -49,7 +49,7 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup }: Props) {
 	const profileName = message.profile?.name;
 	const avatarPath = message.profile?.avatar_path;
 	// показываем аватар только у "последнего" сообщения группы
-	const isShowAvatar = isLastInGroup && !!avatarPath;
+	const isShowAvatar = isLastInGroup;
 	return (
 		<div className={clsx('flex items-end', isOwnMessage ? 'justify-end' : 'justify-start')}>
 			<div
@@ -59,7 +59,7 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup }: Props) {
 					isFirstInGroup ? 'mt-3' : 'mt-0.5 gap-0'
 				)}
 			>
-				{isShowAvatar ? <Avatar img={avatarPath} /> : <div className='w-8' />}
+				{isShowAvatar ? <Avatar img={avatarPath || ''} /> : <div className='w-8' />}
 				<div className={clsx('flex min-w-0 flex-col', isOwnMessage ? 'items-end' : 'items-start')}>
 					{/* time + name owner */}
 					{isFirstInGroup && (
@@ -115,7 +115,7 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup }: Props) {
 								side='bottom'
 								align={'end'}
 								sideOffset={8}
-								className='bg-background w-[220px] rounded-sm border p-3 shadow shadow-neutral-400'
+								className='bg-background w-[240px] rounded-sm border p-3 shadow shadow-neutral-400'
 							>
 								<MessageMenuPopover msg={message} onClose={() => setOpenId(null)} />
 							</PopoverContent>

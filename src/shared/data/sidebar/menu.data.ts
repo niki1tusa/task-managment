@@ -35,7 +35,7 @@ export const MENU: IMenuItem[] = [
 		link: DASHBOARD_PAGES.TEAM,
 	},
 	{
-		title: 'Shedule',
+		title: 'Schedule',
 		Icon: CalendarDays,
 		link: DASHBOARD_PAGES.SCHEDULE,
 	},

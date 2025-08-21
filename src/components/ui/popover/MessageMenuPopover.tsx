@@ -26,19 +26,22 @@ export default function MessageMenuPopover({ msg, onClose }: Props) {
 			{/* main */}
 			<button
 				type='button'
-				onClick={(e) => {
-					e.stopPropagation()
+				onClick={e => {
+					e.stopPropagation();
 					open('updateMessage', msg);
 					onClose();
 				}}
-				className={clsx('flex items-center gap-3')}
+				className={clsx('flex items-center gap-3 rounded p-1 transition-colors hover:bg-gray-200 bg-gray-100')}
 			>
 				<SquarePen size={18} /> <div>Edit Message</div>
 			</button>
 			<BtnCopyName text={msg.text} />
 			<div className='w-full border-b' />
-			<button type='button' className='flex items-center gap-3'>
-				<CornerUpRight size={18} /> <div>Resend message </div>
+			<button
+				type='button'
+				className='flex items-center gap-3 rounded p-1 transition-colors hover:bg-gray-200 bg-gray-100'
+			>
+				<CornerUpRight size={18} /> <div className='flex flex-nowrap'>Resend message </div>
 			</button>
 			<div className='w-full border-b' />
 			<button
@@ -46,9 +49,9 @@ export default function MessageMenuPopover({ msg, onClose }: Props) {
 				onClick={e => {
 					e.stopPropagation();
 					open('deleteMessage', msg.id);
-					onClose()
+					onClose();
 				}}
-				className={clsx('flex items-center gap-3')}
+				className={clsx('flex items-center gap-3 rounded p-1 transition-colors hover:bg-gray-200 bg-gray-100')}
 			>
 				<Trash size={18} /> Delete message
 			</button>

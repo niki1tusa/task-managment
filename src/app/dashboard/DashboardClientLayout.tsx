@@ -17,6 +17,7 @@ interface Props {
 export default function DashboardClientLayout({ data, children }: Props) {
 	const pathname = usePathname();
 	const isDashboard = pathname === DASHBOARD_PAGES.DASHBOARD;
+	const isMessage = pathname === DASHBOARD_PAGES.MESSAGES;
 	return (
 		<div
 			className={clsx('grid', isDashboard ? 'grid-cols-[12%_68%_20%]' : 'grid-cols-[12%_38%_50%]')}
@@ -35,9 +36,11 @@ export default function DashboardClientLayout({ data, children }: Props) {
 			>
 				{children}
 			</main>
-			<aside className='sticky top-0 h-[100dvh] shadow shadow-neutral-400'>
-				<Chat profile={data} />
-			</aside>
+			{(isDashboard || isMessage) && (
+				<aside className='sticky top-0 h-[100dvh] shadow shadow-neutral-400'>
+					<Chat profile={data} />
+				</aside>
+			)}
 		</div>
 	);
 }
