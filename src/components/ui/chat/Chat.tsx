@@ -85,7 +85,10 @@ export default function Chat({ profile }: Props) {
 						<div className='absolute top-5.5 right-0 h-2 w-2 animate-pulse rounded-full border border-green-900 bg-green-500' />
 					</div>
 					<div className='flex flex-col'>
-						<div className='text-[1rem] 2xl:text-[1.2rem]' id='chat-user-name'>
+						<div
+							className='text-sidebar-primary/80 text-[1rem] 2xl:text-[1.2rem]'
+							id='chat-user-name'
+						>
 							{profile.name}
 						</div>
 						<div
@@ -106,7 +109,7 @@ export default function Chat({ profile }: Props) {
 
 			{/* Messages */}
 			<div
-				className='relative flex-1 h-full overflow-y-auto px-2 py-2'
+				className='relative h-full flex-1 overflow-y-auto px-2 py-2'
 				role='log'
 				aria-label='Chat messages'
 				aria-live='polite'

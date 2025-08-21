@@ -29,15 +29,14 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-	modals,
 	children,
 }: Readonly<{
 	children: React.ReactNode;
-	modals: React.ReactNode;
 }>) {
+
 	return (
 		<html lang='en' suppressHydrationWarning>
-			<body className={`${poppins.variable} ${playfairDisplay.variable} h-full antialiased`}>
+			<body className={`${poppins.variable} ${playfairDisplay.variable}antialiased`}>
 				{/* Skip to main content link for keyboard navigation */}
 				<a
 					href='#main-content'
@@ -47,7 +46,6 @@ export default function RootLayout({
 				</a>
 
 				<ProviderWrapper>
-					{modals}
 					<main id='main-content' role='main'>
 						{children}
 					</main>
