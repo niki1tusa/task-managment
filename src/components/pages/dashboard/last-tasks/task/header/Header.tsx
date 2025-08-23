@@ -31,7 +31,7 @@ export const Header = ({ task }: { task: TTask }) => {
 							return (
 								<Avatar
 									key={`${user.profile_id}-${i}`}
-									img={user.profile.avatar_path || ''}
+									img={user.profile.avatar_path}
 									isHoverResolution={true}
 								/>
 							);

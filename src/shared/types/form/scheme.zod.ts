@@ -16,15 +16,40 @@ export const ZSubTaskScheme = z.object({
 	title: z.string().min(1, 'Title is required (minimal one symbol)!'),
 });
 
+// auth
+
 export const ZRegistrationScheme = z.object({
 	name: z.string().min(1, 'Name is required!'),
-	email: z.string().min(1, 'Email is required.').email(),
-	password: z.string().min(1, 'Password is required.'),
+	email: z.string().min(1, 'Email is required').email(),
+	password: z.string().min(1, 'Password is required'),
 });
 export const ZLoginScheme = z.object({
 	email: z.string().min(1, 'Email is required.').email(),
 });
+export const ZLoginPhonePasswordScheme = z.object({
+	phone: z
+		.string()
+		.trim()
+		.regex(/^\+[1-9]\d{7,14}$/, 'Use E.164 format, e.g. +15551234567'),
+	password: z.string().min(1, 'Email is required.').email(),
+});
+export const ZDropPasswordScheme = z.object({
+	email: z.string().min(1, 'Email is required').email(),
+});
+export const ZResetPasswordScheme = z
+	.object({
+		password: z.string().min(1, 'Password is required'),
+		passwordAgain: z.string().min(1, 'Password again is required'),
+	})
+	.refine(v => v.password === v.passwordAgain, {
+		path: ['passwordAgain'],
+		message: 'Passwords do not match',
+	});
+
 export type TRegistrationForm = z.infer<typeof ZRegistrationScheme>;
 export type TFormData = z.infer<typeof ZTaskEditScheme>;
 export type TSubTaskRowForm = z.infer<typeof ZSubTaskScheme>;
 export type TLoginForm = z.infer<typeof ZLoginScheme>;
+export type TLoginPhonePasswordForm = z.infer<typeof ZLoginPhonePasswordScheme>;
+export type TDropPasswordForm = z.infer<typeof ZDropPasswordScheme>;
+export type TResetPasswordForm = z.infer<typeof ZResetPasswordScheme>;

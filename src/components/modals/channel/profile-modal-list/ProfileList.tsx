@@ -24,7 +24,7 @@ export default function ProfileList({
 			{profiles?.map((p: TProfileRow) => (
 				<li key={p.id} className='flex items-center justify-between border-b-2 py-2.5'>
 					<div className='flex items-center gap-3'>
-						<Avatar img={p.avatar_path || ''} />
+						<Avatar img={p.avatar_path} />
 						<span className='text-sm'>{p.name}</span>
 					</div>
 					<Checkbox

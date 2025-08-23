@@ -1,4 +1,9 @@
+'use client';
+
+import { usePathname } from 'next/navigation';
 import type { FieldValues } from 'react-hook-form';
+
+import { PUBLIC_PAGES } from '@/config/public-page.config';
 
 import { Button } from '../button/Button';
 import { DateField } from '../field/DateField';
@@ -18,7 +23,9 @@ export default function Form<T extends FieldValues>({
 	watch,
 	control,
 	isPending,
+	isEmailVariant
 }: IForm<T>) {
+
 	return (
 		<form onSubmit={handleOnSubmit} className='my-5 flex flex-col gap-0.5 2xl:gap-2'>
 			{formElement.map((item, i) => {
@@ -49,7 +56,7 @@ export default function Form<T extends FieldValues>({
 						);
 				}
 			})}
-
+			{isEmailVariant && <div className='h-[70px]' />}
 			<Button type='submit' className={btnClassName} disable={isPending}>
 				{isPending ? 'Sending...' : btnText}
 			</Button>

@@ -101,7 +101,7 @@ export default function PartySide({ channel }: Props) {
               >
                 <div className="relative flex items-center gap-2 truncate p-1">
                   <div className="relative">
-                    <Avatar img={profile.avatar_path || ''} />
+                    <Avatar img={profile.avatar_path} />
                     <div className="absolute top-5.5 right-0 h-2 w-2 animate-pulse rounded-full border border-green-900 bg-green-500" />
                   </div>
                   <span className="group-hover:text-primary relative transition-colors dark:group-hover:text-white">

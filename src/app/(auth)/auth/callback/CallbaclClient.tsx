@@ -7,7 +7,9 @@ import { createClient } from '@/utils/supabase/client';
 
 export default function CallbackClient() {
 	const router = useRouter();
-
+      const url = new URL(window.location.href);
+      const code = url.searchParams.get('code');
+      const next = url.searchParams.get('next') || '/dashboard';
 	useEffect(() => {
 		const supabase = createClient();
 
@@ -16,7 +18,7 @@ export default function CallbackClient() {
 				console.error('Error getting session:', error?.message);
 				router.replace('/login');
 			} else {
-				router.replace('/dashboard');
+				router.replace(next);
 			}
 		});
 	}, [router]);

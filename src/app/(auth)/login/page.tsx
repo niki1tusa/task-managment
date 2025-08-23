@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 
-import LoginClient from '@/components/auth/LoginClient';
+import { LoginClient } from '@/components/auth/login/LoginClient';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 

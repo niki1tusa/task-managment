@@ -1,9 +1,12 @@
+'use client'
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+
+import { Title } from '@/components/ui/Title';
 
 import { type TRegistrationForm, ZRegistrationScheme } from '@/shared/types/form/scheme.zod';
 
@@ -15,10 +18,7 @@ import Form from '../../ui/form/Form';
 import { RegisterFields } from './register.data';
 import { fetchCreateUser } from '@/services/profile/user-client.service';
 
-interface Props {
-	linkText: string;
-}
-export function RegisterForm({ linkText }: Props) {
+export function RegisterClient() {
 	const router = useRouter();
 	const {
 		reset,
@@ -34,7 +34,7 @@ export function RegisterForm({ linkText }: Props) {
 	});
 	const onSubmit: SubmitHandler<TRegistrationForm> = data => {
 		try {
-			mutate(data)
+			mutate(data);
 			reset();
 			console.log(data);
 			toast.success('Successfully registration!');
@@ -49,6 +49,11 @@ export function RegisterForm({ linkText }: Props) {
 
 	return (
 		<div className='flex flex-col gap-2'>
+			<Title>
+				<b className='font-playfair text-3xl 2xl:text-6xl'>
+					Welcome to the <span className='text-4xl'>task management app</span>
+				</b>
+			</Title>
 			<Form<TRegistrationForm>
 				formElement={RegisterFields}
 				handleOnSubmit={handleSubmit(onSubmit)}
@@ -63,7 +68,7 @@ export function RegisterForm({ linkText }: Props) {
 					className='ml-1 border-b border-cyan-400 pb-[1px] text-cyan-400'
 					href={PUBLIC_PAGES.LOGIN}
 				>
-					{linkText}
+					Login...
 				</Link>
 			</div>
 		</div>

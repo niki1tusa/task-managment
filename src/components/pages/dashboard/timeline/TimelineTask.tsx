@@ -48,7 +48,7 @@ function TimelineTask({ task }: { task: TTask }) {
 					{task.task_participants
 						.filter(u => Boolean(u.profile))
 						.map((profile, i) => (
-							<Avatar key={`${profile.profile_id}-${i}`} img={profile.profile.avatar_path || ''} />
+							<Avatar key={`${profile.profile_id}-${i}`} img={profile.profile.avatar_path} />
 						))}
 				</div>
 			</div>

@@ -2,10 +2,10 @@ import type {
 	Control,
 	FieldErrors,
 	FieldValues,
+	Path,
 	UseFormRegister,
 	UseFormSetValue,
 	UseFormWatch,
-	Path,
 } from 'react-hook-form';
 
 export interface IField<T extends FieldValues = FieldValues> {
@@ -44,4 +44,5 @@ export interface IForm<T extends FieldValues = FieldValues> {
 	watch?: UseFormWatch<T>;
 	control?: Control<T>;
 	isPending?: boolean;
+	isEmailVariant?: boolean;
 }

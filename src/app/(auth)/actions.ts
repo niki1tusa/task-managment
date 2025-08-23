@@ -1,5 +1,7 @@
 import { createClient } from '@/utils/supabase/client';
 
+
+// sing in
 export async function signInWithEmail({ email }: { email: string }) {
 	const supabase = createClient();
 	return supabase.auth.signInWithOtp({
@@ -19,3 +21,20 @@ export const signInWithGoogle = async () => {
 	});
 	if (error) console.error('Google sign-in error:', error.message);
 };
+
+// fogot password
+
+export async function sendResetPasswordEmail(email: string) {
+  const supabase =  createClient();
+
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${window.location.origin}/auth/callback?next=/reset-password`,
+  });
+  if (error) throw error;
+  return { ok: true };
+}
+//  sign out
+export async function serverSignOut() {
+  const supabase = createClient();
+  await supabase.auth.signOut();
+}

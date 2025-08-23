@@ -1,4 +1,4 @@
-export const loginFields = [
+export const dropPasswordFields = [
 	{
 		type: 'field',
 		props: {

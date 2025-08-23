@@ -27,14 +27,14 @@ export const ProfileMenu = ({ data }: { data: TProfileRow }) => {
 			{/* {isShowProfile && (
 				<>
 					<div className='flex items-center gap-2'>
-					<Avatar img={data.avatar_path || ''}/>	<span> {data.name}</span>
+					<Avatar img={data.avatar_path}/>	<span> {data.name}</span>
 					</div>
 					<div className='flex items-center gap-2'>
 						<Mail size={20} /> <span>{data.email}</span>
 					</div>
 				</>
 			)} */}
-			<ProfileCard name={data.name || ''}  email={data.email || ''} avatar={data.avatar_path || ''}/>
+			<ProfileCard name={data.name || ''}  email={data.email || ''} avatar={data.avatar_path || '/avatar-fallback.png'}/>
 		</nav>
 	);
 };

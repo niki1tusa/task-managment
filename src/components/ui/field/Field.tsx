@@ -2,6 +2,7 @@
 
 import clsx from 'clsx';
 import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import {
 	type FieldErrors,
@@ -9,6 +10,8 @@ import {
 	type Path,
 	type UseFormRegister,
 } from 'react-hook-form';
+
+import { PUBLIC_PAGES } from '@/config/public-page.config';
 
 interface Props<T extends FieldValues> {
 	register: UseFormRegister<T>;
@@ -28,10 +31,12 @@ export function Field<T extends FieldValues>({
 	errors,
 }: Props<T>) {
 	const [isShowEye, setIsShowEye] = useState(false);
-
+	const pathname = usePathname();
 	return (
 		<div>
-			<label className='mb-1 block font-medium xl:text-sm'>{labelText}:</label>
+			{pathname !== PUBLIC_PAGES.LOGIN && (
+				<label className='mb-1 block font-medium xl:text-sm'>{labelText}:</label>
+			)}
 			<span className='relative'>
 				{type === 'password' && (
 					<Lock
@@ -48,7 +53,7 @@ export function Field<T extends FieldValues>({
 				<input
 					{...register(registerName)}
 					className={clsx(
-						'text-gray h-[30%] w-[80%] rounded border py-5 text-sm shadow shadow-neutral-400 transition-all duration-200  hover:bg-[#f6f4ff]/50 focus:border focus:border-sky-600 focus:bg-[#f6f4ff] focus:shadow-none 2xl:w-full 2xl:text-lg',
+						'text-gray h-[30%] w-[80%] rounded border py-5 text-sm shadow shadow-neutral-400 transition-all duration-200 hover:bg-[#f6f4ff]/50 focus:border focus:border-sky-600 focus:bg-[#f6f4ff] focus:shadow-none 2xl:w-full 2xl:text-lg',
 						type === 'password' || type === 'email' ? 'pl-8' : 'pl-4'
 					)}
 					type={type === 'password' ? (isShowEye ? 'text' : 'password') : 'text'}

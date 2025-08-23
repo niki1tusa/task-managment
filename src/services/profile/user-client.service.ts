@@ -1,7 +1,8 @@
 'use client';
 
-import { PUBLIC_PAGES } from '@/config/public-page.config';
 import type { TRegistrationForm } from '@/shared/types/form/scheme.zod';
+
+import { PUBLIC_PAGES } from '@/config/public-page.config';
 
 import { createClient } from '@/utils/supabase/client';
 
@@ -37,4 +38,19 @@ export async function fetchCreateUser(fields: TRegistrationForm) {
 	}
 
 	return authData.user;
+}
+
+export async function updateUserPassword(newPassword: string) {
+	const client = createClient();
+	const { data, error } = await client.auth.updateUser({ password: newPassword });
+	if (error) throw new Error(error.message || 'Failed to update password');
+	return data;
+}
+
+// login
+export async function loginUserByPhoneAndPassword(payload: { password: string; phone: string }) {
+	const client = createClient();
+	const { data, error } = await client.auth.signInWithPassword({password: payload.password, phone: payload.phone});
+	if (error) throw new Error(error.message || 'Failed to login password');
+	return data;
 }

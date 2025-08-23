@@ -31,7 +31,7 @@ function Timeline({ todayTasks }: { todayTasks: TTask[] }) {
 				<Title>Today Tasks</Title>
 				<div className='flex -space-x-2'>
 					{profiles.map((p, i) => (
-						<Avatar key={`${p.id}-${i}`} img={p.avatar_path || ''} />
+						<Avatar key={`${p.id}-${i}`} img={p.avatar_path} />
 					))}
 				</div>
 			</div>

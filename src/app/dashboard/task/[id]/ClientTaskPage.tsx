@@ -1,5 +1,5 @@
 import { Avatar } from '@/components/ui/Avatar';
-import BackLink from '@/components/ui/BackLink';
+import BtnReturnBack from '@/components/ui/button/BtnReturnBack';
 import { Title } from '@/components/ui/Title';
 
 import { type IconName, MODAL_ICON } from '@/shared/data/icon.data';
@@ -26,7 +26,7 @@ export default function ClientTaskPage({ id, tasks }: Props) {
 				: ` ${date} days`;
 	return (
 		<div className='space-y-6 px-7 py-3.5'>
-			<BackLink text='Back to Dashboard' />
+			<BtnReturnBack text='Back to Dashboard' />
 
 			<header className='border-b pb-4'>
 				<Title heading='page'>Task &quot;{id}&quot;</Title>
@@ -51,7 +51,7 @@ export default function ClientTaskPage({ id, tasks }: Props) {
 							.map((user, i) => (
 								<Avatar
 									key={`${user.profile_id}-${i}`}
-									img={user.profile.avatar_path || ''}
+									img={user.profile.avatar_path}
 									isHoverResolution={true}
 								/>
 							))}

@@ -59,7 +59,7 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup }: Props) {
 					isFirstInGroup ? 'mt-3' : 'mt-0.5 gap-0'
 				)}
 			>
-				{isShowAvatar ? <Avatar img={avatarPath || ''} /> : <div className='w-8' />}
+				{isShowAvatar ? <Avatar img={avatarPath} /> : <div className='w-8' />}
 				<div className={clsx('flex min-w-0 flex-col', isOwnMessage ? 'items-end' : 'items-start')}>
 					{/* time + name owner */}
 					{isFirstInGroup && (
