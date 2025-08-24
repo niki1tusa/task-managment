@@ -24,7 +24,7 @@ import { PUBLIC_PAGES } from '@/config/public-page.config';
 
 import Form from '../../ui/form/Form';
 
-import { loginFields, loginPhonePasswordFields } from './login.data';
+import { loginEmailFields, loginPhonePasswordFields } from './login.data';
 import { loginUserByPhoneAndPassword } from '@/services/profile/user-client.service';
 
 export function LoginClient() {
@@ -55,7 +55,7 @@ export function LoginClient() {
 
 	const onSubmitPhone: SubmitHandler<TLoginPhonePasswordForm> = async ({ phone, password }) => {
 		try {
-			await loginUserByPhoneAndPassword({ phone, password });
+			await mutateAsync({ phone, password });
 			toast.success('Signed in!');
 			// TODO: router.replace('/dashboard')
 		} catch (e: any) {
@@ -73,7 +73,7 @@ export function LoginClient() {
 			<div className='mt-5'>
 				<span className='text-base'>Choice login type:</span>
 				<Tabs defaultValue='email' className='bg-primary shadow-sm'>
-					<TabsList className='grid w-full grid-cols-2 rounded border-b-2'>
+					<TabsList className='grid w-full grid-cols-2 rounded '>
 						<TabsTrigger onClick={() => setLoginType('email')} value='email'>
 							Email
 						</TabsTrigger>
@@ -93,17 +93,15 @@ export function LoginClient() {
 						btnClassName='bg-white/40 py-1.5 hover:text-purple-950 duration-300 text-sm 2xl:text-lg px-2 hover:bg-white/60 w-[30%] rounded-4xl text-white transition-all whitespace-nowrap disabled:opacity-60'
 					/>
 				) : (
-				
-						<Form<TLoginForm>
-							formElement={loginFields}
-							handleOnSubmit={emailForm.handleSubmit(onSubmitEmail)}
-							register={emailForm.register}
-							errors={emailForm.formState.errors}
-							isEmailVariant={true}
-							btnText='Send magic link'
-							btnClassName='bg-white/40 py-1.5 hover:text-purple-950 duration-300 text-sm 2xl:text-lg px-2 hover:bg-white/60 w-[30%] rounded-4xl text-white transition-all whitespace-nowrap'
-						/>
-				
+					<Form<TLoginForm>
+						formElement={loginEmailFields}
+						handleOnSubmit={emailForm.handleSubmit(onSubmitEmail)}
+						register={emailForm.register}
+						errors={emailForm.formState.errors}
+						isEmailVariant={true}
+						btnText='Send magic link'
+						btnClassName='bg-white/40 py-1.5 hover:text-purple-950 duration-300 text-sm 2xl:text-lg px-2 hover:bg-white/60 w-[30%] rounded-4xl text-white transition-all whitespace-nowrap'
+					/>
 				)}
 			</div>
 			{/*  */}

@@ -1,9 +1,6 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import type { FieldValues } from 'react-hook-form';
-
-import { PUBLIC_PAGES } from '@/config/public-page.config';
 
 import { Button } from '../button/Button';
 import { DateField } from '../field/DateField';
@@ -23,15 +20,27 @@ export default function Form<T extends FieldValues>({
 	watch,
 	control,
 	isPending,
-	isEmailVariant
+	isEmailVariant,
 }: IForm<T>) {
-
 	return (
 		<form onSubmit={handleOnSubmit} className='my-5 flex flex-col gap-0.5 2xl:gap-2'>
 			{formElement.map((item, i) => {
 				switch (item.type) {
 					case 'icon':
-						return <IconField key={i} setValue={setValue} watch={watch} />;
+						if (!setValue || !watch) {
+							if (process.env.NODE_ENV !== 'production') {
+								console.warn('Form: "icon" элемент требует setValue и watch');
+							}
+							return null;
+						}
+						return (
+							<IconField<T>
+								key={i}
+								setValue={setValue}
+								watch={watch}
+								fieldName={item.props.fieldName} 
+							/>
+						);
 					case 'date':
 						return (
 							<DateField

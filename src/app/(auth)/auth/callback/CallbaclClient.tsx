@@ -1,27 +1,34 @@
 'use client';
-
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-
+import { useEffect, useRef } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { createClient } from '@/utils/supabase/client';
 
 export default function CallbackClient() {
-	const router = useRouter();
-      const url = new URL(window.location.href);
-      const code = url.searchParams.get('code');
-      const next = url.searchParams.get('next') || '/dashboard';
-	useEffect(() => {
-		const supabase = createClient();
+  const router = useRouter();
+  const params = useSearchParams();
+  const ran = useRef(false);
 
-		supabase.auth.getSession().then(({ data: { session }, error }) => {
-			if (error || !session) {
-				console.error('Error getting session:', error?.message);
-				router.replace('/login');
-			} else {
-				router.replace(next);
-			}
-		});
-	}, [router]);
+  useEffect(() => {
+    if (ran.current) return;
+    ran.current = true;
 
-	return <p className='text-black'>Signing in...</p>;
+    (async () => {
+      const supabase = createClient();
+      const code = params.get('code');
+      const next = params.get('next') || '/dashboard';
+      const err = params.get('error') || params.get('error_description');
+
+      if (err) return router.replace('/login?error=oauth');
+
+      if (code) {
+        const { error } = await supabase.auth.exchangeCodeForSession(code);
+        if (error) return router.replace('/login?error=callback');
+      }
+
+      const { data: { session } } = await supabase.auth.getSession();
+      router.replace(session ? next : '/login');
+    })();
+  }, [params, router]);
+
+  return <p className="text-black">Signing in…</p>;
 }

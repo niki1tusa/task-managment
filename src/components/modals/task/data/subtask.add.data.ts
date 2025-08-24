@@ -1,3 +1,6 @@
+import type { IForm } from '@/components/ui/form/form.types';
+
+import type { TSubTaskRowForm } from '@/shared/types/form/scheme.zod';
 
 export const SUB_TASK_ADD_FIELDS = [
 	{
@@ -9,4 +12,4 @@ export const SUB_TASK_ADD_FIELDS = [
 			type: 'text',
 		},
 	},
-];
+] satisfies IForm<TSubTaskRowForm>['formElement'];

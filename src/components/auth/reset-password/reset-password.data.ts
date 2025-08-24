@@ -1,3 +1,7 @@
+import type { IForm } from '@/components/ui/form/form.types';
+
+import type { TResetPasswordForm } from '@/shared/types/form/scheme.zod';
+
 export const resetPassowrdFields = [
 	{
 		type: 'field',
@@ -8,7 +12,7 @@ export const resetPassowrdFields = [
 			type: 'password',
 		},
 	},
-    	{
+	{
 		type: 'field',
 		props: {
 			labelText: 'Password again',
@@ -17,4 +21,4 @@ export const resetPassowrdFields = [
 			type: 'password',
 		},
 	},
-];
+] satisfies IForm<TResetPasswordForm>['formElement'];

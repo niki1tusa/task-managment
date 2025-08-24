@@ -71,7 +71,7 @@ export const UpdateTaskModal = ({ id, close }: Props) => {
 	if (!id) return null;
 	return (
 		<Modal title='Edit Task' close={close}>
-			<Form
+			<Form<TFormData>
 				setValue={setValue}
 				watch={watch}
 				control={control}

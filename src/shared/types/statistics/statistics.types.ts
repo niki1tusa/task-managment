@@ -12,13 +12,9 @@ export type ITimeRange = {
 export type TProjectStatRow = Database['public']['Tables']['project_stat']['Row'];
 export type TChartPointRow = Database['public']['Tables']['chart_point']['Row'];
 
-export type TGetProjectStatResponse = NonNullable<
-	Awaited<ReturnType<typeof fetchProjectStat>>['data']
->;
+type DataOf<T> = NonNullable<Awaited<T> extends { data: infer D } ? D : Awaited<T>>;
+export type TGetProjectStatResponse = DataOf<ReturnType<typeof fetchProjectStat>>;
 
-export type TGetChartPointResponse = NonNullable<
-	Awaited<ReturnType<typeof fetchChartPoint>>['data']
->;
+export type TGetChartPointResponse = DataOf<ReturnType<typeof fetchChartPoint>>;
 
-export type TGetClientChartPointResponse = NonNullable<Awaited<ReturnType<typeof fetchClientChartPoint>>['data']>
-
+export type TGetClientChartPointResponse = DataOf<ReturnType<typeof fetchClientChartPoint>>;

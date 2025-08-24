@@ -1,6 +1,11 @@
-import CallbackClient from "./CallbaclClient";
+import { Suspense } from 'react';
+
+import CallbackClient from './CallbaclClient';
 
 export default function CallbackPage() {
-
-	return <CallbackClient/>
+	return (
+		<Suspense>
+			<CallbackClient />
+		</Suspense>
+	);
 }

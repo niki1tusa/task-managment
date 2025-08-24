@@ -1,3 +1,7 @@
+import type { IForm } from '@/components/ui/form/form.types';
+
+import type { TTaskCreateForm } from '@/shared/types/task/task.types';
+
 export const TASK_EDIT_FIELDS = [
 	{
 		type: 'field',
@@ -16,5 +20,8 @@ export const TASK_EDIT_FIELDS = [
 	},
 	{
 		type: 'icon',
+		props:{
+			fieldName: 'icon'
+		}
 	},
-];
+] satisfies IForm<TTaskCreateForm>['formElement'];

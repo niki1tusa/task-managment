@@ -1,4 +1,5 @@
-'use client'
+'use client';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import Link from 'next/link';
@@ -16,7 +17,7 @@ import { PUBLIC_PAGES } from '@/config/public-page.config';
 import Form from '../../ui/form/Form';
 
 import { RegisterFields } from './register.data';
-import { fetchCreateUser } from '@/services/profile/user-client.service';
+import { createUser } from '@/services/profile/user-client.service';
 
 export function RegisterClient() {
 	const router = useRouter();
@@ -30,7 +31,7 @@ export function RegisterClient() {
 	});
 	const { mutate } = useMutation({
 		mutationKey: ['register'],
-		mutationFn: (payload: TRegistrationForm) => fetchCreateUser(payload),
+		mutationFn: (payload: TRegistrationForm) => createUser(payload),
 	});
 	const onSubmit: SubmitHandler<TRegistrationForm> = data => {
 		try {

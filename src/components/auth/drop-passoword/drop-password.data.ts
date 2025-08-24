@@ -1,3 +1,7 @@
+import type { IForm } from '@/components/ui/form/form.types';
+
+import type { TDropPasswordForm } from '@/shared/types/form/scheme.zod';
+
 export const dropPasswordFields = [
 	{
 		type: 'field',
@@ -8,4 +12,4 @@ export const dropPasswordFields = [
 			type: 'email',
 		},
 	},
-];
+] satisfies IForm<TDropPasswordForm>['formElement'];

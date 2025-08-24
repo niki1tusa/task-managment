@@ -14,7 +14,7 @@ import { getAllProfile } from '@/services/profile/profile-client.service';
 export function useProfileList(profile: TProfileRow) {
 	const { type } = useModalStore();
 	const { activeChannel } = useChannelStore();
-
+ const channelId = activeChannel?.id; 
 	const [selectProfileIds, setSelectProfileIds] = useState<string[]>([]);
 	const [nameChannel, setNameChannel] = useState('');
 	// profiles
@@ -23,14 +23,16 @@ export function useProfileList(profile: TProfileRow) {
 		queryFn: () => getAllProfile(),
 	});
 	// channel_participants
-	const { data: participants } = useQuery<TChannelParticipantsRow[]>({
-		queryKey: ['participants/all', activeChannel.id],
-		queryFn: () => getChannelParticipantsById(activeChannel.id),
+	const { data: participants = [] } = useQuery<TChannelParticipantsRow[]>({
+		queryKey: ['participants/all', channelId],
+		enabled: !!channelId,
+		queryFn: () => getChannelParticipantsById(channelId!),
+		placeholderData: [],
 	});
 	// create channel
 	const isAddProfileModal = type === 'insertProfileInChannel';
 	const participantIds = new Set(
-		(participants ?? []).flatMap(p => p.profile ?? []).map(pr => pr.id)
+		participants.flatMap(p => p.profile ?? []).map(pr => pr.id)
 	);
 	const profiles = (profilesData ?? []).filter(
 		item => isAddProfileModal?  item.id !== profile?.id &&  !participantIds.has(item.id) : item.id !== profile?.id

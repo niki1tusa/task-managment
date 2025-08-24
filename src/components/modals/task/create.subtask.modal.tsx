@@ -40,7 +40,7 @@ export const CreateSubtaskModal = ({ id, close }: Props) => {
 	};
 	return (
 		<Modal title='Add Subtask' close={close}>
-			<Form
+			<Form<TSubTaskRowForm>
 				register={register}
 				errors={errors}
 				handleOnSubmit={handleSubmit(onSubmit)}

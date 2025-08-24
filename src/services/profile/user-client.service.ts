@@ -6,7 +6,7 @@ import { PUBLIC_PAGES } from '@/config/public-page.config';
 
 import { createClient } from '@/utils/supabase/client';
 
-export async function fetchCreateUser(fields: TRegistrationForm) {
+export async function createUser(fields: TRegistrationForm) {
 	const client = createClient();
 	// Проверяем, есть ли профиль с таким email
 	const { data: existingProfile, error: profileCheckError } = await client
@@ -33,6 +33,7 @@ export async function fetchCreateUser(fields: TRegistrationForm) {
 			emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}${PUBLIC_PAGES.AUTH_CALLBACK}`,
 		},
 	});
+	
 	if (authError || !authData?.user) {
 		throw new Error(authError?.message || 'Не удалось зарегистрировать пользователя');
 	}

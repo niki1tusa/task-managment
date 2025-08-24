@@ -84,7 +84,7 @@ export async function seedUsers() {
 
 	for (const user of users.data.users) {
 		if (
-			user.id === '9155af86-1856-4cfe-814b-5fbd6ec89a27'
+			user.id === '5587e876-183a-44f7-9ade-32f48f47585d'
 		) {
 			await supabase.auth.admin.deleteUser(user.id);
 		}

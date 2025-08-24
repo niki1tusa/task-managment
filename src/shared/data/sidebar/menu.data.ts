@@ -12,6 +12,7 @@ import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 import { SettingsIcon } from '@/components/animate-ui/icons/settings';
 import { MessageCircleMoreIcon } from '@/components/animate-ui/icons/message-circle-more';
 import { Kanban } from '@/components/animate-ui/icons/kanban';
+import { Bell } from '@/components/animate-ui/icons/bell';
 
 export const MENU: IMenuItem[] = [
 	{
@@ -23,6 +24,11 @@ export const MENU: IMenuItem[] = [
 		title: 'Message',
 		Icon: MessageCircleMoreIcon as React.ComponentType<React.SVGProps<SVGSVGElement>>,
 		link: DASHBOARD_PAGES.MESSAGES,
+	},
+		{
+		title: 'Notification',
+		Icon: Bell as React.ComponentType<React.SVGProps<SVGSVGElement>>,
+		link: DASHBOARD_PAGES.NOTIFICATION,
 	},
 	{
 		title: 'Insight',
@@ -40,12 +46,7 @@ export const MENU: IMenuItem[] = [
 		link: DASHBOARD_PAGES.SCHEDULE,
 	},
 	{
-		title: 'Report',
-		Icon: ClipboardMinus,
-		link: DASHBOARD_PAGES.REPORT,
-	},
-	{
-		title: 'Settings',
+		title: 'Setting',
 		Icon: SettingsIcon as React.ComponentType<React.SVGProps<SVGSVGElement>>,
 		link: DASHBOARD_PAGES.SETTINGS,
 	},

@@ -17,7 +17,7 @@ class DashboardPagesConfig {
 	TEAM = `${this.DASHBOARD}/team`;
 	INSIGHT = `${this.DASHBOARD}/insight`;
 	SCHEDULE = `${this.DASHBOARD}/schedule`;
-	REPORT = `${this.DASHBOARD}/report`;
+	NOTIFICATION = `${this.DASHBOARD}/notification`;
 	SETTINGS = `${this.DASHBOARD}/settings`;
 
 }
