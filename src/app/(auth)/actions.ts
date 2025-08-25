@@ -21,7 +21,26 @@ export const signInWithGoogle = async () => {
 	});
 	if (error) console.error('Google sign-in error:', error.message);
 };
-
+export const signInWithGithub = async () => {
+	const supabase = createClient();
+	const { error } = await supabase.auth.signInWithOAuth({
+		provider: 'github',
+		options: {
+			redirectTo: `${window.location.origin}/auth/callback`,
+		},
+	});
+	if (error) console.error('Github sign-in error:', error.message);
+};
+export const signInWithLinkedIn = async () => {
+	const supabase = createClient();
+	const { error } = await supabase.auth.signInWithOAuth({
+		provider: 'linkedin_oidc',
+		options: {
+			redirectTo: `${window.location.origin}/auth/callback`,
+		},
+	});
+	if (error) console.error('Github sign-in error:', error.message);
+};
 // fogot password
 
 export async function sendResetPasswordEmail(email: string) {

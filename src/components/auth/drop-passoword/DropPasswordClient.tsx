@@ -51,7 +51,6 @@ export function DropPasswordClient() {
 				btnText='Send magic link'
 				btnClassName='bg-white/40 py-1.5 hover:text-purple-950 duration-300 text-sm 2xl:text-lg px-2 hover:bg-white/60 w-[30%] rounded-4xl  text-white transition-all whitespace-nowrap'
 			/>
-			<BtnReturnBack text='Return back' />
 		</div>
 	);
 }

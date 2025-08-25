@@ -17,7 +17,7 @@ type ModalType =
 interface ModalState {
 	type: ModalType;
 	payload?: any;
-	open: (type: ModalType, payload?: any) => void;
+	open: (type: ModalType, payload?: any) => void;		
 	close: () => void;
 }
 

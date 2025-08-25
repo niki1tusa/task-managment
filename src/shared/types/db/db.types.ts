@@ -152,6 +152,41 @@ export type Database = {
           },
         ]
       }
+      notice: {
+        Row: {
+          created_at: string
+          id: string
+          profile_id: string
+          status: boolean
+          text: string
+          type: Database["public"]["Enums"]["notice_type"]
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          profile_id: string
+          status?: boolean
+          text: string
+          type: Database["public"]["Enums"]["notice_type"]
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          profile_id?: string
+          status?: boolean
+          text?: string
+          type?: Database["public"]["Enums"]["notice_type"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notice_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profile"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profile: {
         Row: {
           avatar_path: string | null
@@ -315,7 +350,7 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      notice_type: "urgent" | "information" | "advice" | "achievement"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -442,6 +477,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      notice_type: ["urgent", "information", "advice", "achievement"],
+    },
   },
 } as const

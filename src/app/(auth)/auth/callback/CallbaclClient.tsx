@@ -11,7 +11,8 @@ export default function CallbackClient() {
   useEffect(() => {
     if (ran.current) return;
     ran.current = true;
-
+    const allParams = Object.fromEntries(params.entries());
+    console.debug("[OAuth callback] query:", allParams);
     (async () => {
       const supabase = createClient();
       const code = params.get('code');

@@ -7,7 +7,12 @@ import { useState } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import { signInWithEmail, signInWithGoogle } from '@/app/(auth)/actions';
+import {
+	signInWithEmail,
+	signInWithGithub,
+	signInWithGoogle,
+	signInWithLinkedIn,
+} from '@/app/(auth)/actions';
 
 import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/components/tabs';
 import { Title } from '@/components/ui/Title';
@@ -66,22 +71,33 @@ export function LoginClient() {
 		<div className='flex flex-col gap-2'>
 			<Title>
 				<b className='font-playfair text-3xl 2xl:text-6xl'>
-					Welcome to the <span className='text-4xl'>task management app</span>
+					Welcome back <br /> <span className='text-4xl'>to the task management app</span>
 				</b>
 			</Title>
 			{/* tabs */}
-			<div className='mt-5'>
+			<div className='mt-5 flex flex-col gap-3'>
 				<span className='text-base'>Choice login type:</span>
-				<Tabs defaultValue='email' className='bg-primary shadow-sm'>
-					<TabsList className='grid w-full grid-cols-2 rounded '>
-						<TabsTrigger onClick={() => setLoginType('email')} value='email'>
+				<Tabs
+					className='rounded-sm shadow-sm'
+					value={loginType}
+					onValueChange={v => setLoginType(v as 'email' | 'password')}
+				>
+					<TabsList className='bg-primary/50 flex w-full'>
+						<TabsTrigger
+							value='email'
+							className='flex data-[state=active]:text-black data-[state=inactive]:text-white'
+						>
 							Email
 						</TabsTrigger>
-						<TabsTrigger onClick={() => setLoginType('password')} value='password'>
+						<TabsTrigger
+							value='password'
+							className='flex data-[state=active]:text-black data-[state=inactive]:text-white'
+						>
 							Password
 						</TabsTrigger>
 					</TabsList>
-				</Tabs>
+				</Tabs>{' '}
+				<div></div>
 				{/* forms */}
 				{loginType === 'password' ? (
 					<Form<TLoginPhonePasswordForm>
@@ -90,7 +106,7 @@ export function LoginClient() {
 						register={phoneForm.register}
 						errors={phoneForm.formState.errors}
 						btnText='Login'
-						btnClassName='bg-white/40 py-1.5 hover:text-purple-950 duration-300 text-sm 2xl:text-lg px-2 hover:bg-white/60 w-[30%] rounded-4xl text-white transition-all whitespace-nowrap disabled:opacity-60'
+						btnClassName='bg-primary/50 py-1.5 hover:text-purple-950 duration-300 text-sm 2xl:text-lg px-2 hover:bg-white/60 w-[30%] rounded-4xl text-white transition-all whitespace-nowrap disabled:opacity-60'
 					/>
 				) : (
 					<Form<TLoginForm>
@@ -100,7 +116,7 @@ export function LoginClient() {
 						errors={emailForm.formState.errors}
 						isEmailVariant={true}
 						btnText='Send magic link'
-						btnClassName='bg-white/40 py-1.5 hover:text-purple-950 duration-300 text-sm 2xl:text-lg px-2 hover:bg-white/60 w-[30%] rounded-4xl text-white transition-all whitespace-nowrap'
+						btnClassName='bg-primary/50 py-1.5 hover:text-purple-950 duration-300 text-sm 2xl:text-lg px-2 hover:bg-white/60 w-[30%] rounded-4xl text-white transition-all whitespace-nowrap'
 					/>
 				)}
 			</div>
@@ -113,8 +129,8 @@ export function LoginClient() {
 			{/*  */}
 			<div className='my-5 flex justify-center gap-3'>
 				<BtnTabLink path='/google.svg' onClick={signInWithGoogle} />
-				<BtnTabLink path='/meta.svg' />
-				<BtnTabLink path='/github.svg' />
+				<BtnTabLink path='/github.svg' onClick={signInWithGithub} />
+				<BtnTabLink path='/linkedIn.svg' onClick={signInWithLinkedIn} />
 			</div>
 			{/*  */}
 			<div className='text-[0.6em]'>
