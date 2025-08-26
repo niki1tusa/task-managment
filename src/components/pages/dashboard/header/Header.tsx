@@ -1,11 +1,14 @@
 'use client';
 
+import Link from 'next/link';
+
 import { Bell } from '@/components/animate-ui/icons/bell';
 import { AnimateIcon } from '@/components/animate-ui/icons/icon';
 import { Title } from '@/components/ui/Title';
 
+import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
+
 import { SearchField } from './SearchField';
-import { ToggleTheme } from '@/components/ui/toggle-theme/ToggleTheme';
 
 export const Header = () => {
 	return (
@@ -13,11 +16,14 @@ export const Header = () => {
 			<Title heading='page'>Dashboard</Title>
 			<div className='flex flex-col items-center gap-2 lg:flex-row'>
 				<SearchField />
-					<AnimateIcon animateOnHover>
-						<span className='bg-background dark:bg-dark rounded-full text-center shadow shadow-neutral-400'>
-							<Bell className='mx-2 my-2' />
-						</span>
-					</AnimateIcon>
+				<AnimateIcon animateOnHover>
+					<Link
+						href={DASHBOARD_PAGES.NOTIFICATION}
+						className='bg-background dark:bg-dark rounded-full text-center shadow shadow-neutral-400'
+					>
+						<Bell className='mx-2 my-2' />
+					</Link>
+				</AnimateIcon>
 			</div>
 		</div>
 	);

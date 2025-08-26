@@ -1,7 +1,6 @@
 import Image from 'next/image';
 
 import { BubbleBackground } from '@/components/animate-ui/backgrounds/bubble';
-import { Title } from '@/components/ui/Title';
 
 interface Props {
 	children: React.ReactNode;
