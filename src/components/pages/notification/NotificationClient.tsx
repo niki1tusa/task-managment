@@ -1,7 +1,7 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/components/tabs';
 import Skeleton from '@/components/ui/Skeleton';
@@ -12,6 +12,7 @@ import Textarea from '@/components/ui/field/Textarea';
 import type { TProfileRow } from '@/shared/types/task/task.types';
 
 import NoticeList from './NoticeList';
+import type { TNoticeRow } from './notice.types';
 import { getNoticesByProfileId } from '@/services/notice/notice-client.service';
 import { getProfile } from '@/services/profile/profile-client.service';
 
@@ -34,29 +35,37 @@ export default function NotificationClient() {
 		data: notices,
 		isLoading: noticesLoading,
 		isError: noticesError,
-	} = useQuery({
+	} = useQuery<TNoticeRow[]>({
 		queryKey: ['notices', profile?.id],
 		queryFn: () => getNoticesByProfileId(profile!.id),
 		enabled: !!profile?.id,
 	});
 
-	useEffect(() => {
-	
-    const sorted = [...filtered].sort((a, b) => {
-      if (sortBy === 'date') {
-        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-      }
-	}, [sortBy, notices]);
-	let filterNotices;
-	useEffect(() => {
-		if (notices?.length === 0) {
-			filterNotices = [];
-		} else {
-			filterNotices = notices?.filter(notice =>
-				sortRead === 'not' ? notice.status === false : notice.status === true
-			);
-		}
-	}, [sortRead, notices]);
+	const filteredAndSorted = useMemo(() => {
+		if (!notices) return [];
+		// фильтр прочитано/непрочитано
+		const byRead = notices.filter(n =>
+			sortRead === 'not' ? n.status === false : n.status === true
+		);
+
+		// текстовый поиск (по нескольким полям, по желанию можно расширить)
+		const q = query.trim().toLowerCase();
+		const byQuery = q ? byRead.filter(n => n.text.toLowerCase().includes(q)) : byRead;
+
+		// сортировка
+		const sorted = [...byQuery].sort((a, b) => {
+			if (sortBy === 'date') {
+				const at = new Date(a.created_at).getTime() || 0;
+				const bt = new Date(b.created_at).getTime() || 0;
+				return bt - at; // новые выше
+			}
+			// sortBy === 'type'
+			return String(a.type ?? '').localeCompare(String(b.type ?? ''));
+		});
+
+		return sorted;
+	}, [notices, sortRead, sortBy, query]);
+
 	if (profileLoading) return <Skeleton />;
 	if (profileError || !profile) return null;
 
@@ -91,7 +100,7 @@ export default function NotificationClient() {
 			</div>
 
 			{/* list */}
-			<NoticeList notices={filterNotices} />
+			<NoticeList notices={filteredAndSorted} />
 		</section>
 	);
 }

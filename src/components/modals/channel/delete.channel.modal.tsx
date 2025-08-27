@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 
 import { Button } from '@/components/ui/button/Button';
@@ -13,11 +13,12 @@ interface Props {
 }
 export default function DeleteChannelModal({ close }: Props) {
 	const { type, payload } = useModalStore();
-
+	const queryClient = useQueryClient();
 	const { mutate, isPending } = useMutation({
 		mutationFn: (id: string) => deleteClientChannel(id),
 		onSuccess: () => {
 			toast.success('Channel deleted!');
+			queryClient.invalidateQueries({ queryKey: ['channels'], exact: false });
 			close();
 		},
 		onError: (error: unknown) => {

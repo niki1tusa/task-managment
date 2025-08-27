@@ -6,6 +6,7 @@ import ChannelsSide from './channel/ChannelsSide';
 import { getClientChannels } from '@/services/channel/channel-client.service';
 
 export function MessagesClient() {
+	
 	const { data: channels, isLoading } = useQuery({
 		queryKey: ['channels'],
 		queryFn: async () => await getClientChannels(),

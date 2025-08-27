@@ -1,9 +1,10 @@
 'use client';
 
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import type { TChannelInsert } from '@/components/pages/messages/channel/channel.types';
 import { Button } from '@/components/ui/button/Button';
@@ -22,6 +23,7 @@ interface Props {
 	close: () => void;
 }
 export function CreateChannelModal({ close }: Props) {
+	const queryClient = useQueryClient();
 	const pathname = usePathname();
 	const [typeChannel, setTypeChannel] = useState('');
 
@@ -40,6 +42,13 @@ export function CreateChannelModal({ close }: Props) {
 	const { mutate } = useMutation({
 		mutationFn: ({ fields, taskId }: { fields: TChannelInsert; taskId: string }) =>
 			createClientChannelByTaskId(fields, taskId),
+		onSuccess: () => {
+			toast.success(`Channel by task is success created!`);
+			queryClient.invalidateQueries({ queryKey: ['channels'], exact: false });
+		},
+		onError: err => {
+			toast.error('CHannel is error!');
+		},
 	});
 
 	const handleCreateChannelTask = () => {

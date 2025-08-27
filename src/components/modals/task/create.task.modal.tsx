@@ -1,6 +1,6 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
@@ -15,6 +15,7 @@ import { TASK_EDIT_FIELDS } from './data/task.edit.data';
 import { createClientSubTask, createClientTask } from '@/services/tasks/task-client.service';
 
 export const CreateTaskModal = ({ close }: { close: () => void }) => {
+
 	const { mutateAsync: createTask } = useMutation({
 		mutationKey: ['add-task'],
 		mutationFn: (payload: TTaskCreateForm) => createClientTask(payload),
