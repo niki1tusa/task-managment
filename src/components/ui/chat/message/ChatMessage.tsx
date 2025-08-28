@@ -21,7 +21,7 @@ interface Props {
 }
 
 function ChatMessage({ message, isFirstInGroup, isLastInGroup }: Props) {
-	const { user, isLoading } = useProfile();
+	const { profile, isLoading } = useProfile();
 	const [openId, setOpenId] = useState<string | null>(null);
 	// клик по пузырю: не открывать, если есть выделенный текст
 	const handleClick = useCallback(() => {
@@ -41,11 +41,11 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup }: Props) {
 	}, [message.id]);
 
 
-	if (isLoading || !user) {
+	if (isLoading || !profile) {
 		return <Skeleton />;
 	}
 
-	const isOwnMessage = user.id === message.user_id;
+	const isOwnMessage = profile.id === message.user_id;
 	const profileName = message.profile?.name;
 	const avatarPath = message.profile?.avatar_path;
 	// показываем аватар только у "последнего" сообщения группы

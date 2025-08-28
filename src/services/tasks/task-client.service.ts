@@ -40,11 +40,11 @@ export async function getClientTaskById(id: string) {
 }
 // create
 export async function createClientTask(task: TTaskCreateForm) {
-	const supabase = createClient();
+	const client = createClient();
 	const {
 		data: { user },
-	} = await supabase.auth.getUser();
-	const { data, error } = await createClient()
+	} = await client.auth.getUser();
+	const { data, error } = await client
 		.from('task')
 		.insert({
 			...task,
@@ -52,7 +52,14 @@ export async function createClientTask(task: TTaskCreateForm) {
 		})
 		.select()
 		.single();
+
 	if (error || !data) throw new Error(error?.message || 'create task is failed');
+	const { data: task_participants, error: errParticipants } = await client
+		.from('task_participants')
+		.insert({ task_id: data.id, profile_id: user?.id });
+		if(errParticipants){
+			throw new Error('Fail with create task (participants)!')
+		}
 	return data;
 }
 export async function createClientSubTask(

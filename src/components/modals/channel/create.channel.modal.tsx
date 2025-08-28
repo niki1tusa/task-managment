@@ -14,9 +14,10 @@ import type { TTask } from '@/shared/types/task/task.types';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
+import { useProfile } from '@/hooks/useProfile';
+
 import ProfileModalList from './profile-modal-list/ProfileModalList';
 import { createClientChannelByTaskId } from '@/services/channel/channel-client.service';
-import { getProfile } from '@/services/profile/profile-client.service';
 import { getServerAllTask } from '@/services/tasks/task-server.service';
 
 interface Props {
@@ -34,10 +35,7 @@ export function CreateChannelModal({ close }: Props) {
 		queryKey: ['task'],
 		queryFn: async () => await getServerAllTask(),
 	});
-	const { data: profile } = useQuery({
-		queryKey: ['profile'],
-		queryFn: () => getProfile(),
-	});
+	const { profile } = useProfile();
 
 	const { mutate } = useMutation({
 		mutationFn: ({ fields, taskId }: { fields: TChannelInsert; taskId: string }) =>
@@ -47,13 +45,14 @@ export function CreateChannelModal({ close }: Props) {
 			queryClient.invalidateQueries({ queryKey: ['channels'], exact: false });
 		},
 		onError: err => {
-			toast.error('CHannel is error!');
+			console.log(err);
+			toast.error('Channel is error!');
 		},
 	});
 
 	const handleCreateChannelTask = () => {
 		if (!taskState) return;
-		mutate({ fields: { name: taskState!.title, created_by: profile.id }, taskId: taskState!.id });
+		mutate({ fields: { name: taskState!.title, created_by: profile!.id }, taskId: taskState!.id });
 		close();
 	};
 
@@ -101,7 +100,7 @@ export function CreateChannelModal({ close }: Props) {
 				) : openList ? (
 					<ProfileModalList
 						close={close}
-						profile={profile}
+						profile={profile!}
 						setOpenList={setOpenList}
 						typeChannel={typeChannel}
 					/>

@@ -1,34 +1,27 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/components/tabs';
+import FadeOverlay from '@/components/ui/FadeOverlay';
 import Skeleton from '@/components/ui/Skeleton';
 import { Title } from '@/components/ui/Title';
 import { Button } from '@/components/ui/button/Button';
 import Textarea from '@/components/ui/field/Textarea';
 
-import type { TProfileRow } from '@/shared/types/task/task.types';
+import { useProfile } from '@/hooks/useProfile';
 
 import NoticeList from './NoticeList';
 import type { TNoticeRow } from './notice.types';
 import { getNoticesByProfileId } from '@/services/notice/notice-client.service';
-import { getProfile } from '@/services/profile/profile-client.service';
 
 export default function NotificationClient() {
 	const [query, setQuery] = useState('');
 	const [sortBy, setSortBy] = useState<'date' | 'type'>('date');
 	const [sortRead, setSortRead] = useState<'read' | 'not'>('read');
 	// 1) Всегда вызываем хук профиля
-	const {
-		data: profile,
-		isLoading: profileLoading,
-		isError: profileError,
-	} = useQuery<TProfileRow>({
-		queryKey: ['profile'],
-		queryFn: () => getProfile(),
-	});
+	const { profile, isLoading: profileLoading, isError: profileError } = useProfile();
 
 	// 2) Всегда объявляем хук уведомлений (но включаем его только когда есть profile.id)
 	const {
@@ -66,14 +59,11 @@ export default function NotificationClient() {
 		return sorted;
 	}, [notices, sortRead, sortBy, query]);
 
-	if (profileLoading) return <Skeleton />;
 	if (profileError || !profile) return null;
-
-	if (noticesLoading) return <Skeleton />;
 	if (noticesError || !notices) return null;
 
 	return (
-		<section className='mx-5 my-7 flex flex-col gap-6'>
+		<section className='relative flex h-full flex-col gap-6 px-5 pt-7'>
 			<Title heading='page'>Notice</Title>
 
 			{/* toolbar */}
@@ -100,7 +90,8 @@ export default function NotificationClient() {
 			</div>
 
 			{/* list */}
-			<NoticeList notices={filteredAndSorted} />
+			{profileLoading || noticesLoading ? <Skeleton /> : <NoticeList notices={filteredAndSorted} />}
+			<FadeOverlay />
 		</section>
 	);
 }

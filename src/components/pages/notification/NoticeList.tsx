@@ -29,7 +29,7 @@ export default function NoticeList({ notices }: Props) {
 		},
 	});
 	return (
-		<ul className='flex flex-col gap-3'>
+		<ul className='flex flex-col overflow-y-auto p-1 gap-3'>
 			{notices.length > 0 ? (
 				notices.map(notice => {
 					return (
@@ -68,7 +68,7 @@ export default function NoticeList({ notices }: Props) {
 									</span>
 									<p
 										className='line-clamp-2 min-w-0 text-sm leading-6 text-gray-900 dark:text-gray-100'
-										title={notice.text}
+										title={notice.type}
 									>
 										{notice.text}
 									</p>

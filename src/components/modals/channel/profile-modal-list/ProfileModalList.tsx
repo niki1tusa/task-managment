@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 
 import type { TChannelInsert } from '@/components/pages/messages/channel/channel.types';
@@ -30,6 +30,7 @@ export default function ProfileModalList({
 	mutateFnc,
 	isPending,
 }: Props) {
+	const queryClient = useQueryClient();
 	const {
 		type,
 		profiles,
@@ -45,7 +46,11 @@ export default function ProfileModalList({
 			createClientChannelGroup(fields, profilesId),
 		onSuccess: () => {
 			toast.success('Channel group is success created!');
+			queryClient.invalidateQueries({ queryKey: ['channels'], exact: false });
 			close();
+		},
+		onError: err => {
+			toast.error('Channel is error!');
 		},
 	});
 	const { mutate: mutateChannelDirect } = useMutation({
@@ -58,7 +63,11 @@ export default function ProfileModalList({
 		}) => createClientChannelDirect(fields, profileDirect),
 		onSuccess: () => {
 			toast.success('Channel direct is success created!');
+			queryClient.invalidateQueries({ queryKey: ['channels'], exact: false });
 			close();
+		},
+				onError: err => {
+			toast.error('Channel is error!');
 		},
 	});
 	// handle

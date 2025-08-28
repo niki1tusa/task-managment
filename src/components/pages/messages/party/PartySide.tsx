@@ -18,7 +18,7 @@ import { useModalStore } from '@/store/modals.store';
 import type { TChannelParticipantsRow, TChannelRow } from '../channel/channel.types';
 
 import { getChannelParticipantsById } from '@/services/channel/channel-client.service';
-import { getProfile } from '@/services/profile/profile-client.service';
+import { useProfile } from '@/hooks/useProfile';
 
 interface Props {
 	channel: TChannelRow | null;
@@ -29,10 +29,7 @@ export default function PartySide({ channel }: Props) {
 	const { activeChannel } = useChannelStore();
 	const { open } = useModalStore();
 	const channelId = channel?.id;
-	const { data: currentProfile } = useQuery<TProfileRow>({
-		queryKey: ['profile'],
-		queryFn: () => getProfile(),
-	});
+	const { profile: currentProfile } = useProfile()
 	const { data: participants, isLoading } = useQuery<TChannelParticipantsRow[]>({
 		queryKey: ['channel_participants', channelId],
 		queryFn: () => getChannelParticipantsById(channelId!),

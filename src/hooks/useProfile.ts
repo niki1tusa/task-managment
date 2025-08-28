@@ -1,16 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
 
+import type { TProfileRow } from '@/shared/types/task/task.types';
+
 import { getProfile } from '@/services/profile/profile-client.service';
 
 export const useProfile = () => {
-	const query = useQuery({
+	const { data, error, isError, isLoading } = useQuery<TProfileRow>({
 		queryKey: ['profile'],
 		queryFn: getProfile,
 	});
 	return {
-		user: query.data,
-		isLoading: query.isLoading,
-		isError: query.isError,
+		profile: data,
+		isError,
+		error,
+		isLoading,
 	};
 };
-

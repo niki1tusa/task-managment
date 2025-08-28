@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation,  useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 
 import type { TChannelRow } from '@/components/pages/messages/channel/channel.types';
@@ -10,25 +10,24 @@ import { useModalStore } from '@/store/modals.store';
 
 import ProfileModalList from './profile-modal-list/ProfileModalList';
 import { insertProfilesIntoChannel } from '@/services/channel/party-client.service';
-import { getProfile } from '@/services/profile/profile-client.service';
+import { useProfile } from '@/hooks/useProfile';
 
 interface Props {
 	close: () => void;
-	activeChannel: TChannelRow; 
+	activeChannel: TChannelRow;
 }
 
 export default function AddProfileInChannel({ close, activeChannel }: Props) {
+	const queryClient = useQueryClient();
 	const { type } = useModalStore();
-	const { data: profile } = useQuery<TProfileRow>({
-		queryKey: ['profiles'],
-		queryFn: () => getProfile(),
-	});
+	const {profile} = useProfile()
 
 	const { mutate, isPending } = useMutation({
 		mutationFn: ({ channelId, profileIds }: { channelId: string; profileIds: string[] }) =>
 			insertProfilesIntoChannel(channelId, profileIds),
 		onSuccess: () => {
 			toast.success('Profiles have been added to the channel!');
+			queryClient.invalidateQueries({ queryKey: ['channels', 'profiles'], exact: false });
 			close();
 		},
 		onError: (error: unknown) => {
