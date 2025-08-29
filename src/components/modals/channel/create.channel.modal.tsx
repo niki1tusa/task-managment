@@ -14,6 +14,7 @@ import type { TTask } from '@/shared/types/task/task.types';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
+import { useChannels } from '@/hooks/useChannels';
 import { useProfile } from '@/hooks/useProfile';
 
 import ProfileModalList from './profile-modal-list/ProfileModalList';
@@ -27,7 +28,7 @@ export function CreateChannelModal({ close }: Props) {
 	const queryClient = useQueryClient();
 	const pathname = usePathname();
 	const [typeChannel, setTypeChannel] = useState('');
-
+	const { channels } = useChannels();
 	const [openList, setOpenList] = useState(false);
 	const [taskState, setTtaskState] = useState<TTask>();
 	// get task for option channel by task
@@ -61,6 +62,9 @@ export function CreateChannelModal({ close }: Props) {
 		close();
 	}
 
+	const filteredTasks = tasks?.data?.filter(task =>
+		!(channels ?? []).some(channel => channel.task_id === task.id)
+	);
 	return (
 		<Modal close={close} title={`Create new channel ${typeChannel}`}>
 			<div className='flex w-full flex-col gap-3'>
@@ -69,15 +73,15 @@ export function CreateChannelModal({ close }: Props) {
 						<span className='text-lg'>Select the channel type:</span>
 						<div className='flex w-full justify-between gap-3'>
 							<Button onClick={() => setTypeChannel('group')}>Group</Button>
-							<Button onClick={() => setTypeChannel('task')}>Task</Button>
+							<Button disable={!filteredTasks?.length} onClick={() => setTypeChannel('task')}>Task</Button>
 							<Button onClick={() => setTypeChannel('direct')}>Direct</Button>
 						</div>
 					</>
 				) : typeChannel === 'task' ? (
 					<>
 						<div className='flex flex-col items-center gap-4 border-t-2 border-b-2 py-4'>
-							{tasks?.data?.length &&
-								tasks.data.map((task: TTask) => (
+							{filteredTasks?.length &&
+								filteredTasks?.map((task: TTask) => (
 									<Button
 										variant='transparent'
 										className={clsx(

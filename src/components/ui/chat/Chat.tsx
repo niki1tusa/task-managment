@@ -1,8 +1,9 @@
 // import { Search } from 'lucide-react';
+import { Search } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import { Avatar } from '@/components/ui/Avatar';
 import ChatInput from '@/components/ui/chat/ChatInput';
@@ -15,7 +16,10 @@ import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
 import { useChannelStore } from '@/store/channel.store';
 
+import { useClickOutside } from '@/hooks/useClickOutside';
+
 import { Button } from '../button/Button';
+import Textarea from '../field/Textarea';
 
 import { GROUP_GAP_MINUTES, minsDiff } from './messageUtils';
 
@@ -24,8 +28,11 @@ interface Props {
 }
 
 export default function Chat({ profile }: Props) {
+	const [isOpenInput, setIsOpenInput] = useState<boolean>(false);
+	const [value, setValue] = useState('');
 	const { activeChannel } = useChannelStore();
 	const pathname = usePathname();
+	const { ref } = useClickOutside<HTMLDivElement>(() => setIsOpenInput(false));
 	const isDashboard = pathname === '/dashboard';
 	const chat = useChat(activeChannel ? activeChannel.id : '69d922e1-63f4-4f1d-9627-97aa6319902a');
 	const visibleMessages = useMemo(() => {
@@ -50,6 +57,7 @@ export default function Chat({ profile }: Props) {
 			const isLastInGroup = !sameAsNext;
 			return (
 				<ChatMessage
+					value={value}
 					key={m.id}
 					message={m}
 					isFirstInGroup={isFirstInGroup}
@@ -100,10 +108,17 @@ export default function Chat({ profile }: Props) {
 					</div>
 				</div>
 
-				{/* TODO: сделать поиск сообщений */}
-				{/* <button onClick={()=>}>
-					<Search />
-				</button> */}
+				{/* поиск сообщений */}
+				{pathname === DASHBOARD_PAGES.MESSAGES &&
+					(isOpenInput ? (
+						<div ref={ref}>
+							<Textarea value={value} setValue={setValue} placeholder='Search by word...' />
+						</div>
+					) : (
+						<button onClick={() => setIsOpenInput(true)}>
+							<Search />
+						</button>
+					))}
 			</div>
 
 			{/* Messages */}

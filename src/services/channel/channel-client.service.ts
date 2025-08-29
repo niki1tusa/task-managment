@@ -95,7 +95,6 @@ export async function createClientChannelByTaskId(channelFields: TChannelInsert,
 			...channelFields,
 			task_id: taskId,
 			type: 'task',
-			created_by: user.id,
 		})
 		.select()
 		.single();

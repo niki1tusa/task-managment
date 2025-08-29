@@ -15,10 +15,18 @@ import { TASK_EDIT_FIELDS } from './data/task.edit.data';
 import { createClientSubTask, createClientTask } from '@/services/tasks/task-client.service';
 
 export const CreateTaskModal = ({ close }: { close: () => void }) => {
-
+	const queryClient = useQueryClient();
 	const { mutateAsync: createTask } = useMutation({
-		mutationKey: ['add-task'],
+		mutationKey: ['tasks'],
 		mutationFn: (payload: TTaskCreateForm) => createClientTask(payload),
+		onSuccess: () => {
+			toast.success(`Task is success created!`);
+			queryClient.invalidateQueries({ queryKey: ['tasks'], exact: false });
+		},
+		onError: err => {
+			console.log(err);
+			toast.error('Channel is error!');
+		},
 	});
 
 	const { mutateAsync: createSubTask } = useMutation({
@@ -41,8 +49,6 @@ export const CreateTaskModal = ({ close }: { close: () => void }) => {
 					is_completed: false, // явно, чтобы не было NULL
 				},
 			});
-
-			toast.success('Task and subtask created!');
 			close();
 		} catch (err) {
 			toast.error('Error creating task or subtask');

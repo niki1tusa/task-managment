@@ -1,6 +1,5 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 
 import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/components/tabs';
@@ -10,30 +9,18 @@ import { Title } from '@/components/ui/Title';
 import { Button } from '@/components/ui/button/Button';
 import Textarea from '@/components/ui/field/Textarea';
 
-import { useProfile } from '@/hooks/useProfile';
+import { useNotices } from '@/hooks/useNotices';
 
 import NoticeList from './NoticeList';
-import type { TNoticeRow } from './notice.types';
-import { getNoticesByProfileId } from '@/services/notice/notice-client.service';
 
 export default function NotificationClient() {
+	// notice data
+	const { notices, noticesIsError, noticesIsLoading } = useNotices();
+	// sort state
 	const [query, setQuery] = useState('');
 	const [sortBy, setSortBy] = useState<'date' | 'type'>('date');
 	const [sortRead, setSortRead] = useState<'read' | 'not'>('read');
-	// 1) Всегда вызываем хук профиля
-	const { profile, isLoading: profileLoading, isError: profileError } = useProfile();
-
-	// 2) Всегда объявляем хук уведомлений (но включаем его только когда есть profile.id)
-	const {
-		data: notices,
-		isLoading: noticesLoading,
-		isError: noticesError,
-	} = useQuery<TNoticeRow[]>({
-		queryKey: ['notices', profile?.id],
-		queryFn: () => getNoticesByProfileId(profile!.id),
-		enabled: !!profile?.id,
-	});
-
+	//  filters and sorting:
 	const filteredAndSorted = useMemo(() => {
 		if (!notices) return [];
 		// фильтр прочитано/непрочитано
@@ -59,39 +46,53 @@ export default function NotificationClient() {
 		return sorted;
 	}, [notices, sortRead, sortBy, query]);
 
-	if (profileError || !profile) return null;
-	if (noticesError || !notices) return null;
+	if (noticesIsError || !notices) return null;
 
 	return (
 		<section className='relative flex h-full flex-col gap-6 px-5 pt-7'>
 			<Title heading='page'>Notice</Title>
 
-			{/* toolbar */}
-			<div className='flex max-w-xl flex-col gap-3'>
-				<Textarea value={query} setValue={setQuery} placeholder='Search by word…' />
-				<Tabs
-					value={sortBy}
-					onValueChange={v => setSortBy(v as 'date' | 'type')}
-					className='bg-gray dark:bg-muted w-full rounded-md shadow-sm'
-				>
-					<TabsList className='grid w-full grid-cols-2 rounded-md'>
-						<TabsTrigger value='type'>Type</TabsTrigger>
-						<TabsTrigger value='date'>Date</TabsTrigger>
-					</TabsList>
-				</Tabs>
-				<section className='flex gap-1'>
-					<Button className='w-full' onClick={() => setSortRead('not')}>
-						Not read
-					</Button>
-					<Button className='w-full' onClick={() => setSortRead('read')}>
-						Read
-					</Button>
-				</section>
+			<div className='2xl:w-[600px] w-[400px]'>
+				<Textarea className='w-full' value={query} setValue={setQuery} placeholder='Search by word…' />
 			</div>
 
-			{/* list */}
-			{profileLoading || noticesLoading ? <Skeleton /> : <NoticeList notices={filteredAndSorted} />}
-			<FadeOverlay />
+			<div className='flex w-full gap-10'>
+				{/* toolbar */}
+				<div className='flex max-w-xl flex-col gap-3'>
+					<nav className='rind-2 flex flex-col items-start ring-neutral-400 ring-offset-2'>
+						<Tabs
+							className='w-full'
+							value={sortRead}
+							onValueChange={v => setSortRead(v as 'read' | 'not')}
+						>
+							<TabsList className='grid h-20 w-full grid-rows-2'>
+								<TabsTrigger value='not'>Not read</TabsTrigger>
+								<TabsTrigger value='read'>Read</TabsTrigger>
+							</TabsList>
+						</Tabs>
+						<hr className='my-2 h-2 w-full' />
+						<Tabs className='bg-gray dark:bg-muted w-full rounded-md shadow-sm'>
+							<TabsList className='grid h-50 w-full grid-rows-5 rounded-md'>
+								<TabsTrigger value='urgent'>urgent</TabsTrigger>
+								<TabsTrigger value='advice'>advice</TabsTrigger>
+								<TabsTrigger value='achivment'>achivment</TabsTrigger>
+								<TabsTrigger value='information'>inforamtion</TabsTrigger>
+							</TabsList>
+						</Tabs>
+						<hr className='my-2 h-2 w-full' />
+						<Tabs className='w-full'>
+							<TabsList className='grid h-20 w-full grid-rows-2'>
+								<TabsTrigger value='new'>date asc</TabsTrigger>
+								<TabsTrigger value='old'>date desc</TabsTrigger>
+							</TabsList>
+						</Tabs>
+					</nav>
+				</div>
+
+				{/* list */}
+				{noticesIsLoading ? <Skeleton /> : <NoticeList notices={filteredAndSorted} />}
+				<FadeOverlay />
+			</div>
 		</section>
 	);
 }

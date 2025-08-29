@@ -8,31 +8,34 @@ import { AnimateIcon } from '@/components/animate-ui/icons/icon';
 
 import type { IMenuItem } from '@/shared/types/sidebar/menu.item.types';
 
-import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
+import { useNotices } from '@/hooks/useNotices';
 
 export const MenuItem = ({ item }: { item: IMenuItem }) => {
 	const pathname = usePathname();
 	const activeLink = pathname === item.link;
+	const { notices } = useNotices();
 	return (
 		<AnimateIcon animateOnHover>
 			<Link
 				href={item.link}
 				className={clsx(
-					'text-gray flex items-center  rounded-sm px-3 py-1 text-sm transition-colors duration-300',
+					'text-gray relative flex items-center rounded-sm px-3 py-1 text-sm transition-colors duration-300',
 					activeLink
 						? 'bg-primary text-white dark:border-2 dark:bg-transparent'
 						: 'hover:text-primary dark:hover:text-white',
 					item.title === 'Notification' && ''
 				)}
 			>
+				{/* TODO: get notices.length со статусом = false */}
 				<div className='flex items-center gap-2'>
-					<item.Icon size={22} />
+					<div className='relative'>
+						<item.Icon size={22} />
+						{item.title === 'Notification' && !activeLink && notices?.length && (
+							<div className='absolute top-0 left-[50%] flex h-2 w-2 items-center justify-center rounded-full bg-red-500 text-sm text-white'></div>
+						)}
+					</div>
 					<div className='font-medium transition-colors'>{item.title}</div>
 				</div>
-				{/* TODO: get notices.length */}
-				{(item.title === 'Notification' && !activeLink) && (
-					<div className='bg-primary text-white flex ml-3 text-sm max-h-5 w-10 items-center justify-center rounded-sm '>3</div>
-				)}
 			</Link>
 		</AnimateIcon>
 	);

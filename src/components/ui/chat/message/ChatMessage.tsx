@@ -13,33 +13,38 @@ import Skeleton from '../../Skeleton';
 import MessageMenuPopover from '../../popover/MessageMenuPopover';
 
 import type { TChatMessageRow } from './message.types';
+import { highlightSubstrings } from './HightLightHelpers';
 
 interface Props {
 	message: TChatMessageRow;
 	isFirstInGroup: boolean;
 	isLastInGroup: boolean;
+	value: string;
 }
 
-function ChatMessage({ message, isFirstInGroup, isLastInGroup }: Props) {
+function ChatMessage({ message, isFirstInGroup, isLastInGroup, value }: Props) {
 	const { profile, isLoading } = useProfile();
 	const [openId, setOpenId] = useState<string | null>(null);
+	
 	// клик по пузырю: не открывать, если есть выделенный текст
 	const handleClick = useCallback(() => {
-
-			const sel = typeof window !== 'undefined' ? window.getSelection()?.toString() : '';
-			if (sel && sel.length > 0) return; // позволяем копировать текст
-			setOpenId(message.id);
-		
+		const sel = typeof window !== 'undefined' ? window.getSelection()?.toString() : '';
+		if (sel && sel.length > 0) return; // позволяем копировать текст
+		setOpenId(message.id);
 	}, [message.id]);
 	const messageTime = useMemo(
 		() => format(parseISO(message.created_at!), 'hh:mm a').toLowerCase(),
-		[message.id]
+		[message.created_at]
 	);
 	//
 	useEffect(() => {
 		setOpenId(null);
 	}, [message.id]);
 
+	const highlighted = useMemo(
+		() => highlightSubstrings(message.text ?? '', value),
+		[message.text, value]
+	);
 
 	if (isLoading || !profile) {
 		return <Skeleton />;
@@ -50,6 +55,7 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup }: Props) {
 	const avatarPath = message.profile?.avatar_path;
 	// показываем аватар только у "последнего" сообщения группы
 	const isShowAvatar = isLastInGroup;
+
 	return (
 		<div className={clsx('flex items-end', isOwnMessage ? 'justify-end' : 'justify-start')}>
 			<div
@@ -88,6 +94,7 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup }: Props) {
 										}}
 										className={clsx(
 											'relative w-fit rounded-2xl px-3 py-2 text-[1rem] 2xl:max-w-[600px] 2xl:text-xl',
+
 											'[overflow-wrap:anywhere] break-words hyphens-auto whitespace-pre-wrap',
 											isOwnMessage
 												? clsx(
@@ -106,7 +113,7 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup }: Props) {
 											'hover:brightness-[1.02]'
 										)}
 									>
-										{message.text}
+										{highlighted}
 									</button>
 								}
 							/>
@@ -143,7 +150,7 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup }: Props) {
 								'hover:brightness-[1.02]'
 							)}
 						>
-							{message.text}
+							{highlighted}
 						</button>
 					)}
 				</div>

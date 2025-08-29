@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 
 import { Button } from '@/components/ui/button/Button';
@@ -11,11 +11,12 @@ import { deleteClientTask } from '@/services/tasks/task-client.service';
 
 export default function DeleteConfirmModals() {
 	const { close, type, payload } = useModalStore();
-
+	const queryClient = useQueryClient();
 	const { mutate, isPending } = useMutation({
 		mutationFn: (id: string) => deleteClientTask(id),
 		onSuccess: () => {
 			toast.success('Task deleted!');
+			queryClient.invalidateQueries({ queryKey: ['tasks'], exact: false });
 			close();
 		},
 		onError: (error: unknown) => {

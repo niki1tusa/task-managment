@@ -29,7 +29,7 @@ export default function NoticeList({ notices }: Props) {
 		},
 	});
 	return (
-		<ul className='flex flex-col overflow-y-auto p-1 gap-3'>
+		<ul className='flex flex-col overflow-y-auto w-full p-1 gap-3'>
 			{notices.length > 0 ? (
 				notices.map(notice => {
 					return (
