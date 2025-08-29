@@ -2,44 +2,41 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { BadgeCheck, BookOpenText, CircleAlert, HandHelping } from 'lucide-react';
 import React from 'react';
+import { toast } from 'react-toastify';
 
 import { Checkbox } from '@/components/animate-ui/base/checkbox';
 
 import { formatNoticeDate } from './formatNoticeDate';
 import type { TNoticeRow } from './notice.types';
 import { updateStatusNotice } from '@/services/notice/notice-client.service';
-import { toast } from 'react-toastify';
 
 interface Props {
 	notices: TNoticeRow[];
 }
 export default function NoticeList({ notices }: Props) {
-
 	const queryClient = useQueryClient();
 	const { mutate } = useMutation({
 		mutationFn: ({ id, status }: { id: string; status: boolean }) => updateStatusNotice(id, status),
 		onSuccess: () => {
 			// перезапрашиваем все запросы, начинающиеся на ['notices', ...]
-			toast.success(`Notice is success update (read or noread)`)
+			toast.success(`Notice is success update (read or noread)`);
 			queryClient.invalidateQueries({ queryKey: ['notices'], exact: false });
-
 		},
 		onError: err => {
-			toast.error('Notice is error!')
+			toast.error('Notice is error!');
 		},
 	});
 	return (
-		<ul className='flex flex-col overflow-y-auto w-full p-1 gap-3'>
+		<ul className='flex w-full flex-col gap-3 overflow-y-auto p-1'>
 			{notices.length > 0 ? (
 				notices.map(notice => {
 					return (
 						<li key={notice.id} className='grid grid-cols-[auto_1fr_auto] items-start gap-3'>
 							{/* checkbox */}
-							<div className='pt-2'>
-								<Checkbox
-									onCheckedChange={() => mutate({ id: notice.id, status: !notice.status })}
-								/>
-							</div>
+							<Checkbox
+								className='mt-2 shadow shadow-neutral-400 '
+								onCheckedChange={() => mutate({ id: notice.id, status: !notice.status })}
+							/>
 
 							{/* card */}
 							<div

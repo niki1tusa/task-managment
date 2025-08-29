@@ -12,8 +12,8 @@ import { Avatar } from '../../Avatar';
 import Skeleton from '../../Skeleton';
 import MessageMenuPopover from '../../popover/MessageMenuPopover';
 
+import ChatMessageText from './ChatMessageText';
 import type { TChatMessageRow } from './message.types';
-import { highlightSubstrings } from './HightLightHelpers';
 
 interface Props {
 	message: TChatMessageRow;
@@ -25,7 +25,7 @@ interface Props {
 function ChatMessage({ message, isFirstInGroup, isLastInGroup, value }: Props) {
 	const { profile, isLoading } = useProfile();
 	const [openId, setOpenId] = useState<string | null>(null);
-	
+
 	// клик по пузырю: не открывать, если есть выделенный текст
 	const handleClick = useCallback(() => {
 		const sel = typeof window !== 'undefined' ? window.getSelection()?.toString() : '';
@@ -40,11 +40,6 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup, value }: Props) {
 	useEffect(() => {
 		setOpenId(null);
 	}, [message.id]);
-
-	const highlighted = useMemo(
-		() => highlightSubstrings(message.text ?? '', value),
-		[message.text, value]
-	);
 
 	if (isLoading || !profile) {
 		return <Skeleton />;
@@ -113,7 +108,7 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup, value }: Props) {
 											'hover:brightness-[1.02]'
 										)}
 									>
-										{highlighted}
+										<ChatMessageText text={message.text} query={value} />
 									</button>
 								}
 							/>
@@ -150,7 +145,7 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup, value }: Props) {
 								'hover:brightness-[1.02]'
 							)}
 						>
-							{highlighted}
+							<ChatMessageText text={message.text} query={value} />
 						</button>
 					)}
 				</div>

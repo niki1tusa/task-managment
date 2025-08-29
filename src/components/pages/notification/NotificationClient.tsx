@@ -56,10 +56,9 @@ export default function NotificationClient() {
 				<Textarea className='w-full' value={query} setValue={setQuery} placeholder='Search by word…' />
 			</div>
 
-			<div className='flex w-full gap-10'>
+			<div className='flex w-full gap-10 '>
 				{/* toolbar */}
-				<div className='flex max-w-xl flex-col gap-3'>
-					<nav className='rind-2 flex flex-col items-start ring-neutral-400 ring-offset-2'>
+					<nav className='max-w-xl rounded-xl flex flex-col gap-3 items-start shadow shadow-neutral-400 '>
 						<Tabs
 							className='w-full'
 							value={sortRead}
@@ -87,7 +86,6 @@ export default function NotificationClient() {
 							</TabsList>
 						</Tabs>
 					</nav>
-				</div>
 
 				{/* list */}
 				{noticesIsLoading ? <Skeleton /> : <NoticeList notices={filteredAndSorted} />}

@@ -102,13 +102,8 @@ export async function createClientChannelByTaskId(channelFields: TChannelInsert,
 	if (newChannelError || !newChannel) {
 		throw new Error(newChannelError?.message || 'Failed to create channel');
 	}
-	// add owner channel in participants
-	const { error: pErr } = await client
-		.from('channel_participants')
-		.insert({ channel_id: newChannel.id, profile_id: user.id, role: 'owner' });
-	if (pErr) throw new Error(pErr.message);
 
-	// Участники добавятся автоматически триггером в БД
+	// participants and owner добавятся автоматически триггером в БД
 	return newChannel;
 }
 
