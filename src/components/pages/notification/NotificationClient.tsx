@@ -12,6 +12,7 @@ import Textarea from '@/components/ui/field/Textarea';
 import { useNotices } from '@/hooks/useNotices';
 
 import NoticeList from './NoticeList';
+import SelectNotice from './SelectNotice';
 
 export default function NotificationClient() {
 	// notice data
@@ -51,46 +52,20 @@ export default function NotificationClient() {
 	return (
 		<section className='relative flex h-full flex-col gap-6 px-5 pt-7'>
 			<Title heading='page'>Notice</Title>
-
-			<div className='2xl:w-[600px] w-[400px]'>
-				<Textarea className='w-full' value={query} setValue={setQuery} placeholder='Search by word…' />
+			{/* search */}
+			<div className='w-[400px] 2xl:w-[600px]'>
+				<Textarea
+					className='w-full'
+					value={query}
+					setValue={setQuery}
+					placeholder='Search by word…'
+				/>
 			</div>
-
-			<div className='flex w-full gap-10 '>
-				{/* toolbar */}
-					<nav className='max-w-xl rounded-xl flex flex-col gap-3 items-start shadow shadow-neutral-400 '>
-						<Tabs
-							className='w-full'
-							value={sortRead}
-							onValueChange={v => setSortRead(v as 'read' | 'not')}
-						>
-							<TabsList className='grid h-20 w-full grid-rows-2'>
-								<TabsTrigger value='not'>Not read</TabsTrigger>
-								<TabsTrigger value='read'>Read</TabsTrigger>
-							</TabsList>
-						</Tabs>
-						<hr className='my-2 h-2 w-full' />
-						<Tabs className='bg-gray dark:bg-muted w-full rounded-md shadow-sm'>
-							<TabsList className='grid h-50 w-full grid-rows-5 rounded-md'>
-								<TabsTrigger value='urgent'>urgent</TabsTrigger>
-								<TabsTrigger value='advice'>advice</TabsTrigger>
-								<TabsTrigger value='achivment'>achivment</TabsTrigger>
-								<TabsTrigger value='information'>inforamtion</TabsTrigger>
-							</TabsList>
-						</Tabs>
-						<hr className='my-2 h-2 w-full' />
-						<Tabs className='w-full'>
-							<TabsList className='grid h-20 w-full grid-rows-2'>
-								<TabsTrigger value='new'>date asc</TabsTrigger>
-								<TabsTrigger value='old'>date desc</TabsTrigger>
-							</TabsList>
-						</Tabs>
-					</nav>
-
-				{/* list */}
-				{noticesIsLoading ? <Skeleton /> : <NoticeList notices={filteredAndSorted} />}
-				<FadeOverlay />
-			</div>
+			{/* sort toolbar */}
+			<SelectNotice />
+			{/* list */}
+			{noticesIsLoading ? <Skeleton /> : <NoticeList notices={filteredAndSorted} />}
+			<FadeOverlay />
 		</section>
 	);
 }
