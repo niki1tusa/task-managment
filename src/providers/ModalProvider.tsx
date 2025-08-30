@@ -26,7 +26,7 @@ export const ModalProvider = () => {
 		case 'createSubTask':
 			return <CreateSubtaskModal id={payload} close={close} />;
 		case 'updateTask':
-			return <UpdateTaskModal id={payload} close={close} />;
+			return <UpdateTaskModal id={payload.id} close={close} />;
 		case 'deleteChannel':
 			return <DeleteChannelModal {...payload} close={close} />;
 		case 'deleteProfileFromPartyChannel':

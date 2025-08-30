@@ -23,13 +23,7 @@ export default function DeleteProfileFromPartyChannel({ close, profile }: Props)
 		mutationFn: (id: string) => deleteClientProfileFromPartyChannel(id),
 		onSuccess: () => {
 			toast.success('Profile is kicked out!');
-			queryClient.invalidateQueries({ queryKey: ['channels'] });
-			queryClient.invalidateQueries({ queryKey: ['profiles'] });
-			if (activeChannel?.id) {
-				queryClient.invalidateQueries({ queryKey: ['participants', activeChannel.id] });
-			} else {
-				queryClient.invalidateQueries({ queryKey: ['participants'], exact: false });
-			}
+			queryClient.invalidateQueries({ queryKey: ['channel_participants'] });
 			close();
 		},
 		onError: (error: unknown) => {

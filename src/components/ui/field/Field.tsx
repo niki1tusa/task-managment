@@ -53,12 +53,14 @@ export function Field<T extends FieldValues>({
 				<input
 					{...register(registerName)}
 					className={clsx(
-						'text-gray h-[30%] w-[80%] rounded border py-5 text-sm shadow shadow-neutral-400 transition-all duration-200 hover:bg-[#f6f4ff]/50 focus:border focus:border-sky-600 focus:bg-[#f6f4ff] focus:shadow-none 2xl:w-full 2xl:text-lg',
+						'focus:bg-[#f6f4ff] focus:shadow-lg focus:ring-2 focus:ring-sky-600 focus:shadow-sky-300/20',
+						'text-gray h-[30%] w-[80%] rounded py-5 text-sm shadow shadow-neutral-400 transition-all duration-200 hover:bg-[#f6f4ff]/50 2xl:w-full 2xl:text-lg',
 						type === 'password' || type === 'email' ? 'pl-8' : 'pl-4'
 					)}
 					type={type === 'password' ? (isShowEye ? 'text' : 'password') : 'text'}
 					placeholder={placeholderText}
 				/>
+
 				{type === 'password' && (
 					<button
 						type='button'

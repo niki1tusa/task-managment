@@ -7,6 +7,8 @@ import { useRouter } from 'next/navigation';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
+import { serverSignOut } from '@/app/(auth)/actions';
+
 import { Title } from '@/components/ui/Title';
 import Form from '@/components/ui/form/Form';
 
@@ -15,8 +17,7 @@ import { type TResetPasswordForm, ZResetPasswordScheme } from '@/shared/types/fo
 import { PUBLIC_PAGES } from '@/config/public-page.config';
 
 import { resetPassowrdFields } from './reset-password.data';
-import { updateUserPassword } from '@/services/profile/user-client.service';
-import { serverSignOut } from '@/app/(auth)/actions';
+import { updateUserPassword } from '@/services/profile/profile-auth-client.service';
 
 export function ResetPassowrdClient() {
 	const router = useRouter();
@@ -37,7 +38,7 @@ export function ResetPassowrdClient() {
 	const onSubmit: SubmitHandler<TResetPasswordForm> = async data => {
 		try {
 			await mutateAsync(data.password);
-			await serverSignOut()
+			await serverSignOut();
 			toast.success('New password has been set!');
 			reset();
 			router.replace(PUBLIC_PAGES.LOGIN);

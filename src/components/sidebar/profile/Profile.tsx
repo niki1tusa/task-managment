@@ -15,17 +15,17 @@ export const ProfileMenu = ({ data }: { data: TProfileRow }) => {
 	return !data ? (
 		<Skeleton />
 	) : (
-		<nav className='text-foreground/50 text-sm flex w-full flex-col gap-4 pt-4 '>
+		<nav className='text-foreground/40 font-medium text-sm flex w-full flex-col gap-4 pt-4 '>
 			<div className='flex items-center gap-2'>
 				<Title isMenuTitle={true}>PROFILE</Title>
 				{isShowProfile ? (
-					<ChevronUp onClick={() => setIsShowProfile(false)} />
+					<ChevronUp className='text-foreground/60' onClick={() => setIsShowProfile(false)} />
 				) : (
-					<ChevronDown onClick={() => setIsShowProfile(true)} />
+					<ChevronDown className='text-foreground/60' onClick={() => setIsShowProfile(true)} />
 				)}
 			</div>
 			{isShowProfile && (
-				<div className='bg-background flex items-center gap-2 rounded-sm px-2 py-2 shadow shadow-neutral-400'>
+				<div className='bg-background flex items-center gap-2 rounded-md px-2 py-2 shadow shadow-neutral-400'>
 					<div>
 						<Avatar img={data.avatar_path} />
 					</div>

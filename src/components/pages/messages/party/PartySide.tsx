@@ -10,8 +10,6 @@ import Skeleton from '@/components/ui/Skeleton';
 import { Title } from '@/components/ui/Title';
 import Textarea from '@/components/ui/field/Textarea';
 
-import type { TProfileRow } from '@/shared/types/task/task.types';
-
 import { useChannelStore } from '@/store/channel.store';
 import { useModalStore } from '@/store/modals.store';
 
@@ -52,7 +50,7 @@ export default function PartySide({ channel }: Props) {
 					.filter(p => !!p.name)
 					.sort((a, b) => a.name!.localeCompare(b.name!));
 
-	const ownerChannel = participants?.find(p => p.role === 'owner');
+
 	// search profile
 	const handleSearch = searchProfileByName
 		? sortedProfiles?.filter(channel =>

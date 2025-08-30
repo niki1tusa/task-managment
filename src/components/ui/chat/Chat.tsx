@@ -28,22 +28,28 @@ interface Props {
 }
 
 export default function Chat({ profile }: Props) {
+	// store
+	const { activeChannel } = useChannelStore();
+	// hooks
 	const [isOpenInput, setIsOpenInput] = useState<boolean>(false);
 	const [value, setValue] = useState('');
-	const { activeChannel } = useChannelStore();
 	const pathname = usePathname();
-	const { ref } = useClickOutside<HTMLDivElement>(() => setIsOpenInput(false));
 	const isDashboard = pathname === '/dashboard';
+	// costom hooks
+	const { ref } = useClickOutside<HTMLDivElement>(() => setIsOpenInput(false));
 	const chat = useChat(activeChannel ? activeChannel.id : '69d922e1-63f4-4f1d-9627-97aa6319902a');
+	// memo
 	const visibleMessages = useMemo(() => {
 		const all = chat?.messages ?? [];
 		return isDashboard ? all.slice(-7) : all; // последние 7
 	}, [isDashboard, chat?.messages]);
+
 	const renderMessages = useMemo(() => {
 		if (!chat) return null;
-		return visibleMessages.map((m, i) => {
-			const prev = chat.messages[i - 1];
-			const next = chat.messages[i + 1];
+		const arr = visibleMessages;
+		return arr.map((m, i) => {
+			const prev = arr[i - 1];
+			const next = arr[i + 1];
 			const sameAsPrev =
 				!!prev &&
 				prev.user_id === m.user_id &&
@@ -65,7 +71,7 @@ export default function Chat({ profile }: Props) {
 				/>
 			);
 		});
-	}, [chat?.messages]);
+	}, [chat?.messages, visibleMessages]);
 	return (
 		<div className='flex h-full flex-col' role='complementary' aria-label='Chat panel'>
 			{isDashboard && (

@@ -1,7 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
@@ -20,11 +20,13 @@ interface Props {
 	close: () => void;
 }
 export const CreateSubtaskModal = ({ id, close }: Props) => {
+	const queryClient = useQueryClient()
 	const { mutate, isPending } = useMutation({
 		mutationKey: ['createSubTask', id],
 		mutationFn: (payload: TSubTaskRowForm) => createClientSubTask(id, payload),
 		onSuccess: () => {
 			toast.success('Subtask is successfully created!');
+			queryClient.invalidateQueries({queryKey: ['tasks']})
 			close();
 		},
 		onError: () => toast.error('There was a problem during the creation of the subtask!'),

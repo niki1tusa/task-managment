@@ -30,7 +30,7 @@ import { PUBLIC_PAGES } from '@/config/public-page.config';
 import Form from '../../ui/form/Form';
 
 import { loginEmailFields, loginPhonePasswordFields } from './login.data';
-import { loginUserByPhoneAndPassword } from '@/services/profile/user-client.service';
+import { loginUserByPhoneAndPassword } from '@/services/profile/profile-auth-client.service';
 
 export function LoginClient() {
 	const [loginType, setLoginType] = useState<'email' | 'password'>('email');

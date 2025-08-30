@@ -19,10 +19,6 @@ export const CreateTaskModal = ({ close }: { close: () => void }) => {
 	const { mutateAsync: createTask } = useMutation({
 		mutationKey: ['tasks'],
 		mutationFn: (payload: TTaskCreateForm) => createClientTask(payload),
-		onSuccess: () => {
-			toast.success(`Task is success created!`);
-			queryClient.invalidateQueries({ queryKey: ['tasks'], exact: false });
-		},
 		onError: err => {
 			console.log(err);
 			toast.error('Channel is error!');
@@ -40,19 +36,32 @@ export const CreateTaskModal = ({ close }: { close: () => void }) => {
 		const taskPayload = prepareTaskPayload(data);
 
 		try {
-			const task = await createTask(taskPayload); // ждём завершения создания task
-			// Сабтаск создаём только после того, как task гарантированно есть в БД
+			console.log('Creating task with payload:', taskPayload);
+
+			// Создаём основную задачу
+			const task = await createTask(taskPayload);
+
+			// Создаём подзадачу
 			await createSubTask({
 				id: task.id,
 				payload: {
 					title: 'Example subtask',
-					is_completed: false, // явно, чтобы не было NULL
+					is_completed: false,
 				},
 			});
+
+			// Инвалидируем все связанные запросы
+			await Promise.all([
+				queryClient.invalidateQueries({ queryKey: ['tasks'] }),
+				queryClient.invalidateQueries({ queryKey: ['task'] }),
+				queryClient.refetchQueries({ queryKey: ['tasks'] }),
+			]);
+
+			toast.success('Task created successfully!');
 			close();
 		} catch (err) {
+			console.error('Error in task creation process:', err);
 			toast.error('Error creating task or subtask');
-			console.error(err);
 		}
 	};
 

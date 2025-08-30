@@ -28,7 +28,7 @@ export default function ProfileList({
 						<span className='text-sm'>{p.name}</span>
 					</div>
 					<Checkbox
-						className={'bg-white'}
+						className='bg-white shadow shadow-neutral-400'
 						disabled={
 							!selectProfileIds.includes(p.id) &&
 							(typeChannel === 'group'

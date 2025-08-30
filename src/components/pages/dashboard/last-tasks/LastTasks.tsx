@@ -19,7 +19,7 @@ export const LastTasks = ({ tasks }: { tasks: TTask[] }) => {
 	const [select, setSelect] = useState<TStatus>('All');
 	const [sortOrder, setSortOrder] = useState<TByAscOrDesc>('Asc');
 	const { data, isPending } = useQuery({
-		queryKey: ['last-task', select, sortOrder],
+		queryKey: ['tasks', select, sortOrder],
 		queryFn: () => getClientAllTask({ status: select, sortByDue: sortOrder }),
 		initialData: tasks,
 	});

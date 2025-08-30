@@ -6,6 +6,7 @@ import { PUBLIC_PAGES } from '@/config/public-page.config';
 
 import { createClient } from '@/utils/supabase/client';
 
+// register user
 export async function createUser(fields: TRegistrationForm) {
 	const client = createClient();
 	// Проверяем, есть ли профиль с таким email
@@ -33,14 +34,13 @@ export async function createUser(fields: TRegistrationForm) {
 			emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}${PUBLIC_PAGES.AUTH_CALLBACK}`,
 		},
 	});
-	
+
 	if (authError || !authData?.user) {
 		throw new Error(authError?.message || 'Не удалось зарегистрировать пользователя');
 	}
-
 	return authData.user;
 }
-
+// update password
 export async function updateUserPassword(newPassword: string) {
 	const client = createClient();
 	const { data, error } = await client.auth.updateUser({ password: newPassword });
@@ -51,7 +51,10 @@ export async function updateUserPassword(newPassword: string) {
 // login
 export async function loginUserByPhoneAndPassword(payload: { password: string; phone: string }) {
 	const client = createClient();
-	const { data, error } = await client.auth.signInWithPassword({password: payload.password, phone: payload.phone});
+	const { data, error } = await client.auth.signInWithPassword({
+		password: payload.password,
+		phone: payload.phone,
+	});
 	if (error) throw new Error(error.message || 'Failed to login password');
 	return data;
 }

@@ -17,7 +17,7 @@ import { PUBLIC_PAGES } from '@/config/public-page.config';
 import Form from '../../ui/form/Form';
 
 import { RegisterFields } from './register.data';
-import { createUser } from '@/services/profile/user-client.service';
+import { createUser } from '@/services/profile/profile-auth-client.service';
 
 export function RegisterClient() {
 	const router = useRouter();

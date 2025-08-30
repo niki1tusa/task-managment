@@ -1,7 +1,12 @@
 'use client';
 
 import type { Database } from '@/shared/types/db/db.types';
-import type { TByAscOrDesc, TStatus, TTaskCreateForm } from '@/shared/types/task/task.types';
+import type {
+	TByAscOrDesc,
+	TStatus,
+	TTaskCreateForm,
+	TTaskEditForm,
+} from '@/shared/types/task/task.types';
 
 import { filterStatusTasks } from '@/utils/filterStatusTasks';
 import { createClient } from '@/utils/supabase/client';
@@ -54,12 +59,12 @@ export async function createClientTask(task: TTaskCreateForm) {
 		.single();
 
 	if (error || !data) throw new Error(error?.message || 'create task is failed');
-	const { data: task_participants, error: errParticipants } = await client
+	const { error: errParticipants } = await client
 		.from('task_participants')
 		.insert({ task_id: data.id, profile_id: user?.id });
-		if(errParticipants){
-			throw new Error('Fail with create task (participants)!')
-		}
+	if (errParticipants) {
+		throw new Error('Fail with create task (participants)!');
+	}
 	return data;
 }
 export async function createClientSubTask(
@@ -76,10 +81,7 @@ export async function createClientSubTask(
 }
 
 // update
-export async function updateClientTask(
-	id: string,
-	task: Database['public']['Tables']['task']['Update']
-) {
+export async function updateClientTask(id: string, task: TTaskEditForm) {
 	const { data, error } = await createClient()
 		.from('task')
 		.update(task)

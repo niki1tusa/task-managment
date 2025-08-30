@@ -15,6 +15,7 @@ import { type TFormData, ZTaskEditScheme } from '@/shared/types/form/scheme.zod'
 
 import { TASK_EDIT_FIELDS } from './data/task.edit.data';
 import { getClientTaskById, updateClientTask } from '@/services/tasks/task-client.service';
+import type { TTaskEditForm } from '@/shared/types/task/task.types';
 
 interface Props {
 	id: string;
@@ -53,10 +54,9 @@ export const UpdateTaskModal = ({ id, close }: Props) => {
 	const queryClient = useQueryClient();
 	const { mutate, isPending } = useMutation({
 		mutationKey: ['task', 'update', id],
-		mutationFn: (data: Database['public']['Tables']['task']['Update']) =>
-			updateClientTask(id, data),
+		mutationFn: ({ id, data }: { id: string; data: TTaskEditForm }) => updateClientTask(id, data),
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ['task', id] });
+			queryClient.invalidateQueries({ queryKey: ['tasks'] });
 			toast.success('Task updated successfully!');
 			close();
 		},
@@ -66,7 +66,10 @@ export const UpdateTaskModal = ({ id, close }: Props) => {
 		},
 	});
 	const onSubmit: SubmitHandler<TFormData> = data => {
-		mutate({ title: data.title, due_date: data.due_date.toISOString(), icon: data.icon });
+		mutate({
+			id,
+			data: { title: data.title, due_date: data.due_date.toISOString(), icon: data.icon },
+		});
 	};
 	if (!id) return null;
 	return (

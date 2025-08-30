@@ -42,7 +42,7 @@ export const MENU: IMenuItem[] = [
 		link: DASHBOARD_PAGES.TEAM,
 	},
 	{
-		title: 'Setting',
+		title: 'Settings',
 		Icon: SettingsIcon as React.ComponentType<React.SVGProps<SVGSVGElement>>,
 		link: DASHBOARD_PAGES.SETTINGS,
 	},
