@@ -17,7 +17,6 @@ export default function NotificationClient() {
 	const { notices, noticesIsError, noticesIsLoading } = useNotices();
 	// sort state
 	const [query, setQuery] = useState('');
-
 	//  filters and sorting:
 	const filteredAndSorted = useMemo(() => {
 		if (!notices) return [];

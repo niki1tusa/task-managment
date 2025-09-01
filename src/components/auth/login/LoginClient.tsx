@@ -71,7 +71,7 @@ export function LoginClient() {
 		<div className='flex flex-col gap-2'>
 			<Title>
 				<b className='font-playfair text-3xl 2xl:text-6xl'>
-					Welcome back <br /> <span className='text-4xl'>to the task management app</span>
+					Welcome back <br /> <span className='2xl:text-4xl text-xl'>to the task management app</span>
 				</b>
 			</Title>
 			{/* tabs */}
@@ -116,7 +116,7 @@ export function LoginClient() {
 						errors={emailForm.formState.errors}
 						isEmailVariant={true}
 						btnText='Send magic link'
-						btnClassName='bg-primary/50 py-1.5 hover:text-purple-950 duration-300 text-sm 2xl:text-lg px-2 hover:bg-white/60 w-[30%] rounded-4xl text-white transition-all whitespace-nowrap'
+						btnClassName='bg-primary/50 py-1.5 hover:text-purple-950 duration-300 text-sm 2xl:text-lg px-4 hover:bg-white/60 w-auto rounded-4xl text-white transition-all whitespace-nowrap'
 					/>
 				)}
 			</div>

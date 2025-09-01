@@ -6,7 +6,9 @@ import { useProfile } from './useProfile';
 import { getNoticesByProfileId } from '@/services/notice/notice-client.service';
 
 export function useNotices() {
+
 	const { profile } = useProfile();
+
 	const {
 		data: notices,
 		isLoading: noticesIsLoading,
@@ -16,5 +18,6 @@ export function useNotices() {
 		queryFn: () => getNoticesByProfileId(profile!.id),
 		enabled: !!profile?.id,
 	});
+	
 	return { notices, noticesIsLoading, noticesIsError };
 }

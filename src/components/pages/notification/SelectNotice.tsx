@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/components/tabs';
 import { AnimateIcon } from '@/components/animate-ui/icons/icon';
 import { RotateCcw } from '@/components/animate-ui/icons/rotate-ccw';
-import { Button } from '@/components/ui/button/Button';
 import {
 	Select,
 	SelectContent,
