@@ -2,11 +2,9 @@
 
 import { useMemo, useState } from 'react';
 
-import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/components/tabs';
 import FadeOverlay from '@/components/ui/FadeOverlay';
 import Skeleton from '@/components/ui/Skeleton';
 import { Title } from '@/components/ui/Title';
-import { Button } from '@/components/ui/button/Button';
 import Textarea from '@/components/ui/field/Textarea';
 
 import { useNotices } from '@/hooks/useNotices';
@@ -19,8 +17,7 @@ export default function NotificationClient() {
 	const { notices, noticesIsError, noticesIsLoading } = useNotices();
 	// sort state
 	const [query, setQuery] = useState('');
-	const [sortBy, setSortBy] = useState<'date' | 'type'>('date');
-	const [sortRead, setSortRead] = useState<'read' | 'not'>('read');
+
 	//  filters and sorting:
 	const filteredAndSorted = useMemo(() => {
 		if (!notices) return [];
