@@ -5,7 +5,11 @@ import { createClient } from '@/utils/supabase/client';
 // READ
 export async function getNoticesByProfileId(profileId: string) {
 	const client = createClient();
-	const { data, error } = await client.from('notice').select('*').eq('profile_id', profileId);
+	const { data, error } = await client
+		.from('notice')
+		.select('*')
+		.eq('profile_id', profileId)
+		.order('created_at', { ascending: true });
 	if (error) throw new Error('Notice is fail, notice-client-service-ts');
 	return data;
 }
