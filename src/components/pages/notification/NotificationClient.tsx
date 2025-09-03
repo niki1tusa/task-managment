@@ -2,46 +2,73 @@
 
 import { useMemo, useState } from 'react';
 
+// import SelectNotice from './SelectNotice';
+
+import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/components/tabs';
+import { AnimateIcon } from '@/components/animate-ui/icons/icon';
+import { RotateCcw } from '@/components/animate-ui/icons/rotate-ccw';
 import FadeOverlay from '@/components/ui/FadeOverlay';
 import Skeleton from '@/components/ui/Skeleton';
 import { Title } from '@/components/ui/Title';
 import Textarea from '@/components/ui/field/Textarea';
+import {
+	Select,
+	SelectContent,
+	SelectGroup,
+	SelectItem,
+	SelectLabel,
+	SelectTrigger,
+	SelectValue,
+} from '@/components/ui/select';
 
 import { useNotices } from '@/hooks/useNotices';
 
 import NoticeList from './NoticeList';
-import SelectNotice from './SelectNotice';
 
 export default function NotificationClient() {
 	// notice data
 	const { notices, noticesIsError, noticesIsLoading } = useNotices();
 	// sort state
+	const [orderBy, setOrderBy] = useState<'asc' | 'desc'>('asc');
+	const [readOrNot, setReadOrNot] = useState<'no' | 'read'>('no');
+	const [selectType, setSelectType] = useState<
+		'all' | 'advice' | 'urgent' | 'achivment' | 'information'
+	>('all');
+
+	const resetAllFilters = () => {
+		setOrderBy('desc');
+		setReadOrNot('no');
+		setSelectType('all');
+	};
 	const [query, setQuery] = useState('');
 	//  filters and sorting:
 	const filteredAndSorted = useMemo(() => {
 		if (!notices) return [];
-		// фильтр прочитано/непрочитано
-		const byRead = notices.filter(n =>
-			sortRead === 'not' ? n.status === false : n.status === true
-		);
+		//  time select
+		const sorted =
+			orderBy === 'desc'
+				? [...notices].sort(
+						(a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+					)
+				: [...notices].sort(
+						(a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+					);
 
-		// текстовый поиск (по нескольким полям, по желанию можно расширить)
-		const q = query.trim().toLowerCase();
-		const byQuery = q ? byRead.filter(n => n.text.toLowerCase().includes(q)) : byRead;
-
-		// сортировка
-		const sorted = [...byQuery].sort((a, b) => {
-			if (sortBy === 'date') {
-				const at = new Date(a.created_at).getTime() || 0;
-				const bt = new Date(b.created_at).getTime() || 0;
-				return bt - at; // новые выше
-			}
-			// sortBy === 'type'
-			return String(a.type ?? '').localeCompare(String(b.type ?? ''));
-		});
-
+		// read or no select
+		const result =
+			readOrNot === 'no'
+				? sorted?.filter(notice => notice.status === false)
+				: sorted.filter(notice => notice.status === true);
+				const typeActice = switch (selectType) {
+					case value:
+						
+						break;
+					default:
+						
+						break;
+				}
 		return sorted;
-	}, [notices, sortRead, sortBy, query]);
+	}, [notices, orderBy, query]);
 
 	if (noticesIsError || !notices) return null;
 
@@ -58,7 +85,58 @@ export default function NotificationClient() {
 				/>
 			</div>
 			{/* sort toolbar */}
-			<SelectNotice />
+			<nav className='flex items-center gap-3'>
+				{/* read or not  */}
+				<Tabs value={readOrNot} onValueChange={value => setReadOrNot(value as 'read' | 'no')}>
+					<TabsList className='grid grid-cols-2'>
+						<TabsTrigger value='not'>Not read</TabsTrigger>
+						<TabsTrigger value='read'>Read</TabsTrigger>
+					</TabsList>
+				</Tabs>
+				{/* select date */}
+				<Select value={orderBy} onValueChange={value => setOrderBy(value as 'desc' | 'asc')}>
+					<SelectTrigger className='w-[180px]'>
+						<SelectValue placeholder='Sort by date' />
+					</SelectTrigger>
+					<SelectContent>
+						<SelectGroup>
+							<SelectLabel>Date</SelectLabel>
+							<SelectItem value='asc'>Asc</SelectItem>
+							<SelectItem value='desc'>Desc</SelectItem>
+						</SelectGroup>
+					</SelectContent>
+				</Select>
+				{/* select type */}
+				<Select
+					value={selectType}
+					onValueChange={value =>
+						setSelectType(value as 'all' | 'advice' | 'urgent' | 'achivment' | 'information')
+					}
+				>
+					<SelectTrigger className='w-[180px]'>
+						<SelectValue placeholder='Select a type' />
+					</SelectTrigger>
+					<SelectContent>
+						<SelectGroup>
+							<SelectLabel>Type</SelectLabel>
+							<SelectItem value='all'>All</SelectItem>
+							<SelectItem value='advice'>Advice</SelectItem>
+							<SelectItem value='urgent'>Urgent</SelectItem>
+							<SelectItem value='achivment'>Achivment</SelectItem>
+							<SelectItem value='information'>Information</SelectItem>
+						</SelectGroup>
+					</SelectContent>
+				</Select>
+				<button
+					onClick={() => resetAllFilters()}
+					title='Reset all filters'
+					className='flex items-center justify-center rounded-sm p-1 shadow shadow-neutral-400'
+				>
+					<AnimateIcon animateOnHover>
+						<RotateCcw size={26} />
+					</AnimateIcon>
+				</button>
+			</nav>
 			{/* list */}
 			{noticesIsLoading ? <Skeleton /> : <NoticeList notices={filteredAndSorted} />}
 			<FadeOverlay />

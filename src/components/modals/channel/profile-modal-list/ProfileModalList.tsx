@@ -50,7 +50,7 @@ export default function ProfileModalList({
 			close();
 		},
 		onError: err => {
-			toast.error('Channel is error!');
+			toast.error(err.message);
 		},
 	});
 	const { mutate: mutateChannelDirect } = useMutation({
@@ -66,7 +66,7 @@ export default function ProfileModalList({
 			queryClient.invalidateQueries({ queryKey: ['channels'], exact: false });
 			close();
 		},
-				onError: err => {
+		onError: err => {
 			toast.error('Channel is error!');
 		},
 	});

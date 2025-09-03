@@ -47,37 +47,36 @@ export async function getChannelParticipantsById(id: string) {
 	return (data ?? []) as TChannelParticipantsRow[];
 }
 
-
 export async function getMyDirectPartnerIds(myProfileId: string): Promise<string[]> {
-  const supabase = createClient();
+	const supabase = createClient();
 
-  // Шаг 1: взять прямые каналы, в которых участвует текущий пользователь
-  const { data: myLinks, error: e1 } = await supabase
-    .from('channel_participants')
-    .select('channel_id, profile_id, channel:channel!inner(type)')
-    .eq('profile_id', myProfileId)
-    .eq('channel.type', 'direct'); // фильтр по join-таблице channel
+	// Шаг 1: взять прямые каналы, в которых участвует текущий пользователь
+	const { data: myLinks, error: e1 } = await supabase
+		.from('channel_participants')
+		.select('channel_id, profile_id, channel:channel!inner(type)')
+		.eq('profile_id', myProfileId)
+		.eq('channel.type', 'direct'); // фильтр по join-таблице channel
 
-  if (e1) throw e1;
+	if (e1) throw e1;
 
-  const channelIds = (myLinks ?? []).map(r => r.channel_id);
-  if (channelIds.length === 0) return [];
+	const channelIds = (myLinks ?? []).map(r => r.channel_id);
+	if (channelIds.length === 0) return [];
 
-  // Шаг 2: по этим каналам взять всех участников и отфильтровать "не я"
-  const { data: allLinks, error: e2 } = await supabase
-    .from('channel_participants')
-    .select('profile_id, channel_id')
-    .in('channel_id', channelIds);
+	// Шаг 2: по этим каналам взять всех участников и отфильтровать "не я"
+	const { data: allLinks, error: e2 } = await supabase
+		.from('channel_participants')
+		.select('profile_id, channel_id')
+		.in('channel_id', channelIds);
 
-  if (e2) throw e2;
+	if (e2) throw e2;
 
-  const partners = new Set<string>();
-  for (const row of allLinks ?? []) {
-    if (row.profile_id && row.profile_id !== myProfileId) {
-      partners.add(row.profile_id);
-    }
-  }
-  return [...partners];
+	const partners = new Set<string>();
+	for (const row of allLinks ?? []) {
+		if (row.profile_id && row.profile_id !== myProfileId) {
+			partners.add(row.profile_id);
+		}
+	}
+	return [...partners];
 }
 
 // create
@@ -120,6 +119,9 @@ export async function createClientChannelGroup(
 	} = await client.auth.getUser();
 	if (userError || !user) throw new Error('Not authenticated');
 	// 1) create channel
+	const { data: allChannel } = await client.from('channel').select('*');
+	const isAlreadyExistName = allChannel?.some(channel => channel.name === channelFields.name);
+	if (isAlreadyExistName) throw new Error('Channel with name is exist!');
 	const { data: newChannel, error } = await client
 		.from('channel')
 		.insert({ ...channelFields, type: 'group', created_by: user.id })
