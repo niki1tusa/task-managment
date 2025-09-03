@@ -1,76 +1,110 @@
-import { Avatar } from '@/components/ui/Avatar';
-import BtnReturnBack from '@/components/ui/button/BtnReturnBack';
+'use client';
+
+import { useMutation } from '@tanstack/react-query';
+import { Plus } from 'lucide-react';
+import { useEffect } from 'react';
+import { type SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+
 import { Title } from '@/components/ui/Title';
+import Form from '@/components/ui/form/Form';
+import type { IForm } from '@/components/ui/form/form.types';
 
+import type { TSettingsForm } from '@/shared/types/form/scheme.zod';
 
+import { useProfile } from '@/hooks/useProfile';
+
+import { updateProfile } from '@/services/profile/profile-client.service';
+
+type TName = { name: string; email: string; password: string; phone: string };
+export const SettingFields = [
+	{
+		type: 'field',
+		props: {
+			labelText: 'Name',
+			registerName: 'name',
+			type: 'text',
+			inputMode: 'text',
+			autoComplete: 'name',
+		},
+	},
+	{
+		type: 'field',
+		props: {
+			labelText: 'Email',
+			registerName: 'email',
+			placeholderText: 'name@example.com',
+			type: 'email',
+			inputMode: 'email',
+			autoComplete: 'email',
+		},
+	},
+
+	{
+		type: 'field',
+		props: {
+			labelText: 'Phone',
+			registerName: 'phone',
+			placeholderText: '+15551234567',
+			type: 'tel',
+			inputMode: 'tel',
+			autoComplete: 'tel',
+		},
+	},
+	{
+		type: 'field',
+		props: {
+			labelText: 'Password',
+			registerName: 'password',
+			placeholderText: 'Your password',
+			type: 'password',
+			autoComplete: 'current-password',
+		},
+	},
+] satisfies IForm<TName>['formElement'];
 export default function SettingsClientPage() {
+	const form = useForm<TSettingsForm>();
 
-
-
+	const { profile: user, isLoading, isError } = useProfile();
+	useEffect(() => {
+		if (!user) return;
+		form.reset({
+			name: user.name,
+			email: user.email,
+			password: user.password,
+			phone: user.phone,
+		});
+	}, [user]);
+	const { mutate } = useMutation({
+		mutationFn: payload => updateProfile(payload),
+		onSuccess: () => toast.success('Profile settings is success updates!'),
+	});
+	const onSubmitUpdateProfile: SubmitHandler<TSettingsForm> = data => {
+		mutate(data);
+	};
 	return (
-		<div className='space-y-6 px-7 py-3.5'>
-			<BtnReturnBack text='Back to Dashboard' />
-
-			<header className='border-b pb-4'>
-				<Title heading='page'>Task &quot; &quot;</Title>
-			</header>
-
-			<section className='space-y-2 text-sm'>
-				<div>
-					<span className='font-medium text-gray-500'>Title:</span>
+		<div className='relative grid h-full grid-cols-[1fr_1fr_1fr] gap-6 px-5 pt-7'>
+			{/* left side */}
+			<div className='h-full border-r'>
+				<Title heading='page'>Settings</Title>
+				<div className='px-2'>
+					<Form<TSettingsForm>
+						formElement={SettingFields}
+						handleOnSubmit={form.handleSubmit(onSubmitUpdateProfile)}
+						register={form.register}
+						errors={form.formState.errors}
+						btnText='Save'
+					/>
 				</div>
-				<div className='flex items-center gap-2'>
-					<span className='font-medium text-gray-500'>Icon:</span>
-				
-				</div>
-				<div>
-					<span className='font-medium text-gray-500'>Owner:</span>
-				</div>
-				<div className='flex items-center gap-2'>
-					<span className='font-medium text-gray-500'>Participants:</span>
-					<div className='flex -space-x-2'>
-
-					</div>
-				</div>
-				<div>
-					<span className='font-medium text-gray-500'>Due:</span> 
-				</div>
-				<div>
-					<span className='font-medium text-gray-500'>Start time:</span> 
-				</div>
-				<div>
-					<span className='font-medium text-gray-500'>End time:</span> 
-				</div>
-				<div>
-					<span className='font-medium text-gray-500'>Status task:</span>
-
-				</div>
-				<div>
-					<span className='font-medium text-gray-500'>Channnel:</span> {}
-				</div>
-			</section>
-
-			<section className='grid grid-cols-3 gap-5'>
-				<div className='items-center rounded-lg border bg-gray-50 p-3'>
-					<strong>Comment</strong>
-					<p className='text-lg text-gray-600'>1</p>
-				</div>
-				<div className='rounded-lg border bg-gray-50 p-3'>
-					<strong>Image</strong>
-					<p className='text-lg text-gray-600'>2</p>
-				</div>
-				<div className='rounded-lg border bg-gray-50 p-3'>
-					<strong>Link</strong>
-					<p className='text-lg text-gray-600'>3</p>
-				</div>
-			</section>
-
-			<section>
-				<strong className='mb-2 block'>Subtasks:</strong>
-				<ul className='space-y-1'>
-
-				</ul>
-			</section>
+			</div>
+			{/* right side */}
+			<div>
+				{/* add img input or button? */}
+				<button className='flex h-[400px] w-[300px] items-center justify-center rounded-md border-2'>
+					<Plus size={100} className='text-gray' />
+				</button>
+				<span className='text-gray ml-2 text-[10px]'>Add image for you profile</span>
+			</div>
 		</div>
 	);
 }

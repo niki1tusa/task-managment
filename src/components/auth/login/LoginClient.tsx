@@ -62,7 +62,6 @@ export function LoginClient() {
 		try {
 			await mutateAsync({ phone, password });
 			toast.success('Signed in!');
-			// TODO: router.replace('/dashboard')
 		} catch (e: any) {
 			toast.error(e?.message || 'Invalid phone or password.');
 		}

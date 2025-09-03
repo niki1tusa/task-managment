@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+// task
 export const ZTaskEditScheme = z.object({
 	title: z.string().min(1, 'Title is required (minimal one symbol)!'),
 	due_date: z
@@ -10,14 +11,12 @@ export const ZTaskEditScheme = z.object({
 	end_time: z.date().optional(),
 	icon: z.string().optional(),
 });
-//	icon: z.enum(ICON_NAMES, { errorMap: () => ({ message: 'Invalid icon!' }) }),
 
 export const ZSubTaskScheme = z.object({
 	title: z.string().min(1, 'Title is required (minimal one symbol)!'),
 });
 
 // auth
-
 export const ZRegistrationScheme = z.object({
 	name: z.string().min(1, 'Name is required!'),
 	email: z.string().min(1, 'Email is required').email(),
@@ -45,9 +44,20 @@ export const ZResetPasswordScheme = z
 		path: ['passwordAgain'],
 		message: 'Passwords do not match',
 	});
+//  settings
+export const ZSettingsScheme = z.object({
+	name: z.string().min(1, 'Name is required!'),
+	email: z.string().min(1, 'Email is required').email(),
+	password: z.string().min(1, 'Password is required'),
+	phone: z
+		.string()
+		.trim()
+		.regex(/^\+[1-9]\d{7,14}$/, 'Use E.164 format, e.g. +15551234567'),
+});
 
+export type TSettingsForm = z.infer<typeof ZSettingsScheme>;
 export type TRegistrationForm = z.infer<typeof ZRegistrationScheme>;
-export type TFormData = z.infer<typeof ZTaskEditScheme>;
+export type TTaskUpdateForm = z.infer<typeof ZTaskEditScheme>;
 export type TSubTaskRowForm = z.infer<typeof ZSubTaskScheme>;
 export type TLoginForm = z.infer<typeof ZLoginScheme>;
 export type TLoginPhonePasswordForm = z.infer<typeof ZLoginPhonePasswordScheme>;

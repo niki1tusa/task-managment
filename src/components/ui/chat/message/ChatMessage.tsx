@@ -94,7 +94,7 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup, value }: Props) {
 										}}
 										className={clsx(
 											'relative rounded-2xl px-3 py-2 text-[1rem] 2xl:max-w-[600px] 2xl:text-xl',
-											isDashboardPage ? 'w-[50%]' : 'w-fit',
+											isDashboardPage ? 'max-w-[100px] ' : 'w-fit',
 											'[overflow-wrap:anywhere] break-words hyphens-auto whitespace-pre-wrap',
 											isOwnMessage
 												? clsx(

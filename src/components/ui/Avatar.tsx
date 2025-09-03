@@ -32,7 +32,7 @@ export function Avatar({ img, isHoverResolution, isPartySide }: Props) {
 				alt='user'
 				width={24}
 				height={24}
-				className='h-6 w-6 shrink-0'
+				className='shrink-0'
 				priority
 			/>
 		</div>
@@ -43,7 +43,7 @@ export function Avatar({ img, isHoverResolution, isPartySide }: Props) {
 				alt='user'
 				width={32}
 				height={32}
-				className='h-8 w-8 shrink-0'
+				className='shrink-0'
 				priority
 			/>
 		</div>

@@ -11,11 +11,11 @@ import Modal from '@/components/ui/modal/Modal';
 
 import type { MODAL_ICON } from '@/shared/data/icon.data';
 import type { Database } from '@/shared/types/db/db.types';
-import { type TFormData, ZTaskEditScheme } from '@/shared/types/form/scheme.zod';
+import { type TTaskUpdateForm, ZTaskEditScheme } from '@/shared/types/form/scheme.zod';
+import type { TTaskEditForm } from '@/shared/types/task/task.types';
 
 import { TASK_EDIT_FIELDS } from './data/task.edit.data';
 import { getClientTaskById, updateClientTask } from '@/services/tasks/task-client.service';
-import type { TTaskEditForm } from '@/shared/types/task/task.types';
 
 interface Props {
 	id: string;
@@ -31,7 +31,7 @@ export const UpdateTaskModal = ({ id, close }: Props) => {
 		setValue,
 		watch,
 		formState: { errors },
-	} = useForm<TFormData>({
+	} = useForm<TTaskUpdateForm>({
 		resolver: zodResolver(ZTaskEditScheme),
 	});
 	// react query
@@ -65,7 +65,7 @@ export const UpdateTaskModal = ({ id, close }: Props) => {
 			toast.error(`Failed to update task, ${error?.message}`);
 		},
 	});
-	const onSubmit: SubmitHandler<TFormData> = data => {
+	const onSubmit: SubmitHandler<TTaskUpdateForm> = data => {
 		mutate({
 			id,
 			data: { title: data.title, due_date: data.due_date.toISOString(), icon: data.icon },
@@ -74,7 +74,7 @@ export const UpdateTaskModal = ({ id, close }: Props) => {
 	if (!id) return null;
 	return (
 		<Modal title='Edit Task' close={close}>
-			<Form<TFormData>
+			<Form<TTaskUpdateForm>
 				setValue={setValue}
 				watch={watch}
 				control={control}
