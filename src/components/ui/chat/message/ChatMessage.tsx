@@ -2,9 +2,12 @@
 
 import clsx from 'clsx';
 import { format, parseISO } from 'date-fns';
+import { usePathname } from 'next/navigation';
 import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/animate-ui/base/popover';
+
+import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
 import { useProfile } from '@/hooks/useProfile';
 
@@ -25,7 +28,9 @@ interface Props {
 function ChatMessage({ message, isFirstInGroup, isLastInGroup, value }: Props) {
 	const { profile, isLoading } = useProfile();
 	const [openId, setOpenId] = useState<string | null>(null);
+	const pathname = usePathname();
 
+	const isDashboardPage = pathname === DASHBOARD_PAGES.DASHBOARD;
 	// клик по пузырю: не открывать, если есть выделенный текст
 	const handleClick = useCallback(() => {
 		const sel = typeof window !== 'undefined' ? window.getSelection()?.toString() : '';
@@ -88,8 +93,8 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup, value }: Props) {
 											handleClick();
 										}}
 										className={clsx(
-											'relative w-fit rounded-2xl px-3 py-2 text-[1rem] 2xl:max-w-[600px] 2xl:text-xl',
-
+											'relative rounded-2xl px-3 py-2 text-[1rem] 2xl:max-w-[600px] 2xl:text-xl',
+											isDashboardPage ? 'w-[50%]' : 'w-fit',
 											'[overflow-wrap:anywhere] break-words hyphens-auto whitespace-pre-wrap',
 											isOwnMessage
 												? clsx(
