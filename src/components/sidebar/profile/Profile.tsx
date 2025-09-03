@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronDown, ChevronUp, Mail } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
 
 import { Avatar } from '@/components/ui/Avatar';
@@ -15,7 +15,7 @@ export const ProfileMenu = ({ data }: { data: TProfileRow }) => {
 	return !data ? (
 		<Skeleton />
 	) : (
-		<nav className='text-foreground/40 font-medium text-sm flex w-full flex-col gap-4 pt-4 '>
+		<nav className='text-foreground/40 flex w-full flex-col gap-4 pt-4 text-sm font-medium'>
 			<div className='flex items-center gap-2'>
 				<Title isMenuTitle={true}>PROFILE</Title>
 				{isShowProfile ? (
@@ -29,7 +29,7 @@ export const ProfileMenu = ({ data }: { data: TProfileRow }) => {
 					<div>
 						<Avatar img={data.avatar_path} />
 					</div>
-					<div className='flex flex-col truncate'>
+					<div className='flex flex-col truncate text-[10px] 2xl:text-sm'>
 						<span>{data.email}</span>
 						<span> {data.name}</span>
 					</div>

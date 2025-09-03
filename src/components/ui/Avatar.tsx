@@ -3,7 +3,13 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-export function Avatar({ img, isHoverResolution }: { img: string | null; isHoverResolution?: boolean }) {
+interface Props {
+	img: string | null;
+	isHoverResolution?: boolean;
+	isPartySide?: boolean;
+}
+
+export function Avatar({ img, isHoverResolution, isPartySide }: Props) {
 	return isHoverResolution ? (
 		<motion.div
 			initial={{ y: 0 }}
@@ -19,6 +25,17 @@ export function Avatar({ img, isHoverResolution }: { img: string | null; isHover
 				priority
 			/>
 		</motion.div>
+	) : isPartySide ? (
+		<div className='bg-primary flex h-6 w-6 items-center justify-center overflow-hidden rounded-full border shadow shadow-neutral-400'>
+			<Image
+				src={img || '/avatar-fallback.png'}
+				alt='user'
+				width={24}
+				height={24}
+				className='h-6 w-6 shrink-0'
+				priority
+			/>
+		</div>
 	) : (
 		<div className='bg-primary flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border shadow shadow-neutral-400'>
 			<Image

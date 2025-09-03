@@ -1,5 +1,6 @@
 'use client';
 
+import { sortEventsForWeekView } from '@schedule-x/calendar';
 import { useMemo, useState } from 'react';
 
 // import SelectNotice from './SelectNotice';
@@ -30,21 +31,22 @@ export default function NotificationClient() {
 	const { notices, noticesIsError, noticesIsLoading } = useNotices();
 	// sort state
 	const [orderBy, setOrderBy] = useState<'asc' | 'desc'>('asc');
-	const [readOrNot, setReadOrNot] = useState<'no' | 'read'>('no');
+	const [readOrNot, setReadOrNot] = useState<'not' | 'read'>('not');
 	const [selectType, setSelectType] = useState<
-		'all' | 'advice' | 'urgent' | 'achivment' | 'information'
+		'all' | 'advice' | 'urgent' | 'achievement' | 'information'
 	>('all');
 
 	const resetAllFilters = () => {
-		setOrderBy('desc');
-		setReadOrNot('no');
+		setOrderBy('asc');
+		setReadOrNot('not');
 		setSelectType('all');
 	};
 	const [query, setQuery] = useState('');
+
 	//  filters and sorting:
 	const filteredAndSorted = useMemo(() => {
 		if (!notices) return [];
-		//  time select
+		//  time sorting
 		const sorted =
 			orderBy === 'desc'
 				? [...notices].sort(
@@ -53,22 +55,33 @@ export default function NotificationClient() {
 				: [...notices].sort(
 						(a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
 					);
-
-		// read or no select
+		// read or not sorting
 		const result =
-			readOrNot === 'no'
+			readOrNot === 'not'
 				? sorted?.filter(notice => notice.status === false)
 				: sorted.filter(notice => notice.status === true);
-				const typeActice = switch (selectType) {
-					case value:
-						
-						break;
-					default:
-						
-						break;
-				}
-		return sorted;
-	}, [notices, orderBy, query]);
+		// type sorting
+		const activeNoticeType = (() => {
+			switch (selectType) {
+				case 'urgent':
+					return result.filter(notice => notice.type === 'urgent');
+				case 'advice':
+					return result.filter(notice => notice.type === 'advice');
+				case 'achievement':
+					return result.filter(notice => notice.type === 'achievement');
+				case 'information':
+					return result.filter(notice => notice.type === 'information');
+				default:
+					return result;
+			}
+		})();
+		// by word sorting
+		const filterByWord = activeNoticeType.filter(notice =>
+			notice.text.toLowerCase().includes(query.toLowerCase())
+		);
+
+		return filterByWord;
+	}, [notices, orderBy, query, selectType, readOrNot]);
 
 	if (noticesIsError || !notices) return null;
 
@@ -87,7 +100,7 @@ export default function NotificationClient() {
 			{/* sort toolbar */}
 			<nav className='flex items-center gap-3'>
 				{/* read or not  */}
-				<Tabs value={readOrNot} onValueChange={value => setReadOrNot(value as 'read' | 'no')}>
+				<Tabs value={readOrNot} onValueChange={value => setReadOrNot(value as 'read' | 'not')}>
 					<TabsList className='grid grid-cols-2'>
 						<TabsTrigger value='not'>Not read</TabsTrigger>
 						<TabsTrigger value='read'>Read</TabsTrigger>
@@ -110,7 +123,7 @@ export default function NotificationClient() {
 				<Select
 					value={selectType}
 					onValueChange={value =>
-						setSelectType(value as 'all' | 'advice' | 'urgent' | 'achivment' | 'information')
+						setSelectType(value as 'all' | 'advice' | 'urgent' | 'achievement' | 'information')
 					}
 				>
 					<SelectTrigger className='w-[180px]'>
@@ -122,7 +135,7 @@ export default function NotificationClient() {
 							<SelectItem value='all'>All</SelectItem>
 							<SelectItem value='advice'>Advice</SelectItem>
 							<SelectItem value='urgent'>Urgent</SelectItem>
-							<SelectItem value='achivment'>Achivment</SelectItem>
+							<SelectItem value='achievement'>Achievement</SelectItem>
 							<SelectItem value='information'>Information</SelectItem>
 						</SelectGroup>
 					</SelectContent>
