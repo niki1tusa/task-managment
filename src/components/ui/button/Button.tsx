@@ -21,7 +21,7 @@ export function Button({
 			onClick={onClick}
 			type={type}
 			className={clsx(
-				'w-[30%] rounded-sm p-2 text-sm',
+				'w-[30%] rounded-sm p-2 text-sm dark:bg-gray-800',
 				disable ? 'bg-primary/50 cursor-not-allowed': 'cursor-pointer',
 				className,
 				variant === 'primary' &&

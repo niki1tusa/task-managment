@@ -2,11 +2,14 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { Plus } from 'lucide-react';
-import { useEffect } from 'react';
+import Image from 'next/image';
+import { useEffect, useState, type ChangeEvent } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
+import Skeleton from '@/components/ui/Skeleton';
 import { Title } from '@/components/ui/Title';
+import { Button } from '@/components/ui/button/Button';
 import Form from '@/components/ui/form/Form';
 import type { IForm } from '@/components/ui/form/form.types';
 
@@ -16,7 +19,7 @@ import { useProfile } from '@/hooks/useProfile';
 
 import { updateProfile } from '@/services/profile/profile-client.service';
 
-type TName = { name: string; email: string; password: string; phone: string };
+type TName = { name: string; email: string;  phone: string };
 export const SettingFields = [
 	{
 		type: 'field',
@@ -45,44 +48,47 @@ export const SettingFields = [
 		props: {
 			labelText: 'Phone',
 			registerName: 'phone',
-			placeholderText: '+15551234567',
+			placeholderText: 'Enter your tel...',
 			type: 'tel',
 			inputMode: 'tel',
 			autoComplete: 'tel',
 		},
 	},
-	{
-		type: 'field',
-		props: {
-			labelText: 'Password',
-			registerName: 'password',
-			placeholderText: 'Your password',
-			type: 'password',
-			autoComplete: 'current-password',
-		},
-	},
+
 ] satisfies IForm<TName>['formElement'];
 export default function SettingsClientPage() {
 	const form = useForm<TSettingsForm>();
+	const [selectFile, setSelectFile] = useState<null | string>(null);
+	console.log(selectFile)
+	const { profile, isLoading } = useProfile();
 
-	const { profile: user, isLoading, isError } = useProfile();
 	useEffect(() => {
-		if (!user) return;
+		if (!profile) return;
 		form.reset({
-			name: user.name,
-			email: user.email,
-			password: user.password,
-			phone: user.phone,
+			name: profile.name!,
+			email: profile.email!,
+			phone: profile.phone! ?? '',
 		});
-	}, [user]);
+	}, [profile, form]);
+
+	const handleAddFile = (e: ChangeEvent<HTMLInputElement>) => {
+		const file = e.target.files![0]
+		setSelectFile(file.name)
+	}
 	const { mutate } = useMutation({
-		mutationFn: payload => updateProfile(payload),
+		mutationFn: (payload: Partial<TSettingsForm>) => updateProfile(payload),
 		onSuccess: () => toast.success('Profile settings is success updates!'),
 	});
-	const onSubmitUpdateProfile: SubmitHandler<TSettingsForm> = data => {
-		mutate(data);
+	const onSubmitUpdateProfile: SubmitHandler<TSettingsForm> = async data => {
+		const dirty = form.formState.dirtyFields;
+		const profileFields = Object.fromEntries(
+			Object.keys(dirty).map(k => [k, (data as any)[k]])
+		) as Partial<TSettingsForm>;
+		if (Object.keys(profileFields).length && selectFile) mutate({ ...profileFields, avatar_path: selectFile });
 	};
-	return (
+	return isLoading ? (
+		<Skeleton />
+	) : (
 		<div className='relative grid h-full grid-cols-[1fr_1fr_1fr] gap-6 px-5 pt-7'>
 			{/* left side */}
 			<div className='h-full border-r'>
@@ -99,11 +105,24 @@ export default function SettingsClientPage() {
 			</div>
 			{/* right side */}
 			<div>
-				{/* add img input or button? */}
-				<button className='flex h-[400px] w-[300px] items-center justify-center rounded-md border-2'>
-					<Plus size={100} className='text-gray' />
-				</button>
-				<span className='text-gray ml-2 text-[10px]'>Add image for you profile</span>
+				<div className='relative h-[400px] w-[300px] rounded-md border-2'>
+					<input
+						type='file'
+						className='text-background h-full w-full'
+						accept='.jpg,.jpeg,.png,.svg'
+						onChange={e => handleAddFile(e)}
+					/>
+					<Plus
+						size={100}
+						className='text-gray pointer-events-none absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] transform cursor-pointer'
+					/>
+				</div>
+				{profile.avatar_path && (
+					<Image src={profile.avatar_path} alt='imge' width={40} height={40} />
+				)}
+				<span className='text-gray ml-2 text-[10px]'>
+					Add image for you profile, also imortant - format file must be is png, jpg, jpeg or svg.
+				</span>
 			</div>
 		</div>
 	);

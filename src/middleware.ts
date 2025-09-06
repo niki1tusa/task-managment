@@ -44,5 +44,5 @@ export default async function middleware(request: NextRequest) {
 }
 
 export const config = {
-	matcher: '/dashboard/:path*',
+	matcher: ['/auth', '/dashboard/:path*'],
 };

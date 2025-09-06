@@ -6,10 +6,16 @@ import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
 import { getServerAuth } from '@/utils/supabase/get-server-auth';
 
+import AuthWrapper from '../AuthWrapper';
+
 export default async function LoginPage() {
 	const user = await getServerAuth();
 	if (user) {
 		redirect(DASHBOARD_PAGES.DASHBOARD);
 	}
-	return <LoginClient />;
+	return (
+		<AuthWrapper>
+			<LoginClient />
+		</AuthWrapper>
+	);
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
+import { Eye, EyeOff, Lock, Mail, Phone } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import {
@@ -41,21 +41,27 @@ export function Field<T extends FieldValues>({
 				{type === 'password' && (
 					<Lock
 						size={20}
-						className='text-gray absolute top-[60%] left-[2%] z-20 -translate-y-[50%] transform'
+						className='text-gray absolute top-[50%] left-[2%] z-20 -translate-y-[50%] transform'
 					/>
 				)}
 				{type === 'email' && (
 					<Mail
 						size={20}
-						className='text-gray absolute top-[60%] left-[2%] z-20 -translate-y-[50%] transform'
+						className='text-gray absolute top-[50%] left-[2%] z-20 -translate-y-[50%] transform'
+					/>
+				)}
+				{type === 'tel' && (
+					<Phone
+						size={20}
+						className='text-gray absolute top-[50%] left-[2%] z-20 -translate-y-[50%] transform'
 					/>
 				)}
 				<input
 					{...register(registerName)}
 					className={clsx(
-						' focus:bg-[#f6f4ff] focus:shadow-lg focus:ring-2 focus:ring-sky-600 focus:shadow-sky-300/20',
+						'focus:bg-[#f6f4ff] focus:shadow-lg focus:ring-2 focus:shadow-sky-300/20 focus:ring-sky-600',
 						'text-gray h-[30%] w-[80%] rounded py-5 text-sm shadow shadow-neutral-400 transition-all duration-200 hover:bg-[#f6f4ff]/50 2xl:w-full 2xl:text-lg',
-						type === 'password' || type === 'email' ? 'pl-8' : 'pl-4'
+						type === 'text' ? 'pl-4' : 'pl-10'
 					)}
 					type={type === 'password' ? (isShowEye ? 'text' : 'password') : 'text'}
 					placeholder={placeholderText}
@@ -65,7 +71,7 @@ export function Field<T extends FieldValues>({
 					<button
 						type='button'
 						onClick={() => setIsShowEye(!isShowEye)}
-						className='text-gray absolute top-[60%] right-2 -translate-y-[50%] transform'
+						className='text-gray absolute top-[50%] right-2 -translate-y-[50%] transform'
 					>
 						{isShowEye ? <Eye /> : <EyeOff />}
 					</button>

@@ -9,7 +9,7 @@ export async function seedUsers() {
 
 
   // 2) удаляем из auth
-  const { error } = await admin.auth.admin.deleteUser('ec6b99ae-ec70-4544-ad90-ea0ff1aec5a7');
+  const { error } = await admin.auth.admin.deleteUser('15b53e9b-271e-482c-ac5c-2d503d0776bb');
   if (error) throw error;
 	// const users = await admin.auth.admin.listUsers();
 	// for (const user of users.data.users) {

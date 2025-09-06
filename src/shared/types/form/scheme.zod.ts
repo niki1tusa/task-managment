@@ -48,11 +48,8 @@ export const ZResetPasswordScheme = z
 export const ZSettingsScheme = z.object({
 	name: z.string().min(1, 'Name is required!'),
 	email: z.string().min(1, 'Email is required').email(),
-	password: z.string().min(1, 'Password is required'),
-	phone: z
-		.string()
-		.trim()
-		.regex(/^\+[1-9]\d{7,14}$/, 'Use E.164 format, e.g. +15551234567'),
+	phone: z.string().trim().regex(/^\+[1-9]\d{7,14}$/, 'Use E.164 format, e.g. +15551234567'),
+	avatar_path: z.string()
 });
 
 export type TSettingsForm = z.infer<typeof ZSettingsScheme>;

@@ -1,12 +1,17 @@
-import { DropPasswordClient } from '@/components/auth/drop-passoword/DropPasswordClient'
-import type { Metadata } from 'next'
+import type { Metadata } from 'next';
 
+import { DropPasswordClient } from '@/components/auth/drop-passoword/DropPasswordClient';
+
+import AuthWrapper from '../AuthWrapper';
 
 export const metadata: Metadata = {
-    title: 'Drop-password',
-
-}
+	title: 'Drop-password',
+};
 
 export default function NewPasswordPage() {
-    return <DropPasswordClient/>
+	return (
+		<AuthWrapper>
+			<DropPasswordClient />
+		</AuthWrapper>
+	);
 }

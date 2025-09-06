@@ -194,6 +194,7 @@ export type Database = {
           id: string
           name: string | null
           occupation: string | null
+          phone: string | null
         }
         Insert: {
           avatar_path?: string | null
@@ -201,6 +202,7 @@ export type Database = {
           id: string
           name?: string | null
           occupation?: string | null
+          phone?: string | null
         }
         Update: {
           avatar_path?: string | null
@@ -208,6 +210,7 @@ export type Database = {
           id?: string
           name?: string | null
           occupation?: string | null
+          phone?: string | null
         }
         Relationships: []
       }
@@ -340,6 +343,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      _add_user_to_general: {
+        Args: { u: unknown }
+        Returns: undefined
+      }
       is_channel_member: {
         Args: { p_channel: string; p_uid: string }
         Returns: boolean
