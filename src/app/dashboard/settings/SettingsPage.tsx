@@ -23,8 +23,9 @@ export default function SettingsClientPage() {
 	const form = useForm<TSettingsForm>();
 	const [selectFile, setSelectFile] = useState<null | string>(null);
 	console.log(selectFile);
+
 	const { profile, isLoading } = useProfile();
-	console.log(selectFile);
+
 	useEffect(() => {
 		if (!profile) return;
 		form.reset({
@@ -34,31 +35,35 @@ export default function SettingsClientPage() {
 		});
 	}, [profile, form]);
 
+	// mutation
+	const { mutate } = useMutation({
+		mutationFn: (payload: Partial<TSettingsForm>) => updateProfile(payload),
+		onSuccess: () => toast.success('Profile settings is success updates!'),
+	});
+
+	// handle
 	const handleAddFile = async (e: ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files![0];
 		if (!file || !profile) return;
 		try {
 			const publicUrl = await uploadAvatar(file, profile?.id);
 			setSelectFile(publicUrl);
+			mutate()
 		} catch (error) {
 			toast.error('Error by upload file!');
 		}
 	};
-	const { mutate } = useMutation({
-		mutationFn: (payload: Partial<TSettingsForm>) => updateProfile(payload),
-		onSuccess: () => toast.success('Profile settings is success updates!'),
-	});
 
-//  TODO: avatar_path не добавляется, хотя selectFile появляется
+	//  TODO: avatar_path не добавляется, хотя selectFile появляется
 
 	const onSubmitUpdateProfile: SubmitHandler<TSettingsForm> = async data => {
 		const dirty = form.formState.dirtyFields;
 		const profileFields = Object.fromEntries(
 			Object.keys(dirty).map(k => [k, (data as any)[k]])
 		) as Partial<TSettingsForm>;
-		if (Object.keys(profileFields).length && selectFile)
-			mutate({ ...profileFields, avatar_path: selectFile });
+		if (Object.keys(profileFields).length) mutate({ ...profileFields });
 	};
+
 	return isLoading ? (
 		<Skeleton />
 	) : (
@@ -78,24 +83,28 @@ export default function SettingsClientPage() {
 			</div>
 			{/* right side */}
 			<div>
-				<div className='relative h-[400px] w-[300px] rounded-md border-2'>
+				<div className='relative h-[300px] w-[300px] rounded-md border-2 p-1'>
+					{(selectFile || profile?.avatar_path) && (
+						<Image
+							className='rounded'
+							src={selectFile || profile?.avatar_path}
+							alt='imge'
+							width={300}
+							height={300}
+						/>
+					)}
 					<input
 						type='file'
-						className='text-background h-full w-full'
+						className='absolute top-1 bottom-1 z-40 h-full w-full text-transparent'
 						accept='.jpg,.jpeg,.png,.svg'
 						onChange={e => handleAddFile(e)}
 					/>
 					<Plus
 						size={100}
-						className='text-gray pointer-events-none absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] transform cursor-pointer'
+						className='text-gray/90 pointer-events-none absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] transform cursor-pointer'
 					/>
 				</div>
-				{(selectFile || profile?.avatar_path) && (
-					<Image src={selectFile || profile?.avatar_path} alt='imge' width={40} height={40} />
-				)}
-				<span className='text-gray ml-2 text-[10px]'>
-					Add image for you profile, also imortant - format file must be is png, jpg, jpeg or svg.
-				</span>
+				<span className='text-gray ml-2 text-[10px]'>Add image for you profile</span>
 			</div>
 		</div>
 	);

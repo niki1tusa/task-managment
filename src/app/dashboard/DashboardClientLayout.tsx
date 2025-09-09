@@ -23,7 +23,7 @@ export default function DashboardClientLayout({ data, children }: Props) {
 			className={clsx('grid', isDashboard ? 'grid-cols-[12%_68%_20%]' : isMessage ?  'grid-cols-[12%_38%_50%]': 'grid-cols-[12%_88%]')}
 		>
 			<aside
-				className='bg-side sticky top-0 h-[100dvh]'
+				className='bg-side sticky top-0 overflow-y-auto h-[100dvh]'
 				role='navigation'
 				aria-label='Main navigation'
 			>

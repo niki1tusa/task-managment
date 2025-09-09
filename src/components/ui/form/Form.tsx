@@ -67,7 +67,6 @@ export default function Form<T extends FieldValues>({
 						);
 				}
 			})}
-			{isEmailVariant && <div className='h-[70px]' />}
 			<div className='flex gap-3'>
 				<Button type='submit' className={btnClassName} disable={isPending}>
 					{isPending ? 'Sending...' : btnText}
