@@ -70,7 +70,8 @@ export function LoginClient() {
 		<div className='flex flex-col gap-2'>
 			<Title>
 				<b className='font-playfair text-3xl 2xl:text-6xl'>
-					Welcome back <br /> <span className='2xl:text-4xl text-xl'>to the task management app</span>
+					Welcome back <br />
+					<span className='text-xl 2xl:text-4xl'>to the task management app</span>
 				</b>
 			</Title>
 			{/* tabs */}
@@ -95,8 +96,7 @@ export function LoginClient() {
 							Password
 						</TabsTrigger>
 					</TabsList>
-				</Tabs>{' '}
-				<div></div>
+				</Tabs>
 				{/* forms */}
 				{loginType === 'password' ? (
 					<Form<TLoginPhonePasswordForm>

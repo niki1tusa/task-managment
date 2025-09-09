@@ -52,7 +52,7 @@ export function RegisterClient() {
 		<div className='flex flex-col gap-2'>
 			<Title>
 				<b className='font-playfair text-3xl 2xl:text-6xl'>
-					Welcome to the <span className='text-4xl'>task management app</span>
+					Welcome to the <br /> <span className='text-xl 2xl:text-4xl'>task management app</span>
 				</b>
 			</Title>
 			<Form<TRegistrationForm>
