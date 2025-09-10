@@ -31,11 +31,11 @@ export const MENU: IMenuItem[] = [
 		Icon: CalendarDays,
 		link: DASHBOARD_PAGES.SCHEDULE,
 	},
-	{
-		title: 'Insight',
-		Icon: Kanban as React.ComponentType<React.SVGProps<SVGSVGElement>>,
-		link: DASHBOARD_PAGES.INSIGHT,
-	},
+	// {
+	// 	title: 'Insight',
+	// 	Icon: Kanban as React.ComponentType<React.SVGProps<SVGSVGElement>>,
+	// 	link: DASHBOARD_PAGES.INSIGHT,
+	// },
 	{
 		title: 'Team',
 		Icon: UsersRound,

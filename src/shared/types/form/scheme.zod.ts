@@ -47,6 +47,7 @@ export const ZResetPasswordScheme = z
 //  settings
 export const ZSettingsScheme = z.object({
 	name: z.string().min(1, 'Name is required!'),
+	occupation: z.string().default('guest'),
 	email: z.string().min(1, 'Email is required').email(),
 	phone: z.string().trim().regex(/^\+[1-9]\d{7,14}$/, 'Use E.164 format, e.g. +15551234567'),
 });

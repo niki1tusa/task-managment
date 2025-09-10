@@ -31,19 +31,19 @@ export default function NoticeList({ notices }: Props) {
 			{notices.length > 0 ? (
 				notices.map(notice => {
 					return (
-						<li key={notice.id} className='grid grid-cols-[auto_1fr_auto] items-start gap-3'>
+						<li key={notice.id} className='grid grid-cols-[auto_1fr_auto] items-start gap-3 '>
 							{/* checkbox */}
 							<Checkbox
-								className='mt-2 shadow shadow-neutral-400 '
+								className='mt-2 shadow shadow-neutral-300 dark:shadow-none ring-1 ring-gray/40 bg-input/30 hover:bg-input/50'
 								onCheckedChange={() => mutate({ id: notice.id, status: !notice.status })}
 							/>
 
 							{/* card */}
 							<div
 								className={clsx(
-									'min-w-0 rounded-lg border p-4 shadow-sm ring-1 ring-transparent transition-all hover:shadow-neutral-400 dark:bg-gray-700',
+									'min-w-0 rounded-lg border p-4 shadow-sm ring-1 ring-transparent transition-all hover:shadow-neutral-400 dark:hover:shadow-none dark:bg-gray-700 dark:hover:bg-gray-800',
 									notice.type === 'urgent'
-										? 'bg-red-50 hover:bg-red-100'
+										? 'bg-red-50 hover:bg-red-100 '
 										: notice.type === 'achievement'
 											? 'bg-green-50 hover:bg-green-100'
 											: notice.type === 'advice'

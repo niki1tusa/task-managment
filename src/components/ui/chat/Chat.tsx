@@ -1,4 +1,3 @@
-// import { Search } from 'lucide-react';
 import { Search } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -10,8 +9,6 @@ import ChatInput from '@/components/ui/chat/ChatInput';
 import ChatMessage from '@/components/ui/chat/message/ChatMessage';
 import { useChat } from '@/components/ui/chat/useChat';
 
-import type { TProfileRow } from '@/shared/types/task/task.types';
-
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
 import { useChannelStore } from '@/store/channel.store';
@@ -22,15 +19,13 @@ import { Button } from '../button/Button';
 import Textarea from '../field/Textarea';
 
 import { GROUP_GAP_MINUTES, minsDiff } from './messageUtils';
+import { useProfile } from '@/hooks/useProfile';
 
-interface Props {
-	profile: TProfileRow;
-}
-
-export default function Chat({ profile }: Props) {
+export default function Chat() {
 	// store
 	const { activeChannel } = useChannelStore();
 	// hooks
+	const {profile} = useProfile()
 	const [isOpenInput, setIsOpenInput] = useState<boolean>(false);
 	const [value, setValue] = useState('');
 	const pathname = usePathname();

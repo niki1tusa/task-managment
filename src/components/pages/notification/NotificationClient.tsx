@@ -101,14 +101,14 @@ export default function NotificationClient() {
 			<nav className='flex items-center gap-3'>
 				{/* read or not  */}
 				<Tabs value={readOrNot} onValueChange={value => setReadOrNot(value as 'read' | 'not')}>
-					<TabsList className='grid grid-cols-2 shadow shadow-neutral-400'>
+					<TabsList className='grid grid-cols-2 shadow shadow-neutral-300 dark:shadow-none dark:ring-1 ring-gray/40'>
 						<TabsTrigger value='not'>Not read</TabsTrigger>
 						<TabsTrigger value='read'>Read</TabsTrigger>
 					</TabsList>
 				</Tabs>
 				{/* select date */}
 				<Select value={orderBy} onValueChange={value => setOrderBy(value as 'desc' | 'asc')}>
-					<SelectTrigger className='w-[180px] shadow shadow-neutral-400'>
+					<SelectTrigger className='w-[180px] shadow shadow-neutral-300 dark:shadow-none'>
 						<SelectValue placeholder='Sort by date' />
 					</SelectTrigger>
 					<SelectContent>
@@ -126,7 +126,7 @@ export default function NotificationClient() {
 						setSelectType(value as 'all' | 'advice' | 'urgent' | 'achievement' | 'information')
 					}
 				>
-					<SelectTrigger className='w-[180px]'>
+					<SelectTrigger className='w-[180px] shadow shadow-neutral-300 dark:shadow-none'>
 						<SelectValue placeholder='Select a type' />
 					</SelectTrigger>
 					<SelectContent>
@@ -143,7 +143,7 @@ export default function NotificationClient() {
 				<button
 					onClick={() => resetAllFilters()}
 					title='Reset all filters'
-					className='flex items-center justify-center rounded-sm p-1 shadow shadow-neutral-400'
+					className='dark:bg-input/30 dark:hover:bg-input/50 transition-all flex items-center justify-center rounded-sm border p-1 shadow shadow-neutral-300 dark:shadow-none bg-transparent'
 				>
 					<AnimateIcon animateOnHover>
 						<RotateCcw size={26} />

@@ -7,12 +7,12 @@ import { Avatar } from '@/components/ui/Avatar';
 import Skeleton from '@/components/ui/Skeleton';
 import { Title } from '@/components/ui/Title';
 
-import type { TProfileRow } from '@/shared/types/task/task.types';
+import { useProfile } from '@/hooks/useProfile';
 
-export const ProfileMenu = ({ data }: { data: TProfileRow }) => {
+export const ProfileMenu = () => {
 	const [isShowProfile, setIsShowProfile] = useState(true);
-
-	return !data ? (
+	const { profile } = useProfile();
+	return !profile ? (
 		<Skeleton />
 	) : (
 		<nav className='text-foreground/40 flex w-full flex-col gap-4 pt-4 text-sm font-medium'>
@@ -27,11 +27,11 @@ export const ProfileMenu = ({ data }: { data: TProfileRow }) => {
 			{isShowProfile && (
 				<div className='bg-background flex items-center gap-2 rounded-md px-2 py-2 shadow shadow-neutral-400'>
 					<div>
-						<Avatar img={data.avatar_path} />
+						<Avatar img={profile.avatar_path} />
 					</div>
 					<div className='flex flex-col truncate text-[10px] 2xl:text-sm'>
-						<span>{data.email}</span>
-						<span> {data.name}</span>
+						<span>{profile.email}</span>
+						<span> {profile.name}</span>
 					</div>
 				</div>
 			)}

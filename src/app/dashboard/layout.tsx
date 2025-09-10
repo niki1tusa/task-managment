@@ -13,9 +13,7 @@ interface Props {
 export default async function DashboardLayout({ children }: Props) {
 	const user = await getServerAuth();
 	if (!user) {
-		redirect(PUBLIC_PAGES.LOGIN); 
+		redirect(PUBLIC_PAGES.LOGIN);
 	}
-	const data = await getServerProfile();
-	if (!data) return null;
-	return <DashboardClientLayout data={data}>{children}</DashboardClientLayout>;
+	return <DashboardClientLayout>{children}</DashboardClientLayout>;
 }

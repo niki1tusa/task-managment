@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import type { FieldValues } from 'react-hook-form';
 
 import { Button } from '../button/Button';
@@ -24,6 +24,7 @@ export default function Form<T extends FieldValues>({
 	isEmailVariant,
 }: IForm<T>) {
 	const router = useRouter();
+	const pathname = usePathname();
 	return (
 		<form onSubmit={handleOnSubmit} className='my-5 flex flex-col gap-0.5 2xl:gap-2'>
 			{formElement.map((item, i) => {
@@ -71,14 +72,16 @@ export default function Form<T extends FieldValues>({
 				<Button type='submit' className={btnClassName} disable={isPending}>
 					{isPending ? 'Sending...' : btnText}
 				</Button>
-				<Button
-					type='button'
-					onClick={() => router.back()}
-					className={btnClassName}
-					disable={isPending}
-				>
-					Back
-				</Button>
+				{pathname === '/settings' && (
+					<Button
+						type='button'
+						onClick={() => router.back()}
+						className={btnClassName}
+						disable={isPending}
+					>
+						Back
+					</Button>
+				)}
 			</div>
 		</form>
 	);

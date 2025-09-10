@@ -6,28 +6,29 @@ import { usePathname } from 'next/navigation';
 import { Sidebar } from '@/components/sidebar/Sidebar';
 import Chat from '@/components/ui/chat/Chat';
 
-import type { TProfileRow } from '@/shared/types/task/task.types';
-
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
-interface Props {
-	data: TProfileRow;
-	children: React.ReactNode;
-}
-export default function DashboardClientLayout({ data, children }: Props) {
+export default function DashboardClientLayout({ children }: { children: React.ReactNode }) {
 	const pathname = usePathname();
 	const isDashboard = pathname === DASHBOARD_PAGES.DASHBOARD;
 	const isMessage = pathname === DASHBOARD_PAGES.MESSAGES;
 	return (
 		<div
-			className={clsx('grid', isDashboard ? 'grid-cols-[12%_68%_20%]' : isMessage ?  'grid-cols-[12%_38%_50%]': 'grid-cols-[12%_88%]')}
+			className={clsx(
+				'grid',
+				isDashboard
+					? 'grid-cols-[12%_68%_20%]'
+					: isMessage
+						? 'grid-cols-[12%_38%_50%]'
+						: 'grid-cols-[12%_88%]'
+			)}
 		>
 			<aside
-				className='bg-side sticky top-0 overflow-y-auto h-[100dvh]'
+				className='bg-side sticky top-0 h-[100dvh] overflow-y-auto'
 				role='navigation'
 				aria-label='Main navigation'
 			>
-				<Sidebar data={data} />
+				<Sidebar />
 			</aside>
 			<main
 				className={clsx('flex-1 dark:border-r dark:border-l dark:border-neutral-800')}
@@ -38,7 +39,7 @@ export default function DashboardClientLayout({ data, children }: Props) {
 			</main>
 			{(isDashboard || isMessage) && (
 				<aside className='sticky top-0 h-[100dvh] shadow shadow-neutral-400'>
-					<Chat profile={data} />
+					<Chat />
 				</aside>
 			)}
 		</div>
