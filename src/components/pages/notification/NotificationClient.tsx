@@ -101,14 +101,14 @@ export default function NotificationClient() {
 			<nav className='flex items-center gap-3'>
 				{/* read or not  */}
 				<Tabs value={readOrNot} onValueChange={value => setReadOrNot(value as 'read' | 'not')}>
-					<TabsList className='grid grid-cols-2'>
+					<TabsList className='grid grid-cols-2 shadow shadow-neutral-400'>
 						<TabsTrigger value='not'>Not read</TabsTrigger>
 						<TabsTrigger value='read'>Read</TabsTrigger>
 					</TabsList>
 				</Tabs>
 				{/* select date */}
 				<Select value={orderBy} onValueChange={value => setOrderBy(value as 'desc' | 'asc')}>
-					<SelectTrigger className='w-[180px]'>
+					<SelectTrigger className='w-[180px] shadow shadow-neutral-400'>
 						<SelectValue placeholder='Sort by date' />
 					</SelectTrigger>
 					<SelectContent>

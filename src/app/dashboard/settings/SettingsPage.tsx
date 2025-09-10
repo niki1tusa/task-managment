@@ -17,7 +17,7 @@ import { useProfile } from '@/hooks/useProfile';
 
 import { SettingFields } from './settings-form.data';
 import { updateProfile } from '@/services/profile/profile-client.service';
-import { uploadAvatar } from '@/services/settings/settings.service';
+import { updateAvatarPathInProfile, uploadAvatar } from '@/services/settings/settings.service';
 
 export default function SettingsClientPage() {
 	const form = useForm<TSettingsForm>();
@@ -40,15 +40,19 @@ export default function SettingsClientPage() {
 		mutationFn: (payload: Partial<TSettingsForm>) => updateProfile(payload),
 		onSuccess: () => toast.success('Profile settings is success updates!'),
 	});
-
+	const { mutate: avatarMutate } = useMutation({
+		mutationFn: (payload: string) => updateAvatarPathInProfile(payload),
+		onSuccess: () => toast.success('Profile avatar settings is success updates!'),
+	});
 	// handle
 	const handleAddFile = async (e: ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files![0];
 		if (!file || !profile) return;
 		try {
 			const publicUrl = await uploadAvatar(file, profile?.id);
+			console.log(publicUrl)
 			setSelectFile(publicUrl);
-			mutate()
+			avatarMutate(publicUrl)
 		} catch (error) {
 			toast.error('Error by upload file!');
 		}
@@ -87,7 +91,7 @@ export default function SettingsClientPage() {
 					{(selectFile || profile?.avatar_path) && (
 						<Image
 							className='rounded'
-							src={selectFile || profile?.avatar_path}
+							src={selectFile || profile?.avatar_path || ''}
 							alt='imge'
 							width={300}
 							height={300}
