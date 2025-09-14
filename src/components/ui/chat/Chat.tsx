@@ -89,7 +89,7 @@ export default function Chat() {
 			<div className='bg-primary/40 border-gray/20 flex h-27.5 w-full flex-shrink-0 items-center justify-between border-b-2 px-10 font-semibold shadow-sm'>
 				<div className='flex items-center gap-3'>
 					<div className='relative'>
-						<Avatar img={profile.avatar_path} />
+						<Avatar img={profile?.avatar_path || ''} />
 						<div className='absolute top-5.5 right-0 h-2 w-2 animate-pulse rounded-full border border-green-900 bg-green-500' />
 					</div>
 					<div className='flex flex-col'>
@@ -97,13 +97,13 @@ export default function Chat() {
 							className='text-sidebar-primary/80 text-[1rem] 2xl:text-[1.2rem]'
 							id='chat-user-name'
 						>
-							{profile.name}
+							{profile?.name}
 						</div>
 						<div
 							className='text-sidebar-primary/80 text-[0.8rem] 2xl:text-[1rem] dark:text-white'
 							aria-label='User occupation'
 						>
-							{profile.occupation}
+							{profile?.occupation}
 						</div>
 						{/* <div>Channel | {activeChannel.name}</div> */}
 					</div>

@@ -17,7 +17,6 @@ interface Props {
 }
 export default function DeleteProfileFromPartyChannel({ close, profile }: Props) {
 	const { type } = useModalStore();
-	const { activeChannel } = useChannelStore();
 	const queryClient = useQueryClient();
 	const { mutate, isPending } = useMutation({
 		mutationFn: (id: string) => deleteClientProfileFromPartyChannel(id),

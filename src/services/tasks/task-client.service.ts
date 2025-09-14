@@ -98,3 +98,16 @@ export async function deleteClientTask(id: string) {
 	if (error) throw new Error(error?.message || 'Task not found/ delete-task');
 	return data;
 }
+
+// update task participants
+export async function insertTaskParticipants(id: string, profile_ids: string[]) {
+	const { data, error } = await createClient()
+		.from('task_participants')
+		.insert({ task_id: id, profile_id: profile_ids[0] })
+		.eq('id', id)
+		.select()
+		.single();
+
+	if (error || !data) throw new Error(error?.message || 'Task not found, insert-task_participants');
+	return data;
+}

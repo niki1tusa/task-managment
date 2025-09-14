@@ -9,7 +9,7 @@ interface Props {
 	setSelect: (arg: TStatus) => void;
 	setSortOrder: (arg: TByAscOrDesc) => void;
 }
-export default function FilterTask({ select, setSelect, sortOrder, setSortOrder }: Props) {
+export default function FiltersForTask({ select, setSelect, sortOrder, setSortOrder }: Props) {
 	return (
 		<div className='flex gap-2'>
 			{/* tabs */}

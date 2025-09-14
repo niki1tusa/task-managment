@@ -1,42 +1,41 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import Skeleton from '@/components/ui/Skeleton';
 import { Title } from '@/components/ui/Title';
 
-import type { TByAscOrDesc, TStatus, TTask } from '@/shared/types/task/task.types';
+import type { TByAscOrDesc, TStatus } from '@/shared/types/task/task.types';
 
-
-import FilterTask from './FilterTask';
-import { Task } from './task/Task';
-import { getClientAllTask } from '@/services/tasks/task-client.service';
 import { useModalStore } from '@/store/modals.store';
 
-export const LastTasks = ({ tasks }: { tasks: TTask[] }) => {
-	const { open } = useModalStore();
+import { useMyTask } from '@/hooks/useMyTask';
+
+import FiltersForTask from './FiltersForTask';
+import { Task } from './task/Task';
+
+export const LastTasks = () => {
+	// state
 	const [select, setSelect] = useState<TStatus>('All');
 	const [sortOrder, setSortOrder] = useState<TByAscOrDesc>('Asc');
-	const { data, isPending } = useQuery({
-		queryKey: ['tasks', select, sortOrder],
-		queryFn: () => getClientAllTask({ status: select, sortByDue: sortOrder }),
-		initialData: tasks,
-	});
-	if (!data) return null;
+	// custom state
+	const { open } = useModalStore();
+	const { tasks, isPending } = useMyTask({ select, sortOrder });
+
+	if (!tasks) return null;
 	return (
 		<div className='flex flex-col gap-5'>
-			<Title count={data.length}> Last Tasks </Title>
+			<Title count={tasks.length}> Last Tasks </Title>
 			<div className='flex justify-between'>
 				<button
 					onClick={() => {
 						open('createTask');
 					}}
-					className='hover:text-primary flex dark:hover:text-white max-h-[41px] rounded-sm border border-white px-2 pt-2 text-sm font-medium text-gray-500 shadow shadow-neutral-400 transition-all duration-300'
+					className='hover:text-primary flex max-h-[41px] rounded-sm border border-white px-2 pt-2 text-sm font-medium text-gray-500 shadow shadow-neutral-400 transition-all duration-300 dark:hover:text-white'
 				>
 					+ Add Task
 				</button>
-				<FilterTask
+				<FiltersForTask
 					select={select}
 					setSelect={setSelect}
 					sortOrder={sortOrder}
@@ -46,9 +45,9 @@ export const LastTasks = ({ tasks }: { tasks: TTask[] }) => {
 
 			<div className='grid grid-cols-1 gap-x-4 gap-y-5 lg:grid-cols-3 2xl:grid-cols-4'>
 				{isPending ? (
-					<Skeleton length={3} />
-				) : data.length ? (
-					data.map(task => <Task key={task.id} task={task} />)
+					<Skeleton length={3} width='w-[300px]' />
+				) : tasks.length ? (
+					tasks.map(task => <Task key={task.id} task={task} />)
 				) : (
 					<div>No tasks found.</div>
 				)}
