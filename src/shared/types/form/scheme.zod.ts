@@ -51,7 +51,14 @@ export const ZSettingsScheme = z.object({
 	email: z.string().min(1, 'Email is required').email(),
 	phone: z.string().trim().regex(/^\+[1-9]\d{7,14}$/, 'Use E.164 format, e.g. +15551234567'),
 });
+// schedule
+export const ZScheduleScheme = z.object({
+	event: z.string().min(1, 'Name is required!'),
+	start: z.string().min(1, 'Name is required!'),
+	end: z.string().min(1, 'Name is required!'),
+});
 
+export type TScheduleForm = z.infer<typeof ZScheduleScheme>
 export type TSettingsForm = z.infer<typeof ZSettingsScheme>;
 export type TRegistrationForm = z.infer<typeof ZRegistrationScheme>;
 export type TTaskUpdateForm = z.infer<typeof ZTaskEditScheme>;

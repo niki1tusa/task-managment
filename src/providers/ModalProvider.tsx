@@ -1,3 +1,4 @@
+import { CreateCalendarEvent } from '@/app/dashboard/schedule/create-calendar-event.modal';
 import AddProfileInChannel from '@/components/modals/channel/add.profile.modal';
 import { CreateChannelModal } from '@/components/modals/channel/create.channel.modal';
 import DeleteChannelModal from '@/components/modals/channel/delete.channel.modal';
@@ -39,6 +40,8 @@ export const ModalProvider = () => {
 			return <DeleteMessage id={payload} close={close} />;
 		case 'updateMessage':
 			return <UpdateMessage message={payload} close={close} />;
+		case 'createCalendarEvent':
+			return <CreateCalendarEvent {...payload} close={close} />;
 		default:
 			return null;
 	}

@@ -12,6 +12,7 @@ type ModalType =
 	| 'insertProfileInChannel'
 	| 'deleteMessage'
 	| 'updateMessage'
+	| 'createCalendarEvent'
 	| null;
 
 interface ModalState {

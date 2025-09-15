@@ -10,7 +10,6 @@ import Form from '@/components/ui/form/Form';
 import Modal from '@/components/ui/modal/Modal';
 
 import type { MODAL_ICON } from '@/shared/data/icon.data';
-import type { Database } from '@/shared/types/db/db.types';
 import { type TTaskUpdateForm, ZTaskEditScheme } from '@/shared/types/form/scheme.zod';
 import type { TTaskEditForm } from '@/shared/types/task/task.types';
 

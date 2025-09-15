@@ -20,9 +20,9 @@ export default function TeamPageClient() {
 	const [value, setValue] = useState('');
 	const { tasks, isPending } = useMyTask();
 	const { activeTask } = useTaskStore();
-	const {mutate} = useMutation({
-		mutationFn: (payload) => insertTaskParticipants(activeTask.id )
-	})
+	// const {mutate} = useMutation({
+	// 	mutationFn: (payload) => insertTaskParticipants(activeTask.id )
+	// })
 	return (
 		<div className='relative grid h-full grid-cols-[70%_30%] border-l'>
 			{/* first col */}
