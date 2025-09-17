@@ -16,7 +16,7 @@ interface Props {
 export default function ChannelMenuPopover({ activeChannel, onClose }: Props) {
 	const { open } = useModalStore();
 	const { profile } = useProfile();
-	const isNotOwner = profile.id !== activeChannel.created_by;
+	const isNotOwner = profile?.id !== activeChannel.created_by;
 	return (
 		<div className='flex flex-col gap-2 rounded-sm p-3 text-base'>
 			{/* header */}

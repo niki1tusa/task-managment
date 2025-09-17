@@ -8,7 +8,7 @@ interface Props {
 	select?: TStatus;
 	sortOrder?: TByAscOrDesc;
 }
-export function useMyTask({ select, sortOrder }: Props = {}) {
+export function useMyTasks({ select, sortOrder }: Props = {}) {
 	const {
 		data: tasks,
 		isPending,

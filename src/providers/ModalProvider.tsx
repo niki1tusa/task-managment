@@ -1,4 +1,5 @@
 import { CreateCalendarEvent } from '@/app/dashboard/schedule/create-calendar-event.modal';
+
 import AddProfileInChannel from '@/components/modals/channel/add.profile.modal';
 import { CreateChannelModal } from '@/components/modals/channel/create.channel.modal';
 import DeleteChannelModal from '@/components/modals/channel/delete.channel.modal';
@@ -10,6 +11,7 @@ import { CreateSubtaskModal } from '@/components/modals/task/create.subtask.moda
 import { CreateTaskModal } from '@/components/modals/task/create.task.modal';
 import DeleteConfirmModals from '@/components/modals/task/delete.task.modal';
 import { UpdateTaskModal } from '@/components/modals/task/update.task.modal';
+import AddProfileInTask from '@/components/pages/team/add.task-participants';
 
 import { useModalStore } from '@/store/modals.store';
 
@@ -42,6 +44,10 @@ export const ModalProvider = () => {
 			return <UpdateMessage message={payload} close={close} />;
 		case 'createCalendarEvent':
 			return <CreateCalendarEvent {...payload} close={close} />;
+		case 'insertTaskParticipants':
+			return <AddProfileInTask {...payload} close={close} />;
+			case 'deleteProfileFromTaskParticipants':
+				return <DeleteProfileFromPartyChannel profile={payload} close={close} />;
 		default:
 			return null;
 	}

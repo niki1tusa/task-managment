@@ -34,7 +34,7 @@ export default function SettingsClientPage() {
 		if (!profile) return;
 		form.reset({
 			name: profile.name!,
-			occupation: profile.occupation,
+			occupation: profile.occupation!,
 			email: profile.email!,
 			phone: profile.phone! ?? '',
 		});
@@ -107,7 +107,7 @@ export default function SettingsClientPage() {
 			{/* right side */}
 			<div>
 				<div className='relative h-[300px] w-[300px] rounded-md border-2 p-1'>
-					{profile.avatar_path &&(
+					{profile?.avatar_path &&(
 						<Image
 							className='rounded'
 							src={profile.avatar_path}

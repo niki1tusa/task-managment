@@ -12,7 +12,6 @@ import ThemeMenu from './theme-menu/ThemeMenu';
 export const Sidebar = () => {
 	return (
 		<aside className='mt-4 h-full flex-col items-start gap-y-5 lg:flex lg:px-5 2xl:ml-8'>
-			{/* <Profile data={data} /> */}
 			<ProfileMenu />
 			<Menu heading='MENU' menu={MENU} isBorderTop={true} />
 			<ProjectsMenu heading='PROJECTS' menu={PROJECTS_MENU} isBorderTop={true} />

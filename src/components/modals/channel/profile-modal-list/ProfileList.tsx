@@ -6,14 +6,14 @@ import { Avatar } from '@/components/ui/Avatar';
 import type { TProfileRow } from '@/shared/types/task/task.types';
 
 interface Props {
-	typeChannel: string;
+	typeChannel?: string;
 	profiles: TProfileRow[];
 	selectProfileIds: string[];
 	handleAddProfile: (arg: TProfileRow) => void;
 	handleRemoveProfile: (arg: TProfileRow) => void;
 }
 export default function ProfileList({
-	typeChannel,
+	typeChannel = 'group',
 	profiles,
 	selectProfileIds,
 	handleAddProfile,

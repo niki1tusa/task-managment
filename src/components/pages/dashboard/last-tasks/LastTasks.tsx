@@ -9,7 +9,7 @@ import type { TByAscOrDesc, TStatus } from '@/shared/types/task/task.types';
 
 import { useModalStore } from '@/store/modals.store';
 
-import { useMyTask } from '@/hooks/useMyTask';
+import { useMyTasks } from '@/hooks/useMyTasks';
 
 import FiltersForTask from './FiltersForTask';
 import { Task } from './task/Task';
@@ -20,7 +20,7 @@ export const LastTasks = () => {
 	const [sortOrder, setSortOrder] = useState<TByAscOrDesc>('Asc');
 	// custom state
 	const { open } = useModalStore();
-	const { tasks, isPending } = useMyTask({ select, sortOrder });
+	const { tasks, isPending } = useMyTasks({ select, sortOrder });
 
 	if (!tasks) return null;
 	return (

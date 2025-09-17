@@ -111,3 +111,16 @@ export async function insertTaskParticipants(id: string, profile_ids: string[]) 
 	if (error || !data) throw new Error(error?.message || 'Task not found, insert-task_participants');
 	return data;
 }
+
+export async function deleteTaskParticipants(profileId: string) {
+	const { error } = await createClient()
+		.from('task_participants')
+		.delete()
+		.eq('profile_id', profileId);
+
+	if (error) throw new Error(error?.message || 'Task not found, delete-task_participants');
+	return;
+}
+// TODO: 1) auto-scroll for Panel and Team Task
+// 2) не происходит re-render for Panel - какие данные useQuery отображаются в panel?
+// 3) не происходит удаление участника так как не выходит modal winndow - место вызова

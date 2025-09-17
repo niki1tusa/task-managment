@@ -13,6 +13,8 @@ type ModalType =
 	| 'deleteMessage'
 	| 'updateMessage'
 	| 'createCalendarEvent'
+	| 'insertTaskParticipants'
+	| 'deleteProfileFromTaskParticipants'
 	| null;
 
 interface ModalState {
