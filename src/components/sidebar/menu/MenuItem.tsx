@@ -27,7 +27,6 @@ export const MenuItem = ({ item }: { item: IMenuItem }) => {
 					item.title === 'Notification' && ''
 				)}
 			>
-				{/* TODO: get notices.length со статусом = false */}
 				<div className='flex items-center gap-2'>
 					<div className='relative'>
 						<item.Icon size={22} />

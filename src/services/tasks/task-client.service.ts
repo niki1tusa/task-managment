@@ -121,6 +121,14 @@ export async function deleteTaskParticipants(profileId: string) {
 	if (error) throw new Error(error?.message || 'Task not found, delete-task_participants');
 	return;
 }
-// TODO: 1) auto-scroll for Panel and Team Task
-// 2) не происходит re-render for Panel - какие данные useQuery отображаются в panel?
-// 3) не происходит удаление участника так как не выходит modal winndow - место вызова
+// TODO: 
+// 1) auto-scroll for Panel and Team Task
+// 2) не происходит re-render for Panel при добавлении и при удалении profile - какие данные useQuery отображаются в panel?
+// 3) проверить везде DARK THEME на message, dashboard, notice
+// 4) sort for team page 
+// в  task panel можно назначать на subtask
+// при нажатии на task (active) on team page - под ним открывается меню с subtask
+
+// 5) schedule upgrade 
+
+// 6) ошибки при деплое исправить

@@ -8,7 +8,7 @@ import type { TProfileRow } from '@/shared/types/task/task.types';
 
 import { useModalStore } from '@/store/modals.store';
 
-import { deleteClientProfileFromPartyChannel } from '@/services/channel/party-client.service';
+import { deleteTaskParticipants } from '@/services/tasks/task-client.service';
 
 interface Props {
 	close: () => void;
@@ -18,7 +18,7 @@ export default function DeleteProfileFromTaskParticipants({ close, profile }: Pr
 	const { type } = useModalStore();
 	const queryClient = useQueryClient();
 	const { mutate, isPending } = useMutation({
-		mutationFn: (id: string) => deleteClientProfileFromPartyChannel(id),
+		mutationFn: (id: string) => deleteTaskParticipants(id),
 		onSuccess: () => {
 			toast.success('Profile is kicked out!');
 			queryClient.invalidateQueries({ queryKey: ['profiles'] });
@@ -29,12 +29,12 @@ export default function DeleteProfileFromTaskParticipants({ close, profile }: Pr
 		},
 	});
 
-	// if (type !== 'deleteProfileFromTaskParticipants' || !profile) return null;
+	if (type !== 'deleteProfileFromTaskParticipants' || !profile) return null;
 
 	return (
 		<Modal
 			close={close}
-			title={`Do you really want to kicked from party channel "${profile.name}"?`}
+			title={`Do you really want to kicked from party task"${profile.name}"?`}
 		>
 			<Button onClick={() => mutate(profile.id)} disable={isPending}>
 				Yes

@@ -118,8 +118,8 @@ export default function TeamPageClient() {
 												)}
 
 												<button
-													onClick={() => {
-														console.log('delete profile:', profile.name);
+													onClick={(e) => {
+														e.stopPropagation();
 														open('deleteProfileFromTaskParticipants', profile);
 													}}
 													disabled={isPending}

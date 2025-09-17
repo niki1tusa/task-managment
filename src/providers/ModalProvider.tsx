@@ -12,6 +12,7 @@ import { CreateTaskModal } from '@/components/modals/task/create.task.modal';
 import DeleteConfirmModals from '@/components/modals/task/delete.task.modal';
 import { UpdateTaskModal } from '@/components/modals/task/update.task.modal';
 import AddProfileInTask from '@/components/pages/team/add.task-participants';
+import DeleteProfileFromTaskParticipants from '@/components/pages/team/delete.profile-for-task-participants';
 
 import { useModalStore } from '@/store/modals.store';
 
@@ -47,7 +48,7 @@ export const ModalProvider = () => {
 		case 'insertTaskParticipants':
 			return <AddProfileInTask {...payload} close={close} />;
 			case 'deleteProfileFromTaskParticipants':
-				return <DeleteProfileFromPartyChannel profile={payload} close={close} />;
+				return <DeleteProfileFromTaskParticipants profile={payload} close={close} />;
 		default:
 			return null;
 	}
