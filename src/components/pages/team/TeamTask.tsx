@@ -24,8 +24,8 @@ export default function TeamTask({ task }: { task: TTask }) {
 				className={clsx(
 					activeTask?.id === task.id
 						? 'border-2 border-sky-500 '
-						: 'border-2  border-white',
-					'2xl:text-md bg-task-base dark:bg-text-gray rounded text-sm shadow shadow-neutral-400 transition-all hover:bg-gray-200 dark:border-none'
+						: 'border-2  border-white dark:border-white/20',
+					'2xl:text-md bg-task-base  rounded text-sm shadow shadow-neutral-400 transition-all hover:bg-gray-200 dark:hover:bg-gray-700'
 				)}
 			>
 				<Header task={task} />
