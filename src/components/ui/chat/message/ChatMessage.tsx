@@ -122,7 +122,7 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup, value }: Props) {
 								side='bottom'
 								align={'end'}
 								sideOffset={8}
-								className='bg-background w-[240px] rounded-sm border p-3 shadow shadow-neutral-400'
+								className='bg-background dark:bg-white dark:text-black w-[240px] rounded-sm border p-3 shadow shadow-neutral-400'
 							>
 								<MessageMenuPopover msg={message} onClose={() => setOpenId(null)} />
 							</PopoverContent>

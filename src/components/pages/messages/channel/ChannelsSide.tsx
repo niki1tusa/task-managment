@@ -147,7 +147,7 @@ return (
                             side="bottom"
                             align="end"
                             sideOffset={8}
-                            className="bg-background w-[240px] rounded-sm border p-3 shadow shadow-neutral-400"
+                            className="bg-background dark:bg-white w-[240px] rounded-sm border p-3 shadow shadow-neutral-400"
                           >
                             <ChannelMenuPopover activeChannel={channel} onClose={() => setOpenId(null)} />
                           </PopoverContent>

@@ -94,7 +94,7 @@ export default function Chat() {
 					</div>
 					<div className='flex flex-col'>
 						<div
-							className='text-sidebar-primary/80 text-[1rem] 2xl:text-[1.2rem]'
+							className='text-sidebar-primary/80 dark:text-white text-[1rem] 2xl:text-[1.2rem]'
 							id='chat-user-name'
 						>
 							{profile?.name}

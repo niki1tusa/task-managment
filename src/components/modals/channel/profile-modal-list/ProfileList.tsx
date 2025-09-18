@@ -20,12 +20,12 @@ export default function ProfileList({
 	handleRemoveProfile,
 }: Props) {
 	return (
-		<ul className='dark:bg-gray flex flex-col overflow-y-auto  rounded-lg border-2 bg-[#f6f4ff] px-4'>
+		<ul className='dark:bg-gray-800 flex flex-col overflow-y-auto  rounded-lg border-2 bg-[#f6f4ff] px-4'>
 			{profiles?.map((p: TProfileRow) => (
 				<li key={p.id} className='flex items-center justify-between border-b-2 py-2.5'>
 					<div className='flex items-center gap-3'>
 						<Avatar img={p.avatar_path} />
-						<span className='text-sm'>{p.name}</span>
+						<span className='text-sm dark:text-white'>{p.name}</span>
 					</div>
 					<Checkbox
 						className='bg-white shadow shadow-neutral-400'

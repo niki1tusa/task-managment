@@ -3,8 +3,9 @@
 import { ChevronDown } from 'lucide-react';
 import React, { useState } from 'react';
 
-import { useClickOutside } from '@/hooks/useClickOutside';
 import type { ITimeRange } from '@/shared/types/statistics/statistics.types';
+
+import { useClickOutside } from '@/hooks/useClickOutside';
 
 const timeRange: ITimeRange[] = [
 	{ label: 'Yearly', value: 'yearly' },
@@ -36,12 +37,12 @@ export function ProjectChartHeader({ selectedRange, onChangeRange }: Props) {
 					{<ChevronDown size={16} />}
 				</button>
 				{isDropdownOpen && (
-					<div className='absolute right-0 z-20 mt-2 w-32 rounded-2xl border border-neutral-200 py-1 transition-all duration-200'>
+					<div className='bg-background absolute right-0 z-20 mt-2 w-32 rounded-2xl border border-neutral-200 py-1 transition-all duration-200'>
 						{timeRange.map(range => (
 							<button
 								onClick={() => handleRangeChange(range)}
 								key={range.value}
-								className='hover:text-primary mx-2 box-border w-full rounded-sm px-1 py-1 text-left text-sm transition-colors dark:hover:text-white'
+								className='hover:text-primary bg-background mx-1 my-0.5 box-border w-28 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-sm px-1 py-1 text-left text-sm transition-all dark:hover:text-white'
 							>
 								{range.label}
 							</button>

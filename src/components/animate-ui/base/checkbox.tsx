@@ -40,7 +40,7 @@ function Checkbox({
       data-slot="checkbox"
       className={cn(
         'peer shrink-0 flex items-center justify-center outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 disabled:cursor-not-allowed disabled:opacity-50 transition-colors duration-500',
-        'size-5 rounded-sm bg-input focus-visible:ring-offset-2 data-[checked]:bg-primary data-[checked]:text-primary-foreground',
+        'size-5 rounded-sm bg-input focus-visible:ring-offset-2 data-[checked]:bg-primary data-[checked]:text-white',
         className,
       )}
       {...props}

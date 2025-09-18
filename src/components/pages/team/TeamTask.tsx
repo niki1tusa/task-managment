@@ -25,7 +25,7 @@ export default function TeamTask({ task }: { task: TTask }) {
 					activeTask?.id === task.id
 						? 'border-2 border-sky-500 '
 						: 'border-2  border-white',
-					'2xl:text-md bg-task-base rounded text-sm shadow shadow-neutral-400 transition-all hover:bg-gray-200 dark:border-none'
+					'2xl:text-md bg-task-base dark:bg-text-gray rounded text-sm shadow shadow-neutral-400 transition-all hover:bg-gray-200 dark:border-none'
 				)}
 			>
 				<Header task={task} />

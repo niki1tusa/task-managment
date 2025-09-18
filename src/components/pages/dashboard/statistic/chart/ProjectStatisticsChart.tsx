@@ -30,7 +30,7 @@ export function ProjectStatisticsChart({
 
 	return (
 		<div className='text-foreground z-10 rounded-2xl border border-white shadow shadow-neutral-500 dark:border-none'>
-			<ProjectChartHeader onChangeRange={setSelectedRange} selectedRange={selectedRange} />
+			<ProjectChartHeader  onChangeRange={setSelectedRange} selectedRange={selectedRange} />
 			<ProjectChart data={data} />
 		</div>
 	);
