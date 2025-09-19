@@ -3,8 +3,8 @@ import clsx from 'clsx';
 export default function Skeleton({
 	length = 1,
 	rounded = 'rounded-sm',
-	width = 'w-[200px]',
-	height = 'h-[100px]',
+	width = '2xl:w-[200px] w-[100px]',
+	height = '2xl:h-[100px] h-[50px]',
 	className,
 }: {
 	length?: number;
