@@ -242,22 +242,32 @@ export type Database = {
         Row: {
           id: string
           is_completed: boolean | null
+          profile_id: string | null
           task_id: string | null
           title: string
         }
         Insert: {
           id?: string
           is_completed?: boolean | null
+          profile_id?: string | null
           task_id?: string | null
           title: string
         }
         Update: {
           id?: string
           is_completed?: boolean | null
+          profile_id?: string | null
           task_id?: string | null
           title?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "fk_sub_task_profile"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profile"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "sub_task_task_id_fkey"
             columns: ["task_id"]
@@ -274,6 +284,7 @@ export type Database = {
           end_time: string | null
           icon: string | null
           id: string
+          is_completed: boolean
           owner_id: string | null
           start_time: string | null
           title: string
@@ -284,6 +295,7 @@ export type Database = {
           end_time?: string | null
           icon?: string | null
           id?: string
+          is_completed?: boolean
           owner_id?: string | null
           start_time?: string | null
           title: string
@@ -294,6 +306,7 @@ export type Database = {
           end_time?: string | null
           icon?: string | null
           id?: string
+          is_completed?: boolean
           owner_id?: string | null
           start_time?: string | null
           title?: string

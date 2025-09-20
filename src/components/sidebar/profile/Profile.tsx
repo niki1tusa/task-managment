@@ -24,17 +24,21 @@ export const ProfileMenu = () => {
 					<ChevronDown className='text-foreground/60' onClick={() => setIsShowProfile(true)} />
 				)}
 			</div>
-			{isShowProfile && (
-				<div className='bg-background flex items-center gap-2 rounded-md px-2 py-2 shadow shadow-neutral-400'>
-					<div>
-						<Avatar img={profile.avatar_path} />
+
+				{isShowProfile && (
+					<div
+						className='bg-background flex items-center gap-2 rounded-md px-2 py-2 shadow shadow-neutral-400'
+					>
+						<div>
+							<Avatar img={profile.avatar_path} />
+						</div>
+						<div className='flex flex-col truncate text-[10px] 2xl:text-sm'>
+							<span>{profile.email}</span>
+							<span> {profile.name}</span>
+						</div>
 					</div>
-					<div className='flex flex-col truncate text-[10px] 2xl:text-sm'>
-						<span>{profile.email}</span>
-						<span> {profile.name}</span>
-					</div>
-				</div>
-			)}
+				)}
+			
 		</nav>
 	);
 };
