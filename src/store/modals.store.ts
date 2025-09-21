@@ -15,6 +15,8 @@ type ModalType =
 	| 'createCalendarEvent'
 	| 'insertTaskParticipants'
 	| 'deleteProfileFromTaskParticipants'
+	| 'addResponseProfileForSubTask'
+	| 'removeResponseProfileForSubTask'
 	| null;
 
 interface ModalState {

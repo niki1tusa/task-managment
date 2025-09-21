@@ -24,7 +24,7 @@ const calendarEventField = [
 		type: 'field',
 		props: {
 			labelText: 'Event name',
-			registerName: 'event',
+			registerName: 'title',
 			placeholderText: 'Enter event...',
 			type: 'text',
 		},
@@ -32,19 +32,19 @@ const calendarEventField = [
 	{
 		type: 'field',
 		props: {
-			labelText: 'Start time',
-			registerName: 'start',
-			placeholderText: '...',
-			type: 'text',
+			labelText: 'Date',
+			registerName: 'event_date',
+			placeholderText: '2025-09-20',
+			type: 'date',
 		},
 	},
 	{
 		type: 'field',
 		props: {
-			labelText: 'End time',
-			registerName: 'end',
-			placeholderText: '...',
-			type: 'text',
+			labelText: 'Time',
+			registerName: 'event_time',
+			placeholderText: '10:00',
+			type: 'time',
 		},
 	},
 ] satisfies IForm<TScheduleForm>['formElement'];
@@ -56,6 +56,11 @@ export function CreateCalendarEvent({ close }: Props) {
 	const queryClient = useQueryClient();
 	const form = useForm<TScheduleForm>({
 		resolver: zodResolver(ZScheduleScheme),
+		defaultValues: {
+			title: '',
+			event_date: '',
+			event_time: '',
+		},
 	});
 	const { mutate, isPending } = useMutation({
 		mutationFn: ({ fields, taskId }: { fields: TChannelInsert; taskId: string }) =>
@@ -71,15 +76,13 @@ export function CreateCalendarEvent({ close }: Props) {
 	});
 	const handleAddEvent = () => {
 		const today = Temporal.Now.plainDateISO();
-		const start = today.toPlainDateTime(Temporal.PlainTime.from('10:00'));
-		const end = today.toPlainDateTime(Temporal.PlainTime.from('12:00'));
+		const time = today.toPlainDateTime(Temporal.PlainTime.from('10:00'));
 
-		eventsService.add({
-			id: crypto.randomUUID(),
-			title: 'New Event with time',
-			start,
-			end,
-		});
+    eventsService.add({
+      id: crypto.randomUUID(),
+      title: data.title,
+      start, 
+    });
 	};
 
 	// date picker?

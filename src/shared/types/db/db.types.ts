@@ -238,6 +238,38 @@ export type Database = {
         }
         Relationships: []
       }
+      schedule_events: {
+        Row: {
+          event_date: string
+          event_time: string
+          owner_id: string
+          schedule_id: string
+          title: string | null
+        }
+        Insert: {
+          event_date: string
+          event_time: string
+          owner_id: string
+          schedule_id?: string
+          title?: string | null
+        }
+        Update: {
+          event_date?: string
+          event_time?: string
+          owner_id?: string
+          schedule_id?: string
+          title?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_schedule_owner"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "profile"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       sub_task: {
         Row: {
           id: string

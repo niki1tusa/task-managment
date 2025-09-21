@@ -11,8 +11,10 @@ import { CreateSubtaskModal } from '@/components/modals/task/create.subtask.moda
 import { CreateTaskModal } from '@/components/modals/task/create.task.modal';
 import DeleteConfirmModals from '@/components/modals/task/delete.task.modal';
 import { UpdateTaskModal } from '@/components/modals/task/update.task.modal';
-import AddProfileInTask from '@/components/pages/team/add.task-participants';
-import DeleteProfileFromTaskParticipants from '@/components/pages/team/delete.profile-for-task-participants';
+import AddProfileForSubTask from '@/components/modals/team/add.response-profile-subtask';
+import AddProfileInTask from '@/components/modals/team/add.task-participants';
+import DeleteProfileFromTaskParticipants from '@/components/modals/team/delete.profile-for-task-participants';
+import DeleteTeamResponseProfileModal from '@/components/modals/team/delete.response-profile-for-subtask';
 
 import { useModalStore } from '@/store/modals.store';
 
@@ -47,8 +49,12 @@ export const ModalProvider = () => {
 			return <CreateCalendarEvent {...payload} close={close} />;
 		case 'insertTaskParticipants':
 			return <AddProfileInTask {...payload} close={close} />;
-			case 'deleteProfileFromTaskParticipants':
-				return <DeleteProfileFromTaskParticipants profile={payload} close={close} />;
+		case 'deleteProfileFromTaskParticipants':
+			return <DeleteProfileFromTaskParticipants profile={payload} close={close} />;
+		case 'addResponseProfileForSubTask':
+			return <AddProfileForSubTask {...payload} close={close} />;
+		case 'removeResponseProfileForSubTask':
+			return <DeleteTeamResponseProfileModal subtask={payload} close={close} />;
 		default:
 			return null;
 	}

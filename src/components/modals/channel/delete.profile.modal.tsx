@@ -6,7 +6,6 @@ import Modal from '@/components/ui/modal/Modal';
 
 import type { TProfileRow } from '@/shared/types/task/task.types';
 
-import { useChannelStore } from '@/store/channel.store';
 import { useModalStore } from '@/store/modals.store';
 
 import { deleteClientProfileFromPartyChannel } from '@/services/channel/party-client.service';

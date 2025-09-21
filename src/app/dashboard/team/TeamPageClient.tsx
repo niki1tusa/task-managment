@@ -13,8 +13,8 @@ import { useMyTasks } from '@/hooks/useMyTasks';
 import { useProfile } from '@/hooks/useProfile';
 
 import TeamTask from '../../../components/pages/team/TeamTask';
+import TeamTaskPanel from '../../../components/pages/team/TeamTaskPanel';
 
-import TeamTaskPanel from './TeamTaskPanel';
 import { getAllProfile } from '@/services/profile/profile-client.service';
 
 export default function TeamPageClient() {
@@ -58,7 +58,7 @@ export default function TeamPageClient() {
 					<Textarea value={value} setValue={setValue} placeholder='Enter task name...' />
 					<Tabs
 						value={selectTypeTasks}
-						onValueChange={value => setSelectTypeTasks(value)}
+						onValueChange={value => setSelectTypeTasks(value as typeof selectTypeTasks)}
 						className='mt-5 grid rounded-sm shadow-sm'
 					>
 						<TabsList className='bg-primary/50 flex w-full'>
@@ -91,7 +91,7 @@ export default function TeamPageClient() {
 				</div>
 			</div>
 			{/* second col */}
-			<TeamTaskPanel isPending={isPending} taskOwner={taskOwner} />
+			{taskOwner && <TeamTaskPanel isPending={isPending} taskOwner={taskOwner} />}
 		</div>
 	);
 }

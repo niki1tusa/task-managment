@@ -53,9 +53,9 @@ export const ZSettingsScheme = z.object({
 });
 // schedule
 export const ZScheduleScheme = z.object({
-	event: z.string().min(1, 'Name is required!'),
-	start: z.string().min(1, 'Name is required!'),
-	end: z.string().min(1, 'Name is required!'),
+  title: z.string().min(1, 'Name is required!'),
+  event_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date (YYYY-MM-DD)'),
+  event_time: z.string().regex(/^\d{2}:\d{2}(:\d{2})?$/, 'Invalid time (HH:MM or HH:MM:SS)'),
 });
 
 export type TScheduleForm = z.infer<typeof ZScheduleScheme>

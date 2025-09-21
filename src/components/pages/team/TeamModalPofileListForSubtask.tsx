@@ -1,11 +1,16 @@
+import { useQuery } from '@tanstack/react-query';
+import { useMemo, useState } from 'react';
+
 import ProfileList from '@/components/modals/channel/profile-modal-list/ProfileList';
 import { Button } from '@/components/ui/button/Button';
 
 import type { TProfileRow } from '@/shared/types/task/task.types';
 
+import { useSubTaskStore } from '@/store/subtask.store';
 import { useTaskStore } from '@/store/task.store';
 
 import { useTeamParticipants } from './useTeamParticipants';
+import { getAllProfile } from '@/services/profile/profile-client.service';
 
 interface Props {
 	close: () => void;
@@ -14,40 +19,38 @@ interface Props {
 	mutateFnc?: (arg: any) => void;
 	isPending?: boolean;
 }
-export default function TeamModalParticipant({ profile, close, mutateFnc, isPending }: Props) {
-	const { profiles, selectProfileIds, setSelectProfileIds } = useTeamParticipants(profile);
+export default function TeamModalPofileListForSubtask({
+	close,
+	mutateFnc,
+	isPending,
+}: Props) {
+	const [selectProfileId, setSelectProfileId] = useState<string | null>(null);
 	const { activeTask } = useTaskStore();
-	const countAlreadyParticipants = activeTask?.task_participants.length || 0;
-	// handle
-
+	// all profiles
+	const profiles = activeTask?.task_participants.flatMap(i => i.profile) ?? [];
+    // handle
 	const handleAddProfile = (profileToAdd: TProfileRow) => {
-		if (!selectProfileIds.some(p => p === profileToAdd.id)) {
-			setSelectProfileIds([...selectProfileIds, profileToAdd.id]);
-		}
+		setSelectProfileId(profileToAdd.id);
 	};
-	const handleRemoveProfile = (profileToAdd: TProfileRow) => {
-		const filtered = selectProfileIds.filter(id => id !== profileToAdd.id);
-		setSelectProfileIds([...filtered]);
+	const handleRemoveProfile = () => {
+		setSelectProfileId(null);
 	};
 	return (
 		<div className='flex h-auto max-h-[60vh] flex-col justify-start gap-2'>
 			<span className='flex gap-2 py-2 text-base font-medium'>
 				<span>Choice profile:</span>
-				<span>{countAlreadyParticipants + selectProfileIds.length}/ 30</span>
+				<span> {selectProfileId ? 1 : 0}/1</span>
 			</span>
-
-			{/* <Textarea value={} setValue={} /> */}
-
 			<ProfileList
 				profiles={profiles}
 				handleAddProfile={handleAddProfile}
 				handleRemoveProfile={handleRemoveProfile}
-				selectProfileIds={selectProfileIds}
+				selectProfileId={selectProfileId}
 			/>
 
 			{mutateFnc && (
 				<div className='flex gap-4'>
-					<Button disable={isPending} onClick={() => mutateFnc(selectProfileIds)}>
+					<Button disable={isPending} onClick={() => mutateFnc(selectProfileId)}>
 						Save
 					</Button>
 					<Button onClick={close}>Close</Button>

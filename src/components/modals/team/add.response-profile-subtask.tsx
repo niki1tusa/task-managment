@@ -4,25 +4,27 @@ import { toast } from 'react-toastify';
 import Modal from '@/components/ui/modal/Modal';
 
 import { useModalStore } from '@/store/modals.store';
-import { useTaskStore } from '@/store/task.store';
 
 import { useProfile } from '@/hooks/useProfile';
 
-import TeamModalParticipant from './TeamModalParticipant';
-import { insertTaskParticipants } from '@/services/tasks/task-client.service';
+import TeamModalParticipant from '../../pages/team/TeamModalParticipant';
+
+import { useSubTaskStore } from '@/store/subtask.store';
+import { addProfileForSubtask } from '@/services/tasks/subtask.service';
+import TeamModalPofileListForSubtask from '@/components/pages/team/TeamModalPofileListForSubtask';
 
 interface Props {
 	close: () => void;
 }
 
-export default function AddProfileInTask({ close }: Props) {
+export default function AddProfileForSubTask({ close }: Props) {
 	const queryClient = useQueryClient();
 	const { type } = useModalStore();
 	const { profile } = useProfile();
-	const { activeTask } = useTaskStore();
+	const { activeSubTask} = useSubTaskStore()
 	const { mutate, isPending } = useMutation({
-		mutationFn: ({ taskId, profileIds }: { taskId: string; profileIds: string[] }) =>
-			insertTaskParticipants(taskId, profileIds),
+		mutationFn: ({ subTaskId, profileId }: { subTaskId: string; profileId: string }) =>
+			addProfileForSubtask(subTaskId, profileId),
 		onSuccess: () => {
 			toast.success('Profiles successfully added to the Task!');
 			queryClient.invalidateQueries({ queryKey: ['tasks'] });
@@ -36,15 +38,15 @@ export default function AddProfileInTask({ close }: Props) {
 		},
 	});
 
-	if (type !== 'insertTaskParticipants' || !activeTask || !profile) return null;
+	if (type !== 'addResponseProfileForSubTask' || !activeSubTask || !profile) return null;
 
 	return (
-		<Modal close={close} title={`Task - "${activeTask.title}"`}>
+		<Modal close={close} title={`SubTask - "${activeSubTask.title}"`}>
 			<div className='flex w-full flex-col gap-5'>
-				<TeamModalParticipant
+				<TeamModalPofileListForSubtask
 					close={close}
 					profile={profile}
-					mutateFnc={ids => mutate({ taskId: activeTask.id, profileIds: ids })}
+					mutateFnc={id => mutate({ subTaskId: activeSubTask.id, profileId: id })}
 					isPending={isPending}
 				/>
 			</div>

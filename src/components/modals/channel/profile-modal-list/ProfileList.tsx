@@ -8,13 +8,15 @@ import type { TProfileRow } from '@/shared/types/task/task.types';
 interface Props {
 	typeChannel?: string;
 	profiles: TProfileRow[];
-	selectProfileIds: string[];
+	selectProfileId?: string | null;
+	selectProfileIds?: string[];
 	handleAddProfile: (arg: TProfileRow) => void;
 	handleRemoveProfile: (arg: TProfileRow) => void;
 }
 export default function ProfileList({
 	typeChannel = 'group',
 	profiles,
+	selectProfileId,
 	selectProfileIds,
 	handleAddProfile,
 	handleRemoveProfile,
@@ -30,12 +32,13 @@ export default function ProfileList({
 					<Checkbox
 						className='bg-white shadow shadow-neutral-400'
 						disabled={
-							!selectProfileIds.includes(p.id) &&
+							(!selectProfileId?.includes(p.id) && !!selectProfileId) ||
+							(!selectProfileIds?.includes(p.id) &&
 							(typeChannel === 'group'
-								? selectProfileIds.length === 30
-								: selectProfileIds.length === 1)
+								? selectProfileIds?.length === 30
+								: selectProfileIds?.length === 1))
 						}
-						checked={selectProfileIds.includes(p.id)}
+						checked={selectProfileIds?.includes(p.id)}
 						onCheckedChange={checked => {
 							if (checked) {
 								handleAddProfile(p);

@@ -4,8 +4,6 @@ import { toast } from 'react-toastify';
 import type { TChannelRow } from '@/components/pages/messages/channel/channel.types';
 import Modal from '@/components/ui/modal/Modal';
 
-import type { TProfileRow } from '@/shared/types/task/task.types';
-
 import { useModalStore } from '@/store/modals.store';
 
 import ProfileModalList from './profile-modal-list/ProfileModalList';
