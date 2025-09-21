@@ -16,10 +16,11 @@ import TeamTask from '../../../components/pages/team/TeamTask';
 import TeamTaskPanel from '../../../components/pages/team/TeamTaskPanel';
 
 import { getAllProfile } from '@/services/profile/profile-client.service';
+import { useAllTaskWithoutFilter } from '@/hooks/useAllTaskWithoutFilter';
 
 export default function TeamPageClient() {
 	const [value, setValue] = useState('');
-	const { tasks, isPending } = useMyTasks();
+	const { tasks, isPending } = useAllTaskWithoutFilter();
 	const [selectTypeTasks, setSelectTypeTasks] = useState<'owner' | 'participants' | 'completed'>(
 		'owner'
 	);

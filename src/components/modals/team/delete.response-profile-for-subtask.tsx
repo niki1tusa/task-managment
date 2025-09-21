@@ -21,7 +21,7 @@ export default function DeleteTeamResponseProfileModal({ close, subtask }: Props
 		mutationFn: (id: string) => removeProfileForSubtask(id),
 		onSuccess: () => {
 			toast.success('Remove is success!');
-			queryClient.invalidateQueries({ predicate: query => query.queryKey[0] === 'tasks'});
+			queryClient.invalidateQueries({queryKey: ['tasks'] });
 			close();
 		},
 		onError: (error: unknown) => {

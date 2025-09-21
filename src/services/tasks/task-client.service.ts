@@ -33,6 +33,12 @@ export async function getClientAllTask({
 	}
 	return data;
 }
+export async function getClientAllTaskWithoutSorting() {
+	const client = createClient();
+	const {data, error} = await client.from('task').select(`*, sub_task(*),task_participants(profile(*))`);
+	if (error || !data) throw new Error(error?.message || 'Task not found/ get-all-task');
+	return data;
+}
 
 export async function getClientTaskById(id: string) {
 	const { data, error } = await createClient()
