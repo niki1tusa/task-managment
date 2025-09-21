@@ -44,7 +44,7 @@ export function CalendarApp() {
 		plugins: [eventsService],
 	});
 
-
+// TODO: как мне отображать event из supabase?
 	return (
 		<div
 			role='region'

@@ -1,4 +1,4 @@
-import { CreateCalendarEvent } from '@/app/dashboard/schedule/create-calendar-event.modal';
+import { CreateCalendarEvent } from '@/components/pages/schedule/create-calendar-event.modal';
 
 import AddProfileInChannel from '@/components/modals/channel/add.profile.modal';
 import { CreateChannelModal } from '@/components/modals/channel/create.channel.modal';

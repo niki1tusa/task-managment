@@ -73,18 +73,7 @@ export async function createClientTask(task: TTaskCreateForm) {
 	}
 	return data;
 }
-export async function createClientSubTask(
-	id: string,
-	sub_task: Database['public']['Tables']['sub_task']['Insert']
-) {
-	const { data, error } = await createClient()
-		.from('sub_task')
-		.insert({ ...sub_task, task_id: id })
-		.select()
-		.single();
-	if (error || !data) throw new Error(error?.message || 'Task not found/ create-sub-task');
-	return data;
-}
+
 
 // update
 export async function updateClientTask(id: string, task: TTaskEditForm) {
@@ -129,11 +118,5 @@ export async function deleteTaskParticipants(profileId: string) {
 }
 // TODO: 
 // 1) auto-scroll for Panel and Team Task
-// 2) не происходит re-render for Panel при добавлении и при удалении profile - какие данные useQuery отображаются в panel?
+// 2) не происходит re-render for Panel 
 
-// в  task panel можно назначать на subtask
-// при нажатии на task (active) on team page - под ним открывается меню с subtask
-
-// 5) schedule upgrade 
-
-// 6) ошибки при деплое исправить

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 
-import { getClientAllTask, getClientAllTaskWithoutSorting } from '@/services/tasks/task-client.service';
+import {  getClientAllTaskWithoutSorting } from '@/services/tasks/task-client.service';
 import type { TTask } from '@/shared/types/task/task.types';
 
 export function useAllTaskWithoutFilter() {
