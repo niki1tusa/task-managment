@@ -21,24 +21,20 @@ interface Props {
 export function CreateCalendarEvent({ close }: Props) {
 	const { profile } = useProfile();
 	const queryClient = useQueryClient();
-	const {
-		reset,
-		control,
-		register,
-		formState: { errors },
-	} = useForm<TScheduleForm>({
+	const form = useForm<TScheduleForm>({
 		resolver: zodResolver(ZScheduleScheme),
 		defaultValues: {
 			title: '',
 			event_date: '',
-			event_time: '',
+			event_start: '',
+			event_end: ''
 		},
 	});
 	const { mutate, isPending } = useMutation({
 		mutationFn: (payload: TEventInsert) => insertEvent(payload),
 		onSuccess: () => {
 			toast.success(`Event is success created!`);
-			reset();
+			form.reset();
 			queryClient.invalidateQueries({ queryKey: ['events'] });
 		},
 		onError: err => {
@@ -56,12 +52,12 @@ export function CreateCalendarEvent({ close }: Props) {
 			<div className='flex w-full flex-col gap-3'>
 				<Form<TScheduleForm>
 					formElement={CALENDAR_EVENT_FIELDS}
-					register={register}
-					handleOnSubmit={handleAddEvent}
+					register={form.register}
+					handleOnSubmit={form.handleSubmit(handleAddEvent)}
 					btnText='Add'
-					control={control}
+					control={form.control}
 					isPending={isPending}
-					errors={errors}
+					errors={form.formState.errors}
 				/>
 			</div>
 		</Modal>

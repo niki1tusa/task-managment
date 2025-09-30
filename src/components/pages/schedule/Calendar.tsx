@@ -8,7 +8,8 @@ import {
 } from '@schedule-x/calendar';
 import { createEventsServicePlugin } from '@schedule-x/events-service';
 import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react';
-import { useMemo } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect, useMemo } from 'react';
 import 'temporal-polyfill/global';
 
 import { Title } from '@/components/ui/Title';
@@ -17,12 +18,15 @@ import { Button } from '@/components/ui/button/Button';
 
 import { useModalStore } from '@/store/modals.store';
 
+import { type TEventRow, getAllEvents } from '@/services/shedule-event/shedule-event.service';
+
 import './calendar.css';
 import '@schedule-x/theme-default/dist/index.css';
 
 export function CalendarApp() {
 	const eventsService = useMemo(() => createEventsServicePlugin(), []);
 	const { open } = useModalStore();
+
 	const calendar = useNextCalendarApp({
 		views: [createViewDay(), createViewWeek(), createViewMonthGrid(), createViewMonthAgenda()],
 		dayBoundaries: {
@@ -33,25 +37,33 @@ export function CalendarApp() {
 			gridHeight: 700,
 			timeAxisFormatOptions: { hour: '2-digit' },
 		},
-		events: [
-			{
-				id: '1',
-				title: 'Event 1',
-				start: Temporal.PlainDate.from('2023-12-16'),
-				end: Temporal.PlainDate.from('2023-12-16'),
-			},
-		],
+		events: [], // стартуем пустыми
 		plugins: [eventsService],
 	});
 
-// TODO: как мне отображать event из supabase?
+	const { data, isLoading } = useQuery<TEventRow[]>({
+		queryKey: ['events'],
+		queryFn: () => getAllEvents(),
+	});
+	useEffect(() => {
+		if (!data) return;
+
+		const mapped = data.map(e => ({
+			id: e.schedule_id,
+			title: e.title ?? 'Untitled',
+			start: Temporal.PlainDateTime.from(`${e.event_date}T${e.event_start}`),
+			end: Temporal.PlainDateTime.from(`${e.event_date}T${e.event_end}`),
+		}));
+
+		eventsService.set(mapped);
+	}, [data, eventsService]);
+	
 	return (
 		<div
 			role='region'
 			aria-label='Calendar'
 			className='w-full rounded-2xl border border-black/5 bg-white/70 p-3 shadow-xl shadow-black/5 backdrop-blur-md dark:border-white/10 dark:bg-slate-900/60 dark:shadow-black/20'
 		>
-			{/* header */}
 			<div className='mb-3 flex min-w-0 items-center justify-between'>
 				<Title heading='page'>Schedule</Title>
 				<Button onClick={() => open('createCalendarEvent')} className='w-[150px]'>
@@ -59,12 +71,9 @@ export function CalendarApp() {
 				</Button>
 			</div>
 
-			{/* calendar wrapper */}
 			<div className='sx-react-calendar-wrapper h-[900px] min-h-[420px] w-full'>
 				<ScheduleXCalendar calendarApp={calendar} />
 			</div>
 		</div>
 	);
 }
-
-export default CalendarApp;

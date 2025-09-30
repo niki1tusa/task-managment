@@ -23,13 +23,13 @@ export default function AddProfileForSubTask({ close }: Props) {
 	const { profile } = useProfile();
 	const { activeSubTask} = useSubTaskStore()
 	const { mutate, isPending } = useMutation({
+		mutationKey: ['add-profile-subtask'],
 		mutationFn: ({ subTaskId, profileId }: { subTaskId: string; profileId: string }) =>
 			addProfileForSubtask(subTaskId, profileId),
 		onSuccess: () => {
 			toast.success('Profiles successfully added to the Task!');
 			queryClient.invalidateQueries({ queryKey: ['tasks'] });
-			queryClient.invalidateQueries({ queryKey: ['profiles'] });
-
+			queryClient.invalidateQueries({ queryKey: ['profiles'] }); // <-- если что этот важнее
 			queryClient.refetchQueries({ queryKey: ['tasks'] });
 			close();
 		},

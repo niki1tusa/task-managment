@@ -3,6 +3,7 @@ import { Trash2Icon } from 'lucide-react';
 import { Avatar } from '@/components/ui/Avatar';
 
 import type { TTask } from '@/shared/types/task/task.types';
+
 import { useModalStore } from '@/store/modals.store';
 
 interface Props {
@@ -11,9 +12,9 @@ interface Props {
 }
 
 export default function TeamTaskPanelList({ activeTask, isPending }: Props) {
-	const {open} = useModalStore()
+	const { open } = useModalStore();
 	return (
-		<div className='flex h-full min-h-0 flex-col gap-1 overflow-y-auto rounded border bg-gray-50 p-2 py-2 shadow shadow-neutral-400 dark:bg-gray-900 dark:shadow-none'>
+		<div className='flex max-h-65 min-h-0 flex-col gap-1 overflow-y-auto rounded border bg-gray-50 p-2 py-2 shadow shadow-neutral-400 dark:bg-gray-900 dark:shadow-none'>
 			{activeTask?.task_participants
 				?.flatMap(p => (p.profile ? [p.profile] : []))
 				.map(profile => (

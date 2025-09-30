@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 
-import { Header } from '@/components/pages/dashboard/last-tasks/task/header/Header';
+import { Header } from '@/components/ui/header/Header';
 
 import type { TTask } from '@/shared/types/task/task.types';
 
@@ -23,9 +23,9 @@ export default function TeamTask({ task }: { task: TTask }) {
 				style={{ transformOrigin: 'left center' }}
 				className={clsx(
 					activeTask?.id === task.id
-						? 'border-2 border-sky-500 '
-						: 'border-2  border-white dark:border-white/20',
-					'2xl:text-md bg-task-base  rounded text-sm shadow shadow-neutral-400 transition-all hover:bg-gray-200 dark:hover:bg-gray-700'
+						? 'border-2 border-sky-500'
+						: 'border-2 border-white dark:border-white/20',
+					'2xl:text-md bg-task-base rounded text-sm shadow shadow-neutral-400 transition-all hover:bg-gray-200 dark:hover:bg-gray-700'
 				)}
 			>
 				<Header task={task} />

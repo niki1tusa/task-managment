@@ -32,7 +32,7 @@ export default function TeamTaskPanel({ taskOwner, isPending }: Props) {
 					<>
 						<div className='flex items-baseline gap-2'>
 							<Title>Owner:</Title>
-							<span className='text-foreground/60 text-lg'>{taskOwner.name}</span>
+							<span className='text-foreground/60 text-lg'>{taskOwner ? taskOwner.name: ''}</span>
 						</div>
 						<div className='flex items-center gap-10'>
 							<Title>Participants</Title>

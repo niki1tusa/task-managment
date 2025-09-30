@@ -241,21 +241,24 @@ export type Database = {
       schedule_events: {
         Row: {
           event_date: string
-          event_time: string
+          event_end: string
+          event_start: string
           owner_id: string
           schedule_id: string
           title: string | null
         }
         Insert: {
           event_date: string
-          event_time: string
+          event_end: string
+          event_start: string
           owner_id: string
           schedule_id?: string
           title?: string | null
         }
         Update: {
           event_date?: string
-          event_time?: string
+          event_end?: string
+          event_start?: string
           owner_id?: string
           schedule_id?: string
           title?: string | null

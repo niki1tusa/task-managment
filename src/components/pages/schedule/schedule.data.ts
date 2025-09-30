@@ -20,9 +20,18 @@ export const CALENDAR_EVENT_FIELDS = [
 	{
 		type: 'field',
 		props: {
-			labelText: 'Time',
-			registerName: 'event_time',
+			labelText: 'Start',
+			registerName: 'event_start',
 			placeholderText: '10:00',
+			type: 'time',
+		},
+	},
+		{
+		type: 'field',
+		props: {
+			labelText: 'End',
+			registerName: 'event_end',
+			placeholderText: '12:00',
 			type: 'time',
 		},
 	},

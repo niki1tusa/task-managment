@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import { SquareMinus, SquarePlus } from 'lucide-react';
 
+import { Checkbox } from '@/components/animate-ui/base/checkbox';
 import { Title } from '@/components/ui/Title';
 
 import type { TTask } from '@/shared/types/task/task.types';
@@ -47,48 +48,68 @@ export default function TeamSubtaskPanel({ activeTask }: { activeTask: TTask }) 
 							</div>
 						</button>
 						{activeSubTask?.id === subTask.id && (
-							<motion.div
-								initial={{ height: 'auto', opacity: 0 }}
-								animate={{ height: 'auto', opacity: 1 }}
-								exit={{ height: 0, opacity: 0 }}
-								transition={{ duration: 0.4 }}
-								style={{ overflow: 'hidden' }}
-								className={clsx(
-									'mt-1 ml-5 flex items-center justify-between rounded px-2 py-1.5 text-left text-sm',
-									responsibleProfile ? 'bg-green-500/20' : 'bg-amber-500/20'
+							<>
+								<motion.div
+									initial={{ height: 'auto', opacity: 0 }}
+									animate={{ height: 'auto', opacity: 1 }}
+									exit={{ height: 0, opacity: 0 }}
+									transition={{ duration: 0.4 }}
+									style={{ overflow: 'hidden' }}
+									className={clsx(
+										'mt-1 ml-5 flex items-center justify-between rounded px-2 py-1.5 text-left text-sm shadow shadow-neutral-400',
+										responsibleProfile ? 'bg-green-500/20' : 'bg-amber-500/20'
+									)}
+								>
+									<div className='flex items-center gap-2'>
+										<span>Responsible for the subtask:</span>
+										{responsibleProfile ? <span>{responsibleProfile?.name}</span> : ' not assigned'}
+									</div>
+									<div className='flex gap-1'>
+										<button
+											type='button'
+											className={clsx(
+												(profile?.id !== activeTask.owner_id || subTask.profile_id !== null) &&
+													'text-gray'
+											)}
+											disabled={profile?.id !== activeTask.owner_id || subTask.profile_id !== null}
+											onClick={() => {
+												open('addResponseProfileForSubTask');
+											}}
+										>
+											<SquarePlus />
+										</button>
+										<button
+											type='button'
+											className={clsx(
+												(profile?.id !== activeTask.owner_id || subTask.profile_id === null) &&
+													'text-gray'
+											)}
+											disabled={profile?.id !== activeTask.owner_id || subTask.profile_id === null}
+											onClick={() => open('removeResponseProfileForSubTask', subTask)}
+										>
+											<SquareMinus />
+										</button>
+									</div>
+								</motion.div>
+								{responsibleProfile && (
+									<motion.div
+										initial={{ height: 'auto', opacity: 0 }}
+										animate={{ height: 'auto', opacity: 1 }}
+										exit={{ height: 0, opacity: 0 }}
+										transition={{ duration: 0.4 }}
+										style={{ overflow: 'hidden' }}
+										className={clsx(
+											'mt-1 ml-5 flex items-center justify-between rounded px-2 py-1.5 text-left text-sm shadow shadow-neutral-400',
+											subTask.is_completed ? 'bg-green-500/20' : 'bg-amber-500/20'
+										)}
+									>
+										<div className='flex items-center gap-2'>
+											<span>Mark of completion:</span>
+											<Checkbox className='border-2 border-black/50' />
+										</div>
+									</motion.div>
 								)}
-							>
-								<div className='flex items-center gap-2'>
-									<span>Responsible for the subtask:</span>
-									{responsibleProfile ? <span>{responsibleProfile?.name}</span> : ' not assigned'}
-								</div>
-								<div className='flex gap-1'>
-									<button
-										type='button'
-										className={clsx(
-											(profile?.id !== activeTask.owner_id || subTask.profile_id !== null) &&
-												'text-gray'
-										)}
-										disabled={profile?.id !== activeTask.owner_id || subTask.profile_id !== null}
-										onClick={() => {
-											open('addResponseProfileForSubTask');
-										}}
-									>
-										<SquarePlus />
-									</button>
-									<button
-										type='button'
-										className={clsx(
-											(profile?.id !== activeTask.owner_id || subTask.profile_id === null) &&
-												'text-gray'
-										)}
-										disabled={profile?.id !== activeTask.owner_id || subTask.profile_id === null}
-										onClick={() => open('removeResponseProfileForSubTask', subTask)}
-									>
-										<SquareMinus />
-									</button>
-								</div>
-							</motion.div>
+							</>
 						)}
 					</div>
 				))}

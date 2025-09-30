@@ -7,8 +7,9 @@ import { Avatar } from '@/components/ui/Avatar';
 
 import type { TTask } from '@/shared/types/task/task.types';
 
-import { useFormatDateForTask } from '@/hooks/useFormatDateForTask';
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
+
+import { useFormatDateForTask } from '@/hooks/useFormatDateForTask';
 
 export const Header = ({ task }: { task: TTask }) => {
 	const { TaskIcon, displayDue } = useFormatDateForTask(task);
@@ -20,7 +21,7 @@ export const Header = ({ task }: { task: TTask }) => {
 				<div className='flex h-9 min-w-9 items-center justify-center rounded-full shadow shadow-neutral-400'>
 					<TaskIcon color='#725cee' />
 				</div>
-				<div className={clsx(isTeamPage ? 'flex items-center ' :'grid grid-rows-2' )}>
+				<div className={clsx(isTeamPage ? 'flex items-center' : 'grid grid-rows-2')}>
 					<span className='mb-1 flex items-center leading-none font-medium break-words'>
 						{task.title}
 					</span>
@@ -29,12 +30,37 @@ export const Header = ({ task }: { task: TTask }) => {
 			</div>
 
 			<div className='flex -space-x-2'>
-				{task.task_participants
-					.filter(u => Boolean(u.profile))
-					.slice(0, 3)
-					.map((user, i) => (
-						<Avatar key={`${user.profile_id}-${i}`} img={user.profile.avatar_path} isHoverResolution={true} />
-					))}
+				{task.task_participants.length > 3 ? (
+					<>
+						{task.task_participants
+							.filter(u => Boolean(u.profile))
+							.slice(0, 2)
+							.map((user, i) => {
+								return (
+									<Avatar
+										key={`${user.profile_id}-${i}`}
+										img={user.profile.avatar_path}
+										isHoverResolution={true}
+									/>
+								);
+							})}
+						<div className='bg-white flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border shadow shadow-neutral-400'>
+							+{task.task_participants.length - 2}
+						</div>
+					</>
+				) : (
+					task.task_participants
+						.filter(u => Boolean(u.profile))
+						.map((user, i) => {
+							return (
+								<Avatar
+									key={`${user.profile_id}-${i}`}
+									img={user.profile.avatar_path}
+									isHoverResolution={true}
+								/>
+							);
+						})
+				)}
 			</div>
 		</div>
 	);

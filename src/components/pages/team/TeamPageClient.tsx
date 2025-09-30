@@ -9,14 +9,13 @@ import Textarea from '@/components/ui/field/Textarea';
 
 import { useTaskStore } from '@/store/task.store';
 
+import { useAllTaskWithoutFilter } from '@/hooks/useAllTaskWithoutFilter';
 import { useMyTasks } from '@/hooks/useMyTasks';
 import { useProfile } from '@/hooks/useProfile';
 
-import TeamTask from '../../../components/pages/team/TeamTask';
-import TeamTaskPanel from '../../../components/pages/team/TeamTaskPanel';
-
+import TeamTask from './TeamTask';
+import TeamTaskPanel from './TeamTaskPanel';
 import { getAllProfile } from '@/services/profile/profile-client.service';
-import { useAllTaskWithoutFilter } from '@/hooks/useAllTaskWithoutFilter';
 
 export default function TeamPageClient() {
 	const [value, setValue] = useState('');
@@ -45,7 +44,7 @@ export default function TeamPageClient() {
 			default:
 				return query;
 		}
-	}, [tasks, value, selectTypeTasks]);
+	}, [profile, tasks, value, selectTypeTasks]);
 
 	const taskOwner = profiles?.find(profile => profile.id === activeTask?.owner_id);
 	return (
@@ -60,7 +59,7 @@ export default function TeamPageClient() {
 					<Tabs
 						value={selectTypeTasks}
 						onValueChange={value => setSelectTypeTasks(value as typeof selectTypeTasks)}
-						className='mt-5 grid rounded-sm shadow-sm'
+						className='mt-5 grid rounded-lg shadow shadow-neutral-400'
 					>
 						<TabsList className='bg-primary/50 flex w-full'>
 							<TabsTrigger
@@ -85,14 +84,14 @@ export default function TeamPageClient() {
 					</Tabs>
 				</div>
 				{/* list */}
-				<div className='flex flex-col gap-3 overflow-y-auto rounded border-2 p-3'>
+				<div className='flex max-h-170 flex-col gap-3 overflow-y-auto rounded border-2 p-3 shadow shadow-neutral-400'>
 					{taskFiltered?.map(task => (
 						<TeamTask task={task} key={task.id} />
 					))}
 				</div>
 			</div>
 			{/* second col */}
-			{taskOwner && <TeamTaskPanel isPending={isPending} taskOwner={taskOwner} />}
+			<TeamTaskPanel isPending={isPending} taskOwner={taskOwner} />
 		</div>
 	);
 }

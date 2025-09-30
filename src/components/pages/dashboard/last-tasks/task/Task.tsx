@@ -5,13 +5,15 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import type { TSubTaskRow, TTask } from '@/shared/types/task/task.types';
+import type { TSubTaskRow } from '@/shared/types/subtask/subtask.types';
+import type { TTask } from '@/shared/types/task/task.types';
 
 import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
+import { Header } from '../../../../ui/header/Header';
+
 import { Footer } from './Footer';
 import { StatusBar } from './StatusBar';
-import { Header } from './header/Header';
 
 export const Task = ({ task }: { task: TTask }) => {
 	const router = useRouter();

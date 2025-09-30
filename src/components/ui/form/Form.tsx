@@ -21,7 +21,6 @@ export default function Form<T extends FieldValues>({
 	watch,
 	control,
 	isPending,
-	isEmailVariant,
 }: IForm<T>) {
 	const router = useRouter();
 	const pathname = usePathname();

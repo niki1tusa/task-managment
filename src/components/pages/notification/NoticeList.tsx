@@ -27,23 +27,23 @@ export default function NoticeList({ notices }: Props) {
 		},
 	});
 	return (
-		<ul className='flex w-full flex-col gap-3 overflow-y-auto p-1'>
+		<ul className='flex max-h-160 w-full flex-col gap-3 overflow-y-auto rounded border p-2 bg-white dark:bg-gray-900'>
 			{notices.length > 0 ? (
 				notices.map(notice => {
 					return (
-						<li key={notice.id} className='grid grid-cols-[auto_1fr_auto] items-start gap-3 '>
+						<li key={notice.id} className='grid grid-cols-[auto_1fr_auto] items-start gap-3'>
 							{/* checkbox */}
 							<Checkbox
-								className='mt-2 shadow shadow-neutral-300 dark:shadow-none ring-1 ring-gray/40 bg-input/30 hover:bg-input/50'
+								className='ring-gray/40 bg-input/30 hover:bg-input/50 mt-2 shadow ring-2 dark:ring-gray shadow-neutral-300 dark:shadow-none'
 								onCheckedChange={() => mutate({ id: notice.id, status: !notice.status })}
 							/>
 
 							{/* card */}
 							<div
 								className={clsx(
-									'min-w-0 rounded-lg border p-4 shadow-sm ring-1 ring-transparent transition-all hover:shadow-neutral-400 dark:hover:shadow-none dark:bg-gray-700 dark:hover:bg-gray-800',
+									'min-w-0 rounded-lg border p-4 shadow-sm ring-1 ring-transparent transition-all hover:shadow-neutral-400 dark:bg-gray-700 dark:hover:bg-gray-800 dark:hover:shadow-none',
 									notice.type === 'urgent'
-										? 'bg-red-50 hover:bg-red-100 '
+										? 'bg-red-50 hover:bg-red-100'
 										: notice.type === 'achievement'
 											? 'bg-green-50 hover:bg-green-100'
 											: notice.type === 'advice'
