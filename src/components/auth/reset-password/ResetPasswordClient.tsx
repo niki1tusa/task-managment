@@ -34,6 +34,7 @@ export function ResetPassowrdClient() {
 		mutationFn: (payload: string) => updateUserPassword(payload),
 	});
 	// submit
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const onSubmit: SubmitHandler<TResetPasswordForm> = async data => {
 		try {
 			await mutateAsync(data.password);

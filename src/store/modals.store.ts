@@ -18,11 +18,10 @@ type ModalType =
 	| 'addResponseProfileForSubTask'
 	| 'removeResponseProfileForSubTask'
 	| null;
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface ModalState {
 	type: ModalType;
-	payload?: any;
-	open: (type: ModalType, payload?: any) => void;
+	payload?: unknown;
+	open: (type: ModalType, payload?: unknown) => void;
 	close: () => void;
 }
 

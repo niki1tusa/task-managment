@@ -56,7 +56,7 @@ export function LoginClient() {
 			toast.error('Could not send magic link. Please try again.');
 		}
 	};
-
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const onSubmitPhone: SubmitHandler<TLoginPhonePasswordForm> = async ({ phone, password }) => {
 		try {
 			await mutateAsync({ phone, password });

@@ -41,8 +41,10 @@ export function useProfileList(profile: TProfileRow) {
 	});
 	// create channel
 	const isAddProfileModal = type === 'insertProfileInChannel';
-	const participantIds = new Set(participants.flatMap(p => p.profile ?? []).map(pr => pr.id));
-
+	const participantIds = useMemo(
+		() => new Set(participants.flatMap(p => p.profile ?? []).map(pr => pr.id)),
+		[participants]
+	);
 	const partnerSet = useMemo(() => new Set(partnerIds), [partnerIds]);
 
 	const profiles = useMemo(() => {

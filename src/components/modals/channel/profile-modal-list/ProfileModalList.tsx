@@ -13,7 +13,7 @@ import {
 	createClientChannelDirect,
 	createClientChannelGroup,
 } from '@/services/channel/channel-client.service';
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface Props {
 	close: () => void;
 	profile: TProfileRow;

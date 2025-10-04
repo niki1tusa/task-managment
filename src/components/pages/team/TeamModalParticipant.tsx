@@ -6,7 +6,7 @@ import type { TProfileRow } from '@/shared/types/task/task.types';
 import { useTaskStore } from '@/store/task.store';
 
 import { useTeamParticipants } from './useTeamParticipants';
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface Props {
 	close: () => void;
 	profile: TProfileRow;

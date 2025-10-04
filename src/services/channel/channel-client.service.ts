@@ -9,12 +9,6 @@ import type { TProfileRow } from '@/shared/types/task/task.types';
 import { createClient } from '@/utils/supabase/client';
 
 // read
-function throwSB(error: any) {
-	const msg = [error?.message, error?.code, error?.details, error?.hint]
-		.filter(Boolean)
-		.join(' | ');
-	throw new Error(msg || 'Unknown Supabase error');
-}
 
 export async function getClientChannels() {
 	const supabase = createClient();
@@ -30,7 +24,7 @@ export async function getClientChannels() {
 		.select('*')
 		.order('created_at', { ascending: true });
 
-	if (error) throwSB(error.message);
+	if (error) throw new Error(error.message);
 	return data ?? [];
 }
 const UUID_V4 = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -43,7 +37,7 @@ export async function getChannelParticipantsById(id: string) {
 		.select('role, profile:profile_id(id, name, avatar_path, email)')
 		.eq('channel_id', id);
 
-	if (error || !data) throwSB(error?.message || 'Channel not found');
+	if (error || !data) throw new Error(error?.message || 'Channel not found');
 	return (data ?? []) as TChannelParticipantsRow[];
 }
 
