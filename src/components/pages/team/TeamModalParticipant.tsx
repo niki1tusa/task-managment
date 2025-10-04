@@ -10,7 +10,7 @@ interface Props {
 	close: () => void;
 	profile: TProfileRow;
 	setOpenList?: (arg: boolean) => void;
-	mutateFnc?: (arg: unknown) => void;
+	mutateFnc?: (arg: string[]) => void;
 	isPending?: boolean;
 }
 export default function TeamModalParticipant({ profile, close, mutateFnc, isPending }: Props) {

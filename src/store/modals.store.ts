@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { create } from 'zustand';
 
 type ModalType =
@@ -20,8 +21,8 @@ type ModalType =
 	| null;
 interface ModalState {
 	type: ModalType;
-	payload?: unknown;
-	open: (type: ModalType, payload?: unknown) => void;
+	payload?: any;
+	open: (type: ModalType, payload?: any) => void;
 	close: () => void;
 }
 
@@ -31,3 +32,4 @@ export const useModalStore = create<ModalState>(set => ({
 	open: (type, payload) => set({ type, payload }),
 	close: () => set({ type: null, payload: undefined }),
 }));
+/* eslint-enable @typescript-eslint/no-explicit-any */

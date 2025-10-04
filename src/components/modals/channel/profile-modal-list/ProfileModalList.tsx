@@ -19,7 +19,7 @@ interface Props {
 	profile: TProfileRow;
 	typeChannel: string;
 	setOpenList?: (arg: boolean) => void;
-	mutateFnc?: (arg: unknown) => void;
+	mutateFnc?: (arg: string[]) => void;
 	isPending?: boolean;
 }
 export default function ProfileModalList({
