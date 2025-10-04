@@ -7,7 +7,6 @@ import { useModalStore } from '@/store/modals.store';
 
 import { useProfile } from '@/hooks/useProfile';
 
-import TeamModalParticipant from '../../pages/team/TeamModalParticipant';
 
 import { useSubTaskStore } from '@/store/subtask.store';
 import { addProfileForSubtask } from '@/services/tasks/subtask.service';

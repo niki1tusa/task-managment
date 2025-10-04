@@ -1,16 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import ProfileList from '@/components/modals/channel/profile-modal-list/ProfileList';
 import { Button } from '@/components/ui/button/Button';
 
 import type { TProfileRow } from '@/shared/types/task/task.types';
 
-import { useSubTaskStore } from '@/store/subtask.store';
 import { useTaskStore } from '@/store/task.store';
-
-import { useTeamParticipants } from './useTeamParticipants';
-import { getAllProfile } from '@/services/profile/profile-client.service';
 
 interface Props {
 	close: () => void;
@@ -19,16 +14,12 @@ interface Props {
 	mutateFnc?: (arg: any) => void;
 	isPending?: boolean;
 }
-export default function TeamModalPofileListForSubtask({
-	close,
-	mutateFnc,
-	isPending,
-}: Props) {
+export default function TeamModalPofileListForSubtask({ close, mutateFnc, isPending }: Props) {
 	const [selectProfileId, setSelectProfileId] = useState<string | null>(null);
 	const { activeTask } = useTaskStore();
 	// all profiles
 	const profiles = activeTask?.task_participants.flatMap(i => i.profile) ?? [];
-    // handle
+	// handle
 	const handleAddProfile = (profileToAdd: TProfileRow) => {
 		setSelectProfileId(profileToAdd.id);
 	};

@@ -13,7 +13,6 @@ import { useEffect, useMemo } from 'react';
 import 'temporal-polyfill/global';
 
 import { Title } from '@/components/ui/Title';
-// вынес кастомные стили сюда
 import { Button } from '@/components/ui/button/Button';
 
 import { useModalStore } from '@/store/modals.store';
@@ -41,7 +40,7 @@ export default function CalendarApp() {
 		plugins: [eventsService],
 	});
 
-	const { data, isLoading } = useQuery<TEventRow[]>({
+	const { data } = useQuery<TEventRow[]>({
 		queryKey: ['events'],
 		queryFn: () => getAllEvents(),
 	});

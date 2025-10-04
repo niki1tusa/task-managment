@@ -1,6 +1,5 @@
 'use client';
 
-import type { Database } from '@/shared/types/db/db.types';
 import type {
 	TByAscOrDesc,
 	TStatus,
@@ -35,7 +34,9 @@ export async function getClientAllTask({
 }
 export async function getClientAllTaskWithoutSorting() {
 	const client = createClient();
-	const {data, error} = await client.from('task').select(`*, sub_task(*),task_participants(profile(*))`);
+	const { data, error } = await client
+		.from('task')
+		.select(`*, sub_task(*),task_participants(profile(*))`);
 	if (error || !data) throw new Error(error?.message || 'Task not found/ get-all-task');
 	return data;
 }
@@ -73,7 +74,6 @@ export async function createClientTask(task: TTaskCreateForm) {
 	}
 	return data;
 }
-
 
 // update
 export async function updateClientTask(id: string, task: TTaskEditForm) {
@@ -116,7 +116,6 @@ export async function deleteTaskParticipants(profileId: string) {
 	if (error) throw new Error(error?.message || 'Task not found, delete-task_participants');
 	return;
 }
-// TODO: 
+// TODO:
 // 1) auto-scroll for Panel and Team Task
-// 2) не происходит re-render for Panel 
-
+// 2) не происходит re-render for Panel
