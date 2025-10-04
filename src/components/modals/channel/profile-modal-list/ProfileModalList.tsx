@@ -13,13 +13,13 @@ import {
 	createClientChannelDirect,
 	createClientChannelGroup,
 } from '@/services/channel/channel-client.service';
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 interface Props {
 	close: () => void;
 	profile: TProfileRow;
 	typeChannel: string;
 	setOpenList?: (arg: boolean) => void;
-	mutateFnc?: (arg: any) => void;
+	mutateFnc?: (arg: unknown) => void;
 	isPending?: boolean;
 }
 export default function ProfileModalList({
@@ -119,18 +119,20 @@ export default function ProfileModalList({
 			/>
 			{setOpenList ? (
 				<div className='flex w-full gap-3 px-4 py-2'>
-					<Button
-						disable={selectProfileIds.length < 1}
-						onClick={() => {
-							typeChannel === 'group'
-								? handleCreateGroup(selectProfileIds)
-								: handleCreateDirect(
-										profilesData?.find(profile => profile.id === selectProfileIds[0])!
-									);
-						}}
-					>
-						Create
-					</Button>
+					{profilesData && (
+						<Button
+							disable={selectProfileIds.length < 1}
+							onClick={() => {
+								typeChannel === 'group'
+									? handleCreateGroup(selectProfileIds)
+									: handleCreateDirect(
+											profilesData.find(profile => profile.id === selectProfileIds[0])!
+										);
+							}}
+						>
+							Create
+						</Button>
+					)}
 					<Button
 						onClick={() => {
 							setOpenList(false);

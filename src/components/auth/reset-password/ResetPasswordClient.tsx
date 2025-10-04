@@ -42,8 +42,9 @@ export function ResetPassowrdClient() {
 			toast.success('New password has been set!');
 			reset();
 			router.replace(PUBLIC_PAGES.LOGIN);
-		} catch (e: any) {
-			toast.error(e?.message || 'Could not update password. Try again.');
+		} catch (e: unknown) {
+			const error = e as { message?: string };
+			toast.error(error?.message || 'Could not update password. Try again.');
 		}
 	};
 

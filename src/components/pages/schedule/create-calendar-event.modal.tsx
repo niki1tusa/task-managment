@@ -68,11 +68,7 @@ export function CreateCalendarEvent({ close }: Props) {
 				<Form<TScheduleForm>
 					formElement={CALENDAR_EVENT_FIELDS}
 					register={form.register}
-					handleOnSubmit={form.handleSubmit(handleAddEvent, errors => {
-						console.warn('[RHF] submit blocked by errors:', errors);
-						const first = Object.values(errors)[0] as any;
-						toast.error(first?.message ?? 'Please fix the highlighted fields');
-					})}
+					handleOnSubmit={form.handleSubmit(handleAddEvent)}
 					btnText='Add'
 					control={form.control}
 					isPending={isPending}

@@ -56,13 +56,13 @@ export function LoginClient() {
 			toast.error('Could not send magic link. Please try again.');
 		}
 	};
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const onSubmitPhone: SubmitHandler<TLoginPhonePasswordForm> = async ({ phone, password }) => {
 		try {
 			await mutateAsync({ phone, password });
 			toast.success('Signed in!');
-		} catch (e: any) {
-			toast.error(e?.message || 'Invalid phone or password.');
+		} catch (e: unknown) {
+			const error = e as { message?: string };
+			toast.error(error?.message || 'Invalid phone or password.');
 		}
 	};
 	return (

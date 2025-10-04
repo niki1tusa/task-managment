@@ -14,7 +14,7 @@ interface Props {
 	mutateFnc?: (arg: any) => void;
 	isPending?: boolean;
 }
-export default function TeamModalPofileListForSubtask({ close, mutateFnc, isPending }: Props) {
+export default function TeamModalProfileListForSubtask({ close, mutateFnc, isPending }: Props) {
 	const [selectProfileId, setSelectProfileId] = useState<string | null>(null);
 	const { activeTask } = useTaskStore();
 	// all profiles
