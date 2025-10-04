@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { CalendarFold } from 'lucide-react';
 import { type ComponentRef, useRef } from 'react';
 import DatePicker from 'react-datepicker';
-import { Controller, type FieldValues, type Path } from 'react-hook-form';
+import { Controller, type FieldValues } from 'react-hook-form';
 
 import type { IDateField } from '../form/form.types';
 

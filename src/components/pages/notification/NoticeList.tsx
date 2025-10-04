@@ -23,7 +23,7 @@ export default function NoticeList({ notices }: Props) {
 			queryClient.invalidateQueries({ queryKey: ['notices'], exact: false });
 		},
 		onError: err => {
-			toast.error('Notice is error!');
+			toast.error(`Notice is error! ${err}`);
 		},
 	});
 	return (

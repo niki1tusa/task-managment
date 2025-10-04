@@ -11,7 +11,7 @@ interface Props {
 }
 export default function ClientTaskPage({ id, tasks }: Props) {
 	const data = tasks;
-	const findTask: TTask = data?.find(task => task.id === id)!;
+	const findTask: TTask = data.find(task => task.id === id)!;
 	const TaskIcon = MODAL_ICON[findTask.icon as IconName];
 	const date = Math.ceil(
 		(new Date(findTask.due_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24)

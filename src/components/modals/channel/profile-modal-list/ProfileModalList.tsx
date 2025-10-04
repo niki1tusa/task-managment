@@ -67,7 +67,7 @@ export default function ProfileModalList({
 			close();
 		},
 		onError: err => {
-			toast.error('Channel is error!');
+			toast.error(`Channel is error! ${err}`);
 		},
 	});
 	// handle

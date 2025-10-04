@@ -1,7 +1,6 @@
-import { CalendarDays, ClipboardMinus, UsersRound } from 'lucide-react';
+import { CalendarDays, UsersRound } from 'lucide-react';
 
 import { Bell } from '@/components/animate-ui/icons/bell';
-import { Kanban } from '@/components/animate-ui/icons/kanban';
 import { LayoutDashboard } from '@/components/animate-ui/icons/layout-dashboard';
 import { MessageCircleMoreIcon } from '@/components/animate-ui/icons/message-circle-more';
 import { SettingsIcon } from '@/components/animate-ui/icons/settings';

@@ -27,7 +27,7 @@ import {
 export default function SettingsClientPage() {
 	const form = useForm<TSettingsForm>();
 	const queryClient = useQueryClient();
-	const [_, setSelectFile] = useState<null | string>(null);
+	const [, setSelectFile] = useState<null | string>(null);
 	const { profile, isLoading } = useProfile();
 
 	useEffect(() => {
