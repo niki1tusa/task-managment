@@ -128,9 +128,11 @@ export default function ProfileModalList({
 						<Button
 							disable={selectProfileIds.length < 1}
 							onClick={() => {
-								typeChannel === 'group'
-									? handleCreateGroup(selectProfileIds)
-									: handleCreateDirect(picked);
+								if (typeChannel === 'group') {
+									handleCreateGroup(selectProfileIds);
+								} else {
+									handleCreateDirect(picked);
+								}
 							}}
 						>
 							Create
