@@ -1,10 +1,8 @@
 import { parseISO } from 'date-fns';
 
 import { type IconName, MODAL_ICON } from '@/shared/data/icon.data';
-import type { TSubTaskRow, TTask } from '@/shared/types/task/task.types';
-
-
-    //TODO: завтрашний день считается - today, check calculating
+import type {  TTask } from '@/shared/types/task/task.types';
+import type { TSubTaskRow } from '@/shared/types/subtask/subtask.types';
 
 export function useFormatDateForTask(task: TTask) {
 	const TaskIcon = MODAL_ICON[task.icon as IconName];

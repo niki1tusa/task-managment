@@ -15,6 +15,7 @@ export const TASK_EDIT_FIELDS = [
 	{
 		type: 'date',
 		props: {
+			name: 'due_date',
 			labelText: 'Due',
 		},
 	},

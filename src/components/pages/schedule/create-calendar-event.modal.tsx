@@ -27,7 +27,7 @@ export function CreateCalendarEvent({ close }: Props) {
 			title: '',
 			event_date: '',
 			event_start: '',
-			event_end: ''
+			event_end: '',
 		},
 	});
 	const { mutate, isPending } = useMutation({
@@ -42,18 +42,37 @@ export function CreateCalendarEvent({ close }: Props) {
 			toast.error('Calendar is error!');
 		},
 	});
+	function toHHMMSS(t: string) {
+		return /^\d{2}:\d{2}:\d{2}$/.test(t) ? t : `${t}:00`;
+	}
+
 	const handleAddEvent: SubmitHandler<TScheduleForm> = data => {
-		console.log(data);
-		mutate({ ...data, owner_id: profile?.id || '' });
+		if (!profile?.id) {
+			toast.error('You must be logged in to create events');
+			return;
+		}
+		const payload: TEventInsert = {
+			title: data.title.trim(),
+			event_date: data.event_date,
+			event_start: toHHMMSS(data.event_start),
+			event_end: toHHMMSS(data.event_end),
+			owner_id: profile.id,
+		};
+		console.log('msg:', payload);
+		mutate(payload);
+		close()
 	};
-// TODO: сравнить типы table supabase, zod, IForm
 	return (
 		<Modal close={close} title={`Add a new events`}>
 			<div className='flex w-full flex-col gap-3'>
 				<Form<TScheduleForm>
 					formElement={CALENDAR_EVENT_FIELDS}
 					register={form.register}
-					handleOnSubmit={form.handleSubmit(handleAddEvent)}
+					handleOnSubmit={form.handleSubmit(handleAddEvent, errors => {
+						console.warn('[RHF] submit blocked by errors:', errors);
+						const first = Object.values(errors)[0] as any;
+						toast.error(first?.message ?? 'Please fix the highlighted fields');
+					})}
 					btnText='Add'
 					control={form.control}
 					isPending={isPending}

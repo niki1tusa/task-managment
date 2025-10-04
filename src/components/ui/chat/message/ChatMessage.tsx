@@ -6,8 +6,7 @@ import { usePathname } from 'next/navigation';
 import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/animate-ui/base/popover';
-
-import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
+import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
 
 import { useProfile } from '@/hooks/useProfile';
 
@@ -94,7 +93,7 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup, value }: Props) {
 										}}
 										className={clsx(
 											'relative rounded-2xl px-3 py-2 text-[1rem] 2xl:max-w-[600px] 2xl:text-xl',
-											isDashboardPage ? 'max-w-[100px] ' : 'w-fit',
+											isDashboardPage ? 'max-w-[100px]' : 'w-fit',
 											'[overflow-wrap:anywhere] break-words hyphens-auto whitespace-pre-wrap',
 											isOwnMessage
 												? clsx(
@@ -122,7 +121,7 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup, value }: Props) {
 								side='bottom'
 								align={'end'}
 								sideOffset={8}
-								className='bg-background dark:bg-white dark:text-black w-[240px] rounded-sm border p-3 shadow shadow-neutral-400'
+								className='bg-background w-[240px] rounded-sm border p-3 shadow shadow-neutral-400 dark:bg-white dark:text-black'
 							>
 								<MessageMenuPopover msg={message} onClose={() => setOpenId(null)} />
 							</PopoverContent>

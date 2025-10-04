@@ -5,8 +5,7 @@ import { usePathname } from 'next/navigation';
 
 import { Sidebar } from '@/components/sidebar/Sidebar';
 import Chat from '@/components/ui/chat/Chat';
-
-import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
+import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
 
 export default function DashboardClientLayout({ children }: { children: React.ReactNode }) {
 	const pathname = usePathname();

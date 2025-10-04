@@ -5,10 +5,9 @@ import { Kanban } from '@/components/animate-ui/icons/kanban';
 import { LayoutDashboard } from '@/components/animate-ui/icons/layout-dashboard';
 import { MessageCircleMoreIcon } from '@/components/animate-ui/icons/message-circle-more';
 import { SettingsIcon } from '@/components/animate-ui/icons/settings';
+import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
 
 import type { IMenuItem } from '@/shared/types/sidebar/menu.item.types';
-
-import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
 export const MENU: IMenuItem[] = [
 	{

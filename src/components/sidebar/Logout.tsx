@@ -1,8 +1,7 @@
 import { useRouter } from 'next/navigation';
 
 import { AnimateIcon } from '@/components/animate-ui/icons/icon';
-
-import { PUBLIC_PAGES } from '@/config/public-page.config';
+import { PUBLIC_PAGES } from '@/components/ui/config/public-page.config';
 
 import { createClient } from '@/utils/supabase/client';
 
@@ -19,12 +18,12 @@ export default function Logout() {
 		}
 	}
 	return (
-		<nav className='flex w-full flex-col gap-4 text-gray'>
+		<nav className='text-gray flex w-full flex-col gap-4'>
 			<span className='border-gray/30 mt-4 block w-[80%] border-b-2' />
 			<Title isMenuTitle={true}>LOGOUT</Title>
 			<AnimateIcon animateOnHover>
 				<button onClick={signOut} className='flex items-center gap-2'>
-					<LogOut size={20} /> 
+					<LogOut size={20} />
 				</button>
 			</AnimateIcon>
 		</nav>

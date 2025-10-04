@@ -8,24 +8,23 @@ import { Avatar } from '@/components/ui/Avatar';
 import ChatInput from '@/components/ui/chat/ChatInput';
 import ChatMessage from '@/components/ui/chat/message/ChatMessage';
 import { useChat } from '@/components/ui/chat/useChat';
-
-import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
+import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
 
 import { useChannelStore } from '@/store/channel.store';
 
 import { useClickOutside } from '@/hooks/useClickOutside';
+import { useProfile } from '@/hooks/useProfile';
 
 import { Button } from '../button/Button';
 import Textarea from '../field/Textarea';
 
 import { GROUP_GAP_MINUTES, minsDiff } from './messageUtils';
-import { useProfile } from '@/hooks/useProfile';
 
 export default function Chat() {
 	// store
 	const { activeChannel } = useChannelStore();
 	// hooks
-	const {profile} = useProfile()
+	const { profile } = useProfile();
 	const [isOpenInput, setIsOpenInput] = useState<boolean>(false);
 	const [value, setValue] = useState('');
 	const pathname = usePathname();
@@ -94,7 +93,7 @@ export default function Chat() {
 					</div>
 					<div className='flex flex-col'>
 						<div
-							className='text-sidebar-primary/80 dark:text-white text-[1rem] 2xl:text-[1.2rem]'
+							className='text-sidebar-primary/80 text-[1rem] 2xl:text-[1.2rem] dark:text-white'
 							id='chat-user-name'
 						>
 							{profile?.name}

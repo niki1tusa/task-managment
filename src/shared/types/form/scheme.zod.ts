@@ -49,9 +49,19 @@ export const ZSettingsScheme = z.object({
 	name: z.string().min(1, 'Name is required!'),
 	occupation: z.string().default('guest'),
 	email: z.string().min(1, 'Email is required').email(),
-	phone: z.string().trim().regex(/^\+[1-9]\d{7,14}$/, 'Use E.164 format, e.g. +15551234567'),
+	phone: z
+		.string()
+		.trim()
+		.regex(/^\+[1-9]\d{7,14}$/, 'Use E.164 format, e.g. +15551234567'),
 });
 // schedule
+const toYMD = (d: Date) => {
+	const y = d.getFullYear();
+	const m = String(d.getMonth() + 1).padStart(2, '0');
+	const day = String(d.getDate()).padStart(2, '0');
+	return `${y}-${m}-${day}`;
+};
+
 export const ZScheduleScheme = z.object({
   title: z.string().min(1, 'Name is required!'),
   event_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date (YYYY-MM-DD)'),
@@ -59,7 +69,7 @@ export const ZScheduleScheme = z.object({
   event_end: z.string().regex(/^\d{2}:\d{2}(:\d{2})?$/, 'Invalid time (HH:MM or HH:MM:SS)'),
 });
 
-export type TScheduleForm = z.infer<typeof ZScheduleScheme>
+export type TScheduleForm = z.infer<typeof ZScheduleScheme>;
 export type TSettingsForm = z.infer<typeof ZSettingsScheme>;
 export type TRegistrationForm = z.infer<typeof ZRegistrationScheme>;
 export type TTaskUpdateForm = z.infer<typeof ZTaskEditScheme>;
