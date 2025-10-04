@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 
 import ProfileList from '@/components/modals/channel/profile-modal-list/ProfileList';
@@ -6,7 +7,6 @@ import { Button } from '@/components/ui/button/Button';
 import type { TProfileRow } from '@/shared/types/task/task.types';
 
 import { useTaskStore } from '@/store/task.store';
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface Props {
 	close: () => void;
 	profile: TProfileRow;
@@ -50,3 +50,4 @@ export default function TeamModalProfileListForSubtask({ close, mutateFnc, isPen
 		</div>
 	);
 }
+/* eslint-enable @typescript-eslint/no-explicit-any */

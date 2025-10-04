@@ -36,7 +36,7 @@ export default function Chat() {
 	const visibleMessages = useMemo(() => {
 		const all = chat?.messages ?? [];
 		return isDashboard ? all.slice(-7) : all; // последние 7
-	}, [isDashboard, chat?.messages, value, chat]);
+	}, [value, chat]);
 
 	const renderMessages = useMemo(() => {
 		if (!chat) return null;

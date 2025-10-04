@@ -94,6 +94,11 @@ export default function ProfileModalList({
 		const filtered = selectProfileIds.filter(id => id !== profileToAdd.id);
 		setSelectProfileIds([...filtered]);
 	};
+	const picked = profilesData?.find(p => p.id === selectProfileIds[0]);
+	if (!picked) {
+		toast.error('Select a participant first');
+		return;
+	}
 	const isAddProfileModal = type === 'insertProfileInChannel';
 	return (
 		<div className='flex h-auto max-h-[60vh] flex-col justify-start gap-2'>
@@ -125,9 +130,7 @@ export default function ProfileModalList({
 							onClick={() => {
 								typeChannel === 'group'
 									? handleCreateGroup(selectProfileIds)
-									: handleCreateDirect(
-											profilesData.find(profile => profile.id === selectProfileIds[0])!
-										);
+									: handleCreateDirect(picked);
 							}}
 						>
 							Create
