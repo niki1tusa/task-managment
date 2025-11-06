@@ -3,16 +3,15 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import type { TChannelInsert } from '@/components/pages/messages/channel/channel.types';
 import { Button } from '@/components/ui/button/Button';
+import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
 import Modal from '@/components/ui/modal/Modal';
 
 import type { TTask } from '@/shared/types/task/task.types';
-
-import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
 import { useChannels } from '@/hooks/useChannels';
 import { useProfile } from '@/hooks/useProfile';
@@ -62,8 +61,8 @@ export function CreateChannelModal({ close }: Props) {
 		close();
 	}
 
-	const filteredTasks = tasks?.data?.filter(task =>
-		!(channels ?? []).some(channel => channel.task_id === task.id)
+	const filteredTasks = tasks?.data?.filter(
+		task => !(channels ?? []).some(channel => channel.task_id === task.id)
 	);
 	return (
 		<Modal close={close} title={`Create new channel ${typeChannel}`}>
@@ -73,7 +72,9 @@ export function CreateChannelModal({ close }: Props) {
 						<span className='text-lg'>Select the channel type:</span>
 						<div className='flex w-full justify-between gap-3'>
 							<Button onClick={() => setTypeChannel('group')}>Group</Button>
-							<Button disable={!filteredTasks?.length} onClick={() => setTypeChannel('task')}>Task</Button>
+							<Button disable={!filteredTasks?.length} onClick={() => setTypeChannel('task')}>
+								Task
+							</Button>
 							<Button onClick={() => setTypeChannel('direct')}>Direct</Button>
 						</div>
 					</>

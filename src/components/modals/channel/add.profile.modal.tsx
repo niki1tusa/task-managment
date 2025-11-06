@@ -28,7 +28,7 @@ export default function AddProfileInChannel({ close, activeChannel }: Props) {
 			queryClient.invalidateQueries({ queryKey: ['channels', 'profiles'], exact: false });
 			close();
 		},
-		onError: (error: unknown) => {
+		onError: (error) => {
 			toast.error(`Ошибка: ${error instanceof Error ? error.message : 'неизвестная'}`);
 		},
 	});

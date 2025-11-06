@@ -10,11 +10,10 @@ import { toast } from 'react-toastify';
 import { serverSignOut } from '@/app/(auth)/actions';
 
 import { Title } from '@/components/ui/Title';
+import { PUBLIC_PAGES } from '@/components/ui/config/public-page.config';
 import Form from '@/components/ui/form/Form';
 
 import { type TResetPasswordForm, ZResetPasswordScheme } from '@/shared/types/form/scheme.zod';
-
-import { PUBLIC_PAGES } from '@/config/public-page.config';
 
 import { resetPassowrdFields } from './reset-password.data';
 import { updateUserPassword } from '@/services/profile/profile-auth-client.service';
@@ -35,6 +34,7 @@ export function ResetPassowrdClient() {
 		mutationFn: (payload: string) => updateUserPassword(payload),
 	});
 	// submit
+
 	const onSubmit: SubmitHandler<TResetPasswordForm> = async data => {
 		try {
 			await mutateAsync(data.password);
@@ -42,8 +42,9 @@ export function ResetPassowrdClient() {
 			toast.success('New password has been set!');
 			reset();
 			router.replace(PUBLIC_PAGES.LOGIN);
-		} catch (e: any) {
-			toast.error(e?.message || 'Could not update password. Try again.');
+		} catch (e: unknown) {
+			const error = e as { message?: string };
+			toast.error(error?.message || 'Could not update password. Try again.');
 		}
 	};
 

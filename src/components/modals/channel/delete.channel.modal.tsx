@@ -21,7 +21,7 @@ export default function DeleteChannelModal({ close }: Props) {
 			queryClient.invalidateQueries({ queryKey: ['channels'], exact: false });
 			close();
 		},
-		onError: (error: unknown) => {
+		onError: (error) => {
 			toast.error(`Ошибка: ${error instanceof Error ? error.message : 'неизвестная'}`);
 		},
 	});

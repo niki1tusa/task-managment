@@ -4,10 +4,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import { sendResetPasswordEmail, signInWithEmail } from '@/app/(auth)/actions';
+import { sendResetPasswordEmail } from '@/app/(auth)/actions';
 
 import { Title } from '@/components/ui/Title';
-import BtnReturnBack from '@/components/ui/button/BtnReturnBack';
 
 import { type TDropPasswordForm, ZDropPasswordScheme } from '@/shared/types/form/scheme.zod';
 
@@ -26,7 +25,7 @@ export function DropPasswordClient() {
 		resolver: zodResolver(ZDropPasswordScheme),
 	});
 	const onSubmit: SubmitHandler<TDropPasswordForm> = data => {
-		 sendResetPasswordEmail(data.email)
+		sendResetPasswordEmail(data.email)
 			.then(() => {
 				toast.success('Link is send your email, please check your email!');
 			})

@@ -10,7 +10,6 @@ import Textarea from '@/components/ui/field/Textarea';
 import { useTaskStore } from '@/store/task.store';
 
 import { useAllTaskWithoutFilter } from '@/hooks/useAllTaskWithoutFilter';
-import { useMyTasks } from '@/hooks/useMyTasks';
 import { useProfile } from '@/hooks/useProfile';
 
 import TeamTask from './TeamTask';

@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { CalendarFold } from 'lucide-react';
 import { type ComponentRef, useRef } from 'react';
 import DatePicker from 'react-datepicker';
-import { Controller, type FieldValues, type Path } from 'react-hook-form';
+import { Controller, type FieldValues } from 'react-hook-form';
 
 import type { IDateField } from '../form/form.types';
 
@@ -13,9 +13,9 @@ export function DateField<T extends FieldValues>({
 	placeholderText,
 	control,
 	errors,
+	name
 }: IDateField<T>) {
 	const refDate = useRef<ComponentRef<typeof DatePicker>>(null);
-	const name = 'due_date' as Path<T>;
 	return (
 		<div className='mb-5'>
 			<label className='mb-1 block text-sm font-medium 2xl:text-sm'>{labelText}:</label>
@@ -49,8 +49,8 @@ export function DateField<T extends FieldValues>({
 				</button>
 			</span>
 
-			{errors?.due_date?.message && (
-				<p className='text-sm text-red-500'>{errors?.due_date?.message as string}</p>
+			{errors?.name?.message && (
+				<p className='text-sm text-red-500'>{errors?.name?.message as string}</p>
 			)}
 		</div>
 	);

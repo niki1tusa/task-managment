@@ -4,10 +4,9 @@ import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 
 import { Avatar } from '@/components/ui/Avatar';
+import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
 
 import type { TTask } from '@/shared/types/task/task.types';
-
-import { DASHBOARD_PAGES } from '@/config/dashboard-page.config';
 
 import { useFormatDateForTask } from '@/hooks/useFormatDateForTask';
 
@@ -44,7 +43,7 @@ export const Header = ({ task }: { task: TTask }) => {
 									/>
 								);
 							})}
-						<div className='bg-white flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border shadow shadow-neutral-400'>
+						<div className='flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border bg-white shadow shadow-neutral-400'>
 							+{task.task_participants.length - 2}
 						</div>
 					</>

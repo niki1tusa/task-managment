@@ -3,10 +3,7 @@
 import Link from 'next/link';
 
 import { GradientText } from '@/components/animate-ui/text/gradient';
-import { Button } from '@/components/ui/button/Button';
 import { ToggleTheme } from '@/components/ui/toggle-theme/ToggleTheme';
-
-import { PUBLIC_PAGES } from '@/config/public-page.config';
 
 import { HomeSection } from './HomeSection';
 

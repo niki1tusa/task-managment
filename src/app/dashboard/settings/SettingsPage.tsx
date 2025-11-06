@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { LoaderCircle, Plus } from 'lucide-react';
 import Image from 'next/image';
 import { type ChangeEvent, useEffect, useState } from 'react';
-import { type SubmitHandler, useForm } from 'react-hook-form';
+import { type FieldNamesMarkedBoolean, type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import Skeleton from '@/components/ui/Skeleton';
@@ -27,7 +27,7 @@ import {
 export default function SettingsClientPage() {
 	const form = useForm<TSettingsForm>();
 	const queryClient = useQueryClient();
-	const [selectFile, setSelectFile] = useState<null | string>(null);
+	const [, setSelectFile] = useState<null | string>(null);
 	const { profile, isLoading } = useProfile();
 
 	useEffect(() => {
@@ -68,7 +68,7 @@ export default function SettingsClientPage() {
 			setSelectFile(publicUrl);
 			avatarMutate(publicUrl);
 		} catch (error) {
-			toast.error('Error by upload file!');
+			toast.error(`Error by upload file! ${error}`);
 		} finally {
 			(e.target as HTMLInputElement).value = '';
 		}
@@ -78,12 +78,12 @@ export default function SettingsClientPage() {
 		deleteAvatarMutate();
 		setSelectFile(null);
 	};
-	const onSubmitUpdateProfile: SubmitHandler<TSettingsForm> = async data => {
-		const dirty = form.formState.dirtyFields;
-		const profileFields = Object.fromEntries(
-			Object.keys(dirty).map(k => [k, (data as any)[k]])
-		) as Partial<TSettingsForm>;
-		if (Object.keys(profileFields).length) mutate({ ...profileFields });
+	const onSubmitUpdateProfile: SubmitHandler<TSettingsForm> = data => {
+		const dirty = form.formState.dirtyFields as FieldNamesMarkedBoolean<TSettingsForm>;
+		const profileFields = (Object.keys(dirty) as (keyof TSettingsForm)[])
+			.filter(k => (dirty as Record<string, boolean>)[k])
+			.reduce((acc, k) => ({ ...acc, [k]: data[k] }), {} as Partial<TSettingsForm>);
+		if (Object.keys(profileFields).length) mutate(profileFields);
 	};
 
 	return isLoading ? (
@@ -107,7 +107,7 @@ export default function SettingsClientPage() {
 			{/* right side */}
 			<div>
 				<div className='relative h-[300px] w-[300px] rounded-md border-2 p-1'>
-					{profile?.avatar_path &&(
+					{profile?.avatar_path && (
 						<Image
 							className='rounded'
 							src={profile.avatar_path}

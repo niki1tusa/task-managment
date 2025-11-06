@@ -36,7 +36,7 @@ export default function RootLayout({
 
 	return (
 		<html lang='en' suppressHydrationWarning>
-			<body className={`${poppins.variable} ${playfairDisplay.variable}antialiased`}>
+			<body className={`${poppins.variable} ${playfairDisplay.variable} antialiased`}>
 				{/* Skip to main content link for keyboard navigation */}
 				<a
 					href='#main-content'

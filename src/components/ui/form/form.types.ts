@@ -16,6 +16,7 @@ export interface IField<T extends FieldValues = FieldValues> {
 export interface IDateField<T extends FieldValues = FieldValues> {
   labelText: string;
   placeholderText?: string;
+  name: Path<T>
   control?: Control<T>;
   errors?: FieldErrors<T>;
 }

@@ -13,7 +13,6 @@ import { useEffect, useMemo } from 'react';
 import 'temporal-polyfill/global';
 
 import { Title } from '@/components/ui/Title';
-// вынес кастомные стили сюда
 import { Button } from '@/components/ui/button/Button';
 
 import { useModalStore } from '@/store/modals.store';
@@ -23,7 +22,7 @@ import { type TEventRow, getAllEvents } from '@/services/shedule-event/shedule-e
 import './calendar.css';
 import '@schedule-x/theme-default/dist/index.css';
 
-export function CalendarApp() {
+export default function CalendarApp() {
 	const eventsService = useMemo(() => createEventsServicePlugin(), []);
 	const { open } = useModalStore();
 
@@ -37,27 +36,30 @@ export function CalendarApp() {
 			gridHeight: 700,
 			timeAxisFormatOptions: { hour: '2-digit' },
 		},
-		events: [], // стартуем пустыми
+		events: [],
 		plugins: [eventsService],
 	});
 
-	const { data, isLoading } = useQuery<TEventRow[]>({
+	const { data } = useQuery<TEventRow[]>({
 		queryKey: ['events'],
 		queryFn: () => getAllEvents(),
 	});
 	useEffect(() => {
 		if (!data) return;
-
-		const mapped = data.map(e => ({
-			id: e.schedule_id,
-			title: e.title ?? 'Untitled',
-			start: Temporal.PlainDateTime.from(`${e.event_date}T${e.event_start}`),
-			end: Temporal.PlainDateTime.from(`${e.event_date}T${e.event_end}`),
-		}));
-
+		const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+		const mapped = data.map(e => {
+			const startPdt = Temporal.PlainDateTime.from(`${e.event_date}T${e.event_start}`);
+			const endPdt = Temporal.PlainDateTime.from(`${e.event_date}T${e.event_end}`);
+			return {
+				id: e.schedule_id,
+				title: e.title ?? 'Untitled',
+				start: startPdt.toZonedDateTime(timeZone),
+				end: endPdt.toZonedDateTime(timeZone),
+			};
+		});
 		eventsService.set(mapped);
 	}, [data, eventsService]);
-	
+
 	return (
 		<div
 			role='region'

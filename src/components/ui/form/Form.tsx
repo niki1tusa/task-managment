@@ -47,6 +47,7 @@ export default function Form<T extends FieldValues>({
 						return (
 							<DateField
 								key={i}
+								name={item.props.name}
 								labelText={item.props.labelText}
 								placeholderText={item.props.placeholderText}
 								control={control}

@@ -6,12 +6,11 @@ import type { TProfileRow } from '@/shared/types/task/task.types';
 import { useTaskStore } from '@/store/task.store';
 
 import { useTeamParticipants } from './useTeamParticipants';
-
 interface Props {
 	close: () => void;
 	profile: TProfileRow;
 	setOpenList?: (arg: boolean) => void;
-	mutateFnc?: (arg: any) => void;
+	mutateFnc?: (arg: string[]) => void;
 	isPending?: boolean;
 }
 export default function TeamModalParticipant({ profile, close, mutateFnc, isPending }: Props) {

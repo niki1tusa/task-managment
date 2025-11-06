@@ -1,11 +1,10 @@
 import { redirect } from 'next/navigation';
 
-import { PUBLIC_PAGES } from '@/config/public-page.config';
+import { PUBLIC_PAGES } from '@/components/ui/config/public-page.config';
 
 import { getServerAuth } from '@/utils/supabase/get-server-auth';
 
 import DashboardClientLayout from './DashboardClientLayout';
-import { getServerProfile } from '@/services/profile/profile-server.service';
 
 interface Props {
 	children: React.ReactNode;

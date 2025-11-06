@@ -18,7 +18,9 @@ export function useTeamParticipants(profile: TProfileRow) {
 	// participants in active task
 	const participants = activeTask?.task_participants || [];
 	// add participants
-	const participantIds = new Set(participants.flatMap(p => p.profile ?? []).map(pr => pr.id));
+	const participantIds = useMemo(()=>{
+		return new Set(participants.flatMap(p => p.profile ?? []).map(pr => pr.id));
+	}, [participants]) 
 
 	const profiles = useMemo(() => {
 		const base = profilesData ?? [];

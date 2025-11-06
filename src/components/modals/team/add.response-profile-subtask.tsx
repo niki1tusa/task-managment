@@ -7,11 +7,10 @@ import { useModalStore } from '@/store/modals.store';
 
 import { useProfile } from '@/hooks/useProfile';
 
-import TeamModalParticipant from '../../pages/team/TeamModalParticipant';
 
 import { useSubTaskStore } from '@/store/subtask.store';
 import { addProfileForSubtask } from '@/services/tasks/subtask.service';
-import TeamModalPofileListForSubtask from '@/components/pages/team/TeamModalPofileListForSubtask';
+import TeamModalProfileListForSubtask from '@/components/pages/team/TeamModalProfileListForSubtask';
 
 interface Props {
 	close: () => void;
@@ -43,7 +42,7 @@ export default function AddProfileForSubTask({ close }: Props) {
 	return (
 		<Modal close={close} title={`SubTask - "${activeSubTask.title}"`}>
 			<div className='flex w-full flex-col gap-5'>
-				<TeamModalPofileListForSubtask
+				<TeamModalProfileListForSubtask
 					close={close}
 					profile={profile}
 					mutateFnc={id => mutate({ subTaskId: activeSubTask.id, profileId: id })}

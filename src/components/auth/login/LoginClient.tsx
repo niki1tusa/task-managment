@@ -17,6 +17,7 @@ import {
 import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/components/tabs';
 import { Title } from '@/components/ui/Title';
 import { BtnTabLink } from '@/components/ui/button/BtnTabLink';
+import { PUBLIC_PAGES } from '@/components/ui/config/public-page.config';
 
 import {
 	type TLoginForm,
@@ -24,8 +25,6 @@ import {
 	ZLoginPhonePasswordScheme,
 	ZLoginScheme,
 } from '@/shared/types/form/scheme.zod';
-
-import { PUBLIC_PAGES } from '@/config/public-page.config';
 
 import Form from '../../ui/form/Form';
 
@@ -57,13 +56,13 @@ export function LoginClient() {
 			toast.error('Could not send magic link. Please try again.');
 		}
 	};
-
 	const onSubmitPhone: SubmitHandler<TLoginPhonePasswordForm> = async ({ phone, password }) => {
 		try {
 			await mutateAsync({ phone, password });
 			toast.success('Signed in!');
-		} catch (e: any) {
-			toast.error(e?.message || 'Invalid phone or password.');
+		} catch (e: unknown) {
+			const error = e as { message?: string };
+			toast.error(error?.message || 'Invalid phone or password.');
 		}
 	};
 	return (

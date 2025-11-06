@@ -19,7 +19,7 @@ interface Props {
 	profile: TProfileRow;
 	typeChannel: string;
 	setOpenList?: (arg: boolean) => void;
-	mutateFnc?: (arg: any) => void;
+	mutateFnc?: (arg: string[]) => void;
 	isPending?: boolean;
 }
 export default function ProfileModalList({
@@ -67,7 +67,7 @@ export default function ProfileModalList({
 			close();
 		},
 		onError: err => {
-			toast.error('Channel is error!');
+			toast.error(`Channel is error! ${err}`);
 		},
 	});
 	// handle
@@ -94,6 +94,11 @@ export default function ProfileModalList({
 		const filtered = selectProfileIds.filter(id => id !== profileToAdd.id);
 		setSelectProfileIds([...filtered]);
 	};
+	const picked = profilesData?.find(p => p.id === selectProfileIds[0]);
+	if (!picked) {
+		toast.error('Select a participant first');
+		return;
+	}
 	const isAddProfileModal = type === 'insertProfileInChannel';
 	return (
 		<div className='flex h-auto max-h-[60vh] flex-col justify-start gap-2'>
@@ -119,18 +124,20 @@ export default function ProfileModalList({
 			/>
 			{setOpenList ? (
 				<div className='flex w-full gap-3 px-4 py-2'>
-					<Button
-						disable={selectProfileIds.length < 1}
-						onClick={() => {
-							typeChannel === 'group'
-								? handleCreateGroup(selectProfileIds)
-								: handleCreateDirect(
-										profilesData?.find(profile => profile.id === selectProfileIds[0])!
-									);
-						}}
-					>
-						Create
-					</Button>
+					{profilesData && (
+						<Button
+							disable={selectProfileIds.length < 1}
+							onClick={() => {
+								if (typeChannel === 'group') {
+									handleCreateGroup(selectProfileIds);
+								} else {
+									handleCreateDirect(picked);
+								}
+							}}
+						>
+							Create
+						</Button>
+					)}
 					<Button
 						onClick={() => {
 							setOpenList(false);

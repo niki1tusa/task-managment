@@ -3,14 +3,15 @@ import BtnReturnBack from '@/components/ui/button/BtnReturnBack';
 import { Title } from '@/components/ui/Title';
 
 import { type IconName, MODAL_ICON } from '@/shared/data/icon.data';
-import type { TSubTaskRow, TTask } from '@/shared/types/task/task.types';
+import type { TSubTaskRow } from '@/shared/types/subtask/subtask.types';
+import type {  TTask } from '@/shared/types/task/task.types';
 interface Props {
 	id: string;
 	tasks: TTask[];
 }
 export default function ClientTaskPage({ id, tasks }: Props) {
 	const data = tasks;
-	const findTask: TTask = data?.find(task => task.id === id)!;
+	const findTask: TTask = data.find(task => task.id === id)!;
 	const TaskIcon = MODAL_ICON[findTask.icon as IconName];
 	const date = Math.ceil(
 		(new Date(findTask.due_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24)
