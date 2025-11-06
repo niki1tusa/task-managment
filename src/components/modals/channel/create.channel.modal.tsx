@@ -8,10 +8,11 @@ import { toast } from 'react-toastify';
 
 import type { TChannelInsert } from '@/components/pages/messages/channel/channel.types';
 import { Button } from '@/components/ui/button/Button';
-import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
 import Modal from '@/components/ui/modal/Modal';
 
 import type { TTask } from '@/shared/types/task/task.types';
+
+import { DASHBOARD_PAGES } from '@/config/protect-page-config';
 
 import { useChannels } from '@/hooks/useChannels';
 import { useProfile } from '@/hooks/useProfile';

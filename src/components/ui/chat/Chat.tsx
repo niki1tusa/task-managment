@@ -8,7 +8,8 @@ import { Avatar } from '@/components/ui/Avatar';
 import ChatInput from '@/components/ui/chat/ChatInput';
 import ChatMessage from '@/components/ui/chat/message/ChatMessage';
 import { useChat } from '@/components/ui/chat/useChat';
-import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
+
+import { DASHBOARD_PAGES } from '@/config/protect-page-config';
 
 import { useChannelStore } from '@/store/channel.store';
 

@@ -8,10 +8,11 @@ import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { Title } from '@/components/ui/Title';
-import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
-import { PUBLIC_PAGES } from '@/components/ui/config/public-page.config';
 
 import { type TRegistrationForm, ZRegistrationScheme } from '@/shared/types/form/scheme.zod';
+
+import { DASHBOARD_PAGES } from '@/config/protect-page-config';
+import { PUBLIC_PAGES } from '@/config/public-page-config';
 
 import Form from '../../ui/form/Form';
 

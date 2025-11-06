@@ -6,7 +6,8 @@ import { usePathname } from 'next/navigation';
 import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/animate-ui/base/popover';
-import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
+
+import { DASHBOARD_PAGES } from '@/config/protect-page-config';
 
 import { useProfile } from '@/hooks/useProfile';
 

@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { Bell } from '@/components/animate-ui/icons/bell';
 import { AnimateIcon } from '@/components/animate-ui/icons/icon';
 import { Title } from '@/components/ui/Title';
-import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
+
+import { DASHBOARD_PAGES } from '@/config/protect-page-config';
 
 import { SearchField } from './SearchField';
 

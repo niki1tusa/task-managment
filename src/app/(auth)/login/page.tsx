@@ -1,7 +1,8 @@
 import { redirect } from 'next/navigation';
 
 import { LoginClient } from '@/components/auth/login/LoginClient';
-import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
+
+import { DASHBOARD_PAGES } from '@/config/protect-page-config';
 
 import { getServerAuth } from '@/utils/supabase/get-server-auth';
 

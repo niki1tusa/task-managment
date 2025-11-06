@@ -11,7 +11,7 @@ import {
 	type UseFormRegister,
 } from 'react-hook-form';
 
-import { PUBLIC_PAGES } from '@/components/ui/config/public-page.config';
+import { PUBLIC_PAGES } from '@/config/public-page-config';
 
 interface Props<T extends FieldValues> {
 	register: UseFormRegister<T>;

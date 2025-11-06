@@ -4,9 +4,10 @@ import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 
 import { Avatar } from '@/components/ui/Avatar';
-import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
 
 import type { TTask } from '@/shared/types/task/task.types';
+
+import { DASHBOARD_PAGES } from '@/config/protect-page-config';
 
 import { useFormatDateForTask } from '@/hooks/useFormatDateForTask';
 

@@ -1,8 +1,8 @@
 'use client';
 
-import { PUBLIC_PAGES } from '@/components/ui/config/public-page.config';
-
 import type { TRegistrationForm } from '@/shared/types/form/scheme.zod';
+
+import { PUBLIC_PAGES } from '@/config/public-page-config';
 
 import { createClient } from '@/utils/supabase/client';
 

@@ -5,10 +5,10 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
-
 import type { TSubTaskRow } from '@/shared/types/subtask/subtask.types';
 import type { TTask } from '@/shared/types/task/task.types';
+
+import { DASHBOARD_PAGES } from '@/config/protect-page-config';
 
 import { Header } from '../../../../ui/header/Header';
 
