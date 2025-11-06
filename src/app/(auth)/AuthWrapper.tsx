@@ -2,11 +2,14 @@ import Image from 'next/image';
 
 import { BubbleBackground } from '@/components/animate-ui/backgrounds/bubble';
 
+
+
 interface Props {
 	children: React.ReactNode;
 }
 // This is not a layout, because the layout will be displayed until the authorization check is completed.
 export default async function AuthWrapper({ children }: Props) {
+
 	return (
 		<div className='flex min-h-screen w-full flex-col items-center justify-center gap-10 2xl:text-3xl'>
 			<BubbleBackground className='absolute inset-0 z-0 flex items-center justify-center' />

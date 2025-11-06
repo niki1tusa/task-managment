@@ -1,6 +1,9 @@
+'use client';
+
 import Link from 'next/link';
 
 import { GradientText } from '@/components/animate-ui/text/gradient';
+import { Button } from '@/components/ui/button/Button';
 import { ToggleTheme } from '@/components/ui/toggle-theme/ToggleTheme';
 
 import { PUBLIC_PAGES } from '@/config/public-page.config';
@@ -16,14 +19,14 @@ export default function HomeClient() {
 				<div className='flex items-center gap-2'>
 					<Link
 						href={PUBLIC_PAGES.LOGIN}
-						className='rounded-md px-6 py-1 shadow shadow-neutral-400 transition-colors hover:bg-gray-200/50 dark:hover:bg-gray/15'
+						className='dark:hover:bg-gray/15 rounded-md px-6 py-1 shadow shadow-neutral-400 transition-colors hover:bg-gray-200/50'
 					>
 						<GradientText text='Login' className='font-medium' />
 					</Link>
 					<i className='text-[1rem] font-medium'></i>
 					<Link
 						href={PUBLIC_PAGES.REGISTER}
-						className='rounded-md px-6 py-1 shadow shadow-neutral-400 transition-colors hover:bg-gray-200/50 dark:hover:bg-gray/15'
+						className='dark:hover:bg-gray/15 rounded-md px-6 py-1 shadow shadow-neutral-400 transition-colors hover:bg-gray-200/50'
 					>
 						<GradientText text='Register' className='font-medium' />
 					</Link>
@@ -63,7 +66,6 @@ export default function HomeClient() {
 					/>
 				</div>
 			</section>
-
 			{/* Footer */}
 			<footer className='text-muted-foreground mt-32 mb-10 text-center text-xs'>
 				&copy; {new Date().getFullYear()} Task Hub. All rights reserved.
