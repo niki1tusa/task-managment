@@ -16,6 +16,8 @@ import { type TResetPasswordForm, ZResetPasswordScheme } from '@/shared/types/sc
 
 import { PUBLIC_PAGES } from '@/config/public-page-config';
 
+import { PUBLIC_PAGES } from '@/config/public-page-config';
+
 import { resetPassowrdFields } from './reset-password.data';
 import { updateUserPassword } from '@/services/profile/profile-auth-client.service';
 

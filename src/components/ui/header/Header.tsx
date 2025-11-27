@@ -9,6 +9,8 @@ import type { TTask } from '@/shared/types/task.types';
 
 import { GUARD_PAGES } from '@/config/guard-page-config';
 
+import { DASHBOARD_PAGES } from '@/config/protect-page-config';
+
 import { useFormatDateForTask } from '@/hooks/useFormatDateForTask';
 
 export const Header = ({ task }: { task: TTask }) => {

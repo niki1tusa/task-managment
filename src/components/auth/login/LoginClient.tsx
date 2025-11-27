@@ -27,6 +27,8 @@ import {
 
 import { PUBLIC_PAGES } from '@/config/public-page-config';
 
+import { PUBLIC_PAGES } from '@/config/public-page-config';
+
 import Form from '../../ui/form/Form';
 
 import { loginEmailFields, loginPhonePasswordFields } from './login.data';

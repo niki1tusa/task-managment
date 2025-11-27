@@ -14,6 +14,8 @@ import type { TTask } from '@/shared/types/task.types';
 
 import { GUARD_PAGES } from '@/config/guard-page-config';
 
+import { DASHBOARD_PAGES } from '@/config/protect-page-config';
+
 import { useChannels } from '@/hooks/useChannels';
 import { useProfile } from '@/hooks/useProfile';
 

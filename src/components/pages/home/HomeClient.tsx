@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 
 import { GradientText } from '@/components/animate-ui/text/gradient';
@@ -63,7 +65,6 @@ export default function HomeClient() {
 					/>
 				</div>
 			</section>
-
 			{/* Footer */}
 			<footer className='text-muted-foreground mt-32 mb-10 text-center text-xs'>
 				&copy; {new Date().getFullYear()} Task Hub. All rights reserved.

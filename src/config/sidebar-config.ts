@@ -9,6 +9,8 @@ import type { IMenuItem } from '@/shared/types/menu.item.types';
 
 import { GUARD_PAGES } from '@/config/guard-page-config';
 
+import { DASHBOARD_PAGES } from '@/config/protect-page-config';
+
 export const MENU: IMenuItem[] = [
 	{
 		title: 'Dashboard',
