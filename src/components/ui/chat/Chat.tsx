@@ -8,9 +8,10 @@ import { Avatar } from '@/components/ui/Avatar';
 import ChatInput from '@/components/ui/chat/ChatInput';
 import ChatMessage from '@/components/ui/chat/message/ChatMessage';
 import { useChat } from '@/components/ui/chat/useChat';
-import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
 
-import { useChannelStore } from '@/store/channel.store';
+import { GUARD_PAGES } from '@/config/guard-page-config';
+
+import { useChannelStore } from '@/store/channel-store';
 
 import { useClickOutside } from '@/hooks/useClickOutside';
 import { useProfile } from '@/hooks/useProfile';
@@ -109,7 +110,7 @@ export default function Chat() {
 				</div>
 
 				{/* поиск сообщений */}
-				{pathname === DASHBOARD_PAGES.MESSAGES &&
+				{pathname === GUARD_PAGES.MESSAGES &&
 					(isOpenInput ? (
 						<div ref={ref}>
 							<Textarea value={value} setValue={setValue} placeholder='Search by word...' />
@@ -131,7 +132,7 @@ export default function Chat() {
 				{/* button from dahsboard to messages page */}
 				{isDashboard && (
 					<Link
-						href={DASHBOARD_PAGES.MESSAGES}
+						href={GUARD_PAGES.MESSAGES}
 						className='absolute top-[10%] left-[50%] z-50 -translate-x-[50%] transform'
 					>
 						<Button variant='transparent' className='w-[100px]'>

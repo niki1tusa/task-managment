@@ -1,0 +1,42 @@
+@import 'tailwindcss';
+@import 'react-datepicker/dist/react-datepicker.css';
+@import 'tw-animate-css';
+@import './tokens.css';
+@import './utilities.css';
+html {
+	font-size: 16px;
+}
+
+@layer base {
+	body {
+		@apply bg-background text-foreground;
+	}
+}
+html,
+body {
+	font-family: var(--font-poppins-sans);
+	min-width: 320px;
+	height: 100%;
+}
+button,
+input,
+select,
+option {
+	cursor: pointer;
+	outline: none;
+	font-family: var(--font-poppins-sans);
+}
+
+@layer base {
+	* {
+		@apply border-border outline-ring/50;
+	}
+	body {
+		@apply bg-background text-foreground xl:text-xl 2xl:text-2xl;
+	}
+}
+@media (max-height: 800px) {
+	.chat-header-img {
+		@apply hidden;
+	}
+}

@@ -3,7 +3,7 @@ import { SquarePen, SquarePlus, SquareX, Trash } from 'lucide-react';
 
 import { BtnCopyName } from '@/components/ui/button/BtnCopyName';
 
-import { useModalStore } from '@/store/modals.store';
+import { useModalStore } from '@/store/modals-store';
 
 import { useProfile } from '@/hooks/useProfile';
 
@@ -18,7 +18,7 @@ export default function ChannelMenuPopover({ activeChannel, onClose }: Props) {
 	const { profile } = useProfile();
 	const isNotOwner = profile?.id !== activeChannel.created_by;
 	return (
-		<div className='flex flex-col gap-2 rounded-sm p-3  text-base dark:text-black'>
+		<div className='flex flex-col gap-2 rounded-sm p-3 text-base dark:text-black'>
 			{/* header */}
 			<div className='flex items-center justify-between'>
 				<div>Channel Menu</div>

@@ -25,20 +25,17 @@ export const ProfileMenu = () => {
 				)}
 			</div>
 
-				{isShowProfile && (
-					<div
-						className='bg-background flex items-center gap-2 rounded-md px-2 py-2 shadow shadow-neutral-400'
-					>
-						<div>
-							<Avatar img={profile.avatar_path} />
-						</div>
-						<div className='flex flex-col truncate text-[10px] 2xl:text-sm'>
-							<span>{profile.email}</span>
-							<span> {profile.name}</span>
-						</div>
+			{isShowProfile && (
+				<div className='bg-background shadow-default flex items-center gap-2 rounded-md px-2 py-2'>
+					<div>
+						<Avatar img={profile.avatar_path} />
 					</div>
-				)}
-			
+					<div className='flex flex-col truncate text-[10px] 2xl:text-sm'>
+						<span>{profile.email}</span>
+						<span> {profile.name}</span>
+					</div>
+				</div>
+			)}
 		</nav>
 	);
 };

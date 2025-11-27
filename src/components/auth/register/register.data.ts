@@ -1,5 +1,6 @@
-import type { IForm } from "@/components/ui/form/form.types";
-import type { TRegistrationForm } from "@/shared/types/form/scheme.zod";
+import type { IForm } from '@/components/ui/form/form.types';
+
+import type { TRegistrationForm } from '@/shared/types/scheme.zod';
 
 export const RegisterFields = [
 	{
@@ -29,4 +30,4 @@ export const RegisterFields = [
 			type: 'password',
 		},
 	},
-] satisfies IForm<TRegistrationForm>['formElement']
+] satisfies IForm<TRegistrationForm>['formElement'];

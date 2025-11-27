@@ -1,6 +1,6 @@
 'use client';
 
-import type { IProjectsMenu } from '@/shared/types/sidebar/menu.item.types';
+import type { IProjectsMenu } from '@/shared/types/menu.item.types';
 
 export const ProjectMenuItem = ({ item }: { item: IProjectsMenu }) => {
 	return (

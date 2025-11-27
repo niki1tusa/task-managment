@@ -14,7 +14,7 @@ export function Avatar({ img, isHoverResolution, isPartySide }: Props) {
 		<motion.div
 			initial={{ y: 0 }}
 			whileHover={{ y: -3 }}
-			className='bg-primary flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border shadow shadow-neutral-400'
+			className='bg-primary shadow-default flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border'
 		>
 			<Image
 				src={img || '/avatar-fallback.png'}
@@ -26,7 +26,7 @@ export function Avatar({ img, isHoverResolution, isPartySide }: Props) {
 			/>
 		</motion.div>
 	) : isPartySide ? (
-		<div className='bg-primary flex h-6 w-6 items-center justify-center overflow-hidden rounded-full border shadow shadow-neutral-400'>
+		<div className='bg-primary shadow-default flex h-6 w-6 items-center justify-center overflow-hidden rounded-full border'>
 			<Image
 				src={img || '/avatar-fallback.png'}
 				alt='user'
@@ -37,7 +37,7 @@ export function Avatar({ img, isHoverResolution, isPartySide }: Props) {
 			/>
 		</div>
 	) : (
-		<div className='bg-primary flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border shadow shadow-neutral-400'>
+		<div className='bg-primary shadow-default flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border'>
 			<Image
 				src={img || '/avatar-fallback.png'}
 				alt='user'

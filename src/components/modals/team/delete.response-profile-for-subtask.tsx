@@ -4,14 +4,15 @@ import { toast } from 'react-toastify';
 import { Button } from '@/components/ui/button/Button';
 import Modal from '@/components/ui/modal/Modal';
 
-import { useModalStore } from '@/store/modals.store';
+import type { TSubTaskRow } from '@/shared/types/subtask.types';
+
+import { useModalStore } from '@/store/modals-store';
 
 import { removeProfileForSubtask } from '@/services/tasks/subtask.service';
-import type { TSubTaskRow } from '@/shared/types/subtask/subtask.types';
 
 interface Props {
 	close: () => void;
-    subtask: TSubTaskRow
+	subtask: TSubTaskRow;
 }
 export default function DeleteTeamResponseProfileModal({ close, subtask }: Props) {
 	const { type } = useModalStore();
@@ -21,7 +22,7 @@ export default function DeleteTeamResponseProfileModal({ close, subtask }: Props
 		mutationFn: (id: string) => removeProfileForSubtask(id),
 		onSuccess: () => {
 			toast.success('Remove is success!');
-			queryClient.invalidateQueries({queryKey: ['tasks'] });
+			queryClient.invalidateQueries({ queryKey: ['tasks'] });
 			close();
 		},
 		onError: (error: unknown) => {
@@ -32,7 +33,10 @@ export default function DeleteTeamResponseProfileModal({ close, subtask }: Props
 	if (type !== 'removeResponseProfileForSubTask' || !subtask) return null;
 
 	return (
-		<Modal close={close} title={`Do you really want to remove profile with it subtask "${subtask.title}"?`}>
+		<Modal
+			close={close}
+			title={`Do you really want to remove profile with it subtask "${subtask.title}"?`}
+		>
 			<Button onClick={() => mutate(subtask.id)} disable={isPending}>
 				Yes
 			</Button>

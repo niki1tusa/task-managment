@@ -13,7 +13,7 @@ export function DateField<T extends FieldValues>({
 	placeholderText,
 	control,
 	errors,
-	name
+	name,
 }: IDateField<T>) {
 	const refDate = useRef<ComponentRef<typeof DatePicker>>(null);
 	return (
@@ -31,8 +31,8 @@ export function DateField<T extends FieldValues>({
 							onChange={field.onChange}
 							dateFormat='yyyy-MM-dd'
 							className={clsx(
-								'focus:bg-[#f6f4ff] focus:shadow-lg focus:ring-2 focus:ring-sky-600 focus:shadow-sky-300/20',
-								'text-gray h-[30%]  rounded border p-2 text-sm shadow shadow-neutral-400 transition-all duration-200 hover:bg-[#f6f4ff]  2xl:text-lg'
+								'focus:bg-[#f6f4ff] focus:shadow-lg focus:ring-2 focus:shadow-sky-300/20 focus:ring-sky-600',
+								'text-gray shadow-default h-[30%] rounded border p-2 text-sm transition-all duration-200 hover:bg-[#f6f4ff] 2xl:text-lg'
 							)}
 							minDate={new Date()}
 							placeholderText={placeholderText || '2026-01-01'}

@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { Bell } from '@/components/animate-ui/icons/bell';
 import { AnimateIcon } from '@/components/animate-ui/icons/icon';
 import { Title } from '@/components/ui/Title';
-import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
+
+import { GUARD_PAGES } from '@/config/guard-page-config';
 
 import { SearchField } from './SearchField';
 
@@ -17,8 +18,8 @@ export const Header = () => {
 				<SearchField />
 				<AnimateIcon animateOnHover>
 					<Link
-						href={DASHBOARD_PAGES.NOTIFICATION}
-						className='bg-background dark:bg-dark rounded-full text-center shadow shadow-neutral-400'
+						href={GUARD_PAGES.NOTIFICATION}
+						className='bg-background dark:bg-dark shadow-default rounded-full text-center'
 					>
 						<Bell className='mx-2 my-2' />
 					</Link>

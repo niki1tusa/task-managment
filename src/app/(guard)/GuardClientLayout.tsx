@@ -1,0 +1,47 @@
+'use client';
+
+import clsx from 'clsx';
+import { usePathname } from 'next/navigation';
+
+import { Sidebar } from '@/components/sidebar/Sidebar';
+import Chat from '@/components/ui/chat/Chat';
+
+import { GUARD_PAGES } from '@/config/guard-page-config';
+
+export default function GuardClientLayout({ children }: { children: React.ReactNode }) {
+	const pathname = usePathname();
+	const isDashboard = pathname === GUARD_PAGES.DASHBOARD;
+	const isMessage = pathname === GUARD_PAGES.MESSAGES;
+	return (
+		<div
+			className={clsx(
+				'grid',
+				isDashboard
+					? 'grid-cols-[12%_68%_20%]'
+					: isMessage
+						? 'grid-cols-[12%_38%_50%]'
+						: 'grid-cols-[12%_88%]'
+			)}
+		>
+			<aside
+				className='bg-side sticky top-0 h-[100dvh] overflow-y-auto'
+				role='navigation'
+				aria-label='Main navigation'
+			>
+				<Sidebar />
+			</aside>
+			<main
+				className={clsx('flex-1 dark:border-r dark:border-l dark:border-neutral-800')}
+				role='main'
+				aria-label='Dashboard content'
+			>
+				{children}
+			</main>
+			{(isDashboard || isMessage) && (
+				<aside className='shadow-default sticky top-0 h-[100dvh]'>
+					<Chat />
+				</aside>
+			)}
+		</div>
+	);
+}

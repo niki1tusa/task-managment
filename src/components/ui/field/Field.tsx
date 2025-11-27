@@ -11,7 +11,7 @@ import {
 	type UseFormRegister,
 } from 'react-hook-form';
 
-import { PUBLIC_PAGES } from '@/components/ui/config/public-page.config';
+import { PUBLIC_PAGES } from '@/config/public-page-config';
 
 interface Props<T extends FieldValues> {
 	register: UseFormRegister<T>;
@@ -60,7 +60,7 @@ export function Field<T extends FieldValues>({
 					{...register(registerName)}
 					className={clsx(
 						'focus:bg-[#f6f4ff] focus:shadow-lg focus:ring-2 focus:shadow-sky-300/20 focus:ring-sky-600',
-						'text-gray h-[30%] w-[80%] rounded py-5 text-sm shadow shadow-neutral-400 transition-all duration-200 hover:bg-[#f6f4ff]/50 2xl:w-full 2xl:text-lg',
+						'text-gray shadow-default h-[30%] w-[80%] rounded py-5 text-sm transition-all duration-200 hover:bg-[#f6f4ff]/50 2xl:w-full 2xl:text-lg',
 						type === 'text' ? 'pl-4' : 'pl-10'
 					)}
 					type={type === 'password' ? (isShowEye ? 'text' : 'password') : 'text'}

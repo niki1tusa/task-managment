@@ -1,6 +1,7 @@
 'use client';
 
-import { MENU } from '@/shared/data/sidebar/menu.data';
+import { MENU } from '@/config/sidebar-config';
+
 // import { PROJECTS_MENU } from '@/shared/data/sidebar/projects.menu.data';
 
 import Logout from './Logout';

@@ -71,7 +71,7 @@
 // 			<button
 // 				onClick={() => resetAllFilters()}
 // 				title='Reset all filters'
-// 				className='flex items-center justify-center rounded-sm p-1 shadow shadow-neutral-400'
+// 				className='flex items-center justify-center rounded-sm p-1 shadow-default'
 // 			>
 // 				<AnimateIcon animateOnHover>
 // 					<RotateCcw size={26} />

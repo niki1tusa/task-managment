@@ -1,4 +1,4 @@
-import type { TByAscOrDesc, TStatus } from '@/shared/types/task/task.types';
+import type { TByAscOrDesc, TStatus } from '@/shared/types/task.types';
 
 const BUTTONS_OPTIONS = ['All', 'Completed', 'in-progress', 'not-started'];
 const SELECT_OPTIONS = ['Asc', 'Desc'];
@@ -13,7 +13,7 @@ export default function FiltersForTask({ select, setSelect, sortOrder, setSortOr
 	return (
 		<div className='flex gap-2'>
 			{/* tabs */}
-			<div className='mb-4 flex gap-2 rounded-[4px] border border-white py-1 pl-2 shadow shadow-neutral-400'>
+			<div className='shadow-default mb-4 flex gap-2 rounded-[4px] border border-white py-1 pl-2'>
 				{BUTTONS_OPTIONS.map(button => (
 					<button
 						onClick={() => setSelect(button as TStatus)}
@@ -33,7 +33,7 @@ export default function FiltersForTask({ select, setSelect, sortOrder, setSortOr
 			<select
 				value={sortOrder}
 				onChange={e => setSortOrder(e.target.value as TByAscOrDesc)}
-				className='mb-4 rounded-[4px] border border-white px-4 py-1.5 text-sm text-gray-500 shadow shadow-neutral-400 dark:bg-black'
+				className='shadow-default mb-4 rounded-[4px] border border-white px-4 py-1.5 text-sm text-gray-500 dark:bg-black'
 			>
 				{SELECT_OPTIONS.map(option => (
 					<option key={option}>{option}</option>

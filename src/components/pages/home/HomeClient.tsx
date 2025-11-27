@@ -1,8 +1,9 @@
 import Link from 'next/link';
 
 import { GradientText } from '@/components/animate-ui/text/gradient';
-import { PUBLIC_PAGES } from '@/components/ui/config/public-page.config';
 import { ToggleTheme } from '@/components/ui/toggle-theme/ToggleTheme';
+
+import { PUBLIC_PAGES } from '@/config/public-page-config';
 
 import { HomeSection } from './HomeSection';
 
@@ -15,14 +16,14 @@ export default function HomeClient() {
 				<div className='flex items-center gap-2'>
 					<Link
 						href={PUBLIC_PAGES.LOGIN}
-						className='dark:hover:bg-gray/15 rounded-md px-6 py-1 shadow shadow-neutral-400 transition-colors hover:bg-gray-200/50'
+						className='dark:hover:bg-gray/15 shadow-default rounded-md bg-white px-6 py-1 transition-colors hover:bg-gray-200/50'
 					>
 						<GradientText text='Login' className='font-medium' />
 					</Link>
 					<i className='text-[1rem] font-medium'></i>
 					<Link
 						href={PUBLIC_PAGES.REGISTER}
-						className='dark:hover:bg-gray/15 rounded-md px-6 py-1 shadow shadow-neutral-400 transition-colors hover:bg-gray-200/50'
+						className='dark:hover:bg-gray/15 shadow-default rounded-md bg-white px-6 py-1 transition-colors hover:bg-gray-200/50'
 					>
 						<GradientText text='Register' className='font-medium' />
 					</Link>

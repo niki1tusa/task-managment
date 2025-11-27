@@ -15,7 +15,7 @@ import 'temporal-polyfill/global';
 import { Title } from '@/components/ui/Title';
 import { Button } from '@/components/ui/button/Button';
 
-import { useModalStore } from '@/store/modals.store';
+import { useModalStore } from '@/store/modals-store';
 
 import { type TEventRow, getAllEvents } from '@/services/shedule-event/shedule-event.service';
 

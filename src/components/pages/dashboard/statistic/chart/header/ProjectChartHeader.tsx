@@ -3,7 +3,7 @@
 import { ChevronDown } from 'lucide-react';
 import React, { useState } from 'react';
 
-import type { ITimeRange } from '@/shared/types/statistics/statistics.types';
+import type { ITimeRange } from '@/shared/types/statistics.types';
 
 import { useClickOutside } from '@/hooks/useClickOutside';
 
@@ -42,7 +42,7 @@ export function ProjectChartHeader({ selectedRange, onChangeRange }: Props) {
 							<button
 								onClick={() => handleRangeChange(range)}
 								key={range.value}
-								className='hover:text-primary bg-background mx-1 my-0.5 box-border w-28 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-sm px-1 py-1 text-left text-sm transition-all dark:hover:text-white'
+								className='hover:text-primary bg-background mx-1 my-0.5 box-border w-28 rounded-sm px-1 py-1 text-left text-sm transition-all hover:bg-neutral-200 dark:hover:bg-neutral-700 dark:hover:text-white'
 							>
 								{range.label}
 							</button>

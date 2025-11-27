@@ -1,8 +1,9 @@
 import { parseISO } from 'date-fns';
 
-import { type IconName, MODAL_ICON } from '@/shared/data/icon.data';
-import type {  TTask } from '@/shared/types/task/task.types';
-import type { TSubTaskRow } from '@/shared/types/subtask/subtask.types';
+import type { TSubTaskRow } from '@/shared/types/subtask.types';
+import type { TTask } from '@/shared/types/task.types';
+
+import { type IconName, MODAL_ICON } from '@/config/icon-config';
 
 export function useFormatDateForTask(task: TTask) {
 	const TaskIcon = MODAL_ICON[task.icon as IconName];

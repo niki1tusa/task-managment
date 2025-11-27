@@ -7,7 +7,7 @@ import AuthWrapper from '../AuthWrapper';
 export const metadata: Metadata = {
 	title: 'reset-password',
 };
-
+// TODO: после перехода с почты, вкидвает на homePage
 export default function ResetPasswordPage() {
 	return (
 		<AuthWrapper>

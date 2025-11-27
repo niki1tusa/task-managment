@@ -6,10 +6,10 @@ import { SquareMinus, SquarePlus } from 'lucide-react';
 import { Checkbox } from '@/components/animate-ui/base/checkbox';
 import { Title } from '@/components/ui/Title';
 
-import type { TTask } from '@/shared/types/task/task.types';
+import type { TTask } from '@/shared/types/task.types';
 
-import { useModalStore } from '@/store/modals.store';
-import { useSubTaskStore } from '@/store/subtask.store';
+import { useModalStore } from '@/store/modals-store';
+import { useSubTaskStore } from '@/store/subtask-store';
 
 import { useProfile } from '@/hooks/useProfile';
 
@@ -56,7 +56,7 @@ export default function TeamSubtaskPanel({ activeTask }: { activeTask: TTask }) 
 									transition={{ duration: 0.4 }}
 									style={{ overflow: 'hidden' }}
 									className={clsx(
-										'mt-1 ml-5 flex items-center justify-between rounded px-2 py-1.5 text-left text-sm shadow shadow-neutral-400',
+										'shadow-default mt-1 ml-5 flex items-center justify-between rounded px-2 py-1.5 text-left text-sm',
 										responsibleProfile ? 'bg-green-500/20' : 'bg-amber-500/20'
 									)}
 								>
@@ -99,7 +99,7 @@ export default function TeamSubtaskPanel({ activeTask }: { activeTask: TTask }) 
 										transition={{ duration: 0.4 }}
 										style={{ overflow: 'hidden' }}
 										className={clsx(
-											'mt-1 ml-5 flex items-center justify-between rounded px-2 py-1.5 text-left text-sm shadow shadow-neutral-400',
+											'shadow-default mt-1 ml-5 flex items-center justify-between rounded px-2 py-1.5 text-left text-sm',
 											subTask.is_completed ? 'bg-green-500/20' : 'bg-amber-500/20'
 										)}
 									>

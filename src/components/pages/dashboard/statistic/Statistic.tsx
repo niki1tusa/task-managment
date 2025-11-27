@@ -1,7 +1,7 @@
 import type {
 	TGetChartPointResponse,
 	TGetProjectStatResponse,
-} from '@/shared/types/statistics/statistics.types';
+} from '@/shared/types/statistics.types';
 
 import { Card } from './card/Card';
 import { ProjectStatisticsChart } from './chart/ProjectStatisticsChart';
@@ -14,8 +14,8 @@ export const Statistic = ({
 	chartPoints: TGetChartPointResponse;
 }) => {
 	return (
-		<div className='grid grid-cols-1 gap-5 lg:grid-cols-[1fr_2fr] '>
-			<div className='grid grid-cols-1 2xl:grid-cols-2 2xl:grid-rows-2 gap-3'>
+		<div className='grid grid-cols-1 gap-5 lg:grid-cols-[1fr_2fr]'>
+			<div className='grid grid-cols-1 gap-3 2xl:grid-cols-2 2xl:grid-rows-2'>
 				{projectStats.map(card => (
 					<Card
 						key={card.id}

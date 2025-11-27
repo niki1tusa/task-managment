@@ -1,14 +1,14 @@
-import { Search } from "lucide-react";
+import { Search } from 'lucide-react';
 
 export const SearchField = () => {
 	return (
-		<span className='flex items-center gap-2 px-2 bg-background rounded-4xl text-gray shadow shadow-neutral-400'>
+		<span className='bg-background text-gray shadow-default flex items-center gap-2 rounded-4xl px-2'>
 			<Search className='text-foreground' />
 			<input
 				type='text'
-				className='px-2 py-2 outline-none w-[300px] '
+				className='w-[300px] px-2 py-2 outline-none'
 				placeholder='Search something...'
-				autoComplete="off"
+				autoComplete='off'
 			/>
 		</span>
 	);

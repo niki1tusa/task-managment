@@ -3,10 +3,10 @@ import { useMemo, useState } from 'react';
 
 import type { TChannelParticipantsRow } from '@/components/pages/messages/channel/channel.types';
 
-import type { TProfileRow } from '@/shared/types/task/task.types';
+import type { TProfileRow } from '@/shared/types/task.types';
 
-import { useChannelStore } from '@/store/channel.store';
-import { useModalStore } from '@/store/modals.store';
+import { useChannelStore } from '@/store/channel-store';
+import { useModalStore } from '@/store/modals-store';
 
 import {
 	getChannelParticipantsById,

@@ -4,9 +4,9 @@ import { toast } from 'react-toastify';
 import { Button } from '@/components/ui/button/Button';
 import Modal from '@/components/ui/modal/Modal';
 
-import type { TProfileRow } from '@/shared/types/task/task.types';
+import type { TProfileRow } from '@/shared/types/task.types';
 
-import { useModalStore } from '@/store/modals.store';
+import { useModalStore } from '@/store/modals-store';
 
 import { deleteTaskParticipants } from '@/services/tasks/task-client.service';
 
@@ -32,10 +32,7 @@ export default function DeleteProfileFromTaskParticipants({ close, profile }: Pr
 	if (type !== 'deleteProfileFromTaskParticipants' || !profile) return null;
 
 	return (
-		<Modal
-			close={close}
-			title={`Do you really want to kicked from party task"${profile.name}"?`}
-		>
+		<Modal close={close} title={`Do you really want to kicked from party task"${profile.name}"?`}>
 			<Button onClick={() => mutate(profile.id)} disable={isPending}>
 				Yes
 			</Button>

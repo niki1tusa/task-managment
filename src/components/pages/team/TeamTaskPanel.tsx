@@ -4,10 +4,10 @@ import { useState } from 'react';
 
 import { Title } from '@/components/ui/Title';
 
-import type { TProfileRow } from '@/shared/types/task/task.types';
+import type { TProfileRow } from '@/shared/types/task.types';
 
-import { useModalStore } from '@/store/modals.store';
-import { useTaskStore } from '@/store/task.store';
+import { useModalStore } from '@/store/modals-store';
+import { useTaskStore } from '@/store/task-store';
 
 import TeamSubtaskPanel from './TeamSubtaskPanel';
 import TeamTaskPanelList from './TeamTaskPanelList';
@@ -22,7 +22,7 @@ export default function TeamTaskPanel({ taskOwner, isPending }: Props) {
 	const [isPartOpen, setIsPartOpen] = useState<boolean>(true);
 	const { open } = useModalStore();
 	return (
-		<div className='border-l shadow shadow-neutral-400'>
+		<div className='shadow-default border-l'>
 			<div className='px-5 pt-7'>
 				<Title heading='page'>Task Control Panel</Title>
 			</div>
@@ -32,7 +32,7 @@ export default function TeamTaskPanel({ taskOwner, isPending }: Props) {
 					<>
 						<div className='flex items-baseline gap-2'>
 							<Title>Owner:</Title>
-							<span className='text-foreground/60 text-lg'>{taskOwner ? taskOwner.name: ''}</span>
+							<span className='text-foreground/60 text-lg'>{taskOwner ? taskOwner.name : ''}</span>
 						</div>
 						<div className='flex items-center gap-10'>
 							<Title>Participants</Title>
@@ -63,10 +63,7 @@ export default function TeamTaskPanel({ taskOwner, isPending }: Props) {
 										transition={{ duration: 0.4 }}
 										style={{ overflow: 'hidden' }}
 									>
-										<TeamTaskPanelList
-											activeTask={activeTask}
-											isPending={isPending}
-										/>
+										<TeamTaskPanelList activeTask={activeTask} isPending={isPending} />
 									</motion.div>
 								)}
 							</AnimatePresence>

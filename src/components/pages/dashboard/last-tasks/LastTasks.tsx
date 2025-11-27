@@ -5,9 +5,9 @@ import { useState } from 'react';
 import Skeleton from '@/components/ui/Skeleton';
 import { Title } from '@/components/ui/Title';
 
-import type { TByAscOrDesc, TStatus } from '@/shared/types/task/task.types';
+import type { TByAscOrDesc, TStatus } from '@/shared/types/task.types';
 
-import { useModalStore } from '@/store/modals.store';
+import { useModalStore } from '@/store/modals-store';
 
 import { useMyTasks } from '@/hooks/useMyTasks';
 
@@ -31,7 +31,7 @@ export const LastTasks = () => {
 					onClick={() => {
 						open('createTask');
 					}}
-					className='hover:text-primary flex max-h-[41px] rounded-sm border border-white px-2 pt-2 text-sm font-medium text-gray-500 shadow shadow-neutral-400 transition-all duration-300 dark:hover:text-white'
+					className='hover:text-primary shadow-default flex max-h-[41px] rounded-sm border border-white px-2 pt-2 text-sm font-medium text-gray-500 transition-all duration-300 dark:hover:text-white'
 				>
 					+ Add Task
 				</button>

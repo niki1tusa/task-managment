@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 
-import type { TProfileRow } from '@/shared/types/task/task.types';
+import type { TProfileRow } from '@/shared/types/task.types';
 
-import { useTaskStore } from '@/store/task.store';
+import { useTaskStore } from '@/store/task-store';
 
 import { getAllProfile } from '@/services/profile/profile-client.service';
 
@@ -18,9 +18,9 @@ export function useTeamParticipants(profile: TProfileRow) {
 	// participants in active task
 	const participants = activeTask?.task_participants || [];
 	// add participants
-	const participantIds = useMemo(()=>{
+	const participantIds = useMemo(() => {
 		return new Set(participants.flatMap(p => p.profile ?? []).map(pr => pr.id));
-	}, [participants]) 
+	}, [participants]);
 
 	const profiles = useMemo(() => {
 		const base = profilesData ?? [];

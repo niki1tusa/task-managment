@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button/Button';
 import Textarea from '@/components/ui/field/Textarea';
 import Modal from '@/components/ui/modal/Modal';
 
-import { useModalStore } from '@/store/modals.store';
+import { useModalStore } from '@/store/modals-store';
 
 import { renameChannel } from '@/services/channel/channel-client.service';
 

@@ -26,9 +26,8 @@ export default function Textarea({
 				className,
 				isStretch && `h-auto min-h-[100px]`,
 				rounded ? rounded : 'rounded-lg',
-				'resize-none bg-gray-50 px-3 py-2 text-sm placeholder-gray-400 shadow shadow-neutral-400 outline-none dark:bg-gray-700 dark:text-white dark:placeholder-gray-500'
+				'shadow-default resize-none bg-gray-50 px-3 py-2 text-sm placeholder-gray-400 outline-none dark:bg-gray-700 dark:text-white dark:placeholder-gray-500'
 			)}
-
 		/>
 	);
 }

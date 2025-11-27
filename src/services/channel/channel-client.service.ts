@@ -4,7 +4,7 @@ import type {
 	TChannelUpdate,
 } from '@/components/pages/messages/channel/channel.types';
 
-import type { TProfileRow } from '@/shared/types/task/task.types';
+import type { TProfileRow } from '@/shared/types/task.types';
 
 import { createClient } from '@/utils/supabase/client';
 

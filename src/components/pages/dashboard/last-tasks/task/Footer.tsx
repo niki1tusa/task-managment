@@ -11,9 +11,9 @@ import {
 import { Brush } from '@/components/animate-ui/icons/brush';
 import { AnimateIcon } from '@/components/animate-ui/icons/icon';
 
-import type { TTask } from '@/shared/types/task/task.types';
+import type { TTask } from '@/shared/types/task.types';
 
-import { useModalStore } from '@/store/modals.store';
+import { useModalStore } from '@/store/modals-store';
 
 export const Footer = ({ task }: { task: TTask }) => {
 	const { open } = useModalStore();
@@ -30,9 +30,9 @@ export const Footer = ({ task }: { task: TTask }) => {
 					<LucideLink size={19} />1
 				</div>
 			</div>
-			<div className=' mb-2 flex gap-2'>
+			<div className='mb-2 flex gap-2'>
 				<button
-					className='flex h-9 w-9 items-center justify-center rounded-full bg-red-500/80 text-white shadow shadow-neutral-400'
+					className='shadow-default flex h-9 w-9 items-center justify-center rounded-full bg-red-500/80 text-white'
 					onClick={e => {
 						e.stopPropagation();
 						open('deleteTask', task);
@@ -46,7 +46,7 @@ export const Footer = ({ task }: { task: TTask }) => {
 						e.stopPropagation();
 						open('createSubTask', task.id);
 					}}
-					className='bg-primary flex h-9 w-9 items-center justify-center rounded-full text-white shadow shadow-neutral-400'
+					className='bg-primary shadow-default flex h-9 w-9 items-center justify-center rounded-full text-white'
 				>
 					<Plus />
 				</button>
@@ -55,7 +55,7 @@ export const Footer = ({ task }: { task: TTask }) => {
 						e.stopPropagation();
 						open('updateTask', task);
 					}}
-					className='bg-primary flex h-9 w-9 items-center justify-center rounded-full text-white shadow shadow-neutral-400'
+					className='bg-primary shadow-default flex h-9 w-9 items-center justify-center rounded-full text-white'
 				>
 					<AnimateIcon animateOnHover>
 						<Brush size={22} />

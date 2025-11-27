@@ -5,7 +5,7 @@ export default async function middleware(request: NextRequest) {
 	let supabaseResponse = NextResponse.next({
 		request,
 	});
-
+	const { pathname, searchParams } = request.nextUrl;
 	const supabase = createServerClient(
 		process.env.NEXT_PUBLIC_SUPABASE_URL!,
 		process.env.NEXT_PUBLIC_SUPABASE_KEY!,
@@ -30,13 +30,14 @@ export default async function middleware(request: NextRequest) {
 		data: { user },
 	} = await supabase.auth.getUser();
 
-	if (
-		!user &&
-		!request.nextUrl.pathname.startsWith('/login') &&
-		!request.nextUrl.pathname.startsWith('/auth')
-	) {
+	if (!user) {
 		const url = request.nextUrl.clone();
 		url.pathname = '/login';
+
+		const queryString = searchParams.size ? `?${searchParams}` : '';
+		url.search = '';
+		url.searchParams.set('redirectTo', pathname + queryString);
+		console.log(url);
 		return NextResponse.redirect(url);
 	}
 
@@ -44,5 +45,12 @@ export default async function middleware(request: NextRequest) {
 }
 
 export const config = {
-	matcher: ['/auth', '/dashboard/:path*'],
+	matcher: [
+		'/dashboard/:path*',
+		'/messages/:path*',
+		'/notification/:path*',
+		'/schedule/:path*',
+		'/team/:path*',
+		'/settings/:path*',
+	],
 };

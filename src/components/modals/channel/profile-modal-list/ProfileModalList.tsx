@@ -5,7 +5,7 @@ import type { TChannelInsert } from '@/components/pages/messages/channel/channel
 import { Button } from '@/components/ui/button/Button';
 import Textarea from '@/components/ui/field/Textarea';
 
-import type { TProfileRow } from '@/shared/types/task/task.types';
+import type { TProfileRow } from '@/shared/types/task.types';
 
 import ProfileList from './ProfileList';
 import { useProfileList } from './useProfileList';

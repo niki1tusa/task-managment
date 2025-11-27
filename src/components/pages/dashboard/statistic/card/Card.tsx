@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 
-import type { TGetProjectStatResponse } from '@/shared/types/statistics/statistics.types';
+import type { TGetProjectStatResponse } from '@/shared/types/statistics.types';
 
 const bgColorMap = {
 	primary: 'bg-primary/80',
@@ -13,7 +13,7 @@ export const Card = ({ icon, number, label, bg_color }: TGetProjectStatResponse[
 	return (
 		<div
 			className={clsx(
-				`text-dark dark:bg-dark flex justify-between items-center rounded-2xl border border-white px-10 py-7 shadow shadow-neutral-400 dark:border-none dark:text-white`,
+				`text-dark dark:bg-dark shadow-default flex items-center justify-between rounded-2xl border border-white px-10 py-7 dark:border-none dark:text-white`,
 				bgClass
 			)}
 		>

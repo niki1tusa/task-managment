@@ -5,9 +5,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { Avatar } from '@/components/ui/Avatar';
-import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
 
-import type { TTask } from '@/shared/types/task/task.types';
+import type { TTask } from '@/shared/types/task.types';
+
+import { GUARD_PAGES } from '@/config/guard-page-config';
 
 import { useFormatDateForTask } from '@/hooks/useFormatDateForTask';
 
@@ -16,14 +17,14 @@ function TimelineTask({ task }: { task: TTask }) {
 
 	const { TaskIcon, start, end } = useFormatDateForTask(task);
 	return (
-		<div className='relative' onClick={() => router.push(DASHBOARD_PAGES.TASK(task.id))}>
+		<div className='relative' onClick={() => router.push(GUARD_PAGES.TASK(task.id))}>
 			<Link
-				href={DASHBOARD_PAGES.TASK(task.id)}
+				href={GUARD_PAGES.TASK(task.id)}
 				className='pointer-events-none absolute inset-0 z-10'
 				aria-hidden='true'
 				tabIndex={-1}
 			/>
-			<div className='bg-timeline-task 2xl:text-md xl:[290px] transition-color grid max-h-[144px] grid-cols-1 grid-rows-2 gap-3 rounded-3xl border border-white text-sm text-white shadow shadow-neutral-400 xl:h-[241px] dark:border-none'>
+			<div className='bg-timeline-task 2xl:text-md xl:[290px] transition-color shadow-default grid max-h-[144px] grid-cols-1 grid-rows-2 gap-3 rounded-3xl border border-white text-sm text-white xl:h-[241px] dark:border-none'>
 				{/* 1 section */}
 				<div className='mx-5 mt-3 flex gap-3 pt-2'>
 					<div className='flex h-9 min-w-9 items-center justify-center rounded-full bg-white/90 shadow shadow-white'>

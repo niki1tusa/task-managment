@@ -3,10 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
-import type {
-	ITimeRange,
-	TGetClientChartPointResponse,
-} from '@/shared/types/statistics/statistics.types';
+import type { ITimeRange, TGetClientChartPointResponse } from '@/shared/types/statistics.types';
 
 import { ProjectChart } from './ProjectChart';
 import { ProjectChartHeader } from './header/ProjectChartHeader';
@@ -30,7 +27,7 @@ export function ProjectStatisticsChart({
 
 	return (
 		<div className='text-foreground z-10 rounded-2xl border border-white shadow shadow-neutral-500 dark:border-none'>
-			<ProjectChartHeader  onChangeRange={setSelectedRange} selectedRange={selectedRange} />
+			<ProjectChartHeader onChangeRange={setSelectedRange} selectedRange={selectedRange} />
 			<ProjectChart data={data} />
 		</div>
 	);

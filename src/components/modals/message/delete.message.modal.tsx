@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { Button } from '@/components/ui/button/Button';
 import Modal from '@/components/ui/modal/Modal';
 
-import { useModalStore } from '@/store/modals.store';
+import { useModalStore } from '@/store/modals-store';
 
 import { deleteMessage } from '@/services/message/message-client.service';
 

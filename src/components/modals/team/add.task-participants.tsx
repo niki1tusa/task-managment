@@ -3,8 +3,8 @@ import { toast } from 'react-toastify';
 
 import Modal from '@/components/ui/modal/Modal';
 
-import { useModalStore } from '@/store/modals.store';
-import { useTaskStore } from '@/store/task.store';
+import { useModalStore } from '@/store/modals-store';
+import { useTaskStore } from '@/store/task-store';
 
 import { useProfile } from '@/hooks/useProfile';
 

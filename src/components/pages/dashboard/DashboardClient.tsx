@@ -8,8 +8,8 @@ import Timeline from '@/components/pages/dashboard/timeline/Timeline';
 import type {
 	TGetChartPointResponse,
 	TGetProjectStatResponse,
-} from '@/shared/types/statistics/statistics.types';
-import type { TGetTodayTasksResponse } from '@/shared/types/task/task.types';
+} from '@/shared/types/statistics.types';
+import type { TGetTodayTasksResponse } from '@/shared/types/task.types';
 
 export const DashboardClient = ({
 	todayTasks,

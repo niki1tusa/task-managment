@@ -1,16 +1,15 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 
+import TeamModalProfileListForSubtask from '@/components/pages/team/TeamModalProfileListForSubtask';
 import Modal from '@/components/ui/modal/Modal';
 
-import { useModalStore } from '@/store/modals.store';
+import { useModalStore } from '@/store/modals-store';
+import { useSubTaskStore } from '@/store/subtask-store';
 
 import { useProfile } from '@/hooks/useProfile';
 
-
-import { useSubTaskStore } from '@/store/subtask.store';
 import { addProfileForSubtask } from '@/services/tasks/subtask.service';
-import TeamModalProfileListForSubtask from '@/components/pages/team/TeamModalProfileListForSubtask';
 
 interface Props {
 	close: () => void;
@@ -20,7 +19,7 @@ export default function AddProfileForSubTask({ close }: Props) {
 	const queryClient = useQueryClient();
 	const { type } = useModalStore();
 	const { profile } = useProfile();
-	const { activeSubTask} = useSubTaskStore()
+	const { activeSubTask } = useSubTaskStore();
 	const { mutate, isPending } = useMutation({
 		mutationKey: ['add-profile-subtask'],
 		mutationFn: ({ subTaskId, profileId }: { subTaskId: string; profileId: string }) =>

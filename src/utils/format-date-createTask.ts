@@ -1,7 +1,7 @@
 import { addHours, format, setHours, setMinutes, setSeconds } from 'date-fns';
 import { ru } from 'date-fns/locale';
 
-import type { TTaskCreateForm } from '@/shared/types/task/task.types';
+import type { TTaskCreateForm } from '@/shared/types/task.types';
 
 export function prepareTaskPayload(data: TTaskCreateForm) {
 	const now = new Date();

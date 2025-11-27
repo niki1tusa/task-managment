@@ -4,20 +4,21 @@ import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 
 import { Avatar } from '@/components/ui/Avatar';
-import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
 
-import type { TTask } from '@/shared/types/task/task.types';
+import type { TTask } from '@/shared/types/task.types';
+
+import { GUARD_PAGES } from '@/config/guard-page-config';
 
 import { useFormatDateForTask } from '@/hooks/useFormatDateForTask';
 
 export const Header = ({ task }: { task: TTask }) => {
 	const { TaskIcon, displayDue } = useFormatDateForTask(task);
 	const pathname = usePathname();
-	const isTeamPage = pathname === DASHBOARD_PAGES.TEAM;
+	const isTeamPage = pathname === GUARD_PAGES.TEAM;
 	return (
 		<div className={clsx('mx-5 flex justify-between gap-3 py-5')}>
 			<div className='flex gap-3'>
-				<div className='flex h-9 min-w-9 items-center justify-center rounded-full shadow shadow-neutral-400'>
+				<div className='shadow-default flex h-9 min-w-9 items-center justify-center rounded-full'>
 					<TaskIcon color='#725cee' />
 				</div>
 				<div className={clsx(isTeamPage ? 'flex items-center' : 'grid grid-rows-2')}>
@@ -43,7 +44,7 @@ export const Header = ({ task }: { task: TTask }) => {
 									/>
 								);
 							})}
-						<div className='flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border bg-white shadow shadow-neutral-400'>
+						<div className='shadow-default flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border bg-white'>
 							+{task.task_participants.length - 2}
 						</div>
 					</>

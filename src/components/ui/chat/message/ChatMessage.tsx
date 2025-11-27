@@ -6,7 +6,8 @@ import { usePathname } from 'next/navigation';
 import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/animate-ui/base/popover';
-import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
+
+import { GUARD_PAGES } from '@/config/guard-page-config';
 
 import { useProfile } from '@/hooks/useProfile';
 
@@ -29,7 +30,7 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup, value }: Props) {
 	const [openId, setOpenId] = useState<string | null>(null);
 	const pathname = usePathname();
 
-	const isDashboardPage = pathname === DASHBOARD_PAGES.DASHBOARD;
+	const isDashboardPage = pathname === GUARD_PAGES.DASHBOARD;
 	// клик по пузырю: не открывать, если есть выделенный текст
 	const handleClick = useCallback(() => {
 		const sel = typeof window !== 'undefined' ? window.getSelection()?.toString() : '';
@@ -121,7 +122,7 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup, value }: Props) {
 								side='bottom'
 								align={'end'}
 								sideOffset={8}
-								className='bg-background w-[240px] rounded-sm border p-3 shadow shadow-neutral-400 dark:bg-white dark:text-black'
+								className='bg-background shadow-default w-[240px] rounded-sm border p-3 dark:bg-white dark:text-black'
 							>
 								<MessageMenuPopover msg={message} onClose={() => setOpenId(null)} />
 							</PopoverContent>

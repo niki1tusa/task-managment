@@ -3,7 +3,7 @@ import React from 'react';
 import { Checkbox } from '@/components/animate-ui/base/checkbox';
 import { Avatar } from '@/components/ui/Avatar';
 
-import type { TProfileRow } from '@/shared/types/task/task.types';
+import type { TProfileRow } from '@/shared/types/task.types';
 
 interface Props {
 	typeChannel?: string;
@@ -22,7 +22,7 @@ export default function ProfileList({
 	handleRemoveProfile,
 }: Props) {
 	return (
-		<ul className='dark:bg-gray-800 flex flex-col overflow-y-auto  rounded-lg border-2 bg-[#f6f4ff] px-4'>
+		<ul className='flex flex-col overflow-y-auto rounded-lg border-2 bg-[#f6f4ff] px-4 dark:bg-gray-800'>
 			{profiles?.map((p: TProfileRow) => (
 				<li key={p.id} className='flex items-center justify-between border-b-2 py-2.5'>
 					<div className='flex items-center gap-3'>
@@ -30,13 +30,13 @@ export default function ProfileList({
 						<span className='text-sm dark:text-white'>{p.name}</span>
 					</div>
 					<Checkbox
-						className='bg-white shadow shadow-neutral-400'
+						className='shadow-default bg-white'
 						disabled={
 							(!selectProfileId?.includes(p.id) && !!selectProfileId) ||
 							(!selectProfileIds?.includes(p.id) &&
-							(typeChannel === 'group'
-								? selectProfileIds?.length === 30
-								: selectProfileIds?.length === 1))
+								(typeChannel === 'group'
+									? selectProfileIds?.length === 30
+									: selectProfileIds?.length === 1))
 						}
 						checked={selectProfileIds?.includes(p.id)}
 						onCheckedChange={checked => {

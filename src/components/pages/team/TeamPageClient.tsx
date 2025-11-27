@@ -7,7 +7,7 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/components/
 import { Title } from '@/components/ui/Title';
 import Textarea from '@/components/ui/field/Textarea';
 
-import { useTaskStore } from '@/store/task.store';
+import { useTaskStore } from '@/store/task-store';
 
 import { useAllTaskWithoutFilter } from '@/hooks/useAllTaskWithoutFilter';
 import { useProfile } from '@/hooks/useProfile';
@@ -58,7 +58,7 @@ export default function TeamPageClient() {
 					<Tabs
 						value={selectTypeTasks}
 						onValueChange={value => setSelectTypeTasks(value as typeof selectTypeTasks)}
-						className='mt-5 grid rounded-lg shadow shadow-neutral-400'
+						className='shadow-default mt-5 grid rounded-lg'
 					>
 						<TabsList className='bg-primary/50 flex w-full'>
 							<TabsTrigger
@@ -83,7 +83,7 @@ export default function TeamPageClient() {
 					</Tabs>
 				</div>
 				{/* list */}
-				<div className='flex max-h-170 flex-col gap-3 overflow-y-auto rounded border-2 p-3 shadow shadow-neutral-400'>
+				<div className='shadow-default flex max-h-170 flex-col gap-3 overflow-y-auto rounded border-2 p-3'>
 					{taskFiltered?.map(task => (
 						<TeamTask task={task} key={task.id} />
 					))}

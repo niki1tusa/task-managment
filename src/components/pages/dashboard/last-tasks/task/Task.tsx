@@ -5,10 +5,10 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
+import type { TSubTaskRow } from '@/shared/types/subtask.types';
+import type { TTask } from '@/shared/types/task.types';
 
-import type { TSubTaskRow } from '@/shared/types/subtask/subtask.types';
-import type { TTask } from '@/shared/types/task/task.types';
+import { GUARD_PAGES } from '@/config/guard-page-config';
 
 import { Header } from '../../../../ui/header/Header';
 
@@ -30,10 +30,10 @@ export const Task = ({ task }: { task: TTask }) => {
 		<div
 			style={{ perspective: 900 }}
 			className='relative'
-			onClick={() => router.push(DASHBOARD_PAGES.TASK(task.id))}
+			onClick={() => router.push(GUARD_PAGES.TASK(task.id))}
 		>
 			<Link
-				href={DASHBOARD_PAGES.TASK(task.id)}
+				href={GUARD_PAGES.TASK(task.id)}
 				className='pointer-events-none absolute inset-0 z-10'
 				aria-hidden='true'
 				tabIndex={-1}
@@ -47,7 +47,7 @@ export const Task = ({ task }: { task: TTask }) => {
 				transition={{ type: 'spring', stiffness: 200, damping: 18 }}
 				style={{ transformOrigin: 'left center' }}
 				className={clsx(
-					'bg-task-base 2xl:text-md xl:[290px] transition-color grid grid-cols-1 grid-rows-3 gap-3 rounded-3xl border border-white text-sm shadow shadow-neutral-400 xl:h-[241px] dark:border-none'
+					'bg-task-base 2xl:text-md xl:[290px] transition-color shadow-default grid grid-cols-1 grid-rows-3 gap-3 rounded-3xl border border-white text-sm xl:h-[241px] dark:border-none'
 				)}
 			>
 				<Header task={task} />

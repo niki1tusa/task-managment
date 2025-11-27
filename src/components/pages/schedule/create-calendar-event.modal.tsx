@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import Form from '@/components/ui/form/Form';
 import Modal from '@/components/ui/modal/Modal';
 
-import { type TScheduleForm, ZScheduleScheme } from '@/shared/types/form/scheme.zod';
+import { type TScheduleForm, ZScheduleScheme } from '@/shared/types/scheme.zod';
 
 import { useProfile } from '@/hooks/useProfile';
 
@@ -60,7 +60,7 @@ export function CreateCalendarEvent({ close }: Props) {
 		};
 		console.log('msg:', payload);
 		mutate(payload);
-		close()
+		close();
 	};
 	return (
 		<Modal close={close} title={`Add a new events`}>

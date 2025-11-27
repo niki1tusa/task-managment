@@ -10,7 +10,7 @@ import type {
 import Textarea from '@/components/ui/field/Textarea';
 import Modal from '@/components/ui/modal/Modal';
 
-import { useModalStore } from '@/store/modals.store';
+import { useModalStore } from '@/store/modals-store';
 
 import { updateMessage } from '@/services/message/message-client.service';
 

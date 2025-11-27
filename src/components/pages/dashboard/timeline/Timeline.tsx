@@ -3,15 +3,13 @@
 import clsx from 'clsx';
 import { memo } from 'react';
 
+import { Avatar } from '@/components/ui/Avatar';
 import { Title } from '@/components/ui/Title';
 
-import type { TTask } from '@/shared/types/task/task.types';
-
-
+import type { TTask } from '@/shared/types/task.types';
 
 import TimelineTask from './TimelineTask';
 import { timelineTaskPercent } from './timelineTaskPercent';
-import { Avatar } from '@/components/ui/Avatar';
 
 const HOURS = Array.from({ length: 9 }, (_, i) => i + 9);
 

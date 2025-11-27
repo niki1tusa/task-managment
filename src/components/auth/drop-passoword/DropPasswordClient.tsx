@@ -8,11 +8,12 @@ import { sendResetPasswordEmail } from '@/app/(auth)/actions';
 
 import { Title } from '@/components/ui/Title';
 
-import { type TDropPasswordForm, ZDropPasswordScheme } from '@/shared/types/form/scheme.zod';
+import { type TDropPasswordForm, ZDropPasswordScheme } from '@/shared/types/scheme.zod';
 
 import Form from '../../ui/form/Form';
 
 import { dropPasswordFields } from './drop-password.data';
+import BtnReturnBack from '@/components/ui/button/BtnReturnBack';
 
 export function DropPasswordClient() {
 	// react-hook-form
@@ -50,6 +51,7 @@ export function DropPasswordClient() {
 				btnText='Send magic link'
 				btnClassName='bg-white/40 py-1.5 hover:text-purple-950 duration-300 text-sm 2xl:text-lg px-2 hover:bg-white/60 w-[30%] rounded-4xl  text-white transition-all whitespace-nowrap'
 			/>
+			<BtnReturnBack text='Back'/>
 		</div>
 	);
 }

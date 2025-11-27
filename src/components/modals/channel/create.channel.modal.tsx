@@ -8,10 +8,11 @@ import { toast } from 'react-toastify';
 
 import type { TChannelInsert } from '@/components/pages/messages/channel/channel.types';
 import { Button } from '@/components/ui/button/Button';
-import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
 import Modal from '@/components/ui/modal/Modal';
 
-import type { TTask } from '@/shared/types/task/task.types';
+import type { TTask } from '@/shared/types/task.types';
+
+import { GUARD_PAGES } from '@/config/guard-page-config';
 
 import { useChannels } from '@/hooks/useChannels';
 import { useProfile } from '@/hooks/useProfile';
@@ -56,7 +57,7 @@ export function CreateChannelModal({ close }: Props) {
 		close();
 	};
 
-	if (pathname !== DASHBOARD_PAGES.MESSAGES) {
+	if (pathname !== GUARD_PAGES.MESSAGES) {
 		console.log('close modal use if condiiton');
 		close();
 	}

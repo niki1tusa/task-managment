@@ -1,7 +1,8 @@
 import { redirect } from 'next/navigation';
 
 import { LoginClient } from '@/components/auth/login/LoginClient';
-import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
+
+import { GUARD_PAGES } from '@/config/guard-page-config';
 
 import { getServerAuth } from '@/utils/supabase/get-server-auth';
 
@@ -10,7 +11,7 @@ import AuthWrapper from '../AuthWrapper';
 export default async function LoginPage() {
 	const user = await getServerAuth();
 	if (user) {
-		redirect(DASHBOARD_PAGES.DASHBOARD);
+		redirect(GUARD_PAGES.DASHBOARD);
 	}
 	return (
 		<AuthWrapper>

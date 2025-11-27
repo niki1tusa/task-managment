@@ -1,4 +1,4 @@
-import type { TNoticeRow } from '@/components/pages/notification/notice.types';
+import type { TNoticeRow } from '@/components/pages/notification/notice-types';
 
 import { createClient } from '@/utils/supabase/client';
 

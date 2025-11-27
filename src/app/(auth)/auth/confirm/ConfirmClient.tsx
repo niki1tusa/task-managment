@@ -3,10 +3,11 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
-import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
-import { PUBLIC_PAGES } from '@/components/ui/config/public-page.config';
+
 
 import { createClient } from '@/utils/supabase/client';
+import { PUBLIC_PAGES } from '@/config/public-page-config';
+import { GUARD_PAGES } from '@/config/guard-page-config';
 
 export function ConfirmClient() {
 	const router = useRouter();
@@ -24,7 +25,7 @@ export function ConfirmClient() {
 				console.log(error.message);
 				router.replace('/error');
 			}
-			router.replace(DASHBOARD_PAGES.DASHBOARD);
+			router.replace(GUARD_PAGES.DASHBOARD);
 		};
 
 		verifyToken();

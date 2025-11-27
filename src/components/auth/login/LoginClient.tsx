@@ -17,14 +17,15 @@ import {
 import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/components/tabs';
 import { Title } from '@/components/ui/Title';
 import { BtnTabLink } from '@/components/ui/button/BtnTabLink';
-import { PUBLIC_PAGES } from '@/components/ui/config/public-page.config';
 
 import {
 	type TLoginForm,
 	type TLoginPhonePasswordForm,
 	ZLoginPhonePasswordScheme,
 	ZLoginScheme,
-} from '@/shared/types/form/scheme.zod';
+} from '@/shared/types/scheme.zod';
+
+import { PUBLIC_PAGES } from '@/config/public-page-config';
 
 import Form from '../../ui/form/Form';
 

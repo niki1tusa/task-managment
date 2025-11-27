@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import { CornerUpRight, SquarePen, SquareX, Trash } from 'lucide-react';
 
-import { useModalStore } from '@/store/modals.store';
+import { useModalStore } from '@/store/modals-store';
 
 import { BtnCopyName } from '../button/BtnCopyName';
 import type { TChatMessageRow } from '../chat/message/message.types';
@@ -31,7 +31,9 @@ export default function MessageMenuPopover({ msg, onClose }: Props) {
 					open('updateMessage', msg);
 					onClose();
 				}}
-				className={clsx('flex items-center gap-3 rounded p-1 transition-colors hover:bg-gray-200 bg-gray-100')}
+				className={clsx(
+					'flex items-center gap-3 rounded bg-gray-100 p-1 transition-colors hover:bg-gray-200'
+				)}
 			>
 				<SquarePen size={18} /> <div>Edit Message</div>
 			</button>
@@ -39,7 +41,7 @@ export default function MessageMenuPopover({ msg, onClose }: Props) {
 			<div className='w-full border-b' />
 			<button
 				type='button'
-				className='flex items-center gap-3 rounded p-1 transition-colors hover:bg-gray-200 bg-gray-100'
+				className='flex items-center gap-3 rounded bg-gray-100 p-1 transition-colors hover:bg-gray-200'
 			>
 				<CornerUpRight size={18} /> <div className='flex flex-nowrap'>Resend message </div>
 			</button>
@@ -51,7 +53,9 @@ export default function MessageMenuPopover({ msg, onClose }: Props) {
 					open('deleteMessage', msg.id);
 					onClose();
 				}}
-				className={clsx('flex items-center gap-3 rounded p-1 transition-colors hover:bg-gray-200 bg-gray-100')}
+				className={clsx(
+					'flex items-center gap-3 rounded bg-gray-100 p-1 transition-colors hover:bg-gray-200'
+				)}
 			>
 				<Trash size={18} /> Delete message
 			</button>

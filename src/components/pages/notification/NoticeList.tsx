@@ -6,8 +6,8 @@ import { toast } from 'react-toastify';
 
 import { Checkbox } from '@/components/animate-ui/base/checkbox';
 
-import { formatNoticeDate } from './formatNoticeDate';
-import type { TNoticeRow } from './notice.types';
+import { formatNoticeDate } from '../../../utils/format-notice-вate';
+import type { TNoticeRow } from './notice-types';
 import { updateStatusNotice } from '@/services/notice/notice-client.service';
 
 interface Props {
@@ -27,14 +27,14 @@ export default function NoticeList({ notices }: Props) {
 		},
 	});
 	return (
-		<ul className='flex max-h-160 w-full flex-col gap-3 overflow-y-auto rounded border p-2 bg-white dark:bg-gray-900'>
+		<ul className='flex max-h-160 w-full flex-col gap-3 overflow-y-auto rounded-lg border bg-white p-2 dark:bg-gray-900'>
 			{notices.length > 0 ? (
 				notices.map(notice => {
 					return (
-						<li key={notice.id} className='grid grid-cols-[auto_1fr_auto] items-start gap-3'>
+						<li key={notice.id} className='grid grid-cols-[auto_1fr_auto] items-start gap-3 border'>
 							{/* checkbox */}
 							<Checkbox
-								className='ring-gray/40 bg-input/30 hover:bg-input/50 mt-2 shadow ring-2 dark:ring-gray shadow-neutral-300 dark:shadow-none'
+								className='ring-gray/40 bg-input/30 hover:bg-input/50 dark:ring-gray mt-2 shadow ring-2 shadow-neutral-300 dark:shadow-none'
 								onCheckedChange={() => mutate({ id: notice.id, status: !notice.status })}
 							/>
 

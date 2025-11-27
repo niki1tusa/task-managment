@@ -1,7 +1,8 @@
 import { useRouter } from 'next/navigation';
 
 import { AnimateIcon } from '@/components/animate-ui/icons/icon';
-import { PUBLIC_PAGES } from '@/components/ui/config/public-page.config';
+
+import { PUBLIC_PAGES } from '@/config/public-page-config';
 
 import { createClient } from '@/utils/supabase/client';
 

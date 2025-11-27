@@ -27,7 +27,7 @@ const ChatInput = ({ handleSend }: { handleSend: (text: string) => Promise<void>
 				placeholder='Enter your message...'
 				value={text}
 				onChange={e => setText(e.target.value)}
-				className='flex-1 resize-none rounded-lg bg-gray-50 px-3 py-2 text-sm placeholder-gray-400 shadow shadow-neutral-400 outline-none dark:bg-gray-700 dark:placeholder-gray-500'
+				className='shadow-default flex-1 resize-none rounded-lg bg-gray-50 px-3 py-2 text-sm placeholder-gray-400 outline-none dark:bg-gray-700 dark:placeholder-gray-500'
 				onKeyDown={e => {
 					if (e.key === 'Enter' && !e.shiftKey) {
 						e.preventDefault();
@@ -40,7 +40,7 @@ const ChatInput = ({ handleSend }: { handleSend: (text: string) => Promise<void>
 				<button
 					disabled={!text.trim()}
 					onClick={sendMessage}
-					className={`relative h-10 w-10 rounded-full shadow shadow-neutral-400 transition-colors ${
+					className={`shadow-default relative h-10 w-10 rounded-full transition-colors ${
 						text.trim()
 							? 'bg-indigo-500 hover:bg-indigo-600'
 							: 'cursor-not-allowed bg-gray-300 dark:bg-gray-600'

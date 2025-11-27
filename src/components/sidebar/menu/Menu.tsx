@@ -2,7 +2,7 @@
 
 import { Title } from '@/components/ui/Title';
 
-import type { IMenuItem } from '@/shared/types/sidebar/menu.item.types';
+import type { IMenuItem } from '@/shared/types/menu.item.types';
 
 import { MenuItem } from './MenuItem';
 

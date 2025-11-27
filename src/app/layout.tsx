@@ -5,7 +5,7 @@ import { SITE_NAME } from '@/constants/seo.constants';
 
 import { ProviderWrapper } from '../providers/Providers';
 
-import './globals.css';
+import '../shared/styles/globals.css';
 
 const poppins = Poppins({
 	variable: '--font-poppins-sans',

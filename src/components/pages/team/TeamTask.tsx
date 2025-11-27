@@ -5,9 +5,9 @@ import { motion } from 'framer-motion';
 
 import { Header } from '@/components/ui/header/Header';
 
-import type { TTask } from '@/shared/types/task/task.types';
+import type { TTask } from '@/shared/types/task.types';
 
-import { useTaskStore } from '@/store/task.store';
+import { useTaskStore } from '@/store/task-store';
 
 export default function TeamTask({ task }: { task: TTask }) {
 	const { activeTask, setActiveTask } = useTaskStore();
@@ -25,7 +25,7 @@ export default function TeamTask({ task }: { task: TTask }) {
 					activeTask?.id === task.id
 						? 'border-2 border-sky-500'
 						: 'border-2 border-white dark:border-white/20',
-					'2xl:text-md bg-task-base rounded text-sm shadow shadow-neutral-400 transition-all hover:bg-gray-200 dark:hover:bg-gray-700'
+					'2xl:text-md bg-task-base shadow-default rounded text-sm transition-all hover:bg-gray-200 dark:hover:bg-gray-700'
 				)}
 			>
 				<Header task={task} />

@@ -8,10 +8,11 @@ import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { Title } from '@/components/ui/Title';
-import { DASHBOARD_PAGES } from '@/components/ui/config/dashboard-page.config';
-import { PUBLIC_PAGES } from '@/components/ui/config/public-page.config';
 
-import { type TRegistrationForm, ZRegistrationScheme } from '@/shared/types/form/scheme.zod';
+import { type TRegistrationForm, ZRegistrationScheme } from '@/shared/types/scheme.zod';
+
+import { GUARD_PAGES } from '@/config/guard-page-config';
+import { PUBLIC_PAGES } from '@/config/public-page-config';
 
 import Form from '../../ui/form/Form';
 
@@ -39,7 +40,7 @@ export function RegisterClient() {
 			console.log(data);
 			toast.success('Successfully registration!');
 			setTimeout(() => {
-				router.replace(DASHBOARD_PAGES.DASHBOARD);
+				router.replace(GUARD_PAGES.DASHBOARD);
 			}, 1500);
 		} catch (error) {
 			console.error(error);

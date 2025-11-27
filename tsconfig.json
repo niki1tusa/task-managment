@@ -22,7 +22,7 @@
 		"paths": {
 			"@/*": ["./src/*"],
 			"@/types/*": ["./src/shared/types/*"],
-			"@/data/*": ["./src/shared/data/*"],
+			"@/config/*": ["./src/config/*"],
 			"@/ui/*": ["./src/components/ui/*"]
 		}
 	},

@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { Button } from '@/components/ui/button/Button';
 import Modal from '@/components/ui/modal/Modal';
 
-import { useModalStore } from '@/store/modals.store';
+import { useModalStore } from '@/store/modals-store';
 
 import { deleteClientChannel } from '@/services/channel/channel-client.service';
 
@@ -21,7 +21,7 @@ export default function DeleteChannelModal({ close }: Props) {
 			queryClient.invalidateQueries({ queryKey: ['channels'], exact: false });
 			close();
 		},
-		onError: (error) => {
+		onError: error => {
 			toast.error(`Ошибка: ${error instanceof Error ? error.message : 'неизвестная'}`);
 		},
 	});
