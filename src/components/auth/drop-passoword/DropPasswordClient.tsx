@@ -8,7 +8,7 @@ import { sendResetPasswordEmail } from '@/app/(auth)/actions';
 
 import { Title } from '@/components/ui/Title';
 
-import { type TDropPasswordForm, ZDropPasswordScheme } from '@/shared/types/scheme.zod';
+import { type TDropPasswordForm, ZDropPasswordScheme } from '@/shared/types/scheme-zod';
 
 import Form from '../../ui/form/Form';
 

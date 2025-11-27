@@ -13,7 +13,7 @@ export const ToggleTheme = () => {
 	}, []);
 
 	if (!mounted) {
-		return null; // избегаем SSR-клиент различий
+		return null;
 	}
 
 	return (

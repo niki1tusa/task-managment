@@ -1,3 +1,4 @@
+'use client'
 import { Search } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -15,11 +16,11 @@ import { useChannelStore } from '@/store/channel-store';
 
 import { useClickOutside } from '@/hooks/useClickOutside';
 import { useProfile } from '@/hooks/useProfile';
-
+import {GROUP_GAP_MINUTES} from '@/constants/global-constants.ts'
 import { Button } from '../button/Button';
 import Textarea from '../field/Textarea';
 
-import { GROUP_GAP_MINUTES, minsDiff } from './messageUtils';
+import {  minsDiff } from './messageUtils';
 
 export default function Chat() {
 	// store

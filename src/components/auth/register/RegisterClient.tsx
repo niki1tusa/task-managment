@@ -14,9 +14,6 @@ import { type TRegistrationForm, ZRegistrationScheme } from '@/shared/types/sche
 import { GUARD_PAGES } from '@/config/guard-page-config';
 import { PUBLIC_PAGES } from '@/config/public-page-config';
 
-import { DASHBOARD_PAGES } from '@/config/protect-page-config';
-import { PUBLIC_PAGES } from '@/config/public-page-config';
-
 import Form from '../../ui/form/Form';
 
 import { RegisterFields } from './register.data';

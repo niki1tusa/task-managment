@@ -1,0 +1,1 @@
+export const GROUP_GAP_MINUTES = 5;

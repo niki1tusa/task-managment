@@ -2,7 +2,7 @@ import cn from 'clsx';
 import { CircleCheck } from 'lucide-react';
 import { useMemo } from 'react';
 
-import '@/shared/styles/shimmer.animation.css';
+import '@/shared/styles/shimmer-animation.css';
 
 // type Props = Pick<TTask, 'status'>;
 

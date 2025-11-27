@@ -10,6 +10,7 @@
 /* base */
 .bg-task-base {
 	background-color: #f6f4ff;
+	/* background-color: white; */
 }
 .dark .bg-task-base {
 	background-color: #1e1e28; /* базовый фон для тёмной темы */
