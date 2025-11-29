@@ -10,7 +10,7 @@ import {
 	YAxis,
 } from 'recharts';
 
-import type { TGetChartPointResponse } from '@/shared/types/statistics.types';
+import type { TGetChartPointResponse } from '@/shared/types/statistics-types';
 
 import { ProjectChartToolTip } from './tool-tip/ProjectChartToolTip';
 

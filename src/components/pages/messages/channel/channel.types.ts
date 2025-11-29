@@ -1,5 +1,5 @@
-import type { Database } from '@/shared/types/db.types';
-import type { TProfileRow } from '@/shared/types/task.types';
+import type { Database } from '@/shared/types/db-types';
+import type { TProfileRow } from '@/shared/types/task-types';
 
 export type TChannelRow = Database['public']['Tables']['channel']['Row'];
 export type TChannelInsert = Database['public']['Tables']['channel']['Insert'];

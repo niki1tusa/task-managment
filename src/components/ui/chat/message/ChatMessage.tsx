@@ -14,9 +14,10 @@ import { useProfile } from '@/hooks/useProfile';
 import { Avatar } from '../../Avatar';
 import Skeleton from '../../Skeleton';
 import MessageMenuPopover from '../../popover/MessageMenuPopover';
+import type { TChatMessageRow } from '@/shared/types/message-types';
 
-import ChatMessageText from './ChatMessageText';
-import type { TChatMessageRow } from './message.types';
+
+
 
 interface Props {
 	message: TChatMessageRow;
@@ -109,11 +110,10 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup, value }: Props) {
 															? 'rounded-tl-sm rounded-bl-none'
 															: 'rounded-tl-sm rounded-bl-sm'
 													),
-											// лёгкий ховер, чтобы было понятно, что можно кликнуть
 											'hover:brightness-[1.02]'
 										)}
 									>
-										<ChatMessageText text={message.text} query={value} />
+										{message.text}
 									</button>
 								}
 							/>
@@ -150,7 +150,7 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup, value }: Props) {
 								'hover:brightness-[1.02]'
 							)}
 						>
-							<ChatMessageText text={message.text} query={value} />
+							{message.text} 
 						</button>
 					)}
 				</div>

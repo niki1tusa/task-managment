@@ -3,11 +3,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
-import type { ITimeRange, TGetClientChartPointResponse } from '@/shared/types/statistics.types';
+import type { ITimeRange, TGetClientChartPointResponse } from '@/shared/types/statistics-types';
 
 import { ProjectChart } from './ProjectChart';
 import { ProjectChartHeader } from './header/ProjectChartHeader';
-import { fetchClientChartPoint } from '@/services/statistics/chart-point-client.service';
+import { fetchClientChartPoint } from '@/services/statistics/chart-point-client-service';
 
 export function ProjectStatisticsChart({
 	chartPoints,

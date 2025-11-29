@@ -10,7 +10,7 @@ import { useProfile } from '@/hooks/useProfile';
 
 import TeamModalParticipant from '../../pages/team/TeamModalParticipant';
 
-import { insertTaskParticipants } from '@/services/tasks/task-client.service';
+import { insertTaskParticipants } from '@/services/tasks/task-client-service';
 
 interface Props {
 	close: () => void;

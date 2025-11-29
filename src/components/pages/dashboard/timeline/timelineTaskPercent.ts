@@ -1,4 +1,4 @@
-import type { TTask } from '@/shared/types/task.types';
+import type { TTask } from '@/shared/types/task-types';
 
 function timeStrToMinutes(t: string) {
 	const [h, m, s] = t.split(':').map(Number);

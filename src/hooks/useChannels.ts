@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import type { TChannelRow } from '@/components/pages/messages/channel/channel.types';
 
-import { getClientChannels } from '@/services/channel/channel-client.service';
+import { getClientChannels } from '@/services/channel/channel-client-service';
 
 export function useChannels() {
 	const {

@@ -6,7 +6,7 @@ import { memo } from 'react';
 import { Avatar } from '@/components/ui/Avatar';
 import { Title } from '@/components/ui/Title';
 
-import type { TTask } from '@/shared/types/task.types';
+import type { TTask } from '@/shared/types/task-types';
 
 import TimelineTask from './TimelineTask';
 import { timelineTaskPercent } from './timelineTaskPercent';

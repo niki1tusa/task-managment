@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import type { TSubTaskRow } from '@/shared/types/subtask.types';
+import type { TSubTaskRow } from '@/shared/types/subtask-types';
 
 interface SubTaskState {
 	activeSubTask: TSubTaskRow | null;

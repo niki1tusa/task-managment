@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import type { TTask } from '@/shared/types/task.types';
+import type { TTask } from '@/shared/types/task-types';
 
 interface TaskState {
 	activeTask: TTask | null;

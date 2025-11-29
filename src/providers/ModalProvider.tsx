@@ -1,19 +1,19 @@
-import AddProfileInChannel from '@/components/modals/channel/add.profile.modal';
-import { CreateChannelModal } from '@/components/modals/channel/create.channel.modal';
-import DeleteChannelModal from '@/components/modals/channel/delete.channel.modal';
-import DeleteProfileFromPartyChannel from '@/components/modals/channel/delete.profile.modal';
-import RenameChannel from '@/components/modals/channel/rename.channel.modal';
-import DeleteMessage from '@/components/modals/message/delete.message.modal';
-import UpdateMessage from '@/components/modals/message/update.message.modal';
+import AddProfileInChannel from '@/components/modals/channel/add-profile-in-channel-modal';
+import { CreateChannelModal } from '@/components/modals/channel/create-channel-modal';
+import DeleteChannelModal from '@/components/modals/channel/delete-channel-modal';
+import DeleteProfileFromPartyChannel from '@/components/modals/channel/delete-profile-modal';
+import RenameChannel from '@/components/modals/channel/rename-channel-modal';
+import DeleteMessage from '@/components/modals/message/delete-message-modal';
+import UpdateMessage from '@/components/modals/message/update-message-modal';
 import { CreateSubtaskModal } from '@/components/modals/task/create-subtask-modal';
 import { CreateTaskModal } from '@/components/modals/task/create-task-modal';
 import DeleteConfirmModals from '@/components/modals/task/delete-task-modal';
 import { UpdateTaskModal } from '@/components/modals/task/update-task-modal';
-import AddProfileForSubTask from '@/components/modals/team/add.response-profile-subtask';
-import AddProfileInTask from '@/components/modals/team/add.task-participants';
-import DeleteProfileFromTaskParticipants from '@/components/modals/team/delete.profile-for-task-participants';
-import DeleteTeamResponseProfileModal from '@/components/modals/team/delete.response-profile-for-subtask';
-import { CreateCalendarEvent } from '@/components/pages/schedule/create-calendar-event.modal';
+import AddProfileForSubTask from '@/components/modals/team/add-response-profile-for-subtask-modal';
+import AddProfileInTask from '@/components/modals/team/add-task-participants-modal';
+import DeleteProfileFromTaskParticipants from '@/components/modals/team/delete-profile-for-task-participants-modal';
+import DeleteTeamResponseProfileModal from '@/components/modals/team/delete-response-profile-for-subtask-modal';
+import { CreateCalendarEvent } from '@/components/modals/schedule/create-calendar-event-modal';
 
 import { useModalStore } from '@/store/modals-store';
 

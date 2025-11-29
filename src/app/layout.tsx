@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Playfair_Display, Poppins } from 'next/font/google';
 
-import { SITE_NAME } from '@/constants/seo.constants';
+import { SITE_NAME } from '@/constants/seo-constants';
 
 import { ProviderWrapper } from '../providers/Providers';
 
@@ -33,7 +33,6 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-
 	return (
 		<html lang='en' suppressHydrationWarning>
 			<body className={`${poppins.variable} ${playfairDisplay.variable} antialiased`}>

@@ -1,7 +1,7 @@
 import type {
 	TGetChartPointResponse,
 	TGetProjectStatResponse,
-} from '@/shared/types/statistics.types';
+} from '@/shared/types/statistics-types';
 
 import { Card } from './card/Card';
 import { ProjectStatisticsChart } from './chart/ProjectStatisticsChart';

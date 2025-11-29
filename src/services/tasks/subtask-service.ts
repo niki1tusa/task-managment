@@ -1,6 +1,6 @@
 'use client';
 
-import type { TSubTaskInsert } from '@/shared/types/subtask.types';
+import type { TSubTaskInsert } from '@/shared/types/subtask-types';
 
 import { createClient } from '@/utils/supabase/client';
 

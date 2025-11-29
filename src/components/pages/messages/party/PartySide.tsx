@@ -17,7 +17,7 @@ import { useProfile } from '@/hooks/useProfile';
 
 import type { TChannelParticipantsRow, TChannelRow } from '../channel/channel.types';
 
-import { getChannelParticipantsById } from '@/services/channel/channel-client.service';
+import { getChannelParticipantsById } from '@/services/channel/channel-client-service';
 
 interface Props {
 	channel: TChannelRow | null;

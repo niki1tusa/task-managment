@@ -2,9 +2,9 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
-import { createClient } from '@/utils/supabase/client';
+import type { TChatMessageRow } from '@/shared/types/message-types';
 
-import type { TChatMessageRow } from './message/message.types';
+import { createClient } from '@/utils/supabase/client';
 
 export const useChat = (channelId: string | null) => {
 	const supabase = useRef(createClient());

@@ -7,7 +7,7 @@ import { useModalStore } from '@/store/modals-store';
 
 import Modal from '../../ui/modal/Modal';
 
-import { deleteClientTask } from '@/services/tasks/task-client.service';
+import { deleteClientTask } from '@/services/tasks/task-client-service';
 
 export default function DeleteConfirmModals() {
 	const { close, type, payload } = useModalStore();

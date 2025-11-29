@@ -8,11 +8,11 @@ import { sendResetPasswordEmail } from '@/app/(auth)/actions';
 
 import { Title } from '@/components/ui/Title';
 
-import { type TDropPasswordForm, ZDropPasswordScheme } from '@/shared/types/scheme-zod';
+import { type TDropPasswordForm, ZDropPasswordScheme } from '@/shared/types/scheme';
 
 import Form from '../../ui/form/Form';
 
-import { dropPasswordFields } from './drop-password.data';
+import { dropPasswordFields } from './drop-password-config';
 import BtnReturnBack from '@/components/ui/button/BtnReturnBack';
 
 export function DropPasswordClient() {

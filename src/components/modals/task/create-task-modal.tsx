@@ -7,14 +7,15 @@ import { toast } from 'react-toastify';
 import Form from '@/components/ui/form/Form';
 import Modal from '@/components/ui/modal/Modal';
 
-import type { TSubTaskInsert } from '@/shared/types/subtask.types';
-import type { TTaskCreateForm } from '@/shared/types/task.types';
+import type { TSubTaskInsert } from '@/shared/types/subtask-types';
+import type { TTaskCreateForm } from '@/shared/types/task-types';
 
 import { prepareTaskPayload } from '@/utils/format-date-createTask';
 
-import { TASK_EDIT_FIELDS } from './config/task-edit-config';
-import { createClientSubTask } from '@/services/tasks/subtask.service';
-import { createClientTask } from '@/services/tasks/task-client.service';
+import { TASK_EDIT_FIELDS } from '../../../config/task-edit-config';
+
+import { createClientSubTask } from '@/services/tasks/subtask-service';
+import { createClientTask } from '@/services/tasks/task-client-service';
 
 export const CreateTaskModal = ({ close }: { close: () => void }) => {
 	const queryClient = useQueryClient();

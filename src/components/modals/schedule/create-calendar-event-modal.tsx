@@ -8,12 +8,12 @@ import { toast } from 'react-toastify';
 import Form from '@/components/ui/form/Form';
 import Modal from '@/components/ui/modal/Modal';
 
-import { type TScheduleForm, ZScheduleScheme } from '@/shared/types/scheme.zod';
+import { type TScheduleForm, ZScheduleScheme } from '@/shared/types/scheme';
 
 import { useProfile } from '@/hooks/useProfile';
 
-import { CALENDAR_EVENT_FIELDS } from './schedule.data';
-import { type TEventInsert, insertEvent } from '@/services/shedule-event/shedule-event.service';
+import { CALENDAR_EVENT_FIELDS } from '../../../config/schedule-config';
+import { type TEventInsert, insertEvent } from '@/services/shedule-event-service';
 
 interface Props {
 	close: () => void;

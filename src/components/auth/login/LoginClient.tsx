@@ -23,14 +23,14 @@ import {
 	type TLoginPhonePasswordForm,
 	ZLoginPhonePasswordScheme,
 	ZLoginScheme,
-} from '@/shared/types/scheme.zod';
+} from '@/shared/types/scheme';
 
 import { PUBLIC_PAGES } from '@/config/public-page-config';
 
 import Form from '../../ui/form/Form';
 
-import { loginEmailFields, loginPhonePasswordFields } from './login.data';
-import { loginUserByPhoneAndPassword } from '@/services/profile/profile-auth-client.service';
+import { loginEmailFields, loginPhonePasswordFields } from './login-config';
+import { loginUserByPhoneAndPassword } from '@/services/profile/profile-auth-client-service';
 
 export function LoginClient() {
 	const [loginType, setLoginType] = useState<'email' | 'password'>('email');

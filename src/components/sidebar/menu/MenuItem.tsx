@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 
 import { AnimateIcon } from '@/components/animate-ui/icons/icon';
 
-import type { IMenuItem } from '@/shared/types/menu.item.types';
+import type { IMenuItem } from '@/shared/types/menu-item-types';
 
 import { useNotices } from '@/hooks/useNotices';
 

@@ -6,16 +6,17 @@ import { useRouter } from 'next/navigation';
 
 import { Avatar } from '@/components/ui/Avatar';
 
-import type { TTask } from '@/shared/types/task.types';
+import type { TTask } from '@/shared/types/task-types';
 
 import { GUARD_PAGES } from '@/config/guard-page-config';
 
 import { useFormatDateForTask } from '@/hooks/useFormatDateForTask';
+import { getTaskIcon } from '@/utils/getTaskIcon';
 
 function TimelineTask({ task }: { task: TTask }) {
 	const router = useRouter();
-
-	const { TaskIcon, start, end } = useFormatDateForTask(task);
+	const TaskIcon = getTaskIcon(task)
+	const {start, end } = useFormatDateForTask(task);
 	return (
 		<div className='relative' onClick={() => router.push(GUARD_PAGES.TASK(task.id))}>
 			<Link

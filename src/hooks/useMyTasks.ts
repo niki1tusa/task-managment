@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
-import type { TByAscOrDesc, TStatus, TTask } from '@/shared/types/task.types';
+import type { TByAscOrDesc, TStatus, TTask } from '@/shared/types/task-types';
 
-import { getClientAllTask } from '@/services/tasks/task-client.service';
+import { getClientAllTask } from '@/services/tasks/task-client-service';
 
 interface Props {
 	select?: TStatus;

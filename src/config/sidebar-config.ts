@@ -5,7 +5,7 @@ import { LayoutDashboard } from '@/components/animate-ui/icons/layout-dashboard'
 import { MessageCircleMoreIcon } from '@/components/animate-ui/icons/message-circle-more';
 import { SettingsIcon } from '@/components/animate-ui/icons/settings';
 
-import type { IMenuItem } from '@/shared/types/menu.item.types';
+import type { IMenuItem } from '@/shared/types/menu-item-types';
 
 import { GUARD_PAGES } from '@/config/guard-page-config';
 

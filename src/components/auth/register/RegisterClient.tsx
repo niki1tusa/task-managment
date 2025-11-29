@@ -9,15 +9,15 @@ import { toast } from 'react-toastify';
 
 import { Title } from '@/components/ui/Title';
 
-import { type TRegistrationForm, ZRegistrationScheme } from '@/shared/types/scheme.zod';
+import { type TRegistrationForm, ZRegistrationScheme } from '@/shared/types/scheme';
 
 import { GUARD_PAGES } from '@/config/guard-page-config';
 import { PUBLIC_PAGES } from '@/config/public-page-config';
 
 import Form from '../../ui/form/Form';
 
-import { RegisterFields } from './register.data';
-import { createUser } from '@/services/profile/profile-auth-client.service';
+import { RegisterFields } from './register-config';
+import { createUser } from '@/services/profile/profile-auth-client-service';
 
 export function RegisterClient() {
 	const router = useRouter();

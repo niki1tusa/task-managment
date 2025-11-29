@@ -6,7 +6,7 @@ import Modal from '@/components/ui/modal/Modal';
 
 import { useModalStore } from '@/store/modals-store';
 
-import { deleteClientChannel } from '@/services/channel/channel-client.service';
+import { deleteClientChannel } from '@/services/channel/channel-client-service';
 
 interface Props {
 	close: () => void;

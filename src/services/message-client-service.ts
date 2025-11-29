@@ -1,4 +1,4 @@
-import type { TChatMessageUpdate } from '@/components/ui/chat/message/message.types';
+import type { TChatMessageUpdate } from "@/shared/types/message-types";
 
 import { createClient } from '@/utils/supabase/client';
 

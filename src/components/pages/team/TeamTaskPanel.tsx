@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { Title } from '@/components/ui/Title';
 
-import type { TProfileRow } from '@/shared/types/task.types';
+import type { TProfileRow } from '@/shared/types/task-types';
 
 import { useModalStore } from '@/store/modals-store';
 import { useTaskStore } from '@/store/task-store';

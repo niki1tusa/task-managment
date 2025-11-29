@@ -2,7 +2,7 @@ import { Trash2Icon } from 'lucide-react';
 
 import { Avatar } from '@/components/ui/Avatar';
 
-import type { TTask } from '@/shared/types/task.types';
+import type { TTask } from '@/shared/types/task-types';
 
 import { useModalStore } from '@/store/modals-store';
 

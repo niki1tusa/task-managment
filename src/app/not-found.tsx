@@ -1,8 +1,10 @@
+import BtnReturnBack from '@/components/ui/button/BtnReturnBack';
+
 export default function NotFound() {
 	return (
-		<div className='flex flex-col items-center justify-center h-screen w-full'>
-			<h1 className='font-bold text-7xl'>404 | Not found</h1>
-			<BtnReturnBack text='Return back'/>
+		<div className='flex h-screen w-full flex-col items-center justify-center'>
+			<h1 className='text-7xl font-bold'>404 | Not found</h1>
+			<BtnReturnBack text='Return back' />
 		</div>
-	)
+	);
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import type { TRegistrationForm } from '@/shared/types/scheme.zod';
+import type { TRegistrationForm } from '@/shared/types/scheme';
 
 import { PUBLIC_PAGES } from '@/config/public-page-config';
 

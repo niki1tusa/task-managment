@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react';
 
 import type { TChannelParticipantsRow } from '@/components/pages/messages/channel/channel.types';
 
-import type { TProfileRow } from '@/shared/types/task.types';
+import type { TProfileRow } from '@/shared/types/task-types';
 
 import { useChannelStore } from '@/store/channel-store';
 import { useModalStore } from '@/store/modals-store';
@@ -11,8 +11,8 @@ import { useModalStore } from '@/store/modals-store';
 import {
 	getChannelParticipantsById,
 	getMyDirectPartnerIds,
-} from '@/services/channel/channel-client.service';
-import { getAllProfile } from '@/services/profile/profile-client.service';
+} from '@/services/channel/channel-client-service';
+import { getAllProfile } from '@/services/profile/profile-client-service';
 
 export function useProfileList(profile: TProfileRow) {
 	const { type } = useModalStore();

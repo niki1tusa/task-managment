@@ -1,4 +1,4 @@
-import type { TStatus, TTask } from '@/shared/types/task.types';
+import type { TStatus, TTask } from '@/shared/types/task-types';
 
 export function filterStatusTasks(tasks: TTask[], status?: TStatus) {
 	return tasks.filter(item => {

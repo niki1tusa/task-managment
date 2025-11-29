@@ -6,7 +6,7 @@ import { MENU } from '@/config/sidebar-config';
 
 import Logout from './Logout';
 import { Menu } from './menu/Menu';
-import { ProfileMenu } from './profile/Profile';
+import { ProfileMenu } from './Profile';
 // import { ProjectsMenu } from './project/ProjectsMenu';
 import ThemeMenu from './theme-menu/ThemeMenu';
 

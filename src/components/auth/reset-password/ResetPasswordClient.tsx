@@ -12,12 +12,12 @@ import { serverSignOut } from '@/app/(auth)/actions';
 import { Title } from '@/components/ui/Title';
 import Form from '@/components/ui/form/Form';
 
-import { type TResetPasswordForm, ZResetPasswordScheme } from '@/shared/types/scheme.zod';
+import { type TResetPasswordForm, ZResetPasswordScheme } from '@/shared/types/scheme';
 
 import { PUBLIC_PAGES } from '@/config/public-page-config';
 
-import { resetPassowrdFields } from './reset-password.data';
-import { updateUserPassword } from '@/services/profile/profile-auth-client.service';
+import { resetPassowrdFields } from './reset-password-config';
+import { updateUserPassword } from '@/services/profile/profile-auth-client-service';
 
 export function ResetPassowrdClient() {
 	const router = useRouter();

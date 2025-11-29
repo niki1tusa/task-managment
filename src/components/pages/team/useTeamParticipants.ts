@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 
-import type { TProfileRow } from '@/shared/types/task.types';
+import type { TProfileRow } from '@/shared/types/task-types';
 
 import { useTaskStore } from '@/store/task-store';
 
-import { getAllProfile } from '@/services/profile/profile-client.service';
+import { getAllProfile } from '@/services/profile/profile-client-service';
 
 export function useTeamParticipants(profile: TProfileRow) {
 	const { activeTask } = useTaskStore();

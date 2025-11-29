@@ -6,7 +6,7 @@ import { CornerUpRight, SquarePen, SquareX, Trash } from 'lucide-react';
 import { useModalStore } from '@/store/modals-store';
 
 import { BtnCopyName } from '../button/BtnCopyName';
-import type { TChatMessageRow } from '../chat/message/message.types';
+import type { TChatMessageRow } from '@/shared/types/message-types';
 
 interface Props {
 	msg: TChatMessageRow;

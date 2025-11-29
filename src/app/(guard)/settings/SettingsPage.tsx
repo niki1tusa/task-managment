@@ -12,17 +12,17 @@ import { Title } from '@/components/ui/Title';
 import { Button } from '@/components/ui/button/Button';
 import Form from '@/components/ui/form/Form';
 
-import type { TSettingsForm } from '@/shared/types/scheme.zod';
+import type { TSettingsForm } from '@/shared/types/scheme';
 
 import { useProfile } from '@/hooks/useProfile';
 
 import { SettingFields } from './settings-form.data';
-import { updateProfile } from '@/services/profile/profile-client.service';
+import { updateProfile } from '@/services/profile/profile-client-service';
 import {
 	deleteAvatarPathInProfile,
 	updateAvatarPathInProfile,
 	uploadAvatar,
-} from '@/services/settings/settings.service';
+} from '@/services/settings-service';
 
 export default function SettingsClientPage() {
 	const form = useForm<TSettingsForm>();

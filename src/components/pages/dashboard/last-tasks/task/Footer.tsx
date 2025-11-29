@@ -11,7 +11,7 @@ import {
 import { Brush } from '@/components/animate-ui/icons/brush';
 import { AnimateIcon } from '@/components/animate-ui/icons/icon';
 
-import type { TTask } from '@/shared/types/task.types';
+import type { TTask } from '@/shared/types/task-types';
 
 import { useModalStore } from '@/store/modals-store';
 

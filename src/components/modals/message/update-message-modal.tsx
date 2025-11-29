@@ -1,18 +1,18 @@
+'use client';
+
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { Button } from '@/components/ui/button/Button';
-import type {
-	TChatMessageRow,
-	TChatMessageUpdate,
-} from '@/components/ui/chat/message/message.types';
 import Textarea from '@/components/ui/field/Textarea';
 import Modal from '@/components/ui/modal/Modal';
 
+import type { TChatMessageRow, TChatMessageUpdate } from '@/shared/types/message-types';
+
 import { useModalStore } from '@/store/modals-store';
 
-import { updateMessage } from '@/services/message/message-client.service';
+import { updateMessage } from '@/services/message-client-service';
 
 interface Props {
 	close: () => void;

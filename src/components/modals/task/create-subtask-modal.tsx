@@ -8,10 +8,11 @@ import { toast } from 'react-toastify';
 import Form from '@/components/ui/form/Form';
 import Modal from '@/components/ui/modal/Modal';
 
-import { type TSubTaskRowForm, ZSubTaskScheme } from '@/shared/types/scheme.zod';
+import { type TSubTaskRowForm, ZSubTaskScheme } from '@/shared/types/scheme';
 
-import { SUB_TASK_ADD_FIELDS } from './config/subtask-add-config';
-import { createClientSubTask } from '@/services/tasks/subtask.service';
+import { SUB_TASK_ADD_FIELDS } from '../../../config/subtask-add-config';
+
+import { createClientSubTask } from '@/services/tasks/subtask-service';
 
 interface Props {
 	id: string;

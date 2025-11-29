@@ -14,7 +14,7 @@ import { useProfile } from '@/hooks/useProfile';
 
 import TeamTask from './TeamTask';
 import TeamTaskPanel from './TeamTaskPanel';
-import { getAllProfile } from '@/services/profile/profile-client.service';
+import { getAllProfile } from '@/services/profile/profile-client-service';
 
 export default function TeamPageClient() {
 	const [value, setValue] = useState('');

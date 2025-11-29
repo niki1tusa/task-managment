@@ -1,7 +1,7 @@
-import type { Database } from './db.types';
-import type { fetchClientChartPoint } from '@/services/statistics/chart-point-client.service';
-import type { fetchChartPoint } from '@/services/statistics/chart-point-server.service';
-import type { fetchProjectStat } from '@/services/statistics/project-stat-server.service';
+import type { Database } from './db-types';
+import type { fetchClientChartPoint } from '@/services/statistics/chart-point-client-service';
+import type { fetchChartPoint } from '@/services/statistics/chart-point-server-service';
+import type { fetchProjectStat } from '@/services/statistics/project-stat-server-service';
 
 export type ITimeRange = {
 	label: string;

@@ -3,7 +3,7 @@ import React from 'react';
 import { Checkbox } from '@/components/animate-ui/base/checkbox';
 import { Avatar } from '@/components/ui/Avatar';
 
-import type { TProfileRow } from '@/shared/types/task.types';
+import type { TProfileRow } from '@/shared/types/task-types';
 
 interface Props {
 	typeChannel?: string;

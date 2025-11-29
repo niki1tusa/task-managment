@@ -1,6 +1,6 @@
-import type { Database } from './db.types';
-import type { TSubTaskRow } from './subtask.types';
-import type { getServerAllTask } from '@/services/tasks/task-server.service';
+import type { Database } from './db-types';
+import type { TSubTaskRow } from './subtask-types';
+import type { getServerAllTask } from '@/services/tasks/task-server-service';
 
 export type TTaskRow = Database['public']['Tables']['task']['Row'];
 export type TProfileRow = Database['public']['Tables']['profile']['Row'];

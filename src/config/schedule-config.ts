@@ -1,6 +1,6 @@
 import type { IForm } from '@/components/ui/form/form.types';
 
-import type { TScheduleForm } from '@/shared/types/scheme.zod';
+import type { TScheduleForm } from '@/shared/types/scheme';
 
 export const CALENDAR_EVENT_FIELDS = [
 	{

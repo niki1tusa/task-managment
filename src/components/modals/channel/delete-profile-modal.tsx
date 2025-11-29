@@ -4,11 +4,11 @@ import { toast } from 'react-toastify';
 import { Button } from '@/components/ui/button/Button';
 import Modal from '@/components/ui/modal/Modal';
 
-import type { TProfileRow } from '@/shared/types/task.types';
+import type { TProfileRow } from '@/shared/types/task-types';
 
 import { useModalStore } from '@/store/modals-store';
 
-import { deleteClientProfileFromPartyChannel } from '@/services/channel/party-client.service';
+import { deleteClientProfileFromPartyChannel } from '@/services/channel/party-client-service';
 
 interface Props {
 	close: () => void;

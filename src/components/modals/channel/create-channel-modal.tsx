@@ -10,7 +10,7 @@ import type { TChannelInsert } from '@/components/pages/messages/channel/channel
 import { Button } from '@/components/ui/button/Button';
 import Modal from '@/components/ui/modal/Modal';
 
-import type { TTask } from '@/shared/types/task.types';
+import type { TTask } from '@/shared/types/task-types';
 
 import { GUARD_PAGES } from '@/config/guard-page-config';
 
@@ -18,8 +18,8 @@ import { useChannels } from '@/hooks/useChannels';
 import { useProfile } from '@/hooks/useProfile';
 
 import ProfileModalList from './profile-modal-list/ProfileModalList';
-import { createClientChannelByTaskId } from '@/services/channel/channel-client.service';
-import { getServerAllTask } from '@/services/tasks/task-server.service';
+import { createClientChannelByTaskId } from '@/services/channel/channel-client-service';
+import { getServerAllTask } from '@/services/tasks/task-server-service';
 
 interface Props {
 	close: () => void;

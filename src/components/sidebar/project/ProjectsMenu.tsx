@@ -2,7 +2,7 @@
 
 import { Title } from '@/components/ui/Title';
 
-import type { IProjectsMenu } from '@/shared/types/menu.item.types';
+import type { IProjectsMenu } from '@/shared/types/menu-item-types';
 
 import { ProjectMenuItem } from './ProjectMenuItem';
 

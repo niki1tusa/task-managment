@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 import { Header } from '@/components/ui/header/Header';
 
-import type { TTask } from '@/shared/types/task.types';
+import type { TTask } from '@/shared/types/task-types';
 
 import { useTaskStore } from '@/store/task-store';
 

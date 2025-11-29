@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 
-import type { TGetProjectStatResponse } from '@/shared/types/statistics.types';
+import type { TGetProjectStatResponse } from '@/shared/types/statistics-types';
 
 const bgColorMap = {
 	primary: 'bg-primary/80',

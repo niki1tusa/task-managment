@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 import ClientTaskPage from './ClientTaskPage';
-import { getServerAllTask } from '@/services/tasks/task-server.service';
+import { getServerAllTask } from '@/services/tasks/task-server-service';
 
 export const metadata: Metadata = {
 	title: 'Task',

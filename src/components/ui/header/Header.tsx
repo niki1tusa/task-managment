@@ -5,14 +5,17 @@ import { usePathname } from 'next/navigation';
 
 import { Avatar } from '@/components/ui/Avatar';
 
-import type { TTask } from '@/shared/types/task.types';
+import type { TTask } from '@/shared/types/task-types';
 
 import { GUARD_PAGES } from '@/config/guard-page-config';
 
 import { useFormatDateForTask } from '@/hooks/useFormatDateForTask';
 
+import { getTaskIcon } from '@/utils/getTaskIcon';
+
 export const Header = ({ task }: { task: TTask }) => {
-	const { TaskIcon, displayDue } = useFormatDateForTask(task);
+	const { displayDue } = useFormatDateForTask(task);
+	const TaskIcon = getTaskIcon(task);
 	const pathname = usePathname();
 	const isTeamPage = pathname === GUARD_PAGES.TEAM;
 	return (

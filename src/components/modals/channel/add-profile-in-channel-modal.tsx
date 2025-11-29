@@ -9,7 +9,7 @@ import { useModalStore } from '@/store/modals-store';
 import { useProfile } from '@/hooks/useProfile';
 
 import ProfileModalList from './profile-modal-list/ProfileModalList';
-import { insertProfilesIntoChannel } from '@/services/channel/party-client.service';
+import { insertProfilesIntoChannel } from '@/services/channel/party-client-service';
 
 interface Props {
 	close: () => void;

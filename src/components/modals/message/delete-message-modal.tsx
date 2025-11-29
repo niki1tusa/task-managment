@@ -6,7 +6,7 @@ import Modal from '@/components/ui/modal/Modal';
 
 import { useModalStore } from '@/store/modals-store';
 
-import { deleteMessage } from '@/services/message/message-client.service';
+import { deleteMessage } from '@/services/message-client-service';
 
 interface Props {
 	close: () => void;

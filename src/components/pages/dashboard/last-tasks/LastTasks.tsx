@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Skeleton from '@/components/ui/Skeleton';
 import { Title } from '@/components/ui/Title';
 
-import type { TByAscOrDesc, TStatus } from '@/shared/types/task.types';
+import type { TByAscOrDesc, TStatus } from '@/shared/types/task-types';
 
 import { useModalStore } from '@/store/modals-store';
 

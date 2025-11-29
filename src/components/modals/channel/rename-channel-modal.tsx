@@ -12,7 +12,7 @@ import Modal from '@/components/ui/modal/Modal';
 
 import { useModalStore } from '@/store/modals-store';
 
-import { renameChannel } from '@/services/channel/channel-client.service';
+import { renameChannel } from '@/services/channel/channel-client-service';
 
 interface Props {
 	close: () => void;

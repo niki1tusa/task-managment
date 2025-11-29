@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import type { TSubTaskRow } from '@/shared/types/subtask.types';
-import type { TTask } from '@/shared/types/task.types';
+import type { TSubTaskRow } from '@/shared/types/subtask-types';
+import type { TTask } from '@/shared/types/task-types';
 
 import { GUARD_PAGES } from '@/config/guard-page-config';
 

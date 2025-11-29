@@ -9,7 +9,7 @@ import { useSubTaskStore } from '@/store/subtask-store';
 
 import { useProfile } from '@/hooks/useProfile';
 
-import { addProfileForSubtask } from '@/services/tasks/subtask.service';
+import { addProfileForSubtask } from '@/services/tasks/subtask-service';
 
 interface Props {
 	close: () => void;

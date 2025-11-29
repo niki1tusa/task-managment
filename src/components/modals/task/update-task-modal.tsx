@@ -9,13 +9,14 @@ import { toast } from 'react-toastify';
 import Form from '@/components/ui/form/Form';
 import Modal from '@/components/ui/modal/Modal';
 
-import { type TTaskUpdateForm, ZTaskEditScheme } from '@/shared/types/scheme.zod';
-import type { TTaskEditForm } from '@/shared/types/task.types';
+import { type TTaskUpdateForm, ZTaskEditScheme } from '@/shared/types/scheme';
+import type { TTaskEditForm } from '@/shared/types/task-types';
 
 import type { MODAL_ICON } from '@/config/icon-config';
 
-import { TASK_EDIT_FIELDS } from './config/task-edit-config';
-import { getClientTaskById, updateClientTask } from '@/services/tasks/task-client.service';
+import { TASK_EDIT_FIELDS } from '../../../config/task-edit-config';
+
+import { getClientTaskById, updateClientTask } from '@/services/tasks/task-client-service';
 
 interface Props {
 	id: string;

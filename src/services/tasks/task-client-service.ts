@@ -5,7 +5,7 @@ import type {
 	TStatus,
 	TTaskCreateForm,
 	TTaskEditForm,
-} from '@/shared/types/task.types';
+} from '@/shared/types/task-types';
 
 import { filterStatusTasks } from '@/utils/filter-status-tasks';
 import { createClient } from '@/utils/supabase/client';

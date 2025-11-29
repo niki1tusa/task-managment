@@ -4,11 +4,11 @@ import { toast } from 'react-toastify';
 import { Button } from '@/components/ui/button/Button';
 import Modal from '@/components/ui/modal/Modal';
 
-import type { TSubTaskRow } from '@/shared/types/subtask.types';
+import type { TSubTaskRow } from '@/shared/types/subtask-types';
 
 import { useModalStore } from '@/store/modals-store';
 
-import { removeProfileForSubtask } from '@/services/tasks/subtask.service';
+import { removeProfileForSubtask } from '@/services/tasks/subtask-service';
 
 interface Props {
 	close: () => void;

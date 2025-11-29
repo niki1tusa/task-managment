@@ -6,14 +6,14 @@ import { SquareMinus, SquarePlus } from 'lucide-react';
 import { Checkbox } from '@/components/animate-ui/base/checkbox';
 import { Title } from '@/components/ui/Title';
 
-import type { TTask } from '@/shared/types/task.types';
+import type { TTask } from '@/shared/types/task-types';
 
 import { useModalStore } from '@/store/modals-store';
 import { useSubTaskStore } from '@/store/subtask-store';
 
 import { useProfile } from '@/hooks/useProfile';
 
-import { getAllProfile } from '@/services/profile/profile-client.service';
+import { getAllProfile } from '@/services/profile/profile-client-service';
 
 export default function TeamSubtaskPanel({ activeTask }: { activeTask: TTask }) {
 	const { profile } = useProfile();

@@ -1,6 +1,6 @@
 import type { IForm } from '@/components/ui/form/form.types';
 
-import type { TTaskCreateForm } from '@/shared/types/task.types';
+import type { TTaskCreateForm } from '@/shared/types/task-types';
 
 export const TASK_EDIT_FIELDS = [
 	{

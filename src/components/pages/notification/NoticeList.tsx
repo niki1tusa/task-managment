@@ -6,9 +6,10 @@ import { toast } from 'react-toastify';
 
 import { Checkbox } from '@/components/animate-ui/base/checkbox';
 
+import type { TNoticeRow } from '../../../shared/types/notice-types';
 import { formatNoticeDate } from '../../../utils/format-notice-вate';
-import type { TNoticeRow } from './notice-types';
-import { updateStatusNotice } from '@/services/notice/notice-client.service';
+
+import { updateStatusNotice } from '@/services/notice-client-service';
 
 interface Props {
 	notices: TNoticeRow[];

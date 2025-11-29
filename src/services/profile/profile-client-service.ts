@@ -1,6 +1,6 @@
 'use client';
 
-import type { TSettingsForm } from '@/shared/types/scheme.zod';
+import type { TSettingsForm } from '@/shared/types/scheme';
 
 import { createClient } from '@/utils/supabase/client';
 

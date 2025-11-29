@@ -16,11 +16,11 @@ import { useChannelStore } from '@/store/channel-store';
 
 import { useClickOutside } from '@/hooks/useClickOutside';
 import { useProfile } from '@/hooks/useProfile';
-import {GROUP_GAP_MINUTES} from '@/constants/global-constants.ts'
+import { GROUP_GAP_MINUTES } from '@/constants/global-constants';
 import { Button } from '../button/Button';
 import Textarea from '../field/Textarea';
 
-import {  minsDiff } from './messageUtils';
+import { minsDiff } from '@/utils/minsDifferent';
 
 export default function Chat() {
 	// store

@@ -3,7 +3,7 @@
 import { ChevronDown } from 'lucide-react';
 import React, { useState } from 'react';
 
-import type { ITimeRange } from '@/shared/types/statistics.types';
+import type { ITimeRange } from '@/shared/types/statistics-types';
 
 import { useClickOutside } from '@/hooks/useClickOutside';
 
