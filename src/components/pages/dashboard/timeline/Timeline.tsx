@@ -24,7 +24,7 @@ function Timeline({ todayTasks }: { todayTasks: TTask[] }) {
 	];
 
 	return (
-		<div className='text-foreground my-10 h-[600px] rounded-2xl border border-white px-5 pt-5 shadow shadow-neutral-500 dark:border-none'>
+		<div className='text-foreground my-10 h-[600px] bg-side rounded-2xl border border-white px-5 pt-5 shadow shadow-neutral-500 dark:border-none'>
 			<div className='flex justify-between pb-5'>
 				<Title>Today Tasks</Title>
 				<div className='flex -space-x-2'>

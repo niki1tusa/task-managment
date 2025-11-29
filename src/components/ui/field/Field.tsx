@@ -33,7 +33,7 @@ export function Field<T extends FieldValues>({
 	const [isShowEye, setIsShowEye] = useState(false);
 	const pathname = usePathname();
 	return (
-		<div>
+		<div className='relative'>
 			{pathname !== PUBLIC_PAGES.LOGIN && (
 				<label className='mb-1 block font-medium xl:text-sm'>{labelText}:</label>
 			)}
@@ -78,7 +78,7 @@ export function Field<T extends FieldValues>({
 				)}
 			</span>
 			{errors[registerName] && (
-				<p className='text-sm text-red-500'>{errors[registerName].message as string}</p>
+				<p className='text-sm text-red-500 absolute'>{errors[registerName].message as string}</p>
 			)}
 		</div>
 	);

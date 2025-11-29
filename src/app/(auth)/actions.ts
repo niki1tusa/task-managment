@@ -1,6 +1,5 @@
 import { createClient } from '@/utils/supabase/client';
 
-
 // sing in
 export async function signInWithEmail({ email }: { email: string }) {
 	const supabase = createClient();
@@ -8,6 +7,7 @@ export async function signInWithEmail({ email }: { email: string }) {
 		email: email,
 		options: {
 			shouldCreateUser: true,
+			emailRedirectTo: 'http://localhost:3000/auth/confirm',
 		},
 	});
 }
@@ -44,16 +44,16 @@ export const signInWithLinkedIn = async () => {
 // fogot password
 
 export async function sendResetPasswordEmail(email: string) {
-  const supabase =  createClient();
+	const supabase = createClient();
 
-  const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${window.location.origin}/auth/callback?next=/reset-password`,
-  });
-  if (error) throw error;
-  return { ok: true };
+	const { error } = await supabase.auth.resetPasswordForEmail(email, {
+		redirectTo: `${window.location.origin}/auth/callback?next=/reset-password`,
+	});
+	if (error) throw error;
+	return { ok: true };
 }
 //  sign out
 export async function serverSignOut() {
-  const supabase = createClient();
-  await supabase.auth.signOut();
+	const supabase = createClient();
+	await supabase.auth.signOut();
 }

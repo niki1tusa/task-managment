@@ -47,7 +47,7 @@ export const Header = ({ task }: { task: TTask }) => {
 									/>
 								);
 							})}
-						<div className='shadow-default flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border bg-white'>
+						<div className='shadow-default flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border bg-side'>
 							+{task.task_participants.length - 2}
 						</div>
 					</>

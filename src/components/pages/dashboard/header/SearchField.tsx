@@ -2,7 +2,7 @@ import { Search } from 'lucide-react';
 
 export const SearchField = () => {
 	return (
-		<span className='bg-background text-gray shadow-default flex items-center gap-2 rounded-4xl px-2'>
+		<span className='text-gray shadow-default flex items-center gap-2 rounded-4xl bg-side px-2'>
 			<Search className='text-foreground' />
 			<input
 				type='text'

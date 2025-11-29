@@ -87,7 +87,7 @@ export default function Chat() {
 				<div className='from-primary/20 dark:from-gray/5 pointer-events-none absolute top-27.5 left-0 z-50 h-[40%] w-full bg-gradient-to-b to-transparent' />
 			)}
 			{/* User info */}
-			<div className='bg-primary/40 border-gray/20 flex h-27.5 w-full flex-shrink-0 items-center justify-between border-b-2 px-10 font-semibold shadow-sm'>
+			<div className='bg-primary/40 dark:bg-side border-gray/20 flex h-27.5 w-full flex-shrink-0 items-center justify-between border-b-2 px-10 font-semibold shadow-sm'>
 				<div className='flex items-center gap-3'>
 					<div className='relative'>
 						<Avatar img={profile?.avatar_path || ''} />

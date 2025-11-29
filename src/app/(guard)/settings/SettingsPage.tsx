@@ -130,7 +130,7 @@ export default function SettingsClientPage() {
 				</div>
 				<div className='flex flex-col gap-10'>
 					<span className='text-gray ml-2 text-[10px]'>Add image for you profile</span>
-					<Button disable={isDeletePending} onClick={handleRemoveAvatar}>
+					<Button disable={isDeletePending} onClick={handleRemoveAvatar} >
 						{isDeletePending ? <LoaderCircle className='animate-spin' /> : 'Remove image'}
 					</Button>
 				</div>

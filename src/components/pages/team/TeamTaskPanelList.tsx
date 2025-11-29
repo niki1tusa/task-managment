@@ -31,8 +31,6 @@ export default function TeamTaskPanelList({ activeTask, isPending }: Props) {
 								{profile!.name}
 							</span>
 						</div>
-
-						{/* безопаснее с optional chaining */}
 						{activeTask?.owner_id === profile!.id && (
 							<span className='ml-2 rounded-full bg-yellow-300 px-2 py-0.5 text-[10px] font-semibold text-black'>
 								OWNER

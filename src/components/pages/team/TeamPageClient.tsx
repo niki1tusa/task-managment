@@ -83,7 +83,7 @@ export default function TeamPageClient() {
 					</Tabs>
 				</div>
 				{/* list */}
-				<div className='shadow-default flex max-h-170 flex-col gap-3 overflow-y-auto rounded border-2 p-3'>
+				<div className='flex max-h-170 flex-col gap-3 overflow-y-auto rounded p-3'>
 					{taskFiltered?.map(task => (
 						<TeamTask task={task} key={task.id} />
 					))}

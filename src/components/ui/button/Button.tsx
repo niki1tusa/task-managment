@@ -16,12 +16,12 @@ export function Button({
 	disable = false,
 	variant = 'primary',
 }: Props) {
-	return (
+	return ( 
 		<button
 			onClick={onClick}
 			type={type}
 			className={clsx(
-				'w-[30%] rounded-sm p-2 text-sm dark:bg-gray-800',
+				'w-[30%] rounded-sm p-2 text-sm dark:bg-gray-800 dark:hover:bg-gray-600',
 				disable ? 'bg-primary/50 cursor-not-allowed': 'cursor-pointer',
 				className,
 				variant === 'primary' &&

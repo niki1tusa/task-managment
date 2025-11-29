@@ -22,7 +22,7 @@ export default function TeamTaskPanel({ taskOwner, isPending }: Props) {
 	const [isPartOpen, setIsPartOpen] = useState<boolean>(true);
 	const { open } = useModalStore();
 	return (
-		<div className='shadow-default border-l'>
+		<div className=' border-l bg-side'>
 			<div className='px-5 pt-7'>
 				<Title heading='page'>Task Control Panel</Title>
 			</div>
@@ -34,6 +34,7 @@ export default function TeamTaskPanel({ taskOwner, isPending }: Props) {
 							<Title>Owner:</Title>
 							<span className='text-foreground/60 text-lg'>{taskOwner ? taskOwner.name : ''}</span>
 						</div>
+					
 						<div className='flex items-center gap-10'>
 							<Title>Participants</Title>
 							<div>
@@ -52,7 +53,7 @@ export default function TeamTaskPanel({ taskOwner, isPending }: Props) {
 						</div>
 
 						{/* animated participants list */}
-						<div className='mx-2 my-2 min-h-0 flex-1'>
+						<div className='mx-2 my-2 min-h-0 flex-1 shadow shadow-neutral-400 dark:shadow-none'>
 							<AnimatePresence initial={false}>
 								{isPartOpen && (
 									<motion.div

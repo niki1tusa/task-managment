@@ -19,7 +19,7 @@ export const Header = () => {
 				<AnimateIcon animateOnHover>
 					<Link
 						href={GUARD_PAGES.NOTIFICATION}
-						className='bg-background dark:bg-dark shadow-default rounded-full text-center'
+						className='bg-side dark:bg-dark shadow-default rounded-full text-center'
 					>
 						<Bell className='mx-2 my-2' />
 					</Link>

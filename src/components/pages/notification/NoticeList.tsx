@@ -28,11 +28,11 @@ export default function NoticeList({ notices }: Props) {
 		},
 	});
 	return (
-		<ul className='flex max-h-160 w-full flex-col gap-3 overflow-y-auto rounded-lg border bg-white p-2 dark:bg-gray-900'>
+		<ul className='flex h-[80vh] w-full flex-col gap-3 overflow-y-auto rounded-lg border bg-white p-2 dark:bg-gray-900'>
 			{notices.length > 0 ? (
 				notices.map(notice => {
 					return (
-						<li key={notice.id} className='grid grid-cols-[auto_1fr_auto] items-start gap-3 border'>
+						<li key={notice.id} className='grid grid-cols-[auto_1fr_auto] items-start gap-3'>
 							{/* checkbox */}
 							<Checkbox
 								className='ring-gray/40 bg-input/30 hover:bg-input/50 dark:ring-gray mt-2 shadow ring-2 shadow-neutral-300 dark:shadow-none'

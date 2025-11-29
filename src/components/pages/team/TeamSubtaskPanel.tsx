@@ -25,7 +25,7 @@ export default function TeamSubtaskPanel({ activeTask }: { activeTask: TTask }) 
 	const { open } = useModalStore();
 	const responsibleProfile = data?.find(p => p.id === activeSubTask?.profile_id);
 	return (
-		<div className='flex flex-col border-t pb-1'>
+		<div className='flex flex-col pb-1'>
 			<Title>Subtask:</Title>
 			<div className='mx-2 flex flex-col gap-1'>
 				{activeTask?.sub_task?.map(subTask => (
@@ -34,7 +34,7 @@ export default function TeamSubtaskPanel({ activeTask }: { activeTask: TTask }) 
 							onClick={() => setActiveSubTask(subTask)}
 							className={clsx(
 								activeSubTask?.id === subTask.id && 'border-sky-500 transition-all',
-								'flex items-center justify-between rounded border bg-white px-2 py-2'
+								'flex items-center justify-between rounded border bg-white px-2 py-2 dark:bg-gray-900'
 							)}
 						>
 							<span className='text-sm'>{subTask.title}</span>
