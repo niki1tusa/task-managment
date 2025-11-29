@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 
 import type { TChannelInsert } from '@/components/pages/messages/channel/channel.types';
 import { Button } from '@/components/ui/button/Button';

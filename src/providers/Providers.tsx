@@ -3,7 +3,8 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from 'next-themes';
 import { type ReactNode, useState } from 'react';
-import { ToastContainer } from 'react-toastify';
+
+import { Toaster } from '@/components/ui/toast/Toaster';
 
 import { ModalProvider } from './ModalProvider';
 
@@ -12,7 +13,7 @@ export const ProviderWrapper = ({ children }: { children: ReactNode }) => {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-				<ToastContainer />
+				<Toaster />
 				<ModalProvider />
 				{children}
 			</ThemeProvider>

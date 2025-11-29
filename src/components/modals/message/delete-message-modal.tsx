@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button/Button';
 import Modal from '@/components/ui/modal/Modal';

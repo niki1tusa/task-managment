@@ -2,7 +2,7 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button/Button';
 import Textarea from '@/components/ui/field/Textarea';

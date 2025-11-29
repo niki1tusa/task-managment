@@ -31,7 +31,7 @@ export const LastTasks = () => {
 					onClick={() => {
 						open('createTask');
 					}}
-					className='hover:text-primary bg-side shadow-default flex max-h-[41px] rounded-sm border border-white px-2 pt-2 text-sm font-medium text-gray-500 transition-all duration-300 dark:hover:text-white'
+					className='hover:text-primary bg-side shadow-default flex max-h-[41px] rounded-sm px-2 pt-2 text-sm font-medium text-gray-500 transition-all duration-300 dark:hover:text-white'
 				>
 					+ Add Task
 				</button>

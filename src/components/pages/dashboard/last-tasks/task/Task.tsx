@@ -47,7 +47,7 @@ export const Task = ({ task }: { task: TTask }) => {
 				transition={{ type: 'spring', stiffness: 200, damping: 18 }}
 				style={{ transformOrigin: 'left center' }}
 				className={clsx(
-					'bg-task-base 2xl:text-md xl:[290px] transition-color shadow-default grid grid-cols-1 grid-rows-3 gap-3 rounded-3xl border border-white text-sm xl:h-[241px] dark:border-none'
+					'bg-task-base 2xl:text-md xl:[290px] transition-color  grid grid-cols-1 grid-rows-3 gap-3 rounded-3xl border border-white text-sm xl:h-[241px] dark:border-none'
 				)}
 			>
 				<Header task={task} />

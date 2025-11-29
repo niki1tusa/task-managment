@@ -3,7 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { type SubmitHandler, useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 
 import Form from '@/components/ui/form/Form';
 import Modal from '@/components/ui/modal/Modal';
@@ -13,6 +13,7 @@ import { type TScheduleForm, ZScheduleScheme } from '@/shared/types/scheme';
 import { useProfile } from '@/hooks/useProfile';
 
 import { CALENDAR_EVENT_FIELDS } from '../../../config/schedule-config';
+
 import { type TEventInsert, insertEvent } from '@/services/shedule-event-service';
 
 interface Props {
