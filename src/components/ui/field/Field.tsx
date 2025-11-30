@@ -60,8 +60,8 @@ export function Field<T extends FieldValues>({
 					{...register(registerName)}
 					className={clsx(
 						'focus:bg-[#f6f4ff] focus:shadow-lg focus:ring-2 focus:shadow-sky-300/20 focus:ring-sky-600',
-						'text-gray shadow-default h-[30%] w-[80%] rounded py-5 text-sm transition-all duration-200 hover:bg-[#f6f4ff]/50 2xl:w-full 2xl:text-lg',
-						type === 'text' ? 'pl-4' : 'pl-10'
+						'shadow-default h-[30%] w-[80%] rounded py-5 text-sm transition-all duration-200 placeholder:text-gray focus:placeholder:text-gray focus:text-gray hover:bg-[#f6f4ff]/50 2xl:w-full 2xl:text-lg',
+						type === 'text' ? 'pl-2' : 'pl-7'
 					)}
 					type={type === 'password' ? (isShowEye ? 'text' : 'password') : 'text'}
 					placeholder={placeholderText}
@@ -78,7 +78,7 @@ export function Field<T extends FieldValues>({
 				)}
 			</span>
 			{errors[registerName] && (
-				<p className='text-sm text-red-500 absolute'>{errors[registerName].message as string}</p>
+				<p className='absolute text-sm text-red-500'>{errors[registerName].message as string}</p>
 			)}
 		</div>
 	);

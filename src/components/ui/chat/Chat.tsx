@@ -1,14 +1,18 @@
-'use client'
+'use client';
+
 import { Search } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useMemo, useState } from 'react';
 
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/animate-ui/base/popover';
 import { Avatar } from '@/components/ui/Avatar';
 import ChatInput from '@/components/ui/chat/ChatInput';
 import ChatMessage from '@/components/ui/chat/message/ChatMessage';
 import { useChat } from '@/components/ui/chat/useChat';
+
+import { GENERAL_CHAT_ID, GROUP_GAP_MINUTES } from '@/constants/global-constants';
 
 import { GUARD_PAGES } from '@/config/guard-page-config';
 
@@ -16,11 +20,12 @@ import { useChannelStore } from '@/store/channel-store';
 
 import { useClickOutside } from '@/hooks/useClickOutside';
 import { useProfile } from '@/hooks/useProfile';
-import { GROUP_GAP_MINUTES } from '@/constants/global-constants';
-import { Button } from '../button/Button';
-import Textarea from '../field/Textarea';
 
 import { minsDiff } from '@/utils/minsDifferent';
+
+import { Button } from '../button/Button';
+import Textarea from '../field/Textarea';
+import SearchMessageMenuPopover from '../popover/SearchMessageMenuPopover';
 
 export default function Chat() {
 	// store
@@ -33,13 +38,24 @@ export default function Chat() {
 	const isDashboard = pathname === '/dashboard';
 	// costom hooks
 	const { ref } = useClickOutside<HTMLDivElement>(() => setIsOpenInput(false));
-	const chat = useChat(activeChannel ? activeChannel.id : '69d922e1-63f4-4f1d-9627-97aa6319902a');
+	const chat = useChat(activeChannel ? activeChannel.id : GENERAL_CHAT_ID);
 	// memo
 	const visibleMessages = useMemo(() => {
 		const all = chat?.messages ?? [];
-		return isDashboard ? all.slice(-7) : all; // последние 7
+		return isDashboard ? all.slice(-7) : all; // последние 7 message
 	}, [value, chat]);
+	// search messages
+	const filterMessages = useMemo(() => {
+		if (!value) {
+			return [];
+		}
+		let filterMsg = chat.messages.filter(item =>
+			item.text.trim().toLowerCase().includes(value.trim().toLowerCase())
+		);
 
+		return filterMsg;
+	}, [value]);
+	// render messages
 	const renderMessages = useMemo(() => {
 		if (!chat) return null;
 		const arr = visibleMessages;
@@ -57,8 +73,13 @@ export default function Chat() {
 				minsDiff(next.created_at!, m.created_at!) <= GROUP_GAP_MINUTES;
 			const isFirstInGroup = !sameAsPrev;
 			const isLastInGroup = !sameAsNext;
+			const isFindMessage = filterMessages.some(item => item.id === m.id);
 			return (
 				<ChatMessage
+					ref={el => {
+						chat.messagesRefs.current[m.id] = el;
+					}}
+					isFindMessage={isFindMessage}
 					value={value}
 					key={m.id}
 					message={m}
@@ -67,7 +88,8 @@ export default function Chat() {
 				/>
 			);
 		});
-	}, [chat?.messages, visibleMessages]);
+	}, [chat?.messages, visibleMessages, value, filterMessages]);
+
 	return (
 		<div className='flex h-full flex-col' role='complementary' aria-label='Chat panel'>
 			{isDashboard && (
@@ -113,8 +135,24 @@ export default function Chat() {
 				{/* поиск сообщений */}
 				{pathname === GUARD_PAGES.MESSAGES &&
 					(isOpenInput ? (
-						<div ref={ref}>
+						<div ref={ref} className='relative'>
+							{/* search field */}
 							<Textarea value={value} setValue={setValue} placeholder='Search by word...' />
+							{/* popover */}
+							{/* TODO: как только появляется popover у textarea теряется фокус */}
+							<Popover open={filterMessages.length > 0 && isOpenInput}>
+								<PopoverContent
+									side='left'
+									align={'start'}
+									sideOffset={8}
+									className='bg-background shadow-default w-[240px] rounded-sm border p-3 dark:bg-white dark:text-black'
+								>
+									<SearchMessageMenuPopover
+										count={filterMessages.length}
+										onClose={() => setIsOpenInput(false)}
+									/>
+								</PopoverContent>
+							</Popover>
 						</div>
 					) : (
 						<button onClick={() => setIsOpenInput(true)}>
