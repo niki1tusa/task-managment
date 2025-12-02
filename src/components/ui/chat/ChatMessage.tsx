@@ -7,17 +7,15 @@ import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/animate-ui/base/popover';
 
+import type { TChatMessageRow } from '@/shared/types/message-types';
+
 import { GUARD_PAGES } from '@/config/guard-page-config';
 
 import { useProfile } from '@/hooks/useProfile';
 
-import { Avatar } from '../../Avatar';
-import Skeleton from '../../Skeleton';
-import MessageMenuPopover from '../../popover/MessageMenuPopover';
-import type { TChatMessageRow } from '@/shared/types/message-types';
-
-
-
+import { Avatar } from '../Avatar';
+import Skeleton from '../Skeleton';
+import MessageMenuPopover from '../popover/MessageMenuPopover';
 
 interface Props {
 	message: TChatMessageRow;
@@ -54,7 +52,7 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup, value }: Props) {
 	const isOwnMessage = profile.id === message.user_id;
 	const profileName = message.profile?.name;
 	const avatarPath = message.profile?.avatar_path;
-	// показываем аватар только у "последнего" сообщения группы
+	// показываем аватар только у "последнего" сообщения группы (группа это несколько сообщений	одного и того же пользователя)
 	const isShowAvatar = isLastInGroup;
 
 	return (
@@ -150,7 +148,7 @@ function ChatMessage({ message, isFirstInGroup, isLastInGroup, value }: Props) {
 								'hover:brightness-[1.02]'
 							)}
 						>
-							{message.text} 
+							{message.text}
 						</button>
 					)}
 				</div>

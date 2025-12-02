@@ -1,4 +1,5 @@
-'use client'
+'use client';
+
 import { Search } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,20 +8,22 @@ import { useMemo, useState } from 'react';
 
 import { Avatar } from '@/components/ui/Avatar';
 import ChatInput from '@/components/ui/chat/ChatInput';
-import ChatMessage from '@/components/ui/chat/message/ChatMessage';
-import { useChat } from '@/components/ui/chat/useChat';
+import ChatMessage from '@/components/ui/chat/ChatMessage';
+
+import { GROUP_GAP_MINUTES } from '@/constants/global-constants';
 
 import { GUARD_PAGES } from '@/config/guard-page-config';
 
 import { useChannelStore } from '@/store/channel-store';
 
+import { useChat } from '@/hooks/useChat';
 import { useClickOutside } from '@/hooks/useClickOutside';
 import { useProfile } from '@/hooks/useProfile';
-import { GROUP_GAP_MINUTES } from '@/constants/global-constants';
-import { Button } from '../button/Button';
-import Textarea from '../field/Textarea';
 
 import { minsDiff } from '@/utils/minsDifferent';
+
+import { Button } from '../button/Button';
+import Textarea from '../field/Textarea';
 
 export default function Chat() {
 	// store

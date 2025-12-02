@@ -18,6 +18,7 @@ import { type TEventInsert, insertEvent } from '@/services/shedule-event-service
 interface Props {
 	close: () => void;
 }
+// TODO: что яполучаю из IconField?
 export function CreateCalendarEvent({ close }: Props) {
 	const { profile } = useProfile();
 	const queryClient = useQueryClient();
@@ -36,6 +37,7 @@ export function CreateCalendarEvent({ close }: Props) {
 			toast.success(`Event is success created!`);
 			form.reset();
 			queryClient.invalidateQueries({ queryKey: ['events'] });
+			close();
 		},
 		onError: err => {
 			console.log(err);
@@ -60,7 +62,6 @@ export function CreateCalendarEvent({ close }: Props) {
 		};
 		console.log('msg:', payload);
 		mutate(payload);
-		close();
 	};
 	return (
 		<Modal close={close} title={`Add a new events`}>
@@ -69,7 +70,7 @@ export function CreateCalendarEvent({ close }: Props) {
 					formElement={CALENDAR_EVENT_FIELDS}
 					register={form.register}
 					handleOnSubmit={form.handleSubmit(handleAddEvent)}
-					btnText='Add'
+					btnText='Create'
 					control={form.control}
 					isPending={isPending}
 					errors={form.formState.errors}
