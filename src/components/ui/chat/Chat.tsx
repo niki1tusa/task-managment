@@ -9,8 +9,8 @@ import { useMemo, useState } from 'react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/animate-ui/base/popover';
 import { Avatar } from '@/components/ui/Avatar';
 import ChatInput from '@/components/ui/chat/ChatInput';
-import ChatMessage from '@/components/ui/chat/message/ChatMessage';
-import { useChat } from '@/components/ui/chat/useChat';
+import ChatMessage from './ChatMessage';
+
 
 import { GENERAL_CHAT_ID, GROUP_GAP_MINUTES } from '@/constants/global-constants';
 

@@ -13,9 +13,9 @@ import { GUARD_PAGES } from '@/config/guard-page-config';
 
 import { useProfile } from '@/hooks/useProfile';
 
-import { Avatar } from '../../Avatar';
-import Skeleton from '../../Skeleton';
-import MessageMenuPopover from '../../popover/MessageMenuPopover';
+import { Avatar } from '../Avatar';
+import Skeleton from '../Skeleton';
+import MessageMenuPopover from '../popover/MessageMenuPopover';
 
 interface Props {
 	message: TChatMessageRow;
