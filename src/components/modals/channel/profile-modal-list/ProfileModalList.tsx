@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 
 import type { TChannelInsert } from '@/components/pages/messages/channel/channel.types';
 import { Button } from '@/components/ui/button/Button';

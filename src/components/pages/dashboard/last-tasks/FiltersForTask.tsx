@@ -13,7 +13,7 @@ export default function FiltersForTask({ select, setSelect, sortOrder, setSortOr
 	return (
 		<div className='flex gap-2'>
 			{/* tabs */}
-			<div className='shadow-default mb-4 flex gap-2 bg-side rounded-[4px] border border-white py-1 pl-2'>
+			<div className='shadow-default  mb-4 flex gap-2 bg-side rounded-[4px] py-1 pl-2'>
 				{BUTTONS_OPTIONS.map(button => (
 					<button
 						onClick={() => setSelect(button as TStatus)}
@@ -21,7 +21,7 @@ export default function FiltersForTask({ select, setSelect, sortOrder, setSortOr
 						value={button}
 						className={`rounded-sm px-4 py-1.5  text-sm font-medium transition-all  ${
 							select === button
-								? 'text-primary bg-primary/30 shadow'
+								? 'text-primary dark:text-gray bg-primary/30 shadow shadow-neutral-600'
 								: 'hover:text-primary text-gray-500 dark:hover:text-white'
 						}`}
 					>
@@ -33,7 +33,7 @@ export default function FiltersForTask({ select, setSelect, sortOrder, setSortOr
 			<select
 				value={sortOrder}
 				onChange={e => setSortOrder(e.target.value as TByAscOrDesc)}
-				className='shadow-default mb-4 rounded-[4px] border border-white px-4 py-1.5 text-sm text-gray-500 bg-side'
+				className='shadow-default mb-4 rounded-[4px]  px-4 py-1.5 text-sm text-gray-500 bg-side'
 			>
 				{SELECT_OPTIONS.map(option => (
 					<option key={option}>{option}</option>

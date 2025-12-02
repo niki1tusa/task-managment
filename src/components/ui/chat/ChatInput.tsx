@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import { Paperclip } from 'lucide-react';
 import { memo, useState } from 'react';
 
@@ -27,7 +28,11 @@ const ChatInput = ({ handleSend }: { handleSend: (text: string) => Promise<void>
 				placeholder='Enter your message...'
 				value={text}
 				onChange={e => setText(e.target.value)}
-				className='shadow-default flex-1 resize-none rounded-lg bg-gray-50 px-3 py-2 text-sm placeholder-gray-400 outline-none dark:bg-gray-700 dark:placeholder-gray-500'
+				className={clsx(
+					'shadow-default flex-1 resize-none rounded-lg bg-gray-50 px-3 py-2 text-sm outline-none dark:bg-gray-700',
+					'placeholder-gray-400 dark:placeholder-gray-500',
+					'focus:shadow focus:shadow-primary/80 transition-all'
+				)}
 				onKeyDown={e => {
 					if (e.key === 'Enter' && !e.shiftKey) {
 						e.preventDefault();

@@ -6,6 +6,8 @@ import type { TChatMessageRow } from '@/shared/types/message-types';
 
 import { createClient } from '@/utils/supabase/client';
 
+
+
 export const useChat = (channelId: string | null) => {
 	const supabase = useRef(createClient());
 	const [messages, setMessages] = useState<TChatMessageRow[]>([]);
@@ -38,7 +40,7 @@ export const useChat = (channelId: string | null) => {
 					event: 'INSERT',
 					schema: 'public',
 					table: 'chat_message',
-					filter: `channel_id=eq.${channelId}`, // ← слушаем только этот канал
+					filter: `channel_id=eq.${channelId}`,
 				},
 				async payload => {
 					const { data } = await client
@@ -61,7 +63,8 @@ export const useChat = (channelId: string | null) => {
 		};
 	}, [channelId]);
 
-	const messagesEndRef = useRef<HTMLDivElement>(null);
+	const messagesEndRef = useRef<HTMLDivElement | null>(null);
+	const messagesRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
 	useLayoutEffect(() => {
 		if (messagesEndRef.current) {
@@ -78,7 +81,7 @@ export const useChat = (channelId: string | null) => {
 		const { error } = await supabase.current.from('chat_message').insert({
 			text,
 			user_id: userData.user.id,
-			channel_id: channelId, // ← теперь не null
+			channel_id: channelId,
 		});
 
 		if (error) {
@@ -86,5 +89,5 @@ export const useChat = (channelId: string | null) => {
 		}
 	};
 
-	return { messages, messagesEndRef, handleSend };
+	return { messages, messagesRefs, messagesEndRef, handleSend };
 };

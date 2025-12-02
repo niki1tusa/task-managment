@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { BadgeCheck, BookOpenText, CircleAlert, HandHelping } from 'lucide-react';
 import React from 'react';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 
 import { Checkbox } from '@/components/animate-ui/base/checkbox';
 
