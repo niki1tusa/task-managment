@@ -20,7 +20,10 @@ export const ZSubTaskScheme = z.object({
 export const ZRegistrationScheme = z.object({
 	name: z.string().min(1, 'Name is required!'),
 	email: z.string().min(1, 'Email is required').email(),
-	password: z.string().min(6, 'Password is required!').max(6, "Must not contain more than six symbols!"),
+	password: z
+		.string()
+		.min(6, 'Password is required!')
+		.max(6, 'Must not contain more than six symbols!'),
 });
 export const ZLoginScheme = z.object({
 	email: z.string().min(1, 'Email is required.').email(),
@@ -56,10 +59,10 @@ export const ZSettingsScheme = z.object({
 });
 // schedule
 export const ZScheduleScheme = z.object({
-  title: z.string().min(1, 'Name is required!'),
-  event_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date (YYYY-MM-DD)'),
-  event_start: z.string().regex(/^\d{2}:\d{2}(:\d{2})?$/, 'Invalid time (HH:MM or HH:MM:SS)'),
-  event_end: z.string().regex(/^\d{2}:\d{2}(:\d{2})?$/, 'Invalid time (HH:MM or HH:MM:SS)'),
+	title: z.string().min(1, 'Name is required!'),
+	event_date: z.date({ required_error: 'Date is required!', invalid_type_error: 'Invalid date!' }),
+	event_start: z.string().regex(/^\d{2}:\d{2}(:\d{2})?$/, 'Invalid time (HH:MM or HH:MM:SS)'),
+	event_end: z.string().regex(/^\d{2}:\d{2}(:\d{2})?$/, 'Invalid time (HH:MM or HH:MM:SS)'),
 });
 
 export type TScheduleForm = z.infer<typeof ZScheduleScheme>;

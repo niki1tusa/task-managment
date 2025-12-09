@@ -25,7 +25,7 @@ export default function Form<T extends FieldValues>({
 	const router = useRouter();
 	const pathname = usePathname();
 	return (
-		<form onSubmit={handleOnSubmit} className='my-5 flex flex-col gap-0.5 2xl:gap-2'>
+		<form onSubmit={handleOnSubmit} className='my-5 flex flex-col gap-0.5 2xl:gap-2 w-full'>
 			{formElement.map((item, i) => {
 				switch (item.type) {
 					case 'icon':

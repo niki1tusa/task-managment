@@ -22,7 +22,7 @@ export default async function proxy(request: NextRequest) {
 			},
 		}
 	);
-
+// можно заменить на getUser
 	const { data, error } = await supabase.auth.getClaims();
 	const claims = data?.claims;
 

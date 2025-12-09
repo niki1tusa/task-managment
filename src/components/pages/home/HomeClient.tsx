@@ -18,14 +18,14 @@ export default function HomeClient() {
 				<div className='flex items-center gap-2'>
 					<Link
 						href={PUBLIC_PAGES.LOGIN}
-						className='dark:hover:bg-gray/15 shadow-default rounded-md bg-white px-6 py-1 transition-colors hover:bg-gray-200/50'
+						className='dark:hover:bg-gray/15 shadow-default rounded-md dark:bg-[#030307] bg-white px-6 py-1 transition-colors hover:bg-gray-200/50'
 					>
 						<GradientText text='Login' className='font-medium' />
 					</Link>
 					<i className='text-[1rem] font-medium'></i>
 					<Link
 						href={PUBLIC_PAGES.REGISTER}
-						className='dark:hover:bg-gray/15 shadow-default rounded-md bg-white px-6 py-1 transition-colors hover:bg-gray-200/50'
+						className='dark:hover:bg-gray/15 shadow-default rounded-md dark:bg-[#030307] bg-white px-6 py-1 transition-colors hover:bg-gray-200/50'
 					>
 						<GradientText text='Register' className='font-medium' />
 					</Link>
@@ -44,7 +44,7 @@ export default function HomeClient() {
 				</p>
 				<Link
 					href={PUBLIC_PAGES.LOGIN}
-					className='bg-primary hover:bg-primary/90 mt-8 rounded-xl px-6 py-3 text-base font-semibold text-white transition hover:text-white/70 dark:border-2'
+					className='bg-primary hover:bg-primary/90 mt-8 rounded-xl px-6 py-3 text-base font-semibold text-white transition hover:text-white/70 dark:border-2 shadow-default'
 				>
 					Get Started
 				</Link>

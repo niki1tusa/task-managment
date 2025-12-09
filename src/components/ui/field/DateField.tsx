@@ -17,10 +17,10 @@ export function DateField<T extends FieldValues>({
 }: IDateField<T>) {
 	const refDate = useRef<ComponentRef<typeof DatePicker>>(null);
 	return (
-		<div className='mb-5'>
+		<div className='mb-5 w-full'>
 			<label className='mb-1 block text-sm font-medium 2xl:text-sm'>{labelText}:</label>
 
-			<span className='relative'>
+			<span className='relative w-full'>
 				<Controller
 					control={control}
 					name={name}
@@ -32,7 +32,7 @@ export function DateField<T extends FieldValues>({
 							dateFormat='yyyy-MM-dd'
 							className={clsx(
 								'focus:bg-[#f6f4ff] focus:shadow-lg focus:ring-2 focus:shadow-sky-300/20 focus:ring-sky-600',
-								'text-gray shadow-default h-[30%] rounded border p-2 text-sm transition-all duration-200 hover:bg-[#f6f4ff] 2xl:text-lg'
+								'text-gray shadow-default h-[30%] w-full rounded border p-2 text-sm transition-all duration-200 hover:bg-[#f6f4ff] 2xl:text-lg'
 							)}
 							minDate={new Date()}
 							placeholderText={placeholderText || '2026-01-01'}

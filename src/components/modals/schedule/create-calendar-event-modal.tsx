@@ -2,6 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { format } from 'date-fns';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
@@ -15,6 +16,7 @@ import { useProfile } from '@/hooks/useProfile';
 import { CALENDAR_EVENT_FIELDS } from '../../../config/schedule-config';
 
 import { type TEventInsert, insertEvent } from '@/services/shedule-event-service';
+import { toHHMMSS } from '@/utils/format-hour-minutes';
 
 interface Props {
 	close: () => void;
@@ -27,7 +29,7 @@ export function CreateCalendarEvent({ close }: Props) {
 		resolver: zodResolver(ZScheduleScheme),
 		defaultValues: {
 			title: '',
-			event_date: '',
+			event_date: undefined,
 			event_start: '',
 			event_end: '',
 		},
@@ -45,9 +47,7 @@ export function CreateCalendarEvent({ close }: Props) {
 			toast.error('Calendar is error!');
 		},
 	});
-	function toHHMMSS(t: string) {
-		return /^\d{2}:\d{2}:\d{2}$/.test(t) ? t : `${t}:00`;
-	}
+
 
 	const handleAddEvent: SubmitHandler<TScheduleForm> = data => {
 		if (!profile?.id) {
@@ -56,7 +56,7 @@ export function CreateCalendarEvent({ close }: Props) {
 		}
 		const payload: TEventInsert = {
 			title: data.title.trim(),
-			event_date: data.event_date,
+			event_date: format(data.event_date, 'yyyy-MM-dd'),
 			event_start: toHHMMSS(data.event_start),
 			event_end: toHHMMSS(data.event_end),
 			owner_id: profile.id,

@@ -24,7 +24,7 @@ export interface IDateField<T extends FieldValues = FieldValues> {
 export interface IIconField<T extends FieldValues = FieldValues> {
   setValue: UseFormSetValue<T>;
   watch: UseFormWatch<T>;
-  fieldName: Path<T>;              
+  fieldName: Path<T>;        
 }
 
 export interface IForm<T extends FieldValues = FieldValues> {

@@ -1,4 +1,3 @@
-// IconField.tsx
 'use client';
 
 import clsx from 'clsx';
@@ -8,17 +7,10 @@ import { ICON_NAMES, type IconName, MODAL_ICON } from '@/config/icon-config';
 
 import type { IIconField } from '../form/form.types';
 
-// IconField.tsx
-
-// IconField.tsx
-
-// IconField.tsx
-
-export function IconField<T extends FieldValues>({ setValue, watch, fieldName }: IIconField<T>) {
+export function IconField<T extends FieldValues>({ setValue, watch, fieldName}: IIconField<T>) {
 	const current = watch(fieldName) as unknown as IconName | string | undefined;
 
 	const handlePick = (name: IconName) => {
-		// привести к типу значения по пути (PathValue<T, typeof fieldName>)
 		setValue(fieldName, name as PathValue<T, typeof fieldName>, {
 			shouldDirty: true,
 			shouldTouch: true,
