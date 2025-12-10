@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button/Button';
+import { Button } from '@/shared/ui/button/Button';
 
 import { seedUsers } from '@/utils/seeder';
 

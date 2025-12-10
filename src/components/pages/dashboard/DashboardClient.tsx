@@ -3,7 +3,7 @@
 import { Header } from '@/components/pages/dashboard/header/Header';
 import { LastTasks } from '@/components/pages/dashboard/last-tasks/LastTasks';
 import { Statistic } from '@/components/pages/dashboard/statistic/Statistic';
-import Timeline from '@/components/pages/dashboard/timeline/Timeline';
+import Timeline from '@/widgets/timeline/Timeline';
 
 import type {
 	TGetChartPointResponse,

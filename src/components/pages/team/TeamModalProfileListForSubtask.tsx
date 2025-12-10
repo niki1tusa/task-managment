@@ -2,9 +2,9 @@
 import { useState } from 'react';
 
 import ProfileList from '@/components/modals/channel/profile-modal-list/ProfileList';
-import { Button } from '@/components/ui/button/Button';
 
 import type { TProfileRow } from '@/shared/types/task-types';
+import { Button } from '@/shared/ui/button/Button';
 
 import { useTaskStore } from '@/store/task-store';
 

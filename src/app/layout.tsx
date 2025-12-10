@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Playfair_Display, Poppins } from 'next/font/google';
 
-import { SITE_NAME } from '@/constants/seo-constants';
+import { SITE_NAME } from '@/shared/constants/seo-constants';
 
 import { ProviderWrapper } from '../providers/Providers';
 

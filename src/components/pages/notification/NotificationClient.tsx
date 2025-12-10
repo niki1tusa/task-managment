@@ -2,9 +2,9 @@
 
 import { useMemo, useState } from 'react';
 
-import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/components/tabs';
 import { AnimateIcon } from '@/components/animate-ui/icons/icon';
 import { RotateCcw } from '@/components/animate-ui/icons/rotate-ccw';
+import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/radix/tabs';
 import FadeOverlay from '@/components/ui/FadeOverlay';
 import Skeleton from '@/components/ui/Skeleton';
 import { Title } from '@/components/ui/Title';
@@ -19,7 +19,7 @@ import {
 	SelectValue,
 } from '@/components/ui/select';
 
-import { useNotices } from '@/hooks/useNotices';
+import { useNotices } from '@/hooks/use-notices';
 
 import NoticeList from './NoticeList';
 
@@ -98,14 +98,14 @@ export default function NotificationClient() {
 			<nav className='flex items-center gap-3'>
 				{/* read or not  */}
 				<Tabs value={readOrNot} onValueChange={value => setReadOrNot(value as 'read' | 'not')}>
-					<TabsList className='ring-gray/40 grid grid-cols-2 shadow shadow-neutral-300 dark:shadow-none dark:ring-1 bg-side'>
+					<TabsList className='ring-gray/40 bg-side grid grid-cols-2 shadow shadow-neutral-300 dark:shadow-none dark:ring-1'>
 						<TabsTrigger value='not'>Not read</TabsTrigger>
 						<TabsTrigger value='read'>Read</TabsTrigger>
 					</TabsList>
 				</Tabs>
 				{/* select date */}
 				<Select value={orderBy} onValueChange={value => setOrderBy(value as 'desc' | 'asc')}>
-					<SelectTrigger className='w-[180px] shadow shadow-neutral-300 dark:shadow-none bg-side'>
+					<SelectTrigger className='bg-side w-[180px] shadow shadow-neutral-300 dark:shadow-none'>
 						<SelectValue placeholder='Sort by date' />
 					</SelectTrigger>
 					<SelectContent>
@@ -123,7 +123,7 @@ export default function NotificationClient() {
 						setSelectType(value as 'all' | 'advice' | 'urgent' | 'achievement' | 'information')
 					}
 				>
-					<SelectTrigger className='w-[180px] shadow shadow-neutral-300 dark:shadow-none bg-side'>
+					<SelectTrigger className='bg-side w-[180px] shadow shadow-neutral-300 dark:shadow-none'>
 						<SelectValue placeholder='Select a type' />
 					</SelectTrigger>
 					<SelectContent>
@@ -140,7 +140,7 @@ export default function NotificationClient() {
 				<button
 					onClick={() => resetAllFilters()}
 					title='Reset all filters'
-					className='bg-side dark:hover:bg-input/50 flex items-center justify-center rounded-sm border  p-1 shadow shadow-neutral-300 transition-all dark:shadow-none'
+					className='bg-side dark:hover:bg-input/50 flex items-center justify-center rounded-sm border p-1 shadow shadow-neutral-300 transition-all dark:shadow-none'
 				>
 					<AnimateIcon animateOnHover>
 						<RotateCcw size={26} />

@@ -4,8 +4,8 @@ import clsx from 'clsx';
 import { Paperclip } from 'lucide-react';
 import { memo, useState } from 'react';
 
-import { AnimateIcon } from '../../animate-ui/icons/icon';
-import { SendIcon } from '../../animate-ui/icons/send';
+import { AnimateIcon } from '../../../components/animate-ui/icons/icon';
+import { SendIcon } from '../../../components/animate-ui/icons/send';
 
 const ChatInput = ({ handleSend }: { handleSend: (text: string) => Promise<void> }) => {
 	const [text, setText] = useState('');
@@ -19,7 +19,7 @@ const ChatInput = ({ handleSend }: { handleSend: (text: string) => Promise<void>
 		<div className='flex items-center gap-3 border-t bg-white px-4 py-3 shadow-lg dark:bg-gray-800'>
 			<button
 				type='button'
-				className='flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-gray-100 dark:hover:bg-gray-700'
+				className='flex items-center justify-center rounded-full transition-colors hover:bg-gray-100 dark:hover:bg-gray-700'
 			>
 				<Paperclip size={20} />
 			</button>
@@ -31,7 +31,7 @@ const ChatInput = ({ handleSend }: { handleSend: (text: string) => Promise<void>
 				className={clsx(
 					'shadow-default flex-1 resize-none rounded-lg bg-gray-50 px-3 py-2 text-sm outline-none dark:bg-gray-700',
 					'placeholder-gray-400 dark:placeholder-gray-500',
-					'focus:shadow focus:shadow-primary/80 transition-all'
+					'focus:shadow-primary/80 transition-all focus:shadow'
 				)}
 				onKeyDown={e => {
 					if (e.key === 'Enter' && !e.shiftKey) {

@@ -9,7 +9,7 @@ import type { TByAscOrDesc, TStatus } from '@/shared/types/task-types';
 
 import { useModalStore } from '@/store/modals-store';
 
-import { useMyTasks } from '@/hooks/useMyTasks';
+import { useMyTasks } from '@/hooks/use-my-tasks';
 
 import FiltersForTask from './FiltersForTask';
 import { Task } from './task/Task';
@@ -31,7 +31,7 @@ export const LastTasks = () => {
 					onClick={() => {
 						open('createTask');
 					}}
-					className='hover:text-primary bg-side shadow-default flex max-h-[41px] rounded-sm px-2 pt-2 text-sm font-medium text-gray-500 transition-all duration-300 dark:hover:text-white'
+					className='hover:text-primary bg-side shadow-default flex items-center rounded-sm px-2 mb-4 text-sm font-medium text-gray-500 transition-all duration-300 dark:hover:text-white'
 				>
 					+ Add Task
 				</button>

@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { SquareX } from 'lucide-react';
 
-import { useClickOutside } from '@/hooks/useClickOutside';
+import { useClickOutside } from '@/hooks/use-onclick-outside';
 
 import { WrapperModal } from './WrapperModal';
 

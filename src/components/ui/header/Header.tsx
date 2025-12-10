@@ -9,7 +9,7 @@ import type { TTask } from '@/shared/types/task-types';
 
 import { GUARD_PAGES } from '@/config/guard-page-config';
 
-import { useFormatDateForTask } from '@/hooks/useFormatDateForTask';
+import { useFormatDateForTask } from '@/hooks/use-format-date-for-task';
 
 import { getTaskIcon } from '@/utils/getTaskIcon';
 
@@ -47,7 +47,7 @@ export const Header = ({ task }: { task: TTask }) => {
 									/>
 								);
 							})}
-						<div className='shadow-default flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border bg-side'>
+						<div className='shadow-default bg-side flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border'>
 							+{task.task_participants.length - 2}
 						</div>
 					</>

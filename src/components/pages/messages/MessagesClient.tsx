@@ -1,6 +1,6 @@
 'use client';
 
-import { useChannels } from '@/hooks/useChannels';
+import { useChannels } from '@/hooks/use-channels';
 
 import ChannelsSide from './channel/ChannelsSide';
 

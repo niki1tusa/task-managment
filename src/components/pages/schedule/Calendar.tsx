@@ -13,7 +13,8 @@ import { useEffect, useMemo } from 'react';
 import 'temporal-polyfill/global';
 
 import { Title } from '@/components/ui/Title';
-import { Button } from '@/components/ui/button/Button';
+
+import { Button } from '@/shared/ui/button/Button';
 
 import { useModalStore } from '@/store/modals-store';
 

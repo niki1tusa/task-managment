@@ -3,10 +3,11 @@
 import clsx from 'clsx';
 import { CornerUpRight, SquarePen, SquareX, Trash } from 'lucide-react';
 
+import type { TChatMessageRow } from '@/shared/types/message-types';
+
 import { useModalStore } from '@/store/modals-store';
 
-import { BtnCopyName } from '../button/BtnCopyName';
-import type { TChatMessageRow } from '@/shared/types/message-types';
+import { BtnCopyName } from '../../../shared/ui/button/BtnCopyName';
 
 interface Props {
 	msg: TChatMessageRow;

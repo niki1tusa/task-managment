@@ -4,29 +4,30 @@ import { Search } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/animate-ui/base/popover';
+import { PopoverAnchor } from '@/components/animate-ui/primitives/radix/popover';
+import { Popover, PopoverContent } from '@/components/animate-ui/radix/popover';
 import { Avatar } from '@/components/ui/Avatar';
-import ChatInput from '@/components/ui/chat/ChatInput';
-import ChatMessage from './ChatMessage';
 
-
-import { GENERAL_CHAT_ID, GROUP_GAP_MINUTES } from '@/constants/global-constants';
+import { GENERAL_CHAT_ID, GROUP_GAP_MINUTES } from '@/shared/constants/constants';
 
 import { GUARD_PAGES } from '@/config/guard-page-config';
 
 import { useChannelStore } from '@/store/channel-store';
 
-import { useChat } from '@/hooks/useChat';
-import { useClickOutside } from '@/hooks/useClickOutside';
-import { useProfile } from '@/hooks/useProfile';
+import { useClickOutside } from '@/hooks/use-onclick-outside';
+import { useProfile } from '@/hooks/use-profile';
 
 import { minsDiff } from '@/utils/minsDifferent';
 
-import { Button } from '../button/Button';
-import Textarea from '../field/Textarea';
-import SearchMessageMenuPopover from '../popover/SearchMessageMenuPopover';
+import Textarea from '../../../components/ui/field/Textarea';
+import SearchMessageMenuPopover from '../../../components/ui/popover/SearchMessageMenuPopover';
+import { Button } from '../../../shared/ui/button/Button';
+
+import ChatMessage from './ChatMessage';
+import { useChat } from '@/widgets/chat/model/use-chat';
+import ChatInput from '@/widgets/chat/ui/ChatInput';
 
 export default function Chat() {
 	// store
@@ -35,10 +36,12 @@ export default function Chat() {
 	const { profile } = useProfile();
 	const [isOpenInput, setIsOpenInput] = useState<boolean>(false);
 	const [value, setValue] = useState('');
+	const popoverRef = useRef(null);
 	const pathname = usePathname();
 	const isDashboard = pathname === '/dashboard';
+	const ignoreRefs = useMemo(() => [popoverRef], []);
 	// costom hooks
-	const { ref } = useClickOutside<HTMLDivElement>(() => setIsOpenInput(false));
+	const { ref } = useClickOutside<HTMLDivElement>(() => setIsOpenInput(false), ignoreRefs);
 	const chat = useChat(activeChannel ? activeChannel.id : GENERAL_CHAT_ID);
 	// memo
 	const visibleMessages = useMemo(() => {
@@ -55,7 +58,7 @@ export default function Chat() {
 		);
 
 		return filterMsg;
-	}, [value]);
+	}, [value, chat.messages]);
 	// render messages
 	const renderMessages = useMemo(() => {
 		if (!chat) return null;
@@ -92,7 +95,7 @@ export default function Chat() {
 	}, [chat?.messages, visibleMessages, value, filterMessages]);
 
 	return (
-		<div className='flex h-full flex-col' role='complementary' aria-label='Chat panel'>
+		<div className='flex h-full flex-col' aria-label='Chat panel'>
 			{isDashboard && (
 				<div className='relative w-full'>
 					<Image
@@ -105,7 +108,7 @@ export default function Chat() {
 					/>
 				</div>
 			)}
-			{/* overlay должен быть ниже user info! */}
+			{/* chat overlay */}
 			{!isDashboard && (
 				<div className='from-primary/20 dark:from-gray/5 pointer-events-none absolute top-27.5 left-0 z-50 h-[40%] w-full bg-gradient-to-b to-transparent' />
 			)}
@@ -136,25 +139,30 @@ export default function Chat() {
 				{/* поиск сообщений */}
 				{pathname === GUARD_PAGES.MESSAGES &&
 					(isOpenInput ? (
-						<div ref={ref} className='relative'>
-							{/* search field */}
-							<Textarea value={value} setValue={setValue} placeholder='Search by word...' />
-							{/* popover */}
-							{/* TODO: как только появляется popover у textarea теряется фокус */}
-							<Popover open={filterMessages.length > 0 && isOpenInput}>
-								<PopoverContent
-									side='left'
-									align={'start'}
-									sideOffset={8}
-									className='bg-background shadow-default w-[240px] rounded-sm border p-3 dark:bg-white dark:text-black'
-								>
-									<SearchMessageMenuPopover
-										count={filterMessages.length}
-										onClose={() => setIsOpenInput(false)}
-									/>
-								</PopoverContent>
-							</Popover>
-						</div>
+						<Popover open={filterMessages.length > 0 && isOpenInput}>
+							<PopoverAnchor asChild>
+								<div ref={ref} className='relative'>
+									{/* search field */}
+									<Textarea value={value} setValue={setValue} placeholder='Search by word...' />
+								</div>
+							</PopoverAnchor>
+							<PopoverContent
+								ref={popoverRef}
+								side='left'
+								align={'start'}
+								sideOffset={8}
+								onOpenAutoFocus={e => e.preventDefault()}
+								onCloseAutoFocus={e => e.preventDefault()}
+								onFocusOutside={e => e.preventDefault()}
+								className='bg-background shadow-default w-[240px] rounded-sm border p-3 dark:bg-white dark:text-black'
+							>
+								<SearchMessageMenuPopover
+									count={filterMessages.length}
+									onClose={() => setIsOpenInput(false)}
+									messagesRefs={chat.messagesRefs}
+								/>
+							</PopoverContent>
+						</Popover>
 					) : (
 						<button onClick={() => setIsOpenInput(true)}>
 							<Search />

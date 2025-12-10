@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import type { TNoticeRow } from '@/shared/types/notice-types';
 
-import { useProfile } from './useProfile';
+import { useProfile } from './use-profile';
 import { getNoticesByProfileId } from '@/services/notice-client-service';
 
 export function useNotices() {

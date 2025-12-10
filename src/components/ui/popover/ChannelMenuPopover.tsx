@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import { SquarePen, SquarePlus, SquareX, Trash } from 'lucide-react';
 
-import { BtnCopyName } from '@/components/ui/button/BtnCopyName';
+import { BtnCopyName } from '@/shared/ui/button/BtnCopyName';
 
 import { useModalStore } from '@/store/modals-store';
 
-import { useProfile } from '@/hooks/useProfile';
+import { useProfile } from '@/hooks/use-profile';
 
 import type { TChannelRow } from '../../pages/messages/channel/channel.types';
 

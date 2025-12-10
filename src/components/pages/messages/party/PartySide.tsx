@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Trash2Icon } from 'lucide-react';
 import { useState } from 'react';
 
-import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/components/tabs';
+import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/radix/tabs';
 import { Avatar } from '@/components/ui/Avatar';
 import Skeleton from '@/components/ui/Skeleton';
 import { Title } from '@/components/ui/Title';
@@ -13,7 +13,7 @@ import Textarea from '@/components/ui/field/Textarea';
 import { useChannelStore } from '@/store/channel-store';
 import { useModalStore } from '@/store/modals-store';
 
-import { useProfile } from '@/hooks/useProfile';
+import { useProfile } from '@/hooks/use-profile';
 
 import type { TChannelParticipantsRow, TChannelRow } from '../channel/channel.types';
 

@@ -6,7 +6,7 @@ import Modal from '@/components/ui/modal/Modal';
 
 import { useModalStore } from '@/store/modals-store';
 
-import { useProfile } from '@/hooks/useProfile';
+import { useProfile } from '@/hooks/use-profile';
 
 import ProfileModalList from './profile-modal-list/ProfileModalList';
 import { insertProfilesIntoChannel } from '@/services/channel/party-client-service';

@@ -4,11 +4,11 @@ import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-import { Button } from '@/components/ui/button/Button';
 import Textarea from '@/components/ui/field/Textarea';
 import Modal from '@/components/ui/modal/Modal';
 
 import type { TChatMessageRow, TChatMessageUpdate } from '@/shared/types/message-types';
+import { Button } from '@/shared/ui/button/Button';
 
 import { useModalStore } from '@/store/modals-store';
 

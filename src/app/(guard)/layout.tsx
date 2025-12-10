@@ -4,9 +4,10 @@ import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 
 import { Sidebar } from '@/components/sidebar/Sidebar';
-import Chat from '@/components/ui/chat/Chat';
 
 import { GUARD_PAGES } from '@/config/guard-page-config';
+
+import Chat from '@/widgets/chat/ui/Chat';
 
 export default function GuardLayout({ children }: { children: React.ReactNode }) {
 	const pathname = usePathname();

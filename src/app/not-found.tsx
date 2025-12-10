@@ -1,4 +1,4 @@
-import BtnReturnBack from '@/components/ui/button/BtnReturnBack';
+import BtnReturnBack from '@/shared/ui/button/BtnReturnBack';
 
 export default function NotFound() {
 	return (

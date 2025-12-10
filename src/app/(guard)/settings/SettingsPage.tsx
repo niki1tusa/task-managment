@@ -9,12 +9,12 @@ import { toast } from 'sonner';
 
 import Skeleton from '@/components/ui/Skeleton';
 import { Title } from '@/components/ui/Title';
-import { Button } from '@/components/ui/button/Button';
 import Form from '@/components/ui/form/Form';
 
 import type { TSettingsForm } from '@/shared/types/scheme';
+import { Button } from '@/shared/ui/button/Button';
 
-import { useProfile } from '@/hooks/useProfile';
+import { useProfile } from '@/hooks/use-profile';
 
 import { SettingFields } from './settings-form.data';
 import { updateProfile } from '@/services/profile/profile-client-service';

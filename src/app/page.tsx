@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 import HomeClient from '@/components/pages/home/HomeClient';
 
-import { OG_IMAGE, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/constants/seo-constants';
+import { OG_IMAGE, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/shared/constants/seo-constants';
 
 export const metadata: Metadata = {
 	title: `${SITE_NAME} | Home`,

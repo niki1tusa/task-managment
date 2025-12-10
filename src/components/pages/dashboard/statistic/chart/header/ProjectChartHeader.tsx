@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 import type { ITimeRange } from '@/shared/types/statistics-types';
 
-import { useClickOutside } from '@/hooks/useClickOutside';
+import { useClickOutside } from '@/hooks/use-onclick-outside';
 
 const timeRange: ITimeRange[] = [
 	{ label: 'Yearly', value: 'yearly' },

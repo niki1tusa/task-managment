@@ -36,5 +36,5 @@ export default function CallbackClient() {
 		})();
 	}, [params, router]);
 
-	return <p className='text-black'>Signing in…</p>;
+	return <p className='text-white p-2'>Signing in…</p>;
 }

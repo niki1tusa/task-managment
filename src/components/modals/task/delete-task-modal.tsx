@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { Button } from '@/components/ui/button/Button';
+import { Button } from '@/shared/ui/button/Button';
 
 import { useModalStore } from '@/store/modals-store';
 

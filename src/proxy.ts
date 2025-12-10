@@ -23,10 +23,10 @@ export default async function proxy(request: NextRequest) {
 		}
 	);
 // можно заменить на getUser
-	const { data, error } = await supabase.auth.getClaims();
-	const claims = data?.claims;
+	const { data, error } = await supabase.auth.getUser();
+	const user = data.user
 
-	if (!claims || error) {
+	if (!user || error) {
 		const url = request.nextUrl.clone();
 		url.pathname = '/login';
 		const queryString = searchParams.size ? `?${searchParams}` : '';

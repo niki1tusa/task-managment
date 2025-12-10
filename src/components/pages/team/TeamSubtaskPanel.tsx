@@ -11,7 +11,7 @@ import type { TTask } from '@/shared/types/task-types';
 import { useModalStore } from '@/store/modals-store';
 import { useSubTaskStore } from '@/store/subtask-store';
 
-import { useProfile } from '@/hooks/useProfile';
+import { useProfile } from '@/hooks/use-profile';
 
 import { getAllProfile } from '@/services/profile/profile-client-service';
 

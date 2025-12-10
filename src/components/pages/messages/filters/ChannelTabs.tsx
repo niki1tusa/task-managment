@@ -1,4 +1,4 @@
-import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/components/tabs';
+import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/radix/tabs';
 
 interface Props {
 	setSortType: (arg: 'all' | 'group' | 'task' | 'direct') => void;

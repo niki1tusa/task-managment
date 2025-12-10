@@ -10,13 +10,14 @@ import type { TTask } from '@/shared/types/task-types';
 
 import { GUARD_PAGES } from '@/config/guard-page-config';
 
-import { useFormatDateForTask } from '@/hooks/useFormatDateForTask';
+import { useFormatDateForTask } from '@/hooks/use-format-date-for-task';
+
 import { getTaskIcon } from '@/utils/getTaskIcon';
 
 function TimelineTask({ task }: { task: TTask }) {
 	const router = useRouter();
-	const TaskIcon = getTaskIcon(task)
-	const {start, end } = useFormatDateForTask(task);
+	const TaskIcon = getTaskIcon(task);
+	const { start, end } = useFormatDateForTask(task);
 	return (
 		<div className='relative' onClick={() => router.push(GUARD_PAGES.TASK(task.id))}>
 			<Link

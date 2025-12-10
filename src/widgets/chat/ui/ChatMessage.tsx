@@ -11,11 +11,11 @@ import type { TChatMessageRow } from '@/shared/types/message-types';
 
 import { GUARD_PAGES } from '@/config/guard-page-config';
 
-import { useProfile } from '@/hooks/useProfile';
+import { useProfile } from '@/hooks/use-profile';
 
-import { Avatar } from '../Avatar';
-import Skeleton from '../Skeleton';
-import MessageMenuPopover from '../popover/MessageMenuPopover';
+import { Avatar } from '../../../components/ui/Avatar';
+import Skeleton from '../../../components/ui/Skeleton';
+import MessageMenuPopover from '../../../components/ui/popover/MessageMenuPopover';
 
 interface Props {
 	message: TChatMessageRow;

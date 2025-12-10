@@ -14,9 +14,8 @@ import {
 	signInWithLinkedIn,
 } from '@/app/(auth)/actions';
 
-import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/components/tabs';
+import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/radix/tabs';
 import { Title } from '@/components/ui/Title';
-import { BtnTabLink } from '@/components/ui/button/BtnTabLink';
 
 import {
 	type TLoginForm,
@@ -24,6 +23,7 @@ import {
 	ZLoginPhonePasswordScheme,
 	ZLoginScheme,
 } from '@/shared/types/scheme';
+import { BtnTabLink } from '@/shared/ui/button/BtnTabLink';
 
 import { PUBLIC_PAGES } from '@/config/public-page-config';
 
@@ -71,7 +71,7 @@ export function LoginClient() {
 			<Title>
 				<b className='font-playfair text-3xl 2xl:text-6xl'>
 					Welcome back <br />
-					<span className='text-xl 2xl:text-4xl'>to the task management app</span>
+					<span className='text-xl 2xl:text-4xl'>To the task management app</span>
 				</b>
 			</Title>
 			{/* tabs */}
@@ -120,16 +120,16 @@ export function LoginClient() {
 				)}
 			</div>
 			{/*  */}
-			<div className='text-gray mt-8 flex items-center gap-1 text-[0.6em]'>
+			<div className='text-gray flex items-center gap-1 text-[0.6em]'>
 				<span className='w-full border-b' />
 				<span className='text-[0.8em] whitespace-nowrap'>Or continue with</span>
 				<span className='w-full border-b' />
 			</div>
 			{/*  */}
 			<div className='my-5 flex justify-center gap-3'>
-				<BtnTabLink path='/google.svg' onClick={signInWithGoogle} />
-				<BtnTabLink path='/github.svg' onClick={signInWithGithub} />
-				<BtnTabLink path='/linkedIn.svg' onClick={signInWithLinkedIn} />
+				<BtnTabLink path='/icons/google.svg' onClick={signInWithGoogle} />
+				<BtnTabLink path='/icons/github.svg' onClick={signInWithGithub} />
+				<BtnTabLink path='/icons/linkedIn.svg' onClick={signInWithLinkedIn} />
 			</div>
 			{/*  */}
 			<div className='text-[0.6em]'>

@@ -1,9 +1,9 @@
 import { Avatar } from '@/components/ui/Avatar';
 import { Title } from '@/components/ui/Title';
-import BtnReturnBack from '@/components/ui/button/BtnReturnBack';
 
 import type { TSubTaskRow } from '@/shared/types/subtask-types';
 import type { TTask } from '@/shared/types/task-types';
+import BtnReturnBack from '@/shared/ui/button/BtnReturnBack';
 
 import { type IconName, MODAL_ICON } from '@/config/icon-config';
 

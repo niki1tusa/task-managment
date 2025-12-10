@@ -7,7 +7,7 @@ import Modal from '@/components/ui/modal/Modal';
 import { useModalStore } from '@/store/modals-store';
 import { useSubTaskStore } from '@/store/subtask-store';
 
-import { useProfile } from '@/hooks/useProfile';
+import { useProfile } from '@/hooks/use-profile';
 
 import { addProfileForSubtask } from '@/services/tasks/subtask-service';
 

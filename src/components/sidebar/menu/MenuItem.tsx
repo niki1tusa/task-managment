@@ -8,7 +8,7 @@ import { AnimateIcon } from '@/components/animate-ui/icons/icon';
 
 import type { IMenuItem } from '@/shared/types/menu-item-types';
 
-import { useNotices } from '@/hooks/useNotices';
+import { useNotices } from '@/hooks/use-notices';
 
 export const MenuItem = ({ item }: { item: IMenuItem }) => {
 	const pathname = usePathname();

@@ -7,7 +7,7 @@ import { Avatar } from '@/components/ui/Avatar';
 import Skeleton from '@/components/ui/Skeleton';
 import { Title } from '@/components/ui/Title';
 
-import { useProfile } from '@/hooks/useProfile';
+import { useProfile } from '@/hooks/use-profile';
 
 export const ProfileMenu = () => {
 	const [isShowProfile, setIsShowProfile] = useState(true);

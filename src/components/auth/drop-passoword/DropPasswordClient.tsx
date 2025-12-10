@@ -7,9 +7,9 @@ import { toast } from 'sonner';
 import { sendResetPasswordEmail } from '@/app/(auth)/actions';
 
 import { Title } from '@/components/ui/Title';
-import BtnReturnBack from '@/components/ui/button/BtnReturnBack';
 
 import { type TDropPasswordForm, ZDropPasswordScheme } from '@/shared/types/scheme';
+import BtnReturnBack from '@/shared/ui/button/BtnReturnBack';
 
 import Form from '../../ui/form/Form';
 

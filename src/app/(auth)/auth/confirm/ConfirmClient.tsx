@@ -30,5 +30,5 @@ export function ConfirmClient() {
 
 		verifyToken();
 	}, [params, router]);
-	return <p>Verify is your email... please wait.</p>;
+	return <p className='text-white p-2'>Verify is your email... please wait.</p>;
 }

@@ -3,14 +3,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 
-import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/components/tabs';
+import { Tabs, TabsList, TabsTrigger } from '@/components/animate-ui/radix/tabs';
 import { Title } from '@/components/ui/Title';
 import Textarea from '@/components/ui/field/Textarea';
 
 import { useTaskStore } from '@/store/task-store';
 
-import { useAllTaskWithoutFilter } from '@/hooks/useAllTaskWithoutFilter';
-import { useProfile } from '@/hooks/useProfile';
+import { useProfile } from '@/hooks/use-profile';
+import { useAllTaskWithoutFilter } from '@/hooks/use-tasks-without-filter';
 
 import TeamTask from './TeamTask';
 import TeamTaskPanel from './TeamTaskPanel';

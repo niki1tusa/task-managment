@@ -11,12 +11,13 @@ import Modal from '@/components/ui/modal/Modal';
 
 import { type TScheduleForm, ZScheduleScheme } from '@/shared/types/scheme';
 
-import { useProfile } from '@/hooks/useProfile';
+import { useProfile } from '@/hooks/use-profile';
+
+import { toHHMMSS } from '@/utils/format-hour-minutes';
 
 import { CALENDAR_EVENT_FIELDS } from '../../../config/schedule-config';
 
 import { type TEventInsert, insertEvent } from '@/services/shedule-event-service';
-import { toHHMMSS } from '@/utils/format-hour-minutes';
 
 interface Props {
 	close: () => void;
@@ -47,7 +48,6 @@ export function CreateCalendarEvent({ close }: Props) {
 			toast.error('Calendar is error!');
 		},
 	});
-
 
 	const handleAddEvent: SubmitHandler<TScheduleForm> = data => {
 		if (!profile?.id) {

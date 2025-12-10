@@ -7,8 +7,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/animate-ui/base/popover';
 import Skeleton from '@/components/ui/Skeleton';
 import { Title } from '@/components/ui/Title';
-import { Button } from '@/components/ui/button/Button';
 import Textarea from '@/components/ui/field/Textarea';
+
+import { Button } from '@/shared/ui/button/Button';
 
 import { useChannelStore } from '@/store/channel-store';
 import { useModalStore } from '@/store/modals-store';

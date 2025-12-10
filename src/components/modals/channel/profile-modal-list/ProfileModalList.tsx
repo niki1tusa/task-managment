@@ -2,10 +2,10 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import type { TChannelInsert } from '@/components/pages/messages/channel/channel.types';
-import { Button } from '@/components/ui/button/Button';
 import Textarea from '@/components/ui/field/Textarea';
 
 import type { TProfileRow } from '@/shared/types/task-types';
+import { Button } from '@/shared/ui/button/Button';
 
 import ProfileList from './ProfileList';
 import { useProfileList } from './useProfileList';

@@ -3,7 +3,7 @@
 import { usePathname, useRouter } from 'next/navigation';
 import type { FieldValues } from 'react-hook-form';
 
-import { Button } from '../button/Button';
+import { Button } from '../../../shared/ui/button/Button';
 import { DateField } from '../field/DateField';
 import { Field } from '../field/Field';
 import { IconField } from '../field/IconField';
@@ -25,7 +25,7 @@ export default function Form<T extends FieldValues>({
 	const router = useRouter();
 	const pathname = usePathname();
 	return (
-		<form onSubmit={handleOnSubmit} className='my-5 flex flex-col gap-0.5 2xl:gap-2 w-full'>
+		<form onSubmit={handleOnSubmit} className='my-5 flex w-full flex-col gap-0.5 2xl:gap-2'>
 			{formElement.map((item, i) => {
 				switch (item.type) {
 					case 'icon':

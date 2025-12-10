@@ -7,15 +7,15 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 
 import type { TChannelInsert } from '@/components/pages/messages/channel/channel.types';
-import { Button } from '@/components/ui/button/Button';
 import Modal from '@/components/ui/modal/Modal';
 
 import type { TTask } from '@/shared/types/task-types';
+import { Button } from '@/shared/ui/button/Button';
 
 import { GUARD_PAGES } from '@/config/guard-page-config';
 
-import { useChannels } from '@/hooks/useChannels';
-import { useProfile } from '@/hooks/useProfile';
+import { useChannels } from '@/hooks/use-channels';
+import { useProfile } from '@/hooks/use-profile';
 
 import ProfileModalList from './profile-modal-list/ProfileModalList';
 import { createClientChannelByTaskId } from '@/services/channel/channel-client-service';
