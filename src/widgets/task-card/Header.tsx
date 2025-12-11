@@ -4,13 +4,13 @@ import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 
 import { GUARD_PAGES } from '@/shared/config/guard-page-config';
-import { useFormatDateForTask } from '@/shared/lib/formatDateForTask';
 import { getTaskIcon } from '@/shared/lib/getTaskIcon';
 import type { TTask } from '@/shared/model/task-types';
 import { Avatar } from '@/shared/ui/Avatar';
+import { useFormatDateForTask } from '@/shared/lib/formatDateForTask';
 
 export const Header = ({ task }: { task: TTask }) => {
-	const { displayDue } = formatDateForTask(task);
+	const { displayDue } = useFormatDateForTask(task);
 	const TaskIcon = getTaskIcon(task);
 	const pathname = usePathname();
 	const isTeamPage = pathname === GUARD_PAGES.TEAM;

@@ -12,7 +12,7 @@ import { PUBLIC_PAGES } from '@/shared/config/public-page-config';
 import { type TRegistrationForm, ZRegistrationScheme } from '@/shared/model/scheme';
 import { Title } from '@/shared/ui/Title';
 
-import Form from '../../../shared/ui/ui/form/Form';
+import Form from '@/widgets/form/Form';
 
 import { RegisterFields } from './register-config';
 import { createUser } from '@/entities/profile/api/profile-auth-client-service';

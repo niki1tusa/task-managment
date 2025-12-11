@@ -1,6 +1,6 @@
-import type { IForm } from '@/components/ui/form/form.types';
+import type { IForm } from '@/widgets/form/form.types';
 
-type TName = { name: string; occupation: string, email: string; phone: string };
+type TName = { name: string; occupation: string; email: string; phone: string };
 export const SettingFields = [
 	{
 		type: 'field',
@@ -12,7 +12,7 @@ export const SettingFields = [
 			autoComplete: 'name',
 		},
 	},
-		{
+	{
 		type: 'field',
 		props: {
 			labelText: 'Occupation',

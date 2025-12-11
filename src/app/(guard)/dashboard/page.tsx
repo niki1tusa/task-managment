@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { DashboardClient } from '@/widgets/DashboardClient';
+import { DashboardClient } from '@/pages/DashboardClient';
 
 import { getServerTodayTasks } from '@/entities/task/api/task-server-service';
 import { fetchChartPoint } from '@/features/statistic/api/chart-point-server-service';

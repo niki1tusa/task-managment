@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 import AuthWrapper from '../AuthWrapper';
 
-import { ResetPassowrdClient } from '@/widgets/auth/reset-password/ResetPasswordClient';
+import { ResetPassowrdClient } from '@/pages/auth/reset-password/ResetPasswordClient';
 
 export const metadata: Metadata = {
 	title: 'reset-password',

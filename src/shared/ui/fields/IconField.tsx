@@ -5,7 +5,7 @@ import type { FieldValues, PathValue } from 'react-hook-form';
 
 import { ICON_NAMES, type IconName, MODAL_ICON } from '@/shared/config/icon-config';
 
-import type { IIconField } from '../form/form.types';
+import type { IIconField } from '@/widgets/form/form.types';
 
 export function IconField<T extends FieldValues>({ setValue, watch, fieldName }: IIconField<T>) {
 	const current = watch(fieldName) as unknown as IconName | string | undefined;

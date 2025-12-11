@@ -9,14 +9,13 @@ import { toast } from 'sonner';
 
 import { serverSignOut } from '@/app/(auth)/actions';
 
-import Form from '@/components/ui/form/Form';
-
 import { PUBLIC_PAGES } from '@/shared/config/public-page-config';
 import { type TResetPasswordForm, ZResetPasswordScheme } from '@/shared/model/scheme';
 import { Title } from '@/shared/ui/Title';
 
 import { resetPassowrdFields } from './reset-password-config';
 import { updateUserPassword } from '@/entities/profile/api/profile-auth-client-service';
+import Form from '@/widgets/form/Form';
 
 export function ResetPassowrdClient() {
 	const router = useRouter();

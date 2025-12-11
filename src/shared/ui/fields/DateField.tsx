@@ -6,7 +6,7 @@ import { type ComponentRef, useRef } from 'react';
 import DatePicker from 'react-datepicker';
 import { Controller, type FieldValues } from 'react-hook-form';
 
-import type { IDateField } from '../form/form.types';
+import type { IDateField } from '@/widgets/form/form.types';
 
 export function DateField<T extends FieldValues>({
 	labelText,

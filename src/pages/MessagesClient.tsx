@@ -1,6 +1,6 @@
 'use client';
 
-import ChannelsSide from '../../../widgets/channels/ChannelsSide';
+import ChannelsSide from '@/widgets/channels/ChannelsSide';
 
 import { useChannels } from '@/features/messages/model/use-channels';
 

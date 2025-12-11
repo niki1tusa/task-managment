@@ -6,7 +6,7 @@ import { PUBLIC_PAGES } from '@/shared/config/public-page-config';
 import { ToggleTheme } from '@/shared/ui/ToggleTheme';
 import { GradientText } from '@/shared/ui/animate-ui/text/gradient';
 
-import { HomeSection } from './HomeSection';
+import { HomeSection } from '../widgets/home/HomeSection';
 
 export default function HomeClient() {
 	return (

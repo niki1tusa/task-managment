@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 import AuthWrapper from '../AuthWrapper';
 
-import { DropPasswordClient } from '@/widgets/auth/drop-passoword/DropPasswordClient';
+import { DropPasswordClient } from '@/pages/auth/drop-passoword/DropPasswordClient';
 
 export const metadata: Metadata = {
 	title: 'Drop-password',

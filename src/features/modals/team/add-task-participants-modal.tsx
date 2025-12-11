@@ -5,7 +5,7 @@ import { useModalStore } from '@/shared/store/modals-store';
 import { useTaskStore } from '@/shared/store/task-store';
 import Modal from '@/shared/ui/modal/Modal';
 
-import TeamModalParticipant from '../../pages/team/TeamModalParticipant';
+import TeamModalParticipant from '@/widgets/team/TeamModalParticipant';
 
 import { useProfile } from '@/entities/profile/use-profile';
 import { insertTaskParticipants } from '@/entities/task/api/task-client-service';

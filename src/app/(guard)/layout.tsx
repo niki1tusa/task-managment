@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 
-import { Sidebar } from '@/components/sidebar/Sidebar';
+import { Sidebar } from '@/widgets/sidebar/Sidebar';
 
 import { GUARD_PAGES } from '@/shared/config/guard-page-config';
 

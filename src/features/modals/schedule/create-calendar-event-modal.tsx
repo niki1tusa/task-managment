@@ -6,17 +6,15 @@ import { format } from 'date-fns';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import Form from '@/components/ui/form/Form';
-
 import { type TScheduleForm, ZScheduleScheme } from '@/shared/model/scheme';
 import Modal from '@/shared/ui/modal/Modal';
-
-import { toHHMMSS } from '@/features/modals/schedule/format-hour-minutes';
 
 import { CALENDAR_EVENT_FIELDS } from '../../../shared/config/schedule-config';
 
 import { useProfile } from '@/entities/profile/use-profile';
 import { type TEventInsert, insertEvent } from '@/entities/schedule/shedule-event-service';
+import { toHHMMSS } from '@/features/modals/schedule/format-hour-minutes';
+import Form from '@/widgets/form/Form';
 
 interface Props {
 	close: () => void;

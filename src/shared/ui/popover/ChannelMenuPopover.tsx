@@ -4,7 +4,7 @@ import { SquarePen, SquarePlus, SquareX, Trash } from 'lucide-react';
 import { useModalStore } from '@/shared/store/modals-store';
 import { BtnCopyName } from '@/shared/ui/buttons/BtnCopyName';
 
-import type { TChannelRow } from '../../../../widgets/channels/channel.types';
+import type { TChannelRow } from '@/widgets/channels/channel.types';
 
 import { useProfile } from '@/entities/profile/use-profile';
 

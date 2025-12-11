@@ -19,7 +19,7 @@ import {
 	SelectValue,
 } from '@/shared/ui/select';
 
-import NoticeList from './NoticeList';
+import NoticeList from '../widgets/notification/NoticeList';
 import { useNotices } from '@/entities/notice/use-notices';
 
 export default function NotificationClient() {

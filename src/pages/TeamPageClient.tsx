@@ -8,8 +8,9 @@ import { Title } from '@/shared/ui/Title';
 import { Tabs, TabsList, TabsTrigger } from '@/shared/ui/animate-ui/radix/tabs';
 import Textarea from '@/shared/ui/fields/Textarea';
 
-import TeamTask from './TeamTask';
-import TeamTaskPanel from './TeamTaskPanel';
+import TeamTask from '../widgets/team/TeamTask';
+import TeamTaskPanel from '../widgets/team/TeamTaskPanel';
+
 import { getAllProfile } from '@/entities/profile/api/profile-client-service';
 import { useProfile } from '@/entities/profile/use-profile';
 import { useAllTaskWithoutFilter } from '@/entities/team/use-tasks-without-filter';

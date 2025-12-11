@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { MessagesClient } from '../../../widgets/components/pages/messages/MessagesClient';
+import { MessagesClient } from '@/pages/MessagesClient';
 
 export const metadata: Metadata = {
 	title: 'Messages',

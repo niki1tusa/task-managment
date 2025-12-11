@@ -2,10 +2,9 @@ import { useRouter } from 'next/navigation';
 
 import { PUBLIC_PAGES } from '@/shared/config/public-page-config';
 import { createClient } from '@/shared/lib/supabase/client';
+import { Title } from '@/shared/ui/Title';
 import { AnimateIcon } from '@/shared/ui/animate-ui/icons/icon';
-
-import { LogOut } from '../animate-ui/icons/log-out';
-import { Title } from '../ui/Title';
+import { LogOut } from '@/shared/ui/animate-ui/icons/log-out';
 
 export default function Logout() {
 	const router = useRouter();

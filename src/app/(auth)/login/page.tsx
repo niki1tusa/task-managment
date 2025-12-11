@@ -5,7 +5,7 @@ import { getServerAuth } from '@/shared/lib/supabase/get-server-auth';
 
 import AuthWrapper from '../AuthWrapper';
 
-import { LoginClient } from '@/widgets/auth/login/LoginClient';
+import { LoginClient } from '@/pages/auth/login/LoginClient';
 
 export default async function LoginPage() {
 	const user = await getServerAuth();

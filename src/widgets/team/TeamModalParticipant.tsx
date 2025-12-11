@@ -1,4 +1,4 @@
-import ProfileList from '@/components/modals/channel/profile-modal-list/ProfileList';
+import ProfileList from '@/features/messages/modals/profile-modal-list/ProfileList';
 
 import type { TProfileRow } from '@/shared/model/task-types';
 import { useTaskStore } from '@/shared/store/task-store';

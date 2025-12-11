@@ -1,6 +1,6 @@
-import type { IForm } from '@/components/ui/form/form.types';
-
 import type { TResetPasswordForm } from '@/shared/model/scheme';
+
+import type { IForm } from '@/widgets/form/form.types';
 
 export const resetPassowrdFields = [
 	{

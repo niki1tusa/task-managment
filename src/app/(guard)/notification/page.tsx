@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import NotificationClient from '../../../widgets/components/pages/notification/NotificationClient';
+import NotificationClient from '@/pages/NotificationClient';
 
 export const metadata: Metadata = {
 	title: 'Notifications',

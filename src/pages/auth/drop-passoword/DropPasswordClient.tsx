@@ -10,7 +10,7 @@ import { type TDropPasswordForm, ZDropPasswordScheme } from '@/shared/model/sche
 import { Title } from '@/shared/ui/Title';
 import BtnReturnBack from '@/shared/ui/buttons/BtnReturnBack';
 
-import Form from '../../../shared/ui/ui/form/Form';
+import Form from '@/widgets/form/Form';
 
 import { dropPasswordFields } from './drop-password-config';
 

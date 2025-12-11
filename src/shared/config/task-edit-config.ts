@@ -1,4 +1,4 @@
-import type { IForm } from '@/components/ui/form/form.types';
+import type { IForm } from "@/widgets/form/form.types";
 
 import type { TTaskCreateForm } from '@/shared/model/task-types';
 

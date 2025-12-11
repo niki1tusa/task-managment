@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
-import HomeClient from '@/widgets/home/HomeClient';
-
 import { OG_IMAGE, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/shared/constants/seo-constants';
+
+import HomeClient from '@/pages/HomeClient';
 
 export const metadata: Metadata = {
 	title: `${SITE_NAME} | Home`,

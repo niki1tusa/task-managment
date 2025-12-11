@@ -5,15 +5,15 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { GUARD_PAGES } from '@/shared/config/guard-page-config';
-import { useFormatDateForTask } from '@/shared/lib/formatDateForTask';
 import { getTaskIcon } from '@/shared/lib/getTaskIcon';
 import type { TTask } from '@/shared/model/task-types';
 import { Avatar } from '@/shared/ui/Avatar';
+import { useFormatDateForTask } from '@/shared/lib/formatDateForTask';
 
 function TimelineTask({ task }: { task: TTask }) {
 	const router = useRouter();
 	const TaskIcon = getTaskIcon(task);
-	const { start, end } = formatDateForTask(task);
+	const { start, end } = useFormatDateForTask(task);
 	return (
 		<div className='relative' onClick={() => router.push(GUARD_PAGES.TASK(task.id))}>
 			<Link

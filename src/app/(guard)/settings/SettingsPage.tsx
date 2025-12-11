@@ -7,7 +7,7 @@ import { type ChangeEvent, useEffect, useState } from 'react';
 import { type FieldNamesMarkedBoolean, type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import Form from '@/components/ui/form/Form';
+import Form from '@/widgets/form/Form';
 
 import type { TSettingsForm } from '@/shared/model/scheme';
 import Skeleton from '@/shared/ui/Skeleton';

@@ -10,7 +10,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/animate-ui/
 
 import { Avatar } from '../../../shared/ui/Avatar';
 import Skeleton from '../../../shared/ui/Skeleton';
-import MessageMenuPopover from '../../../shared/ui/ui/popover/MessageMenuPopover';
+import MessageMenuPopover from '@/shared/ui/popover/MessageMenuPopover';
 
 import { useProfile } from '@/entities/profile/use-profile';
 import type { TChatMessageRow } from '@/features/messages/model/message-types';
