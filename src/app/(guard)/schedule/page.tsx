@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 
-import CalendarApp from '../../../components/pages/schedule/Calendar';
+import CalendarApp from '../../../widgets/schedule/Calendar';
 
 
 export const metadata: Metadata = {

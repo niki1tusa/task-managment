@@ -1,4 +1,4 @@
-import { createClient } from '@/utils/supabase/client';
+import { createClient } from '@/shared/lib/supabase/client';
 
 // sing in
 export async function signInWithEmail({ email }: { email: string }) {

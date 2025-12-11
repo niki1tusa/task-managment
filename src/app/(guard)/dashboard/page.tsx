@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 
-import { DashboardClient } from '@/components/pages/dashboard/DashboardClient';
+import { DashboardClient } from '@/widgets/DashboardClient';
 
-import { fetchChartPoint } from '@/services/statistics/chart-point-server-service';
-import { fetchProjectStat } from '@/services/statistics/project-stat-server-service';
-import { getServerTodayTasks } from '@/services/tasks/task-server-service';
+import { getServerTodayTasks } from '@/entities/task/api/task-server-service';
+import { fetchChartPoint } from '@/features/statistic/api/chart-point-server-service';
+import { fetchProjectStat } from '@/features/statistic/api/project-stat-server-service';
 
 export const metadata: Metadata = {
 	title: 'Dashboard',

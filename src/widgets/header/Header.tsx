@@ -1,0 +1,29 @@
+'use client';
+
+import Link from 'next/link';
+
+import { GUARD_PAGES } from '@/shared/config/guard-page-config';
+import { Title } from '@/shared/ui/Title';
+import { Bell } from '@/shared/ui/animate-ui/icons/bell';
+import { AnimateIcon } from '@/shared/ui/animate-ui/icons/icon';
+
+import { SearchField } from './SearchField';
+
+export const Header = () => {
+	return (
+		<div className='flex flex-col items-center justify-between bg-transparent pt-4 lg:flex-row'>
+			<Title heading='page'>Dashboard</Title>
+			<div className='flex flex-col items-center gap-2 lg:flex-row'>
+				<SearchField />
+				<AnimateIcon animateOnHover>
+					<Link
+						href={GUARD_PAGES.NOTIFICATION}
+						className='bg-side dark:bg-dark shadow-default rounded-full text-center'
+					>
+						<Bell className='mx-2 my-2' />
+					</Link>
+				</AnimateIcon>
+			</div>
+		</div>
+	);
+};

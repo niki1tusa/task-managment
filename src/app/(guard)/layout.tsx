@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 
 import { Sidebar } from '@/components/sidebar/Sidebar';
 
-import { GUARD_PAGES } from '@/config/guard-page-config';
+import { GUARD_PAGES } from '@/shared/config/guard-page-config';
 
 import Chat from '@/widgets/chat/ui/Chat';
 

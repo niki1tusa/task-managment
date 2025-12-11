@@ -1,12 +1,11 @@
 import { redirect } from 'next/navigation';
 
-import { LoginClient } from '@/components/auth/login/LoginClient';
-
-import { GUARD_PAGES } from '@/config/guard-page-config';
-
-import { getServerAuth } from '@/utils/supabase/get-server-auth';
+import { GUARD_PAGES } from '@/shared/config/guard-page-config';
+import { getServerAuth } from '@/shared/lib/supabase/get-server-auth';
 
 import AuthWrapper from '../AuthWrapper';
+
+import { LoginClient } from '@/widgets/auth/login/LoginClient';
 
 export default async function LoginPage() {
 	const user = await getServerAuth();

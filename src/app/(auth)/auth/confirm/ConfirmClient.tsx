@@ -3,11 +3,9 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
-
-
-import { createClient } from '@/utils/supabase/client';
-import { PUBLIC_PAGES } from '@/config/public-page-config';
-import { GUARD_PAGES } from '@/config/guard-page-config';
+import { GUARD_PAGES } from '@/shared/config/guard-page-config';
+import { PUBLIC_PAGES } from '@/shared/config/public-page-config';
+import { createClient } from '@/shared/lib/supabase/client';
 
 export function ConfirmClient() {
 	const router = useRouter();
@@ -30,5 +28,5 @@ export function ConfirmClient() {
 
 		verifyToken();
 	}, [params, router]);
-	return <p className='text-white p-2'>Verify is your email... please wait.</p>;
+	return <p className='p-2 text-white'>Verify is your email... please wait.</p>;
 }

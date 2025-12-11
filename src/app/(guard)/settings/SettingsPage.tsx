@@ -7,22 +7,21 @@ import { type ChangeEvent, useEffect, useState } from 'react';
 import { type FieldNamesMarkedBoolean, type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import Skeleton from '@/components/ui/Skeleton';
-import { Title } from '@/components/ui/Title';
 import Form from '@/components/ui/form/Form';
 
-import type { TSettingsForm } from '@/shared/types/scheme';
-import { Button } from '@/shared/ui/button/Button';
-
-import { useProfile } from '@/hooks/use-profile';
+import type { TSettingsForm } from '@/shared/model/scheme';
+import Skeleton from '@/shared/ui/Skeleton';
+import { Title } from '@/shared/ui/Title';
+import { Button } from '@/shared/ui/buttons/Button';
 
 import { SettingFields } from './settings-form.data';
-import { updateProfile } from '@/services/profile/profile-client-service';
+import { updateProfile } from '@/entities/profile/api/profile-client-service';
+import { useProfile } from '@/entities/profile/use-profile';
 import {
 	deleteAvatarPathInProfile,
 	updateAvatarPathInProfile,
 	uploadAvatar,
-} from '@/services/settings-service';
+} from '@/entities/settings/settings-service';
 
 export default function SettingsClientPage() {
 	const form = useForm<TSettingsForm>();

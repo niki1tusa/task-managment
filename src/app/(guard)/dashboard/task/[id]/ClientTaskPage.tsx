@@ -1,11 +1,9 @@
-import { Avatar } from '@/components/ui/Avatar';
-import { Title } from '@/components/ui/Title';
-
-import type { TSubTaskRow } from '@/shared/types/subtask-types';
-import type { TTask } from '@/shared/types/task-types';
-import BtnReturnBack from '@/shared/ui/button/BtnReturnBack';
-
-import { type IconName, MODAL_ICON } from '@/config/icon-config';
+import { type IconName, MODAL_ICON } from '@/shared/config/icon-config';
+import type { TSubTaskRow } from '@/shared/model/subtask-types';
+import type { TTask } from '@/shared/model/task-types';
+import { Avatar } from '@/shared/ui/Avatar';
+import { Title } from '@/shared/ui/Title';
+import BtnReturnBack from '@/shared/ui/buttons/BtnReturnBack';
 
 interface Props {
 	id: string;

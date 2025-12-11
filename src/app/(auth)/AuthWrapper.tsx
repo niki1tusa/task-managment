@@ -1,7 +1,8 @@
-'use client'
+'use client';
+
 import Image from 'next/image';
 
-import { BubbleBackground } from '@/components/animate-ui/backgrounds/bubble';
+import { BubbleBackground } from '@/shared/ui/animate-ui/backgrounds/bubble';
 
 // This is not a layout, because the layout will be displayed until the authorization check is completed.
 export default function AuthWrapper({ children }: { children: React.ReactNode }) {
@@ -12,7 +13,7 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
 				<div className='flex flex-col gap-5 p-10 shadow'>{children}</div>
 				<div className='relative hidden lg:block xl:min-h-[600px]'>
 					<Image
-						src={window.innerWidth > 1700 ? '/chat.png': '/chat2.png'}
+						src={window.innerWidth > 1700 ? '/chat.png' : '/chat2.png'}
 						alt='chat'
 						sizes='(max-width: 1024px) 0px, 50vw'
 						fill

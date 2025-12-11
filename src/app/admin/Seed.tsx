@@ -1,6 +1,5 @@
-import { Button } from '@/shared/ui/button/Button';
-
-import { seedUsers } from '@/utils/seeder';
+import { seedUsers } from '@/shared/lib/seeder';
+import { Button } from '@/shared/ui/buttons/Button';
 
 export function Seed() {
 	return (

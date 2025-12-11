@@ -6,26 +6,22 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useMemo, useRef, useState } from 'react';
 
-import { PopoverAnchor } from '@/components/animate-ui/primitives/radix/popover';
-import { Popover, PopoverContent } from '@/components/animate-ui/radix/popover';
-import { Avatar } from '@/components/ui/Avatar';
-
+import { GUARD_PAGES } from '@/shared/config/guard-page-config';
 import { GENERAL_CHAT_ID, GROUP_GAP_MINUTES } from '@/shared/constants/constants';
+import { useClickOutside } from '@/shared/lib/use-onclick-outside';
+import { useChannelStore } from '@/shared/store/channel-store';
+import { Avatar } from '@/shared/ui/Avatar';
+import { PopoverAnchor } from '@/shared/ui/animate-ui/primitives/radix/popover';
+import { Popover, PopoverContent } from '@/shared/ui/animate-ui/radix/popover';
 
-import { GUARD_PAGES } from '@/config/guard-page-config';
+import { minsDiff } from '@/widgets/chat/model/minsDifferent';
 
-import { useChannelStore } from '@/store/channel-store';
-
-import { useClickOutside } from '@/hooks/use-onclick-outside';
-import { useProfile } from '@/hooks/use-profile';
-
-import { minsDiff } from '@/utils/minsDifferent';
-
-import Textarea from '../../../components/ui/field/Textarea';
-import SearchMessageMenuPopover from '../../../components/ui/popover/SearchMessageMenuPopover';
-import { Button } from '../../../shared/ui/button/Button';
+import { Button } from '@/shared/ui/buttons/Button';
+import Textarea from '@/shared/ui/fields/Textarea';
+import SearchMessageMenuPopover from '@/shared/ui/popover/SearchMessageMenuPopover';
 
 import ChatMessage from './ChatMessage';
+import { useProfile } from '@/entities/profile/use-profile';
 import { useChat } from '@/widgets/chat/model/use-chat';
 import ChatInput from '@/widgets/chat/ui/ChatInput';
 

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import TeamPageClient from '../../../components/pages/team/TeamPageClient';
+import TeamPageClient from '../../../widgets/team/TeamPageClient';
 
 export const metadata: Metadata = {
 	title: 'Team',

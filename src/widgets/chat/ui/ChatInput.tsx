@@ -4,8 +4,8 @@ import clsx from 'clsx';
 import { Paperclip } from 'lucide-react';
 import { memo, useState } from 'react';
 
-import { AnimateIcon } from '../../../components/animate-ui/icons/icon';
-import { SendIcon } from '../../../components/animate-ui/icons/send';
+import { AnimateIcon } from '../../../shared/ui/animate-ui/icons/icon';
+import { SendIcon } from '../../../shared/ui/animate-ui/icons/send';
 
 const ChatInput = ({ handleSend }: { handleSend: (text: string) => Promise<void> }) => {
 	const [text, setText] = useState('');

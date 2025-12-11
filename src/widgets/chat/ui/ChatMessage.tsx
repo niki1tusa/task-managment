@@ -5,17 +5,15 @@ import { format, parseISO } from 'date-fns';
 import { usePathname } from 'next/navigation';
 import { forwardRef, memo, useCallback, useEffect, useMemo, useState } from 'react';
 
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/animate-ui/base/popover';
+import { GUARD_PAGES } from '@/shared/config/guard-page-config';
+import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/animate-ui/base/popover';
 
-import type { TChatMessageRow } from '@/shared/types/message-types';
+import { Avatar } from '../../../shared/ui/Avatar';
+import Skeleton from '../../../shared/ui/Skeleton';
+import MessageMenuPopover from '../../../shared/ui/ui/popover/MessageMenuPopover';
 
-import { GUARD_PAGES } from '@/config/guard-page-config';
-
-import { useProfile } from '@/hooks/use-profile';
-
-import { Avatar } from '../../../components/ui/Avatar';
-import Skeleton from '../../../components/ui/Skeleton';
-import MessageMenuPopover from '../../../components/ui/popover/MessageMenuPopover';
+import { useProfile } from '@/entities/profile/use-profile';
+import type { TChatMessageRow } from '@/features/messages/model/message-types';
 
 interface Props {
 	message: TChatMessageRow;

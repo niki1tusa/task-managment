@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 
-import { createClient } from '@/utils/supabase/client';
+import { createClient } from '@/shared/lib/supabase/client';
 
 export default function CallbackClient() {
 	const router = useRouter();
@@ -36,5 +36,5 @@ export default function CallbackClient() {
 		})();
 	}, [params, router]);
 
-	return <p className='text-white p-2'>Signing in…</p>;
+	return <p className='p-2 text-white'>Signing in…</p>;
 }
