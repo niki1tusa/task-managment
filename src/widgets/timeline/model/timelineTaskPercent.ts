@@ -1,10 +1,10 @@
-import type { TTask } from '@/shared/model/task-types';
+import type { Task } from '@/shared/model/task-types';
 
 function timeStrToMinutes(t: string) {
 	const [h, m, s] = t.split(':').map(Number);
 	return h * 60 + m + (s ? Math.floor(s / 60) : 0);
 }
-export function timelineTaskPercent(task: TTask) {
+export function timelineTaskPercent(task: Task) {
 	const WINDOW_START_MIN = 9 * 60; // 09:00
 	const WINDOW_END_MIN = 17 * 60; // 17:00
 	const WINDOW_SPAN_MIN = WINDOW_END_MIN - WINDOW_START_MIN; // 480

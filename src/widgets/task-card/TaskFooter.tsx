@@ -8,12 +8,12 @@ import {
 	Trash2,
 } from 'lucide-react';
 
-import type { TTask } from '@/shared/model/task-types';
+import type { Task } from '@/shared/model/task-types';
 import { useModalStore } from '@/shared/store/modals-store';
 import { Brush } from '@/shared/ui/animate-ui/icons/brush';
 import { AnimateIcon } from '@/shared/ui/animate-ui/icons/icon';
 
-export const Footer = ({ task }: { task: TTask }) => {
+export const TaskFooter = ({ task }: { task: Task }) => {
 	const { open } = useModalStore();
 	return (
 		<div className='mx-5 flex items-center justify-between pb-2'>

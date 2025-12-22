@@ -13,7 +13,7 @@ export const Card = ({ icon, number, label, bg_color }: TGetProjectStatResponse[
 	return (
 		<div
 			className={clsx(
-				`text-dark shadow-default dark:bg-side flex items-center justify-between rounded-2xl border border-white px-10 py-7 dark:border-none dark:text-white`,
+				`text-dark shadow-default dark:bg-side flex items-center justify-between rounded-2xl px-10 py-7 dark:border-none dark:text-white`,
 				bgClass
 			)}
 		>

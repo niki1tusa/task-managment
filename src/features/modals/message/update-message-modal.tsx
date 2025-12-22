@@ -38,7 +38,7 @@ export default function UpdateMessage({ close, message }: Props) {
 				<Textarea value={value} setValue={setValue} className='h-auto' isStretch={true} />
 
 				<div className='flex gap-4 py-4'>
-					<Button onClick={() => mutate({ id: message.id, text: value })} disable={isPending}>
+					<Button onClick={() => mutate({ id: message.id, text: value })} disabled={isPending}>
 						Save
 					</Button>
 					<Button onClick={close}>Close</Button>

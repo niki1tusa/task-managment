@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import { SquareMinus, SquarePlus } from 'lucide-react';
 
-import type { TTask } from '@/shared/model/task-types';
+import type { Task } from '@/shared/model/task-types';
 import { useModalStore } from '@/shared/store/modals-store';
 import { useSubTaskStore } from '@/shared/store/subtask-store';
 import { Title } from '@/shared/ui/Title';
@@ -12,7 +12,7 @@ import { Checkbox } from '@/shared/ui/animate-ui/base/checkbox';
 import { getAllProfile } from '@/entities/profile/api/profile-client-service';
 import { useProfile } from '@/entities/profile/use-profile';
 
-export default function TeamSubtaskPanel({ activeTask }: { activeTask: TTask }) {
+export default function TeamSubtaskPanel({ activeTask }: { activeTask: Task }) {
 	const { profile } = useProfile();
 	const { setActiveSubTask, activeSubTask } = useSubTaskStore();
 	const { data } = useQuery({

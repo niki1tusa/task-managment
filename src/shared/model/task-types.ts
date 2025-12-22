@@ -1,20 +1,19 @@
 import type { Database } from './db-types';
-import type { TSubTaskRow } from './subtask-types';
+import type { SubTask } from './subtask-types';
 import type { getServerAllTask } from '@/entities/task/api/task-server-service';
 
-export type TTaskRow = Database['public']['Tables']['task']['Row'];
-export type TProfileRow = Database['public']['Tables']['profile']['Row'];
+export type ProfileRow = Database['public']['Tables']['profile']['Row'];
 
-export type TParticipants = Database['public']['Tables']['task_participants']['Row'] & {
-	profile: TProfileRow;
+export type Participants = Database['public']['Tables']['task_participants']['Row'] & {
+	profile: ProfileRow;
 };
 
-export type TTask = Database['public']['Tables']['task']['Row'] & {
-	sub_task: TSubTaskRow[];
-	task_participants: TParticipants[];
+export type Task = Database['public']['Tables']['task']['Row'] & {
+	sub_task: SubTask[];
+	task_participants: Participants[];
 };
-export type TTaskCreateForm = Database['public']['Tables']['task']['Insert'];
-export type TTaskEditForm = Database['public']['Tables']['task']['Update'];
+export type TaskCreateForm = Database['public']['Tables']['task']['Insert'];
+export type TaskEditForm = Database['public']['Tables']['task']['Update'];
 
 export type TGetTasksResponse = NonNullable<Awaited<ReturnType<typeof getServerAllTask>>['data']>;
 export type TGetTodayTasksResponse = NonNullable<

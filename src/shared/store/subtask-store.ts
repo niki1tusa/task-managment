@@ -1,10 +1,10 @@
 import { create } from 'zustand';
 
-import type { TSubTaskRow } from '@/shared/model/subtask-types';
+import type { SubTask } from '@/shared/model/subtask-types';
 
 interface SubTaskState {
-	activeSubTask: TSubTaskRow | null;
-	setActiveSubTask: (subTask: TSubTaskRow | null) => void;
+	activeSubTask: SubTask | null;
+	setActiveSubTask: (subTask: SubTask | null) => void;
 }
 
 export const useSubTaskStore = create<SubTaskState>(set => ({

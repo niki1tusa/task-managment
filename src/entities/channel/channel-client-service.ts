@@ -1,5 +1,5 @@
 import { createClient } from '@/shared/lib/supabase/client';
-import type { TProfileRow } from '@/shared/model/task-types';
+import type { ProfileRow } from '@/shared/model/task-types';
 
 import type {
 	TChannelInsert,
@@ -142,7 +142,7 @@ export async function createClientChannelGroup(
 // direct
 export async function createClientChannelDirect(
 	channelFields: TChannelInsert,
-	profile: TProfileRow
+	profile: ProfileRow
 ) {
 	const client = createClient();
 	// получаем текущего пользователя

@@ -4,8 +4,8 @@ import { createClient } from '@/shared/lib/supabase/client';
 import type {
 	TByAscOrDesc,
 	TStatus,
-	TTaskCreateForm,
-	TTaskEditForm,
+	TaskCreateForm,
+	TaskEditForm,
 } from '@/shared/model/task-types';
 
 import { filterStatusTasks } from '@/entities/task/filter-status-tasks';
@@ -51,7 +51,7 @@ export async function getClientTaskById(id: string) {
 	return data;
 }
 // create
-export async function createClientTask(task: TTaskCreateForm) {
+export async function createClientTask(task: TaskCreateForm) {
 	const client = createClient();
 	const {
 		data: { user },
@@ -76,7 +76,7 @@ export async function createClientTask(task: TTaskCreateForm) {
 }
 
 // update
-export async function updateClientTask(id: string, task: TTaskEditForm) {
+export async function updateClientTask(id: string, task: TaskEditForm) {
 	const { data, error } = await createClient()
 		.from('task')
 		.update(task)

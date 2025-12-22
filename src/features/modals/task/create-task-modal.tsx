@@ -4,24 +4,22 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import Form from '@/widgets/form/Form';
-
 import type { TSubTaskInsert } from '@/shared/model/subtask-types';
-import type { TTaskCreateForm } from '@/shared/model/task-types';
+import type { TaskCreateForm } from '@/shared/model/task-types';
 import Modal from '@/shared/ui/modal/Modal';
-
-import { prepareTaskPayload } from '@/features/modals/task/format-date-createTask';
 
 import { TASK_EDIT_FIELDS } from '../../../shared/config/task-edit-config';
 
 import { createClientSubTask } from '@/entities/task/api/subtask-service';
 import { createClientTask } from '@/entities/task/api/task-client-service';
+import { prepareTaskPayload } from '@/features/modals/task/format-date-createTask';
+import Form from '@/widgets/form/Form';
 
 export const CreateTaskModal = ({ close }: { close: () => void }) => {
 	const queryClient = useQueryClient();
 	const { mutateAsync: createTask } = useMutation({
 		mutationKey: ['tasks'],
-		mutationFn: (payload: TTaskCreateForm) => createClientTask(payload),
+		mutationFn: (payload: TaskCreateForm) => createClientTask(payload),
 		onError: err => {
 			console.log(err);
 			toast.error('Channel is error!');
@@ -34,7 +32,7 @@ export const CreateTaskModal = ({ close }: { close: () => void }) => {
 			createClientSubTask(id, payload),
 	});
 
-	const onSubmit: SubmitHandler<TTaskCreateForm> = async data => {
+	const onSubmit: SubmitHandler<TaskCreateForm> = async data => {
 		// fnc payload -> обработанная date:
 		const taskPayload = prepareTaskPayload(data);
 
@@ -75,11 +73,11 @@ export const CreateTaskModal = ({ close }: { close: () => void }) => {
 		register,
 		formState: { errors },
 		handleSubmit,
-	} = useForm<TTaskCreateForm>();
+	} = useForm<TaskCreateForm>();
 
 	return (
 		<Modal title='Add Task' close={close}>
-			<Form<TTaskCreateForm>
+			<Form<TaskCreateForm>
 				setValue={setValue}
 				watch={watch}
 				control={control}

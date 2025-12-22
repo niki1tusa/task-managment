@@ -1,6 +1,6 @@
-import type { IForm } from "@/widgets/form/form.types";
+import type { TaskCreateForm } from '@/shared/model/task-types';
 
-import type { TTaskCreateForm } from '@/shared/model/task-types';
+import type { IForm } from '@/widgets/form/form.types';
 
 export const TASK_EDIT_FIELDS = [
 	{
@@ -25,4 +25,4 @@ export const TASK_EDIT_FIELDS = [
 			fieldName: 'icon',
 		},
 	},
-] satisfies IForm<TTaskCreateForm>['formElement'];
+] satisfies IForm<TaskCreateForm>['formElement'];

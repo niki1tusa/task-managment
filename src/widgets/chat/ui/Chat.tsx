@@ -24,6 +24,7 @@ import { minsDiff } from '@/widgets/chat/model/minsDifferent';
 import { useChat } from '@/widgets/chat/model/use-chat';
 import ChatInput from '@/widgets/chat/ui/ChatInput';
 
+// TODO: сообщения не отправляються и появляються новые только после перезагрузки старницы (или это плохой интернет)
 export default function Chat() {
 	// store
 	const { activeChannel } = useChannelStore();
@@ -105,10 +106,10 @@ export default function Chat() {
 			)}
 			{/* chat overlay */}
 			{!isDashboard && (
-				<div className='from-primary/20 dark:from-gray/5 pointer-events-none absolute top-27.5 left-0 z-50 h-[40%] w-full bg-gradient-to-b to-transparent' />
+				<div className='from-primary/20 dark:from-gray/5 pointer-events-none absolute top-27.5 left-0 z-50 h-[40%] w-full bg-linear-to-b to-transparent' />
 			)}
 			{/* User info */}
-			<div className='bg-primary/40 dark:bg-side border-gray/20 flex h-27.5 w-full flex-shrink-0 items-center justify-between border-b-2 px-10 font-semibold shadow-sm'>
+			<div className='bg-primary/40 dark:bg-side border-gray/20 flex h-27.5 w-full shrink-0 items-center justify-between border-b-2 px-10 font-semibold shadow-sm'>
 				<div className='flex items-center gap-3'>
 					<div className='relative'>
 						<Avatar img={profile?.avatar_path || ''} />
@@ -149,7 +150,7 @@ export default function Chat() {
 								onOpenAutoFocus={e => e.preventDefault()}
 								onCloseAutoFocus={e => e.preventDefault()}
 								onFocusOutside={e => e.preventDefault()}
-								className='bg-background shadow-default w-[240px] rounded-sm border p-3 dark:bg-white dark:text-black'
+								className='bg-background shadow-default w-60 rounded-sm border p-3 dark:bg-white dark:text-black'
 							>
 								<SearchMessageMenuPopover
 									count={filterMessages.length}
@@ -185,7 +186,7 @@ export default function Chat() {
 				)}
 				{/* Fade overlay for dashboard */}
 				{isDashboard && (
-					<div className='from-primary pointer-events-none absolute top-0 left-0 z-40 h-full w-full bg-gradient-to-b to-transparent dark:from-[#6366F1]' />
+					<div className='from-primary pointer-events-none absolute top-0 left-0 z-40 h-full w-full bg-linear-to-b to-transparent dark:from-[#6366F1]' />
 				)}
 
 				<div className={clsx('flex flex-col', isDashboard && 'h-[365px] overflow-y-hidden')}>

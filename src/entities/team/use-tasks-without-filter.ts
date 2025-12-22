@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import type { TTask } from '@/shared/model/task-types';
+import type { Task } from '@/shared/model/task-types';
 
 import { getClientAllTaskWithoutSorting } from '@/entities/task/api/task-client-service';
 
@@ -9,7 +9,7 @@ export function useAllTaskWithoutFilter() {
 		data: tasks,
 		isPending,
 		isFetching,
-	} = useQuery<TTask[], Error>({
+	} = useQuery<Task[], Error>({
 		queryKey: ['tasks'],
 		queryFn: () => getClientAllTaskWithoutSorting(),
 		placeholderData: prev => prev,

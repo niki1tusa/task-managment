@@ -28,7 +28,7 @@ export function ProjectStatisticsChart({
 	});
 
 	return (
-		<div className='text-foreground bg-side z-10 rounded-2xl border border-white shadow shadow-neutral-500 dark:border-none'>
+		<div className='text-foreground bg-side z-10 rounded-2xl shadow-default'>
 			<ProjectChartHeader onChangeRange={setSelectedRange} selectedRange={selectedRange} />
 			<ProjectChart data={data} />
 		</div>

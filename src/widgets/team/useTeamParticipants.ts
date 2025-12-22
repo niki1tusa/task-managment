@@ -1,16 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 
-import type { TProfileRow } from '@/shared/model/task-types';
+import type { ProfileRow } from '@/shared/model/task-types';
 import { useTaskStore } from '@/shared/store/task-store';
 
 import { getAllProfile } from '@/entities/profile/api/profile-client-service';
 
-export function useTeamParticipants(profile: TProfileRow) {
+export function useTeamParticipants(profile: ProfileRow) {
 	const { activeTask } = useTaskStore();
 	const [selectProfileIds, setSelectProfileIds] = useState<string[]>([]);
 	// all profiles
-	const { data: profilesData } = useQuery<TProfileRow[]>({
+	const { data: profilesData } = useQuery<ProfileRow[]>({
 		queryKey: ['profiles'],
 		queryFn: () => getAllProfile(),
 	});

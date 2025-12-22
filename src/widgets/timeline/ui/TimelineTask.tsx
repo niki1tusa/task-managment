@@ -5,12 +5,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { GUARD_PAGES } from '@/shared/config/guard-page-config';
-import { getTaskIcon } from '@/shared/lib/getTaskIcon';
-import type { TTask } from '@/shared/model/task-types';
-import { Avatar } from '@/shared/ui/Avatar';
 import { useFormatDateForTask } from '@/shared/lib/formatDateForTask';
+import { getTaskIcon } from '@/shared/lib/getTaskIcon';
+import type { Task } from '@/shared/model/task-types';
+import { Avatar } from '@/shared/ui/Avatar';
 
-function TimelineTask({ task }: { task: TTask }) {
+function TimelineTask({ task }: { task: Task }) {
 	const router = useRouter();
 	const TaskIcon = getTaskIcon(task);
 	const { start, end } = useFormatDateForTask(task);

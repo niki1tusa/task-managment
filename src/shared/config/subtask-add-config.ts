@@ -1,4 +1,4 @@
-import type { TSubTaskRowForm } from '@/shared/model/scheme';
+import type { SubTaskForm } from '@/shared/model/scheme';
 
 import type { IForm } from '@/widgets/form/form.types';
 
@@ -12,4 +12,4 @@ export const SUB_TASK_ADD_FIELDS = [
 			type: 'text',
 		},
 	},
-] satisfies IForm<TSubTaskRowForm>['formElement'];
+] satisfies IForm<SubTaskForm>['formElement'];

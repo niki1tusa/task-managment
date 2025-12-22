@@ -29,7 +29,7 @@ export default function DeleteMessage({ close, id }: Props) {
 
 	return (
 		<Modal close={close} title={`Do you really want to delete this message?`}>
-			<Button onClick={() => mutate(id)} disable={isPending}>
+			<Button onClick={() => mutate(id)} disabled={isPending}>
 				Yes
 			</Button>
 			<Button onClick={close}>No</Button>

@@ -3,17 +3,17 @@
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { GUARD_PAGES } from '@/shared/config/guard-page-config';
-import type { TTask } from '@/shared/model/task-types';
+import type { Task as TaskType } from '@/shared/model/task-types';
 
-import { Footer } from './Footer';
-import { Header } from './Header';
-import { StatusBar } from './StatusBar';
-import { useTask } from './use-task';
+import { TaskFooter } from './TaskFooter';
+import { TaskHeader } from './TaskHeader';
+import TaskStatusBar from './TaskStatusBar';
 
-export const Task = ({ task }: { task: TTask }) => {
-	const { router, status } = useTask();
+export const Task = ({ task }: { task: TaskType }) => {
+	const router = useRouter();
 	return (
 		<div
 			style={{ perspective: 900 }}
@@ -38,11 +38,11 @@ export const Task = ({ task }: { task: TTask }) => {
 					'bg-task-base 2xl:text-md xl:[290px] transition-color grid grid-cols-1 grid-rows-3 gap-3 rounded-3xl border border-white text-sm xl:h-[241px] dark:border-none'
 				)}
 			>
-				<Header task={task} />
+				<TaskHeader task={task} />
 
-				<StatusBar status={status(task)} />
+				<TaskStatusBar task={task} />
 
-				<Footer task={task} />
+				<TaskFooter task={task} />
 			</motion.div>
 		</div>
 	);

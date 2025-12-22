@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import { memo } from 'react';
 
-import type { TTask } from '@/shared/model/task-types';
+import type { Task } from '@/shared/model/task-types';
 import { Avatar } from '@/shared/ui/Avatar';
 import { Title } from '@/shared/ui/Title';
 
@@ -13,7 +13,7 @@ import TimelineTask from './TimelineTask';
 
 const HOURS = Array.from({ length: 9 }, (_, i) => i + 9);
 
-function Timeline({ todayTasks }: { todayTasks: TTask[] }) {
+function Timeline({ todayTasks }: { todayTasks: Task[] }) {
 	const profiles = [
 		...new Map(
 			todayTasks

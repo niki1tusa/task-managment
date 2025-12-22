@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown, ChevronUp, SquarePlus } from 'lucide-react';
 import { useState } from 'react';
 
-import type { TProfileRow } from '@/shared/model/task-types';
+import type { ProfileRow } from '@/shared/model/task-types';
 import { useModalStore } from '@/shared/store/modals-store';
 import { useTaskStore } from '@/shared/store/task-store';
 import { Title } from '@/shared/ui/Title';
@@ -12,7 +12,7 @@ import TeamTaskPanelList from './TeamTaskPanelList';
 
 interface Props {
 	isPending: boolean;
-	taskOwner: TProfileRow;
+	taskOwner: ProfileRow;
 }
 
 export default function TeamTaskPanel({ taskOwner, isPending }: Props) {

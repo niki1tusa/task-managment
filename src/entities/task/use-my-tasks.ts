@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import type { TByAscOrDesc, TStatus, TTask } from '@/shared/model/task-types';
+import type { TByAscOrDesc, TStatus, Task } from '@/shared/model/task-types';
 
 import { getClientAllTask } from '@/entities/task/api/task-client-service';
 
@@ -13,7 +13,7 @@ export function useMyTasks({ select, sortOrder }: Props = {}) {
 		data: tasks,
 		isPending,
 		isFetching,
-	} = useQuery<TTask[], Error>({
+	} = useQuery<Task[], Error>({
 		queryKey: ['tasks', select, sortOrder],
 		queryFn: () => getClientAllTask({ status: select, sortByDue: sortOrder }),
 		placeholderData: prev => prev,

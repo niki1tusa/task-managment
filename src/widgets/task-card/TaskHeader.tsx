@@ -4,13 +4,13 @@ import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 
 import { GUARD_PAGES } from '@/shared/config/guard-page-config';
+import { displayDueFnc } from '@/shared/lib/displayDue';
 import { getTaskIcon } from '@/shared/lib/getTaskIcon';
-import type { TTask } from '@/shared/model/task-types';
+import type { Task } from '@/shared/model/task-types';
 import { Avatar } from '@/shared/ui/Avatar';
-import { useFormatDateForTask } from '@/shared/lib/formatDateForTask';
 
-export const Header = ({ task }: { task: TTask }) => {
-	const { displayDue } = useFormatDateForTask(task);
+export const TaskHeader = ({ task }: { task: Task }) => {
+	const displayDue = displayDueFnc(task);
 	const TaskIcon = getTaskIcon(task);
 	const pathname = usePathname();
 	const isTeamPage = pathname === GUARD_PAGES.TEAM;
@@ -21,7 +21,7 @@ export const Header = ({ task }: { task: TTask }) => {
 					<TaskIcon color='#725cee' />
 				</div>
 				<div className={clsx(isTeamPage ? 'flex items-center' : 'grid grid-rows-2')}>
-					<span className='mb-1 flex items-center leading-none font-medium break-words'>
+					<span className='mb-1 flex items-center leading-none font-medium wrap-break-word'>
 						{task.title}
 					</span>
 					{!isTeamPage && <time className='text-gray mt-1'>{displayDue}</time>}

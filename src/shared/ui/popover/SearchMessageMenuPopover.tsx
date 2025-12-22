@@ -1,6 +1,7 @@
 'use client';
 
-import { ChevronDown, ChevronUp, CornerUpRight, SearchCheck, SquareX } from 'lucide-react';
+import { ChevronDown, ChevronUp, SearchCheck, SquareX } from 'lucide-react';
+import { useState } from 'react';
 
 interface Props {
 	onClose: () => void;
@@ -8,6 +9,10 @@ interface Props {
 	messagesRefs: Record<string, HTMLDivElement | null>;
 }
 export default function SearchMessageMenuPopover({ count, onClose, messagesRefs }: Props) {
+	const [countRef, setCountRef] = useState(0);
+	const handler = () => {
+		messagesRefs;
+	};
 	return (
 		<div className='flex flex-col gap-2 rounded-sm p-3 text-base'>
 			{/* header */}
@@ -23,7 +28,6 @@ export default function SearchMessageMenuPopover({ count, onClose, messagesRefs 
 
 			<div className='w-full border-b' />
 			<div className='flex items-center gap-2 p-1'>
-				tit
 				<div className='flex flex-col'>
 					<button
 						type='button'

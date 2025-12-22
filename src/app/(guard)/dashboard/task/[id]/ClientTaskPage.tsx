@@ -1,30 +1,21 @@
 import { type IconName, MODAL_ICON } from '@/shared/config/icon-config';
-import type { TSubTaskRow } from '@/shared/model/subtask-types';
-import type { TTask } from '@/shared/model/task-types';
+import { displayDueFnc } from '@/shared/lib/displayDue';
+import type { Task } from '@/shared/model/task-types';
 import { Avatar } from '@/shared/ui/Avatar';
 import { Title } from '@/shared/ui/Title';
 import BtnReturnBack from '@/shared/ui/buttons/BtnReturnBack';
 
 interface Props {
 	id: string;
-	tasks: TTask[];
+	tasks: Task[];
 }
 export default function ClientTaskPage({ id, tasks }: Props) {
 	const data = tasks;
-	const findTask: TTask = data.find(task => task.id === id)!;
+	const findTask: Task = data.find(task => task.id === id)!;
 	const TaskIcon = MODAL_ICON[findTask.icon as IconName];
-	const date = Math.ceil(
-		(new Date(findTask.due_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24)
-	);
 
-	const displayDue =
-		date === 0
-			? 'Today'
-			: date < 0
-				? findTask.sub_task.every((subTask: TSubTaskRow) => subTask.is_completed)
-					? 'Done'
-					: 'Overdue'
-				: ` ${date} days`;
+	const displayDue = displayDueFnc(findTask);
+
 	return (
 		<div className='space-y-6 px-7 py-3.5'>
 			<BtnReturnBack text='Back to Dashboard' />
@@ -71,9 +62,7 @@ export default function ClientTaskPage({ id, tasks }: Props) {
 					<span className='font-medium text-gray-500'>Status task:</span>
 					<span
 						className={`ml-2 rounded-full px-3 py-1 text-xs font-medium ${
-							displayDue.includes('Overdue')
-								? 'bg-red-100 text-red-700'
-								: 'bg-green-100 text-green-700'
+							displayDue === 'Overdue' ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'
 						}`}
 					>
 						{displayDue}

@@ -35,7 +35,7 @@ export default function RenameChannel({ close, activeChannel }: Props) {
 			<div className='flex flex-col gap-5'>
 				<Textarea value={value} setValue={setValue} />
 				<div className='flex gap-4'>
-					<Button onClick={() => mutate({ ...activeChannel, name: value })} disable={isPending}>
+					<Button onClick={() => mutate({ ...activeChannel, name: value })} disabled={isPending}>
 						Save
 					</Button>
 					<Button onClick={close}>No</Button>

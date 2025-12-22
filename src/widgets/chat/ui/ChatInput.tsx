@@ -29,7 +29,7 @@ const ChatInput = ({ handleSend }: { handleSend: (text: string) => Promise<void>
 				value={text}
 				onChange={e => setText(e.target.value)}
 				className={clsx(
-					'shadow-default flex-1 resize-none rounded-lg bg-gray-50 px-3 py-2 text-sm outline-none dark:bg-gray-700',
+					'shadow-default w-full resize-none rounded-lg bg-gray-50 px-3 py-2 text-sm outline-none dark:bg-gray-700',
 					'placeholder-gray-400 dark:placeholder-gray-500',
 					'focus:shadow-primary/80 transition-all focus:shadow'
 				)}
@@ -45,13 +45,13 @@ const ChatInput = ({ handleSend }: { handleSend: (text: string) => Promise<void>
 				<button
 					disabled={!text.trim()}
 					onClick={sendMessage}
-					className={`shadow-default relative h-10 w-10 rounded-full transition-colors ${
+					className={`shadow-default relative w-8 h-8 border rounded-full transition-colors ${
 						text.trim()
 							? 'bg-indigo-500 hover:bg-indigo-600'
 							: 'cursor-not-allowed bg-gray-300 dark:bg-gray-600'
 					}`}
 				>
-					<SendIcon size={24} className='absolute top-2.5 right-2.5 text-white' />
+					<SendIcon size={22} className='absolute top-[50%] right-[50%] transform translate-x-[50%] -translate-y-[50%] text-white' />
 				</button>
 			</AnimateIcon>
 		</div>

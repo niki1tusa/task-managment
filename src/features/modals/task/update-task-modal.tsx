@@ -6,16 +6,15 @@ import { useEffect } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import Form from '@/widgets/form/Form';
-
 import type { MODAL_ICON } from '@/shared/config/icon-config';
-import { type TTaskUpdateForm, ZTaskEditScheme } from '@/shared/model/scheme';
-import type { TTaskEditForm } from '@/shared/model/task-types';
+import { type TaskUpdateForm, ZTaskEditScheme } from '@/shared/model/scheme';
+import type { TaskEditForm } from '@/shared/model/task-types';
 import Modal from '@/shared/ui/modal/Modal';
 
 import { TASK_EDIT_FIELDS } from '../../../shared/config/task-edit-config';
 
 import { getClientTaskById, updateClientTask } from '@/entities/task/api/task-client-service';
+import Form from '@/widgets/form/Form';
 
 interface Props {
 	id: string;
@@ -31,7 +30,7 @@ export const UpdateTaskModal = ({ id, close }: Props) => {
 		setValue,
 		watch,
 		formState: { errors },
-	} = useForm<TTaskUpdateForm>({
+	} = useForm<TaskUpdateForm>({
 		resolver: zodResolver(ZTaskEditScheme),
 	});
 	// react query
@@ -54,7 +53,7 @@ export const UpdateTaskModal = ({ id, close }: Props) => {
 	const queryClient = useQueryClient();
 	const { mutate, isPending } = useMutation({
 		mutationKey: ['task', 'update', id],
-		mutationFn: ({ id, data }: { id: string; data: TTaskEditForm }) => updateClientTask(id, data),
+		mutationFn: ({ id, data }: { id: string; data: TaskEditForm }) => updateClientTask(id, data),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ['tasks'] });
 			toast.success('Task updated successfully!');
@@ -65,7 +64,7 @@ export const UpdateTaskModal = ({ id, close }: Props) => {
 			toast.error(`Failed to update task, ${error?.message}`);
 		},
 	});
-	const onSubmit: SubmitHandler<TTaskUpdateForm> = data => {
+	const onSubmit: SubmitHandler<TaskUpdateForm> = data => {
 		mutate({
 			id,
 			data: { title: data.title, due_date: data.due_date.toISOString(), icon: data.icon },
@@ -74,7 +73,7 @@ export const UpdateTaskModal = ({ id, close }: Props) => {
 	if (!id) return null;
 	return (
 		<Modal title='Edit Task' close={close}>
-			<Form<TTaskUpdateForm>
+			<Form<TaskUpdateForm>
 				setValue={setValue}
 				watch={watch}
 				control={control}

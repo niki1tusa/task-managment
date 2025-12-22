@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 
-import ProfileList from '@/features/messages/modals/profile-modal-list/ProfileList';
-
-import type { TProfileRow } from '@/shared/model/task-types';
+import type { ProfileRow } from '@/shared/model/task-types';
 import { useTaskStore } from '@/shared/store/task-store';
 import { Button } from '@/shared/ui/buttons/Button';
 
+import ProfileList from '@/features/messages/modals/profile-modal-list/ProfileList';
+
 interface Props {
 	close: () => void;
-	profile: TProfileRow;
+	profile: ProfileRow;
 	setOpenList?: (arg: boolean) => void;
 	mutateFnc?: (arg: any) => void;
 	isPending?: boolean;
@@ -20,7 +20,7 @@ export default function TeamModalProfileListForSubtask({ close, mutateFnc, isPen
 	// all profiles
 	const profiles = activeTask?.task_participants.flatMap(i => i.profile) ?? [];
 	// handle
-	const handleAddProfile = (profileToAdd: TProfileRow) => {
+	const handleAddProfile = (profileToAdd: ProfileRow) => {
 		setSelectProfileId(profileToAdd.id);
 	};
 	const handleRemoveProfile = () => {
@@ -41,7 +41,7 @@ export default function TeamModalProfileListForSubtask({ close, mutateFnc, isPen
 
 			{mutateFnc && (
 				<div className='flex gap-4'>
-					<Button disable={isPending} onClick={() => mutateFnc(selectProfileId)}>
+					<Button disabled={isPending} onClick={() => mutateFnc(selectProfileId)}>
 						Save
 					</Button>
 					<Button onClick={close}>Close</Button>

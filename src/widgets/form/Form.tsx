@@ -69,7 +69,7 @@ export default function Form<T extends FieldValues>({
 				}
 			})}
 			<div className='flex gap-3'>
-				<Button type='submit' className={btnClassName} disable={isPending}>
+				<Button type='submit' className={btnClassName} disabled={isPending}>
 					{isPending ? 'Sending...' : btnText}
 				</Button>
 				{pathname === '/settings' && (
@@ -77,7 +77,7 @@ export default function Form<T extends FieldValues>({
 						type='button'
 						onClick={() => router.back()}
 						className={btnClassName}
-						disable={isPending}
+						disabled={isPending}
 					>
 						Back
 					</Button>

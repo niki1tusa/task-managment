@@ -22,7 +22,7 @@ export function HomeSection({ text1, text2 }: { text1: string; text2: string }) 
 					damping: 30,
 				},
 			}}
-			className='bg-muted mt-10 relative overflow-hidden rounded-xl p-6 shadow-sm'
+			className='bg-muted relative overflow-hidden rounded-xl p-6 shadow-sm'
 		>
 			<div className='relative z-10'>
 				<h3 className='mb-2 text-lg font-semibold'>{text1}</h3>

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import type { TProfileRow } from '@/shared/model/task-types';
+import type { ProfileRow } from '@/shared/model/task-types';
 import { Button } from '@/shared/ui/buttons/Button';
 import Textarea from '@/shared/ui/fields/Textarea';
 
@@ -15,7 +15,7 @@ import type { TChannelInsert } from '@/widgets/channels/channel.types';
 
 interface Props {
 	close: () => void;
-	profile: TProfileRow;
+	profile: ProfileRow;
 	typeChannel: string;
 	setOpenList?: (arg: boolean) => void;
 	mutateFnc?: (arg: string[]) => void;
@@ -58,7 +58,7 @@ export default function ProfileModalList({
 			profileDirect,
 		}: {
 			fields: TChannelInsert;
-			profileDirect: TProfileRow;
+			profileDirect: ProfileRow;
 		}) => createClientChannelDirect(fields, profileDirect),
 		onSuccess: () => {
 			toast.success('Channel direct is success created!');
@@ -79,17 +79,17 @@ export default function ProfileModalList({
 			setSelectProfileIds([]);
 		}
 	};
-	const handleCreateDirect = (profileDirect: TProfileRow) => {
+	const handleCreateDirect = (profileDirect: ProfileRow) => {
 		mutateChannelDirect({ fields: { name: nameChannel, created_by: profile.id }, profileDirect });
 		setNameChannel('');
 		setSelectProfileIds([]);
 	};
-	const handleAddProfile = (profileToAdd: TProfileRow) => {
+	const handleAddProfile = (profileToAdd: ProfileRow) => {
 		if (!selectProfileIds.some(p => p === profileToAdd.id)) {
 			setSelectProfileIds([...selectProfileIds, profileToAdd.id]);
 		}
 	};
-	const handleRemoveProfile = (profileToAdd: TProfileRow) => {
+	const handleRemoveProfile = (profileToAdd: ProfileRow) => {
 		const filtered = selectProfileIds.filter(id => id !== profileToAdd.id);
 		setSelectProfileIds([...filtered]);
 	};
@@ -125,7 +125,7 @@ export default function ProfileModalList({
 				<div className='flex w-full gap-3 px-4 py-2'>
 					{profilesData && (
 						<Button
-							disable={selectProfileIds.length < 1}
+							disabled={selectProfileIds.length < 1}
 							onClick={() => {
 								if (typeChannel === 'group') {
 									handleCreateGroup(selectProfileIds);
@@ -149,7 +149,7 @@ export default function ProfileModalList({
 			) : (
 				mutateFnc && (
 					<div className='flex gap-4'>
-						<Button disable={isPending} onClick={() => mutateFnc(selectProfileIds)}>
+						<Button disabled={isPending} onClick={() => mutateFnc(selectProfileIds)}>
 							Save
 						</Button>
 						<Button onClick={close}>Close</Button>

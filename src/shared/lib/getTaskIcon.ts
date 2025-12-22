@@ -1,7 +1,7 @@
 import { type IconName, MODAL_ICON } from '@/shared/config/icon-config';
-import type { TTask } from '@/shared/model/task-types';
+import type { Task } from '@/shared/model/task-types';
 
-export function getTaskIcon(task: TTask) {
+export function getTaskIcon(task: Task) {
 	const TaskIcon = MODAL_ICON[task.icon as IconName];
 	return TaskIcon;
 }

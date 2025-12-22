@@ -1,14 +1,13 @@
-import ProfileList from '@/features/messages/modals/profile-modal-list/ProfileList';
-
-import type { TProfileRow } from '@/shared/model/task-types';
+import type { ProfileRow } from '@/shared/model/task-types';
 import { useTaskStore } from '@/shared/store/task-store';
 import { Button } from '@/shared/ui/buttons/Button';
 
 import { useTeamParticipants } from './useTeamParticipants';
+import ProfileList from '@/features/messages/modals/profile-modal-list/ProfileList';
 
 interface Props {
 	close: () => void;
-	profile: TProfileRow;
+	profile: ProfileRow;
 	setOpenList?: (arg: boolean) => void;
 	mutateFnc?: (arg: string[]) => void;
 	isPending?: boolean;
@@ -19,12 +18,12 @@ export default function TeamModalParticipant({ profile, close, mutateFnc, isPend
 	const countAlreadyParticipants = activeTask?.task_participants.length || 0;
 	// handle
 
-	const handleAddProfile = (profileToAdd: TProfileRow) => {
+	const handleAddProfile = (profileToAdd: ProfileRow) => {
 		if (!selectProfileIds.some(p => p === profileToAdd.id)) {
 			setSelectProfileIds([...selectProfileIds, profileToAdd.id]);
 		}
 	};
-	const handleRemoveProfile = (profileToAdd: TProfileRow) => {
+	const handleRemoveProfile = (profileToAdd: ProfileRow) => {
 		const filtered = selectProfileIds.filter(id => id !== profileToAdd.id);
 		setSelectProfileIds([...filtered]);
 	};
@@ -46,7 +45,7 @@ export default function TeamModalParticipant({ profile, close, mutateFnc, isPend
 
 			{mutateFnc && (
 				<div className='flex gap-4'>
-					<Button disable={isPending} onClick={() => mutateFnc(selectProfileIds)}>
+					<Button disabled={isPending} onClick={() => mutateFnc(selectProfileIds)}>
 						Save
 					</Button>
 					<Button onClick={close}>Close</Button>

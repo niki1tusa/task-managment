@@ -1,6 +1,6 @@
-import type { TStatus, TTask } from '@/shared/model/task-types';
+import type { TStatus, Task } from '@/shared/model/task-types';
 
-export function filterStatusTasks(tasks: TTask[], status?: TStatus) {
+export function filterStatusTasks(tasks: Task[], status?: TStatus) {
 	return tasks.filter(item => {
 		switch (status) {
 			case 'Completed':

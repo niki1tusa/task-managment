@@ -29,7 +29,7 @@ export default function DeleteChannelModal({ close }: Props) {
 
 	return (
 		<Modal close={close} title={`Do you really want to delete the channel "${payload.name}"?`}>
-			<Button onClick={() => mutate(payload.id)} disable={isPending}>
+			<Button onClick={() => mutate(payload.id)} disabled={isPending}>
 				Yes
 			</Button>
 			<Button onClick={close}>No</Button>

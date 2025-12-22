@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 
-import type { TProfileRow } from '@/shared/model/task-types';
+import type { ProfileRow } from '@/shared/model/task-types';
 import { useChannelStore } from '@/shared/store/channel-store';
 import { useModalStore } from '@/shared/store/modals-store';
 
@@ -12,7 +12,7 @@ import {
 import { getAllProfile } from '@/entities/profile/api/profile-client-service';
 import type { TChannelParticipantsRow } from '@/widgets/channels/channel.types';
 
-export function useProfileList(profile: TProfileRow) {
+export function useProfileList(profile: ProfileRow) {
 	const { type } = useModalStore();
 	const { activeChannel } = useChannelStore();
 
@@ -20,7 +20,7 @@ export function useProfileList(profile: TProfileRow) {
 	const [selectProfileIds, setSelectProfileIds] = useState<string[]>([]);
 	const [nameChannel, setNameChannel] = useState('');
 	// profiles
-	const { data: profilesData } = useQuery<TProfileRow[]>({
+	const { data: profilesData } = useQuery<ProfileRow[]>({
 		queryKey: ['profiles'],
 		queryFn: () => getAllProfile(),
 	});

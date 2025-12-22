@@ -3,12 +3,12 @@
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 
-import type { TTask } from '@/shared/model/task-types';
+import type { Task } from '@/shared/model/task-types';
 import { useTaskStore } from '@/shared/store/task-store';
 
-import { Header } from '@/widgets/task-card/Header';
+import { TaskHeader } from '../task-card/TaskHeader';
 
-export default function TeamTask({ task }: { task: TTask }) {
+export default function TeamTask({ task }: { task: Task }) {
 	const { activeTask, setActiveTask } = useTaskStore();
 	return (
 		<button onClick={() => setActiveTask(task)} style={{ perspective: 900 }} className='relative'>
@@ -27,7 +27,7 @@ export default function TeamTask({ task }: { task: TTask }) {
 					'2xl:text-md bg-task-base shadow-default rounded text-sm transition-all hover:bg-gray-200 dark:hover:bg-gray-700'
 				)}
 			>
-				<Header task={task} />
+				<TaskHeader task={task} />
 			</motion.div>
 		</button>
 	);

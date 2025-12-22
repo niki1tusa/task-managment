@@ -7,8 +7,6 @@ import { type ChangeEvent, useEffect, useState } from 'react';
 import { type FieldNamesMarkedBoolean, type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import Form from '@/widgets/form/Form';
-
 import type { TSettingsForm } from '@/shared/model/scheme';
 import Skeleton from '@/shared/ui/Skeleton';
 import { Title } from '@/shared/ui/Title';
@@ -22,6 +20,7 @@ import {
 	updateAvatarPathInProfile,
 	uploadAvatar,
 } from '@/entities/settings/settings-service';
+import Form from '@/widgets/form/Form';
 
 export default function SettingsClientPage() {
 	const form = useForm<TSettingsForm>();
@@ -129,7 +128,7 @@ export default function SettingsClientPage() {
 				</div>
 				<div className='flex flex-col gap-10'>
 					<span className='text-gray ml-2 text-[10px]'>Add image for you profile</span>
-					<Button disable={isDeletePending} onClick={handleRemoveAvatar}>
+					<Button disabled={isDeletePending} onClick={handleRemoveAvatar}>
 						{isDeletePending ? <LoaderCircle className='animate-spin' /> : 'Remove image'}
 					</Button>
 				</div>

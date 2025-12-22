@@ -1,11 +1,11 @@
 import { Trash2Icon } from 'lucide-react';
 
-import type { TTask } from '@/shared/model/task-types';
+import type { Task } from '@/shared/model/task-types';
 import { useModalStore } from '@/shared/store/modals-store';
 import { Avatar } from '@/shared/ui/Avatar';
 
 interface Props {
-	activeTask: TTask;
+	activeTask: Task;
 	isPending: boolean;
 }
 

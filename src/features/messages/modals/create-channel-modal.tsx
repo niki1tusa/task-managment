@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 
 import { GUARD_PAGES } from '@/shared/config/guard-page-config';
-import type { TTask } from '@/shared/model/task-types';
+import type { Task } from '@/shared/model/task-types';
 import { Button } from '@/shared/ui/buttons/Button';
 import Modal from '@/shared/ui/modal/Modal';
 
@@ -27,7 +27,7 @@ export function CreateChannelModal({ close }: Props) {
 	const [typeChannel, setTypeChannel] = useState('');
 	const { channels } = useChannels();
 	const [openList, setOpenList] = useState(false);
-	const [taskState, setTtaskState] = useState<TTask>();
+	const [taskState, setTtaskState] = useState<Task>();
 	// get task for option channel by task
 	const { data: tasks } = useQuery({
 		queryKey: ['task'],
@@ -70,7 +70,7 @@ export function CreateChannelModal({ close }: Props) {
 						<span className='text-lg'>Select the channel type:</span>
 						<div className='flex w-full justify-between gap-3'>
 							<Button onClick={() => setTypeChannel('group')}>Group</Button>
-							<Button disable={!filteredTasks?.length} onClick={() => setTypeChannel('task')}>
+							<Button disabled={!filteredTasks?.length} onClick={() => setTypeChannel('task')}>
 								Task
 							</Button>
 							<Button onClick={() => setTypeChannel('direct')}>Direct</Button>
@@ -80,7 +80,7 @@ export function CreateChannelModal({ close }: Props) {
 					<>
 						<div className='flex flex-col items-center gap-4 border-t-2 border-b-2 py-4'>
 							{filteredTasks?.length &&
-								filteredTasks?.map((task: TTask) => (
+								filteredTasks?.map((task: Task) => (
 									<Button
 										variant='transparent'
 										className={clsx(

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import type { TProfileRow } from '@/shared/model/task-types';
+import type { ProfileRow } from '@/shared/model/task-types';
 import { useModalStore } from '@/shared/store/modals-store';
 import { Button } from '@/shared/ui/buttons/Button';
 import Modal from '@/shared/ui/modal/Modal';
@@ -10,7 +10,7 @@ import { deleteTaskParticipants } from '@/entities/task/api/task-client-service'
 
 interface Props {
 	close: () => void;
-	profile: TProfileRow;
+	profile: ProfileRow;
 }
 export default function DeleteProfileFromTaskParticipants({ close, profile }: Props) {
 	const { type } = useModalStore();
@@ -31,7 +31,7 @@ export default function DeleteProfileFromTaskParticipants({ close, profile }: Pr
 
 	return (
 		<Modal close={close} title={`Do you really want to kicked from party task"${profile.name}"?`}>
-			<Button onClick={() => mutate(profile.id)} disable={isPending}>
+			<Button onClick={() => mutate(profile.id)} disabled={isPending}>
 				Yes
 			</Button>
 			<Button onClick={close}>No</Button>
