@@ -12,6 +12,7 @@ export function ConfirmClient() {
 	const params = useSearchParams();
 	useEffect(() => {
 		const verifyToken = async () => {
+			if (!params) return;
 			const token_hash = params.get('token_hash');
 			if (!token_hash) return router.replace(PUBLIC_PAGES.LOGIN);
 
@@ -28,5 +29,9 @@ export function ConfirmClient() {
 
 		verifyToken();
 	}, [params, router]);
-	return <p className='p-2 text-white'>Verify is your email... please wait.</p>;
+	return (
+		<div className='flex h-full w-full items-center justify-center text-white'>
+			Verify is your email... please wait.
+		</div>
+	);
 }

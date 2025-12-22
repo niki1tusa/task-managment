@@ -12,6 +12,7 @@ export default function CallbackClient() {
 
 	useEffect(() => {
 		if (ran.current) return;
+		if (!params) return;
 		ran.current = true;
 		const allParams = Object.fromEntries(params.entries());
 		console.debug('[OAuth callback] query:', allParams);
@@ -36,5 +37,7 @@ export default function CallbackClient() {
 		})();
 	}, [params, router]);
 
-	return <p className='p-2 text-white'>Signing in…</p>;
+	return (
+		<div className='flex h-full w-full items-center justify-center text-white'>Signing in…</div>
+	);
 }

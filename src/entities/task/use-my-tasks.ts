@@ -14,7 +14,7 @@ export function useMyTasks({ select, sortOrder }: Props = {}) {
 		isPending,
 		isFetching,
 	} = useQuery<TTask[], Error>({
-		queryKey: ['tasks', { select, sortOrder }],
+		queryKey: ['tasks', select, sortOrder],
 		queryFn: () => getClientAllTask({ status: select, sortByDue: sortOrder }),
 		placeholderData: prev => prev,
 	});

@@ -12,12 +12,8 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
 			<div className='z-20 grid h-[70%] w-[50%] grid-cols-[100%_0] overflow-hidden rounded-4xl bg-purple-950/80 text-white/90 lg:grid-cols-2'>
 				<div className='flex flex-col gap-5 p-10 shadow'>{children}</div>
 				<div className='relative hidden lg:block xl:min-h-[600px]'>
-					<Image
-						src={window.innerWidth > 1700 ? '/chat.png' : '/chat2.png'}
-						alt='chat'
-						sizes='(max-width: 1024px) 0px, 50vw'
-						fill
-					/>
+					<Image src={'/chat.png'} alt='chat' sizes='hidden 2xl:block object-contain' fill />
+					<Image src={'/chat2.png'} alt='chat' sizes='2xl:hidden block object-contain' fill />
 				</div>
 			</div>
 		</div>

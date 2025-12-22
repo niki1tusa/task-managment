@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import { Search } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,15 +14,13 @@ import { useChannelStore } from '@/shared/store/channel-store';
 import { Avatar } from '@/shared/ui/Avatar';
 import { PopoverAnchor } from '@/shared/ui/animate-ui/primitives/radix/popover';
 import { Popover, PopoverContent } from '@/shared/ui/animate-ui/radix/popover';
-
-import { minsDiff } from '@/widgets/chat/model/minsDifferent';
-
 import { Button } from '@/shared/ui/buttons/Button';
 import Textarea from '@/shared/ui/fields/Textarea';
 import SearchMessageMenuPopover from '@/shared/ui/popover/SearchMessageMenuPopover';
 
 import ChatMessage from './ChatMessage';
 import { useProfile } from '@/entities/profile/use-profile';
+import { minsDiff } from '@/widgets/chat/model/minsDifferent';
 import { useChat } from '@/widgets/chat/model/use-chat';
 import ChatInput from '@/widgets/chat/ui/ChatInput';
 
@@ -40,10 +39,10 @@ export default function Chat() {
 	const { ref } = useClickOutside<HTMLDivElement>(() => setIsOpenInput(false), ignoreRefs);
 	const chat = useChat(activeChannel ? activeChannel.id : GENERAL_CHAT_ID);
 	// memo
-	const visibleMessages = useMemo(() => {
-		const all = chat?.messages ?? [];
-		return isDashboard ? all.slice(-7) : all; // последние 7 message
-	}, [value, chat]);
+	// const visibleMessages = useMemo(() => {
+	// 	const all = chat?.messages ?? [];
+	// 	return isDashboard ? all : all;
+	// }, [value, chat]);
 	// search messages
 	const filterMessages = useMemo(() => {
 		if (!value) {
@@ -58,7 +57,7 @@ export default function Chat() {
 	// render messages
 	const renderMessages = useMemo(() => {
 		if (!chat) return null;
-		const arr = visibleMessages;
+		const arr = chat.messages;
 		return arr.map((m, i) => {
 			const prev = arr[i - 1];
 			const next = arr[i + 1];
@@ -88,7 +87,7 @@ export default function Chat() {
 				/>
 			);
 		});
-	}, [chat?.messages, visibleMessages, value, filterMessages]);
+	}, [chat?.messages, value, filterMessages]);
 
 	return (
 		<div className='flex h-full flex-col' aria-label='Chat panel'>
@@ -189,7 +188,7 @@ export default function Chat() {
 					<div className='from-primary pointer-events-none absolute top-0 left-0 z-40 h-full w-full bg-gradient-to-b to-transparent dark:from-[#6366F1]' />
 				)}
 
-				<div className='flex flex-col'>
+				<div className={clsx('flex flex-col', isDashboard && 'h-[365px] overflow-y-hidden')}>
 					{renderMessages}
 					{/* last message */}
 					{chat && !isDashboard && <div ref={chat.messagesEndRef} aria-hidden='true' />}

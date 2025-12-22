@@ -9,6 +9,7 @@ interface Props {
 	setSelect: (arg: TStatus) => void;
 	setSortOrder: (arg: TByAscOrDesc) => void;
 }
+// TODO: вынести button и select в отдельные компоненты
 export default function FiltersForTask({ select, setSelect, sortOrder, setSortOrder }: Props) {
 	return (
 		<div className='flex gap-2'>
